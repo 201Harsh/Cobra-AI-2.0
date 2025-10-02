@@ -83,36 +83,6 @@ const Welcome = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 text-white">
-      {/* Navigation */}
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg flex items-center justify-center">
-              <FaCode className="text-white text-sm" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
-              Cobra AI 2.0
-            </span>
-          </div>
-
-          <div className="hidden md:flex space-x-6">
-            <button className="hover:text-emerald-400 transition-colors">
-              Features
-            </button>
-            <button className="hover:text-emerald-400 transition-colors">
-              Templates
-            </button>
-            <button className="hover:text-emerald-400 transition-colors">
-              Documentation
-            </button>
-          </div>
-
-          <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-            Get Started
-          </button>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20">
         <div className="text-center max-w-4xl mx-auto">
@@ -123,27 +93,27 @@ const Welcome = () => {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight font-h1 uppercase">
             Code Smarter with{" "}
             <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
               Cobra AI 2.0
             </span>
           </h1>
 
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+          <p className="md:text-xl text-lg text-gray-300 mb-8 leading-relaxed font-inter">
             Cobra AI 2.0 is the next-generation AI-agentic coding platform that
             revolutionizes how developers code, collaborate, and deploy
             full-stack projects with intelligent real-time AI assistance.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2">
+            <button className="cursor-pointer bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2">
               <span>Launch Cobra AI 2.0</span>
               <FaArrowRight />
             </button>
-            <button className="border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2">
-              <FaGithub />
-              <span>View on GitHub</span>
+            <button className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2">
+              <FaPlay />
+              <span>View on Examples</span>
             </button>
           </div>
 

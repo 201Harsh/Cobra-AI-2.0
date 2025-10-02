@@ -20,6 +20,7 @@ import {
   SiExpress,
 } from "react-icons/si";
 import Header from "./Header";
+import Link from "next/link";
 
 const Welcome = () => {
   const features = [
@@ -110,10 +111,13 @@ const Welcome = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <button className="cursor-pointer bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2">
+              <Link
+                href="/register"
+                className="cursor-pointer bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2"
+              >
                 <span>Launch Cobra AI 2.0</span>
                 <FaArrowRight />
-              </button>
+              </Link>
               <button className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2">
                 <FaPlay />
                 <span>View on Examples</span>

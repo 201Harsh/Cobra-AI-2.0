@@ -20,7 +20,7 @@ import {
   SiExpress,
 } from "react-icons/si";
 
-const page = () => {
+const Welcome = () => {
   const features = [
     {
       icon: <FaUsers className="text-2xl" />,
@@ -82,7 +82,7 @@ const page = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-bg-gray-800 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 text-white">
       {/* Navigation */}
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
@@ -124,7 +124,7 @@ const page = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Build Better with{" "}
+            Code Smarter with{" "}
             <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
               Cobra AI 2.0
             </span>
@@ -349,4 +349,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Welcome;

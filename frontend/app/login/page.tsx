@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 import { FaCode, FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 
@@ -126,12 +127,12 @@ const Login = () => {
           <div className="mt-6 pt-6 border-t border-gray-700">
             <p className="text-center text-gray-400">
               Don't have an account?{" "}
-              <a
+              <Link
                 href="/register"
                 className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
               >
                 Create Account
-              </a>
+              </Link>
             </p>
           </div>
         </div>

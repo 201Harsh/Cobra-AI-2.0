@@ -9,11 +9,11 @@ const Header = () => {
         <nav className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg flex items-center justify-center">
+              <div className="w-16 h-16  rounded-lg flex items-center justify-center">
                 {/* <FaCode className="text-white text-sm" /> */}
-                <img src="/img/logo.png" alt="logo" className="w-10 h-10" />
+                <img src="/img/logo.png" alt="logo" className="w-full h-full object-cover" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+              <span className="text-xl font-extrabold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent capitalize font-h1">
                 Cobra AI 2.0
               </span>
             </div>

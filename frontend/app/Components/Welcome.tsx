@@ -21,6 +21,7 @@ import {
 } from "react-icons/si";
 import Header from "./Header";
 import Link from "next/link";
+import Footer from "./Footer";
 
 const Welcome = () => {
   const features = [
@@ -304,26 +305,7 @@ const Welcome = () => {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-6 py-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-6 h-6 bg-gradient-to-r from-emerald-400 to-green-500 rounded flex items-center justify-center">
-                <FaCode className="text-white text-xs" />
-              </div>
-              <span className="font-bold">Cobra AI 2.0</span>
-            </div>
-
-            <div className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} Cobra AI 2.0. Built with ❤️ by{" "}
-              <a
-                href="https://github.com/201Harsh"
-                className="text-emerald-400 hover:text-emerald-300"
-              >
-                Harsh Pandey
-              </a>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

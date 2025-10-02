@@ -55,8 +55,10 @@ const Login = () => {
                   <FaEnvelope className="text-gray-400" />
                 </div>
                 <input
+                  required
                   type="email"
                   name="email"
+                  id="email"
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
@@ -75,8 +77,10 @@ const Login = () => {
                   <FaLock className="text-gray-400" />
                 </div>
                 <input
+                  required
                   type={showPassword ? "text" : "password"}
                   name="password"
+                  id="password"
                   value={formData.password}
                   onChange={handleChange}
                   className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-12 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"

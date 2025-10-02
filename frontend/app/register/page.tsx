@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import {
   FaCode,
@@ -34,7 +35,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-bg-gray-800 text-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 text-white flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -65,8 +66,10 @@ const Register = () => {
                   <FaUser className="text-gray-400" />
                 </div>
                 <input
-                  type="text"
+                  required
                   name="name"
+                  id="name"
+                  type="text"
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
@@ -85,8 +88,10 @@ const Register = () => {
                   <FaEnvelope className="text-gray-400" />
                 </div>
                 <input
+                  required
                   type="email"
                   name="email"
+                  id="email"
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
@@ -105,8 +110,10 @@ const Register = () => {
                   <FaLock className="text-gray-400" />
                 </div>
                 <input
+                  required
                   type={showPassword ? "text" : "password"}
                   name="password"
+                  id="password"
                   value={formData.password}
                   onChange={handleChange}
                   className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-12 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
@@ -119,6 +126,27 @@ const Register = () => {
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center">
+                <input
+                  id="agreeToTerms"
+                  name="agreeToTerms"
+                  type="checkbox"
+                  required
+                  className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-600 rounded"
+                />
+                <label
+                  htmlFor="agreeToTerms"
+                  className="ml-2 block text-sm text-gray-300"
+                >
+                  I agree to the{" "}
+                  <span className="font-medium text-emerald-400 hover:text-emerald-300 cursor-pointer">
+                    Terms and Conditions
+                  </span>
+                </label>
               </div>
             </div>
 

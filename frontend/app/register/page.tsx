@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 import {
   FaCode,
@@ -163,12 +164,12 @@ const Register = () => {
           <div className="mt-6 pt-6 border-t border-gray-700">
             <p className="text-center text-gray-400">
               Already have an account?{" "}
-              <a
+              <Link
                 href="/login"
                 className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
               >
                 Sign In
-              </a>
+              </Link>
             </p>
           </div>
         </div>

@@ -87,7 +87,10 @@ const Welcome = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen pt-10 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 text-white">
+      <div
+        className="min-h-screen pt-10 bg-gray-950 
+      bg-gradient-to-br from-gray-950 via-emerald-900/30 to-green-700/50 text-white"
+      >
         {/* Hero Section */}
         <section className="container mx-auto px-6 py-20">
           <div className="text-center max-w-4xl mx-auto">

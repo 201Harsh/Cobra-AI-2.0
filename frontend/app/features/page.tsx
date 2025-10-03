@@ -241,7 +241,7 @@ const Features = () => {
     },
     {
       name: "Pro",
-      price: "$29",
+      price: "₹349",
       period: "/month",
       description: "For professionals and small teams",
       features: [
@@ -258,7 +258,7 @@ const Features = () => {
     },
     {
       name: "Enterprise",
-      price: "Custom",
+      price: "₹1999",
       description: "For large teams and organizations",
       features: [
         "Everything in Pro",

@@ -198,10 +198,10 @@ const Welcome = () => {
                 <span>Launch Cobra AI 2.0</span>
                 <FaArrowRight />
               </Link>
-              <button className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2">
+              <Link href={"/demo"} className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2">
                 <FaPlay />
                 <span>Watch Demos</span>
-              </button>
+              </Link>
             </div>
 
             {/* Supported Languages */}

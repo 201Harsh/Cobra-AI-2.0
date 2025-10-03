@@ -34,9 +34,9 @@ const Header = () => {
               >
                 Features
               </Link>
-              <button className="hover:text-emerald-400 transition-colors">
-                Pricing
-              </button>
+              <Link href={"/about"} className="hover:text-emerald-400 transition-colors">
+                About
+              </Link>
               <button className="hover:text-emerald-400 transition-colors">
                 Documentation
               </button>

@@ -67,15 +67,18 @@ const OTPVerification: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 text-white flex items-center justify-center p-4">
+    <div
+      className="min-h-screen bg-gray-950 
+      bg-gradient-to-br from-gray-950 via-emerald-900/30 to-green-700/50 text-white flex items-center justify-center p-4"
+    >
       <div className="max-w-md w-full">
         {/* Back Button */}
         <Link
           href={"/register"}
           className="flex items-center space-x-2 text-gray-400 hover:text-emerald-400 transition-colors mb-8"
         >
-          <FaArrowLeft />
-          <span>Back</span>
+          <FaArrowLeft className="text-xl" />
+          <span className="text-xl font-bold font-h underline" >Back to Register</span>
         </Link>
 
         {/* Logo & Header */}
@@ -123,7 +126,7 @@ const OTPVerification: React.FC = () => {
                       handleKeyDown(index, e)
                     }
                     onPaste={handlePaste}
-                    className="w-16 h-16 bg-gray-700/50 border-2 border-gray-600 rounded-xl text-center text-2xl font-bold text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
+                    className="w-16 h-16 bg-gray-700/50 border-2 border-gray-600 rounded-xl text-center text-2xl font-bold text-green-500 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
                   />
                 ))}
               </div>
@@ -144,7 +147,7 @@ const OTPVerification: React.FC = () => {
             <button
               onClick={handleResendOTP}
               type="button"
-              className="flex items-center justify-center space-x-2 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors mx-auto group"
+              className="flex cursor-pointer items-center justify-center space-x-2 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors mx-auto group"
             >
               <FaRedo className="group-hover:rotate-180 transition-transform duration-500" />
               <span>Resend OTP</span>

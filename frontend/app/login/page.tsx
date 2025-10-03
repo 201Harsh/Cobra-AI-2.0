@@ -27,13 +27,20 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-800 text-white flex items-center justify-center p-4">
+    <div
+      className="min-h-screen bg-gray-950 
+      bg-gradient-to-br from-gray-950 via-emerald-900/30 to-green-700/50 text-white flex items-center justify-center p-4"
+    >
       <div className="max-w-md w-full">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="flex justify-center items-center space-x-2 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg flex items-center justify-center">
-              <FaCode className="text-white text-lg" />
+            <div className="w-20 h-20 rounded-lg flex items-center justify-center">
+              <img
+                src="/img/logo.png"
+                alt="logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
               Cobra AI 2.0

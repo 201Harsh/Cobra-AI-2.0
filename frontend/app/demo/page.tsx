@@ -144,9 +144,10 @@ const Demo = () => {
             </h1>
 
             <p className="md:text-xl text-lg text-gray-300 mb-8 leading-relaxed">
-              Watch how Cobra AI 2.0 transforms ideas into fully functional
-              websites and applications - whether you're a complete beginner or
-              an experienced developer.
+              Watch how{" "}
+              <span className="font-bold text-emerald-400">Cobra AI 2.0</span>{" "}
+              transforms ideas into fully functional websites and applications -
+              whether you're a complete beginner or an experienced developer.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">

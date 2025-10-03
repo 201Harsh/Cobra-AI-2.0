@@ -172,7 +172,7 @@ const Welcome = () => {
             <div className="inline-flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-full mb-6 border border-emerald-500/20">
               <FaLightbulb className="text-emerald-400" />
               <span className="text-sm">
-                Revolutionary AI-Powered Coding Platform
+                AI That Builds. AI That Codes. AI That Transforms
               </span>
             </div>
 
@@ -243,7 +243,7 @@ const Welcome = () => {
                 <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <FaMagic className="text-white text-2xl" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Beginner Mode</h3>
+                <h3 className="text-2xl font-bold mb-2">Creator Mode</h3>
                 <p className="text-emerald-400 font-semibold">For Non-Coders</p>
               </div>
 
@@ -284,7 +284,7 @@ const Welcome = () => {
                 <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <FaLaptopCode className="text-white text-2xl" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Coder Mode</h3>
+                <h3 className="text-2xl font-bold mb-2">Dev Mode</h3>
                 <p className="text-blue-400 font-semibold">For Developers</p>
               </div>
 
@@ -313,8 +313,8 @@ const Welcome = () => {
 
               <div className="mt-6 pt-6 border-t border-gray-700">
                 <p className="text-sm text-gray-400 text-center">
-                  Perfect for: Developers, Teams, Students, Tech Companies ,
-                  Professionals
+                  Perfect for: Developers, Teams, Students, Tech Companies,
+                  Working Professionals
                 </p>
               </div>
             </div>
@@ -475,6 +475,7 @@ const Welcome = () => {
                   {/* Social Links */}
                   <div className="flex flex-wrap justify-center md:justify-start gap-4">
                     <a
+                      target="_blank"
                       href="https://github.com/201Harsh"
                       className="flex items-center space-x-2 bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     >
@@ -482,14 +483,16 @@ const Welcome = () => {
                       <span className="font-medium">GitHub</span>
                     </a>
                     <a
-                      href="https://linkedin.com/in/harsh-pandey"
+                      target="_blank"
+                      href="https://www.linkedin.com/in/201harsh/"
                       className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     >
                       <FaLinkedin className="text-white text-lg" />
                       <span className="font-medium">LinkedIn</span>
                     </a>
                     <a
-                      href="https://instagram.com/harsh_pandey"
+                      target="_blank"
+                      href="https://www.instagram.com/201harshs/"
                       className="flex items-center space-x-2 bg-pink-600 hover:bg-pink-700 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     >
                       <FaInstagram className="text-white text-lg" />

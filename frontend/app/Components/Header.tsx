@@ -24,9 +24,9 @@ const Header = () => {
             </Link>
 
             <div className="hidden md:flex space-x-6">
-              <button className="hover:text-emerald-400 transition-colors">
+              <Link href={"/features"} className="hover:text-emerald-400 transition-colors">
                 Features
-              </button>
+              </Link>
               <button className="hover:text-emerald-400 transition-colors">
                 Templates
               </button>

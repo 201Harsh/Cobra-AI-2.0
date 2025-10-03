@@ -24,6 +24,7 @@ import {
 import Header from "./Header";
 import Link from "next/link";
 import Footer from "./Footer";
+import Image from "next/image";
 
 const Welcome = () => {
   const features = [
@@ -458,8 +459,12 @@ const Welcome = () => {
               <div className="flex flex-col md:flex-row items-center gap-8">
                 {/* Developer Photo */}
                 <div className="flex-shrink-0">
-                  <div className="w-48 h-48 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
-                    HP
+                  <div className="w-52 h-52 rounded-full flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
+                    <img
+                      src="/img/dev1.jpg"
+                      alt="dev"
+                      className="h-full w-full object-cover rounded-full"
+                    />
                   </div>
                 </div>
 

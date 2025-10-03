@@ -30,7 +30,7 @@ const Welcome = () => {
   const features = [
     {
       icon: <FaMagic className="text-2xl" />,
-      title: "Beginner Mode - No Code Required",
+      title: "Creator Mode - No Code Required",
       description:
         "Instantly generate stunning, ready-made websites from templates. AI handles text, branding, and images. Perfect for non-coders who want professional websites in minutes.",
       highlights: [
@@ -43,7 +43,7 @@ const Welcome = () => {
     },
     {
       icon: <FaLaptopCode className="text-2xl" />,
-      title: "Coder Mode - AI Collaboration",
+      title: "Dev Mode - AI Collaboration",
       description:
         "Collaborate with AI as your coding mentor. Real-time group chats, multi-user editing, and full-stack project execution in browser with AI-powered assistance.",
       highlights: [

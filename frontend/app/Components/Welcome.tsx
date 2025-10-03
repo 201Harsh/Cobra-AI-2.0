@@ -11,6 +11,8 @@ import {
   FaShieldAlt,
   FaLinkedin,
   FaInstagram,
+  FaMagic,
+  FaLaptopCode,
 } from "react-icons/fa";
 import {
   SiJavascript,
@@ -25,6 +27,58 @@ import Footer from "./Footer";
 
 const Welcome = () => {
   const features = [
+    {
+      icon: <FaMagic className="text-2xl" />,
+      title: "Beginner Mode - No Code Required",
+      description:
+        "Instantly generate stunning, ready-made websites from templates. AI handles text, branding, and images. Perfect for non-coders who want professional websites in minutes.",
+      highlights: [
+        "AI-powered template customization",
+        "Automatic branding & image integration",
+        "Live preview with WebContainers",
+        "One-click deployment",
+        "Download ready-to-use code",
+      ],
+    },
+    {
+      icon: <FaLaptopCode className="text-2xl" />,
+      title: "Coder Mode - AI Collaboration",
+      description:
+        "Collaborate with AI as your coding mentor. Real-time group chats, multi-user editing, and full-stack project execution in browser with AI-powered assistance.",
+      highlights: [
+        "AI coding mentor & teammate",
+        "Real-time collaborative editing",
+        "@AI command triggers",
+        "Live code execution",
+        "Automatic error detection",
+      ],
+    },
+    {
+      icon: <FaUsers className="text-2xl" />,
+      title: "Dual User Journey",
+      description:
+        "Seamless experience for both beginners and advanced developers. Choose your path and let AI adapt to your skill level and requirements.",
+      highlights: [
+        "Beginner: Template → Brand → Website",
+        "Coder: Chat → Code → Collaborate → Deploy",
+        "AI adapts to user skill level",
+        "Progressive complexity",
+        "Unified platform experience",
+      ],
+    },
+    {
+      icon: <FaRobot className="text-2xl" />,
+      title: "AI Mentor & Agent Platform",
+      description:
+        "AI acts as designer for non-coders and coding mentor for developers. MCP server integration enables advanced AI actions and real-time project management.",
+      highlights: [
+        "Dual AI role: Designer & Mentor",
+        "MCP server integration",
+        "Real-time code monitoring",
+        "Automated fixes & suggestions",
+        "Full-stack scaffolding",
+      ],
+    },
     {
       icon: <FaUsers className="text-2xl" />,
       title: "Real-Time Collaboration",
@@ -76,6 +130,27 @@ const Welcome = () => {
     },
   ];
 
+  const templates = [
+    {
+      type: "E-commerce",
+      desc: "Online stores with AI-powered product management",
+    },
+    { type: "Portfolio", desc: "Professional portfolios with dynamic content" },
+    {
+      type: "Blog Platform",
+      desc: "Content-rich blogs with AI writing assistance",
+    },
+    {
+      type: "Gaming Sites",
+      desc: "Interactive gaming portfolios and communities",
+    },
+    {
+      type: "Animated Sites",
+      desc: "GSAP-powered animations and interactions",
+    },
+    { type: "SaaS Dashboards", desc: "Business dashboards with analytics" },
+  ];
+
   const languages = [
     { icon: <SiJavascript />, name: "JavaScript" },
     { icon: <SiReact />, name: "React" },
@@ -101,17 +176,18 @@ const Welcome = () => {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight font-h1 uppercase">
-              Code Smarter with{" "}
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight font-h1 capitalize">
+              Code Collaborate Create{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
-                Cobra AI 2.0
+                <br /> Cobra AI 2.0
               </span>
             </h1>
 
             <p className="md:text-xl text-lg text-gray-300 mb-8 leading-relaxed font-inter">
-              Cobra AI 2.0 is the next-generation AI-agentic coding platform
-              that revolutionizes how developers code, collaborate, and deploy
-              full-stack projects with intelligent real-time AI assistance.
+              Cobra AI 2.0 is the next-generation AI-agentic platform that
+              empowers both coders and non-coders to build, collaborate, and
+              deploy websites and full-stack projects with intelligent real-time
+              AI assistance.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -124,7 +200,7 @@ const Welcome = () => {
               </Link>
               <button className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2">
                 <FaPlay />
-                <span>View on Examples</span>
+                <span>Watch Demos</span>
               </button>
             </div>
 
@@ -147,6 +223,127 @@ const Welcome = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Dual Mode Section */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Choose Your Path</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              One platform, two powerful ways to create - designed for everyone
+              from complete beginners to professional developers
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Beginner Mode Card */}
+            <div className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 group hover:transform hover:scale-105">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <FaMagic className="text-white text-2xl" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Beginner Mode</h3>
+                <p className="text-emerald-400 font-semibold">For Non-Coders</p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span>Select from beautiful templates</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span>Input your brand details</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span>AI customizes everything automatically</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span>Get live preview instantly</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span>Download or deploy with one click</span>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-gray-700">
+                <p className="text-sm text-gray-400 text-center">
+                  Perfect for: Entrepreneurs, Bloggers, Artists, Small
+                  Businesses, Non-Techies
+                </p>
+              </div>
+            </div>
+
+            {/* Coder Mode Card */}
+            <div className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 group hover:transform hover:scale-105">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <FaLaptopCode className="text-white text-2xl" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Coder Mode</h3>
+                <p className="text-blue-400 font-semibold">For Developers</p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span>Real-time collaborative coding</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span>AI mentor for code suggestions</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span>Live browser execution</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span>Automatic error detection & fixes</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span>Full-stack project scaffolding</span>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-gray-700">
+                <p className="text-sm text-gray-400 text-center">
+                  Perfect for: Developers, Teams, Students, Tech Companies ,
+                  Professionals
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Template Showcase */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Ready-Made Templates</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              AI-powered templates that automatically adapt to your brand,
+              content, and style preferences
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {templates.map((template, index) => (
+              <div
+                key={template.type}
+                className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-emerald-500/30 transition-all duration-300 group hover:transform hover:scale-105"
+              >
+                <div className="text-emerald-400 mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <FaMagic className="text-xl" />
+                </div>
+                <h4 className="text-lg font-bold mb-2">{template.type}</h4>
+                <p className="text-gray-400 text-sm">{template.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -192,6 +389,53 @@ const Welcome = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* User Journey Section */}
+        <section className="container mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Simple steps from idea to deployed project, powered by AI
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                {[
+                  {
+                    step: "1",
+                    title: "Register & Verify",
+                    desc: "Quick signup with OTP verification",
+                  },
+                  {
+                    step: "2",
+                    title: "Choose Your Mode",
+                    desc: "Beginner or Coder - AI adapts to you",
+                  },
+                  {
+                    step: "3",
+                    title: "Create with AI",
+                    desc: "Build websites or code with AI assistance",
+                  },
+                  {
+                    step: "4",
+                    title: "Deploy & Share",
+                    desc: "One-click deployment to go live",
+                  },
+                ].map((item, index) => (
+                  <div key={index} className="flex flex-col items-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-3">
+                      {item.step}
+                    </div>
+                    <h4 className="font-bold mb-2">{item.title}</h4>
+                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 

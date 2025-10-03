@@ -184,10 +184,11 @@ const Welcome = () => {
             </h1>
 
             <p className="md:text-xl text-lg text-gray-300 mb-8 leading-relaxed font-inter">
-              Cobra AI 2.0 is the next-generation AI-agentic platform that
-              empowers both coders and non-coders to build, collaborate, and
-              deploy websites and full-stack projects with intelligent real-time
-              AI assistance.
+              Cobra AI 2.0 is the next-generation{" "}
+              <span className="font-bold text-emerald-400">AI-agentic</span>{" "}
+              platform that empowers both coders and non-coders to build,
+              collaborate, and deploy websites and full-stack projects with
+              intelligent real-time AI assistance.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -198,7 +199,10 @@ const Welcome = () => {
                 <span>Launch Cobra AI 2.0</span>
                 <FaArrowRight />
               </Link>
-              <Link href={"/demo"} className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2">
+              <Link
+                href={"/demo"}
+                className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center space-x-2"
+              >
                 <FaPlay />
                 <span>Watch Demos</span>
               </Link>
@@ -279,34 +283,34 @@ const Welcome = () => {
             </div>
 
             {/* Coder Mode Card */}
-            <div className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 group hover:transform hover:scale-105">
+            <div className="bg-gray-800/30 backdrop-blur-sm p-8 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 group hover:transform hover:scale-105">
               <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-green-700 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <FaLaptopCode className="text-white text-2xl" />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Dev Mode</h3>
-                <p className="text-blue-400 font-semibold">For Developers</p>
+                <p className="text-emerald-400 font-semibold">For Developers</p>
               </div>
 
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
                   <span>Real-time collaborative coding</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
                   <span>AI mentor for code suggestions</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
                   <span>Live browser execution</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
                   <span>Automatic error detection & fixes</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
                   <span>Full-stack project scaffolding</span>
                 </div>
               </div>

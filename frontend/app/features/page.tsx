@@ -29,8 +29,8 @@ const Features = () => {
 
   const featureCategories = [
     { id: "all", name: "All Features", icon: <FaStar /> },
-    { id: "beginner", name: "Beginner Mode", icon: <FaMagic /> },
-    { id: "coder", name: "Coder Mode", icon: <FaLaptopCode /> },
+    { id: "beginner", name: "Creator Mode", icon: <FaMagic /> },
+    { id: "coder", name: "Dev Mode", icon: <FaLaptopCode /> },
     { id: "ai", name: "AI Capabilities", icon: <FaRobot /> },
     { id: "collaboration", name: "Collaboration", icon: <FaUsers /> },
     { id: "deployment", name: "Deployment", icon: <FaRocket /> },
@@ -311,7 +311,7 @@ const Features = () => {
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                  className={`flex cursor-pointer items-center space-x-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                     activeCategory === category.id
                       ? "bg-gradient-to-r from-emerald-500 to-green-600 text-white shadow-lg"
                       : "bg-gray-800/30 text-gray-300 hover:text-white hover:bg-gray-700/50 border border-gray-700"
@@ -423,13 +423,13 @@ const Features = () => {
               </div>
 
               {/* Coder Mode */}
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-blue-500/20 p-8">
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-green-500/20 p-8">
                 <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-green-700 rounded-full flex items-center justify-center mx-auto mb-4">
                     <FaLaptopCode className="text-white text-2xl" />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Coder Mode</h3>
-                  <p className="text-blue-400 font-semibold">
+                  <p className="text-emerald-400 font-semibold">
                     Advanced Development
                   </p>
                 </div>
@@ -446,7 +446,7 @@ const Features = () => {
                     "Custom deployment pipelines",
                   ].map((item, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <FaCheck className="text-blue-400 flex-shrink-0" />
+                      <FaCheck className="text-emerald-400 flex-shrink-0" />
                       <span className="text-gray-300">{item}</span>
                     </div>
                   ))}

@@ -20,7 +20,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
 const Demo = () => {
-  const [activeTab, setActiveTab] = useState("Creator");
+  const [activeTab, setActiveTab] = useState("beginner");
   const [selectedTemplate, setSelectedTemplate] = useState(0);
 
   const templates = [

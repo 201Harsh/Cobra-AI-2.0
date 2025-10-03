@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaCode } from "react-icons/fa";
@@ -12,9 +13,12 @@ const Header = () => {
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-16 h-16  rounded-lg flex items-center justify-center">
                 {/* <FaCode className="text-white text-sm" /> */}
-                <img
+                <Image
+                  priority
                   src="/img/logo.png"
                   alt="logo"
+                  width={100}
+                  height={100}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -24,7 +28,10 @@ const Header = () => {
             </Link>
 
             <div className="hidden md:flex space-x-6">
-              <Link href={"/features"} className="hover:text-emerald-400 transition-colors">
+              <Link
+                href={"/features"}
+                className="hover:text-emerald-400 transition-colors"
+              >
                 Features
               </Link>
               <button className="hover:text-emerald-400 transition-colors">

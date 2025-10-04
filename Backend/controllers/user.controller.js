@@ -179,4 +179,31 @@ module.exports.logoutUser = async (req, res) => {
   }
 };
 
-module.exports.getUser = async (req, res) => {}
+module.exports.getUser = async (req, res) => {
+  try {
+    const UserId = req.user._id;
+
+    if (!UserId) {
+      return res.status(400).json({
+        message: "User ID is required",
+      });
+    }
+
+    const user = await UserModel.findById(UserId);
+
+    if (!user) {
+      return res.status(400).json({
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      message: "User found",
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

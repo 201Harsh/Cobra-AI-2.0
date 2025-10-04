@@ -157,30 +157,40 @@ const About = () => {
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-emerald-500/20 p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-green-600 rounded-full flex items-center justify-center mb-6">
+              {/* Mission */}
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-emerald-500/20 p-8 hover:border-emerald-400/40 transition">
+                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-green-600 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/30">
                   <FaRocket className="text-white text-2xl" />
                 </div>
-                <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
+                <h2 className="text-3xl font-bold mb-4 text-emerald-400">
+                  Our Mission
+                </h2>
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  To eliminate the technical barriers that prevent people from
-                  bringing their ideas to life online. We believe that everyone
-                  should have the power to create professional websites and
-                  applications, regardless of their technical background or
-                  coding experience.
+                  To redefine how the world creates on the web — by fusing
+                  artificial intelligence with human imagination. Cobra AI
+                  empowers both coders and creators to design, develop, and
+                  deploy stunning digital experiences effortlessly. Our mission
+                  is to make innovation accessible to everyone, from dreamers
+                  with no code skills to developers building the next generation
+                  of the web.
                 </p>
               </div>
 
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-green-600/20 p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-700 rounded-full flex items-center justify-center mb-6">
+              {/* Vision */}
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-green-600/20 p-8 hover:border-green-400/40 transition">
+                <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-green-700 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-green-500/30">
                   <FaGlobe className="text-white text-2xl" />
                 </div>
-                <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
+                <h2 className="text-3xl font-bold mb-4 text-emerald-400">
+                  Our Vision
+                </h2>
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  A world where AI and human creativity work together seamlessly
-                  to build the next generation of web experiences. We envision a
-                  future where anyone with an idea can transform it into a fully
-                  functional digital product in minutes, not months.
+                  To build a future where AI and creativity move as one —
+                  crafting experiences that are intelligent, beautiful, and
+                  human-centered. Cobra AI envisions a digital world where ideas
+                  become products in minutes, collaboration feels effortless,
+                  and technology becomes invisible — leaving only pure creation
+                  behind.
                 </p>
               </div>
             </div>

@@ -24,46 +24,112 @@ const Demo = () => {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
 
   const templates = [
-    {
-      id: 1,
-      name: "E-commerce Store",
-      type: "E-commerce",
-      description: "AI-powered online store with product management",
-      features: [
-        "Product Catalog",
-        "Shopping Cart",
-        "Payment Integration",
-        "Inventory Management",
-      ],
-      image: "/api/placeholder/400/250",
-    },
-    {
-      id: 2,
-      name: "Portfolio Website",
-      type: "Portfolio",
-      description: "Professional portfolio with dynamic content sections",
-      features: [
-        "Project Showcase",
-        "About Section",
-        "Contact Form",
-        "Social Integration",
-      ],
-      image: "/api/placeholder/400/250",
-    },
-    {
-      id: 3,
-      name: "Blog Platform",
-      type: "Blog",
-      description: "Content-rich blog with AI writing assistance",
-      features: [
-        "Blog Posts",
-        "Categories",
-        "Search Function",
-        "Comment System",
-      ],
-      image: "/api/placeholder/400/250",
-    },
-  ];
+  {
+    id: 1,
+    name: "E-commerce Store",
+    type: "E-commerce",
+    description: "AI-powered online store with product management",
+    features: [
+      "Product Catalog",
+      "Shopping Cart",
+      "Payment Integration",
+      "Inventory Management",
+    ],
+    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713", // Ecommerce
+  },
+  {
+    id: 2,
+    name: "Portfolio Website",
+    type: "Portfolio",
+    description: "Professional portfolio with dynamic content sections",
+    features: [
+      "Project Showcase",
+      "About Section",
+      "Contact Form",
+      "Social Integration",
+    ],
+    image: "https://images.unsplash.com/photo-1504691342899-7b0f5d43c0f2", // Portfolio
+  },
+  {
+    id: 3,
+    name: "Blog Platform",
+    type: "Blog",
+    description: "Content-rich blog with AI writing assistance",
+    features: [
+      "Blog Posts",
+      "Categories",
+      "Search Function",
+      "Comment System",
+    ],
+    image: "https://images.unsplash.com/photo-1502882705085-c47e1e6c6d6e", // Blog
+  },
+  {
+    id: 4,
+    name: "Gaming Hub",
+    type: "Gaming",
+    description: "Interactive gaming community site with leaderboards",
+    features: [
+      "Game Listings",
+      "Leaderboards",
+      "User Profiles",
+      "Live Chat",
+    ],
+    image: "https://images.unsplash.com/photo-1605902711622-cfb43c4437b5", // Gaming
+  },
+  {
+    id: 5,
+    name: "Startup Landing Page",
+    type: "Landing",
+    description: "Modern landing page to showcase your startup",
+    features: [
+      "Hero Section",
+      "Feature Highlights",
+      "Testimonials",
+      "Call-to-Action",
+    ],
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f", // Landing
+  },
+  {
+    id: 6,
+    name: "Restaurant Website",
+    type: "Food & Beverage",
+    description: "Elegant restaurant site with menu and reservations",
+    features: [
+      "Digital Menu",
+      "Table Booking",
+      "Gallery",
+      "Contact Info",
+    ],
+    image: "https://images.unsplash.com/photo-1555992336-03a23c8bf6c7", // Restaurant
+  },
+  {
+    id: 7,
+    name: "Event Website",
+    type: "Events",
+    description: "Dynamic event site with scheduling and ticketing",
+    features: [
+      "Event Schedule",
+      "Ticket Booking",
+      "Speaker Profiles",
+      "Countdown Timer",
+    ],
+    image: "https://images.unsplash.com/photo-1503424886309-46e126a0f3a5", // Event
+  },
+  {
+    id: 8,
+    name: "Educational Platform",
+    type: "Education",
+    description: "AI-driven learning site for online courses",
+    features: [
+      "Course Listings",
+      "Quizzes",
+      "Student Dashboard",
+      "Certifications",
+    ],
+    image: "https://images.unsplash.com/photo-1584697964403-6f2c0c5d16c5", // Education
+  }
+];
+
 
   const coderFeatures = [
     {

@@ -13,4 +13,14 @@ router.post("/register", [
   UserController.registerUser,
 ]);
 
+router.post(
+  "/verify",
+  [
+    body("email").isEmail().withMessage("Email is invalid"),
+    body("otp").notEmpty().withMessage("OTP is required"),
+  ],
+  ValidateMiddleware.validateUser,
+  UserController.verifyOtp
+);
+
 module.exports = router;

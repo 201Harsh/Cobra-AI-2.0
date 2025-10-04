@@ -81,3 +81,35 @@ module.exports.registerUser = async (req, res) => {
     });
   }
 };
+
+module.exports.verifyOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+
+    const User = await UserService.VerifyOtp({
+      email,
+      otp,
+    });
+
+    if (!User) {
+      return res.status(400).json({
+        message: "Something went wrong",
+      });
+    }
+
+    res.status(201).json({
+      message: "Account created successfully",
+      User,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

@@ -27,4 +27,15 @@ router.post(
   UserController.verifyOtp
 );
 
+router.post("/login", [
+  body("email").isEmail().withMessage("Email is invalid"),
+  body("password")
+    .notEmpty()
+    .withMessage("Password is required")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters"),
+  ValidateMiddleware.validateUser,
+  UserController.loginUser,
+]);
+
 module.exports = router;

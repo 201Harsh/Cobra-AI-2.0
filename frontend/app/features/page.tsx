@@ -496,9 +496,12 @@ const Features = () => {
             </h1>
 
             <p className="md:text-xl text-lg text-gray-300 mb-8 leading-relaxed">
-              Whether you're a complete beginner or an experienced developer,
-              Cobra AI 2.0 provides all the tools and AI assistance you need to
-              create, collaborate, and deploy with confidence.
+              Whether you're a complete beginner or an experienced developer, 
+              <span className="ml-1 font-bold text-emerald-400">
+                Cobra AI 2.0
+              </span>{" "}
+              provides all the tools and AI assistance you need to create,
+              collaborate, and deploy with confidence.
             </p>
           </div>
         </section>

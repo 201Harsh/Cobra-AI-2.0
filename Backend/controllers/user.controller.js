@@ -6,6 +6,29 @@ module.exports.registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    const allowedDomains = [
+      "gmail.com",
+      "yahoo.com",
+      "outlook.com",
+      "hotmail.com",
+      "icloud.com",
+      "protonmail.com",
+      "aol.com",
+      "mail.com",
+      "zoho.com",
+      "yandex.com",
+    ];
+
+    const validateEmail = (email) => {
+      const domain = email.split("@")[1]?.toLowerCase();
+      if (!allowedDomains.includes(domain)) {
+        throw new Error("Use a Valid Email Address");
+      }
+      return true;
+    };
+
+    validateEmail(email);
+
     if (!name || !email || !password) {
       return res.status(400).json({
         message: "All fields are required",
@@ -32,10 +55,12 @@ module.exports.registerUser = async (req, res) => {
 
     const OtpExpiryTime = Date.now() + 5 * 60 * 1000;
 
+    const hashedPassword = await UserModel.hashedPassword(password);
+
     const user = await UserService.CreateTempuser({
       name,
       email,
-      password,
+      password: hashedPassword,
       otp,
       otpExpire: OtpExpiryTime,
     });

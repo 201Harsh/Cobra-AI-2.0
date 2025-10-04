@@ -24,58 +24,75 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import Link from "next/link";
-import { HeadersAdapter } from "next/dist/server/web/spec-extension/adapters/headers";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
-type DocumentationSection = {
+// Type definitions
+type SidebarSection = {
+  id: string;
+  name: string;
+  icon: React.ReactNode;
+};
+
+type FeatureItem = {
+  icon: string;
   title: string;
   description: string;
-  content: Array<{
-    type: string;
-    text?: string;
-    title?: string;
-    items?: string[] | any[];
-    features?: Array<{
-      icon: string;
-      title: string;
-      description: string;
-    }>;
-    agents?: Array<{
-      name: string;
-      role: string;
-      description: string;
-      capabilities: string[];
-    }>;
-    plans?: Array<{
-      name: string;
-      price: string;
-      for: string;
-      features: string[];
-    }>;
-    categories?: Array<{
-      category: string;
-      technologies: string[];
-    }>;
-    steps?: string[];
-    channels?: Array<{
-      icon: React.ReactNode;
-      name: string;
-      description: string;
-      link: string;
-    }>;
-  }>;
 };
 
-type DocumentationContent = {
-  [key: string]: DocumentationSection;
+type AgentItem = {
+  name: string;
+  role: string;
+  description: string;
+  capabilities: string[];
 };
 
-const Documentation = () => {
-  const [activeSection, setActiveSection] = useState("overview");
-  const [searchQuery, setSearchQuery] = useState("");
+type PlanItem = {
+  name: string;
+  price: string;
+  for: string;
+  features: string[];
+};
 
-  const sidebarSections = [
+type CategoryItem = {
+  category: string;
+  technologies: string[];
+};
+
+type ChannelItem = {
+  icon: React.ReactNode;
+  name: string;
+  description: string;
+  link: string;
+};
+
+type ContentItem = 
+  | { type: "intro"; text: string }
+  | { type: "highlights"; title: string; items: string[] }
+  | { type: "features"; title: string; items: FeatureItem[] }
+  | { type: "usecases"; title: string; items: string[] }
+  | { type: "feature-grid"; features: Array<{ title: string; description: string; capabilities: string[] }> }
+  | { type: "agents"; agents: AgentItem[] }
+  | { type: "pricing-table"; plans: PlanItem[] }
+  | { type: "tech-grid"; categories: CategoryItem[] }
+  | { type: "security-features"; features: string[] }
+  | { type: "guide"; title: string; steps: string[] }
+  | { type: "support-channels"; channels: ChannelItem[] }
+  | { type: "roadmap"; title: string; items: string[] };
+
+interface DocumentationSection {
+  title: string;
+  description: string;
+  content: ContentItem[];
+}
+
+type SectionKey = "overview" | "creator-mode" | "dev-mode" | "features" | "ai-agents" | "pricing" | "tech-stack" | "security" | "guides" | "support";
+
+const Documentation: React.FC = () => {
+  const [activeSection, setActiveSection] = useState<SectionKey>("overview");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const sidebarSections: SidebarSection[] = [
     { id: "overview", name: "Overview", icon: <FaBook /> },
     { id: "creator-mode", name: "Creator Mode", icon: <FaMagic /> },
     { id: "dev-mode", name: "Dev Mode", icon: <FaLaptopCode /> },
@@ -88,7 +105,7 @@ const Documentation = () => {
     { id: "support", name: "Support", icon: <FaUsers /> },
   ];
 
-  const documentationContent: DocumentationContent = {
+  const documentationContent: Record<SectionKey, DocumentationSection> = {
     overview: {
       title: "Cobra AI 2.0 Documentation",
       description:
@@ -602,8 +619,273 @@ const Documentation = () => {
     },
   };
 
-  const currentContent: DocumentationSection =
-    documentationContent[activeSection];
+  const currentContent: DocumentationSection = documentationContent[activeSection];
+
+  const renderContentSection = (section: ContentItem, index: number) => {
+    switch (section.type) {
+      case "intro":
+        return (
+          <p key={index} className="text-gray-300 leading-relaxed text-lg">
+            {section.text}
+          </p>
+        );
+
+      case "highlights":
+        return (
+          <div key={index}>
+            <h3 className="text-2xl font-bold mb-4 text-emerald-400">
+              {section.title}
+            </h3>
+            <ul className="space-y-3">
+              {section.items.map((item, idx) => (
+                <li key={idx} className="flex items-start space-x-3 text-gray-300">
+                  <span className="text-emerald-400 mt-1 flex-shrink-0">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+
+      case "features":
+        return (
+          <div key={index}>
+            <h3 className="text-2xl font-bold mb-6 text-emerald-400">
+              {section.title}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {section.items.map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
+                >
+                  <div className="flex items-center space-x-3 mb-3">
+                    <span className="text-2xl">{feature.icon}</span>
+                    <h4 className="text-xl font-bold">{feature.title}</h4>
+                  </div>
+                  <p className="text-gray-300">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "usecases":
+        return (
+          <div key={index}>
+            <h3 className="text-2xl font-bold mb-4 text-emerald-400">
+              {section.title}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {section.items.map((usecase, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center space-x-3 text-gray-300"
+                >
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span>{usecase}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "feature-grid":
+        return (
+          <div key={index} className="space-y-6">
+            {section.features.map((feature, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
+              >
+                <h3 className="text-xl font-bold mb-3 text-emerald-400">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 mb-4">{feature.description}</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {feature.capabilities.map((capability, capIdx) => (
+                    <div
+                      key={capIdx}
+                      className="flex items-center space-x-2 text-sm text-emerald-300"
+                    >
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
+                      <span>{capability}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "agents":
+        return (
+          <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {section.agents.map((agent, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
+              >
+                <h3 className="text-xl font-bold mb-2 text-emerald-400">
+                  {agent.name}
+                </h3>
+                <p className="text-blue-400 font-semibold mb-3">{agent.role}</p>
+                <p className="text-gray-300 mb-4">{agent.description}</p>
+                <div className="space-y-2">
+                  {agent.capabilities.map((capability, capIdx) => (
+                    <div
+                      key={capIdx}
+                      className="flex items-center space-x-2 text-sm text-emerald-300"
+                    >
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
+                      <span>{capability}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "pricing-table":
+        return (
+          <div key={index} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {section.plans.map((plan, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-700/30 rounded-xl p-6 border border-gray-600 text-center"
+              >
+                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                <div className="text-2xl font-bold text-emerald-400 mb-1">
+                  {plan.price}
+                </div>
+                <p className="text-gray-400 text-sm mb-4">{plan.for}</p>
+                <div className="space-y-2 mb-6">
+                  {plan.features.map((feature, featIdx) => (
+                    <div key={featIdx} className="text-sm text-gray-300">
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  href="/register"
+                  className="block w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                >
+                  Get Started
+                </Link>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "tech-grid":
+        return (
+          <div key={index} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {section.categories.map((category, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
+              >
+                <h3 className="text-xl font-bold mb-4 text-emerald-400">
+                  {category.category}
+                </h3>
+                <div className="space-y-2">
+                  {category.technologies.map((tech, techIdx) => (
+                    <div
+                      key={techIdx}
+                      className="flex items-center space-x-2 text-gray-300"
+                    >
+                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
+                      <span>{tech}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "security-features":
+        return (
+          <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {section.features.map((feature, idx) => (
+              <div
+                key={idx}
+                className="flex items-center space-x-3 text-gray-300"
+              >
+                <FaShieldAlt className="text-emerald-400 flex-shrink-0" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "guide":
+        return (
+          <div key={index} className="bg-gray-700/30 rounded-xl p-6 border border-gray-600">
+            <h3 className="text-2xl font-bold mb-4 text-emerald-400">
+              {section.title}
+            </h3>
+            <div className="space-y-3">
+              {section.steps.map((step, idx) => (
+                <div key={idx} className="flex items-start space-x-3">
+                  <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1 flex-shrink-0">
+                    {idx + 1}
+                  </div>
+                  <p className="text-gray-300">{step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "support-channels":
+        return (
+          <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {section.channels.map((channel, idx) => (
+              <a
+                key={idx}
+                href={channel.link}
+                className="bg-gray-700/30 rounded-xl p-6 border border-gray-600 hover:border-emerald-500/30 transition-all duration-300 group"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="text-2xl text-emerald-400 group-hover:scale-110 transition-transform duration-300">
+                    {channel.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">{channel.name}</h3>
+                    <p className="text-gray-300">{channel.description}</p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        );
+
+      case "roadmap":
+        return (
+          <div key={index}>
+            <h3 className="text-2xl font-bold mb-4 text-emerald-400">
+              {section.title}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {section.items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center space-x-3 text-gray-300"
+                >
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -635,7 +917,7 @@ const Documentation = () => {
                     type="text"
                     placeholder="Search documentation..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
                     className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   />
                 </div>
@@ -645,7 +927,7 @@ const Documentation = () => {
                   {sidebarSections.map((section) => (
                     <button
                       key={section.id}
-                      onClick={() => setActiveSection(section.id)}
+                      onClick={() => setActiveSection(section.id as SectionKey)}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-300 ${
                         activeSection === section.id
                           ? "bg-gradient-to-r from-emerald-500 to-green-600 text-white shadow-lg"
@@ -673,313 +955,9 @@ const Documentation = () => {
                 </div>
 
                 <div className="space-y-8">
-                  {currentContent.content.map((section: any, index: number) => (
-                    <div key={index} className="space-y-6">
-                      {/* Intro Text */}
-                      {section.type === "intro" && (
-                        <p className="text-gray-300 leading-relaxed text-lg">
-                          {section.text}
-                        </p>
-                      )}
-
-                      {/* Highlights List */}
-                      {section.type === "highlights" && (
-                        <div>
-                          <h3 className="text-2xl font-bold mb-4 text-emerald-400">
-                            {section.title}
-                          </h3>
-                          <ul className="space-y-3">
-                            {section.items.map((item: string, idx: number) => (
-                              <li
-                                key={idx}
-                                className="flex items-start space-x-3 text-gray-300"
-                              >
-                                <span className="text-emerald-400 mt-1 flex-shrink-0">
-                                  •
-                                </span>
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* Feature Grid */}
-                      {section.type === "features" && (
-                        <div>
-                          <h3 className="text-2xl font-bold mb-6 text-emerald-400">
-                            {section.title}
-                          </h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {section.items.map((feature: any, idx: number) => (
-                              <div
-                                key={idx}
-                                className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
-                              >
-                                <div className="flex items-center space-x-3 mb-3">
-                                  <span className="text-2xl">
-                                    {feature.icon}
-                                  </span>
-                                  <h4 className="text-xl font-bold">
-                                    {feature.title}
-                                  </h4>
-                                </div>
-                                <p className="text-gray-300">
-                                  {feature.description}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Use Cases */}
-                      {section.type === "usecases" && (
-                        <div>
-                          <h3 className="text-2xl font-bold mb-4 text-emerald-400">
-                            {section.title}
-                          </h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {section.items.map(
-                              (usecase: string, idx: number) => (
-                                <div
-                                  key={idx}
-                                  className="flex items-center space-x-3 text-gray-300"
-                                >
-                                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                                  <span>{usecase}</span>
-                                </div>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Feature Grid Detailed */}
-                      {section.type === "feature-grid" && (
-                        <div className="space-y-6">
-                          {section.features.map((feature: any, idx: number) => (
-                            <div
-                              key={idx}
-                              className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
-                            >
-                              <h3 className="text-xl font-bold mb-3 text-emerald-400">
-                                {feature.title}
-                              </h3>
-                              <p className="text-gray-300 mb-4">
-                                {feature.description}
-                              </p>
-                              <div className="grid grid-cols-2 gap-2">
-                                {feature.capabilities.map(
-                                  (capability: string, capIdx: number) => (
-                                    <div
-                                      key={capIdx}
-                                      className="flex items-center space-x-2 text-sm text-emerald-300"
-                                    >
-                                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
-                                      <span>{capability}</span>
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* AI Agents */}
-                      {section.type === "agents" && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {section.agents.map((agent: any, idx: number) => (
-                            <div
-                              key={idx}
-                              className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
-                            >
-                              <h3 className="text-xl font-bold mb-2 text-emerald-400">
-                                {agent.name}
-                              </h3>
-                              <p className="text-blue-400 font-semibold mb-3">
-                                {agent.role}
-                              </p>
-                              <p className="text-gray-300 mb-4">
-                                {agent.description}
-                              </p>
-                              <div className="space-y-2">
-                                {agent.capabilities.map(
-                                  (capability: string, capIdx: number) => (
-                                    <div
-                                      key={capIdx}
-                                      className="flex items-center space-x-2 text-sm text-emerald-300"
-                                    >
-                                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
-                                      <span>{capability}</span>
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Pricing Table */}
-                      {section.type === "pricing-table" && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                          {section.plans.map((plan: any, idx: number) => (
-                            <div
-                              key={idx}
-                              className="bg-gray-700/30 rounded-xl p-6 border border-gray-600 text-center"
-                            >
-                              <h3 className="text-xl font-bold mb-2">
-                                {plan.name}
-                              </h3>
-                              <div className="text-2xl font-bold text-emerald-400 mb-1">
-                                {plan.price}
-                              </div>
-                              <p className="text-gray-400 text-sm mb-4">
-                                {plan.for}
-                              </p>
-                              <div className="space-y-2 mb-6">
-                                {plan.features.map(
-                                  (feature: string, featIdx: number) => (
-                                    <div
-                                      key={featIdx}
-                                      className="text-sm text-gray-300"
-                                    >
-                                      {feature}
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                              <Link
-                                href="/register"
-                                className="block w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
-                              >
-                                Get Started
-                              </Link>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Tech Stack */}
-                      {section.type === "tech-grid" && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {section.categories.map(
-                            (category: any, idx: number) => (
-                              <div
-                                key={idx}
-                                className="bg-gray-700/30 rounded-xl p-6 border border-gray-600"
-                              >
-                                <h3 className="text-xl font-bold mb-4 text-emerald-400">
-                                  {category.category}
-                                </h3>
-                                <div className="space-y-2">
-                                  {category.technologies.map(
-                                    (tech: string, techIdx: number) => (
-                                      <div
-                                        key={techIdx}
-                                        className="flex items-center space-x-2 text-gray-300"
-                                      >
-                                        <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
-                                        <span>{tech}</span>
-                                      </div>
-                                    )
-                                  )}
-                                </div>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      )}
-
-                      {/* Security Features */}
-                      {section.type === "security-features" && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {section.features.map(
-                            (feature: string, idx: number) => (
-                              <div
-                                key={idx}
-                                className="flex items-center space-x-3 text-gray-300"
-                              >
-                                <FaShieldAlt className="text-emerald-400 flex-shrink-0" />
-                                <span>{feature}</span>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      )}
-
-                      {/* Guides */}
-                      {section.type === "guide" && (
-                        <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600">
-                          <h3 className="text-2xl font-bold mb-4 text-emerald-400">
-                            {section.title}
-                          </h3>
-                          <div className="space-y-3">
-                            {section.steps.map((step: any, idx: number) => (
-                              <div
-                                key={idx}
-                                className="flex items-start space-x-3"
-                              >
-                                <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1 flex-shrink-0">
-                                  {idx + 1}
-                                </div>
-                                <p className="text-gray-300">{step}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Support Channels */}
-                      {section.type === "support-channels" && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {section.channels.map((channel: any, idx: number) => (
-                            <a
-                              key={idx}
-                              href={channel.link}
-                              className="bg-gray-700/30 rounded-xl p-6 border border-gray-600 hover:border-emerald-500/30 transition-all duration-300 group"
-                            >
-                              <div className="flex items-center space-x-4">
-                                <div className="text-2xl text-emerald-400 group-hover:scale-110 transition-transform duration-300">
-                                  {channel.icon}
-                                </div>
-                                <div>
-                                  <h3 className="text-xl font-bold mb-1">
-                                    {channel.name}
-                                  </h3>
-                                  <p className="text-gray-300">
-                                    {channel.description}
-                                  </p>
-                                </div>
-                              </div>
-                            </a>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Roadmap */}
-                      {section.type === "roadmap" && (
-                        <div>
-                          <h3 className="text-2xl font-bold mb-4 text-emerald-400">
-                            {section.title}
-                          </h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {section.items.map((item: any, idx: number) => (
-                              <div
-                                key={idx}
-                                className="flex items-center space-x-3 text-gray-300"
-                              >
-                                <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                                <span>{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                  {currentContent.content.map((section, index) => 
+                    renderContentSection(section, index)
+                  )}
                 </div>
 
                 {/* Navigation Buttons */}
@@ -990,7 +968,7 @@ const Documentation = () => {
                         (s) => s.id === activeSection
                       );
                       const prevSection = sidebarSections[currentIndex - 1];
-                      if (prevSection) setActiveSection(prevSection.id);
+                      if (prevSection) setActiveSection(prevSection.id as SectionKey);
                     }}
                     className="flex items-center space-x-2 px-6 py-3 rounded-lg bg-gray-700/50 hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={activeSection === sidebarSections[0].id}
@@ -1005,12 +983,11 @@ const Documentation = () => {
                         (s) => s.id === activeSection
                       );
                       const nextSection = sidebarSections[currentIndex + 1];
-                      if (nextSection) setActiveSection(nextSection.id);
+                      if (nextSection) setActiveSection(nextSection.id as SectionKey);
                     }}
                     className="flex items-center space-x-2 px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105"
                     disabled={
-                      activeSection ===
-                      sidebarSections[sidebarSections.length - 1].id
+                      activeSection === sidebarSections[sidebarSections.length - 1].id
                     }
                   >
                     <span>Next</span>

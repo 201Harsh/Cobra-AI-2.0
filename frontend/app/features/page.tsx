@@ -484,7 +484,7 @@ const Features = () => {
             <div className="inline-flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-full mb-6 border border-emerald-500/20">
               <FaLightbulb className="text-emerald-400" />
               <span className="text-sm">
-                Powerful Features for Every Creator
+                Powerful Features for Every Creator & Developer
               </span>
             </div>
 

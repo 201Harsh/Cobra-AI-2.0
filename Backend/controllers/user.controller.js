@@ -201,6 +201,108 @@ module.exports.loginUser = async (req, res) => {
   }
 };
 
+module.exports.forgotPasswordSendOtp = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        message: "Email is required",
+      });
+    }
+
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "User not found",
+      });
+    }
+
+    const Otp = Math.floor(100000 + Math.random() * 900000);
+    const OtpExpiryTime = Date.now() + 5 * 60 * 1000;
+
+    const User = await UserService.ForgetPasswordSendOtp({
+      user,
+      email,
+      otp: Otp,
+      otpExpire: OtpExpiryTime,
+    });
+
+    if (!User) {
+      return res.status(400).json({
+        message: "Something went wrong",
+      });
+    }
+
+    res.status(200).json({
+      message: "OTP sent successfully",
+      User,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+module.exports.checkOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+
+    await UserService.CheckOtp({
+      email,
+      otp,
+    });
+
+    res.status(200).json({
+      message: "OTP verified successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+module.exports.UpdatePassword = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+
+    const User = await UserService.UpdatePassword({
+      email,
+      password,
+    });
+
+    if (!User) {
+      return res.status(400).json({
+        message: "Something went wrong",
+      });
+    }
+
+    res.status(200).json({
+      message: "Password updated successfully",
+      User,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports.logoutUser = async (req, res) => {
   try {
     res.clearCookie("token");

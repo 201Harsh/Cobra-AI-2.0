@@ -1,5 +1,6 @@
 const TempUserModel = require("../models/tempuser.model");
 const UserModel = require("../models/user.model");
+const bcrypt = require("bcrypt");
 
 module.exports.CreateTempuser = async ({
   email,
@@ -68,7 +69,7 @@ module.exports.VerifyOtp = async ({ email, otp }) => {
   return user;
 };
 
-module.exports.ResendOtp = async ({ email, otp , otpExpire }) => {
+module.exports.ResendOtp = async ({ email, otp, otpExpire }) => {
   if (!email) {
     throw new Error("Email is required");
   }
@@ -78,8 +79,82 @@ module.exports.ResendOtp = async ({ email, otp , otpExpire }) => {
   tempuser.otp = otp;
   tempuser.otpExpire = otpExpire;
 
-
   await tempuser.save();
 
   return tempuser;
+};
+
+module.exports.ForgetPasswordSendOtp = async ({
+  email,
+  otp,
+  otpExpire,
+  user,
+}) => {
+  if (!email) {
+    throw new Error("Email is required");
+  }
+
+  const TempUser = await TempUserModel.create({
+    email: user.email,
+    name: user.name,
+    password: user.password,
+    otp,
+    otpExpire,
+  });
+
+  return TempUser;
+};
+
+module.exports.CheckOtp = async ({ email, otp }) => {
+  if (!email || !otp) {
+    throw new Error("All fields are required");
+  }
+
+  const tempuser = await TempUserModel.findOne({ email });
+
+  if (!tempuser) {
+    throw new Error("User not found");
+  }
+
+  if (tempuser.otp !== otp) {
+    throw new Error("Invalid OTP");
+  }
+  if (tempuser.otpExpire < Date.now()) {
+    throw new Error("OTP expired");
+  }
+};
+
+module.exports.UpdatePassword = async ({ email, password }) => {
+  if (!email || !password) {
+    throw new Error("All fields are required");
+  }
+
+  const TempUser = await TempUserModel.findOne({ email });
+
+  if (!TempUser) {
+    throw new Error("User not found");
+  }
+
+  const isSamePassword = await bcrypt.compare(password, TempUser.password);
+  if (isSamePassword) {
+    throw new Error("Password used before cannot be used again");
+  }
+
+  const HashedPassword = await UserModel.HashPassword(password);
+
+  TempUser.password = HashedPassword;
+
+  await TempUser.save();
+
+  const updatedUser = await UserModel.findOneAndUpdate(
+    { email },
+    { password: TempUser.password },
+    { new: true }
+  );
+
+  if (!updatedUser) {
+    throw new Error("User not found in main collection");
+  }
+
+  return updatedUser;
 };

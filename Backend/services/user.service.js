@@ -67,3 +67,19 @@ module.exports.VerifyOtp = async ({ email, otp }) => {
 
   return user;
 };
+
+module.exports.ResendOtp = async ({ email, otp , otpExpire }) => {
+  if (!email) {
+    throw new Error("Email is required");
+  }
+
+  const tempuser = await TempUserModel.findOne({ email });
+
+  tempuser.otp = otp;
+  tempuser.otpExpire = otpExpire;
+
+
+  await tempuser.save();
+
+  return tempuser;
+};

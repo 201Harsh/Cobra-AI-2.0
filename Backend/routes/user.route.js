@@ -28,6 +28,12 @@ router.post(
   UserController.verifyOtp
 );
 
+router.post("/resend", [
+  body("email").isEmail().withMessage("Email is invalid"),
+  ValidateMiddleware.validateUser,
+  UserController.resendOtp,
+]);
+
 router.post("/login", [
   body("email").isEmail().withMessage("Email is invalid"),
   body("password")

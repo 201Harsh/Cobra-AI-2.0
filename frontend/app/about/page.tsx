@@ -145,9 +145,10 @@ const About = () => {
             </h1>
 
             <p className="md:text-xl text-lg text-gray-300 mb-8 leading-relaxed">
-              Cobra AI 2.0 is more than just a platform—it's a vision to
-              democratize web development and empower everyone to create amazing
-              digital experiences, with or without coding skills.
+              <span className="font-bold text-emerald-400">Cobra AI 2.0</span>{" "}
+              is more than just a platform—it's a vision to democratize web
+              development and empower everyone to create amazing digital
+              experiences, with or without coding skills.
             </p>
           </div>
         </section>
@@ -191,7 +192,11 @@ const About = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-4">
-                Why We Built Cobra AI 2.0
+                Why We Built{" "}
+                <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
+                  {" "}
+                  Cobra AI 2.0
+                </span>
               </h2>
               <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                 Addressing the fundamental challenges in modern web development
@@ -375,10 +380,10 @@ const About = () => {
                   <div className="flex-shrink-0">
                     <div className="w-52 h-52  rounded-full flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
                       <img
-                      src="/img/dev1.jpg"
-                      alt="dev"
-                      className="h-full w-full object-cover rounded-full"
-                    />
+                        src="/img/dev1.jpg"
+                        alt="dev"
+                        className="h-full w-full object-cover rounded-full"
+                      />
                     </div>
                   </div>
 
@@ -393,7 +398,7 @@ const About = () => {
 
                     <div className="flex flex-wrap justify-center md:justify-start gap-4">
                       <a
-                      target="_blank"
+                        target="_blank"
                         href={member.social.github}
                         className="flex items-center space-x-2 bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                       >
@@ -401,7 +406,7 @@ const About = () => {
                         <span className="font-medium">GitHub</span>
                       </a>
                       <a
-                      target="_blank"
+                        target="_blank"
                         href={member.social.linkedin}
                         className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                       >
@@ -409,7 +414,7 @@ const About = () => {
                         <span className="font-medium">LinkedIn</span>
                       </a>
                       <a
-                      target="_blank"
+                        target="_blank"
                         href={member.social.instagram}
                         className="flex items-center space-x-2 bg-pink-600 hover:bg-pink-700 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                       >

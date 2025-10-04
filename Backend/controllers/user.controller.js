@@ -57,7 +57,7 @@ module.exports.registerUser = async (req, res) => {
 
     const hashedPassword = await UserModel.HashPassword(password);
 
-    const user = await UserService.CreateTempuser({
+    const tempuser = await UserService.CreateTempuser({
       name,
       email,
       password: hashedPassword,
@@ -65,7 +65,7 @@ module.exports.registerUser = async (req, res) => {
       otpExpire: OtpExpiryTime,
     });
 
-    if (!user) {
+    if (!tempuser) {
       return res.status(400).json({
         message: "Something went wrong",
       });
@@ -73,6 +73,7 @@ module.exports.registerUser = async (req, res) => {
 
     res.status(201).json({
       message: "Verfiy your email via otp",
+      tempuser,
     });
   } catch (error) {
     res.status(500).json({

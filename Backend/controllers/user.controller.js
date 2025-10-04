@@ -103,9 +103,16 @@ module.exports.verifyOtp = async (req, res) => {
       });
     }
 
-    res.status(201).json({
+    const token = UserModel.Jwt_token();
+
+    res.cookie("token", token, {
+      httpOnly: true,
+    });
+
+    res.status(200).json({
       message: "Account created successfully",
       User,
+      token,
     });
   } catch (error) {
     res.status(500).json({

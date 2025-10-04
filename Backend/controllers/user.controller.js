@@ -55,7 +55,7 @@ module.exports.registerUser = async (req, res) => {
 
     const OtpExpiryTime = Date.now() + 5 * 60 * 1000;
 
-    const hashedPassword = await UserModel.hashedPassword(password);
+    const hashedPassword = await UserModel.HashPassword(password);
 
     const user = await UserService.CreateTempuser({
       name,

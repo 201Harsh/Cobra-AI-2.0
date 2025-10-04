@@ -28,7 +28,17 @@ module.exports.registerUser = async (req, res) => {
       });
     }
 
-    const user = await UserService.CreateTempuser(req.body);
+    const otp = Math.floor(1000 + Math.random() * 9000);
+
+    const OtpExpiryTime = Date.now() + 5 * 60 * 1000;
+
+    const user = await UserService.CreateTempuser({
+      name,
+      email,
+      password,
+      otp,
+      otpExpire: OtpExpiryTime,
+    });
 
     if (!user) {
       return res.status(400).json({

@@ -43,6 +43,6 @@ router.post("/logout", AuthMiddleware.AuthUser, UserController.logoutUser);
 
 router.get("/me", AuthMiddleware.AuthUser, UserController.getUser);
 
-router.get("/all", AuthMiddleware.AuthUser, UserController.getAllUsers);
+router.get("/all", UserController.getAllUsers);
 
 module.exports = router;

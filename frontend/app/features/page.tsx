@@ -19,6 +19,11 @@ import {
   FaStar,
   FaLightbulb,
   FaCloud,
+  FaComments,
+  FaSave,
+  FaCubes,
+  FaPalette,
+  FaPenNib,
 } from "react-icons/fa";
 import Link from "next/link";
 import Header from "../Components/Header";
@@ -217,6 +222,96 @@ const Features = () => {
       ],
       status: "live",
     },
+    {
+      id: 13,
+      title: "AI Design Assistant",
+      description:
+        "Let AI handle color palettes, typography, and layout adjustments automatically for aesthetic perfection.",
+      category: "beginner",
+      icon: <FaPalette className="text-2xl" />,
+      highlights: [
+        "Auto UI adjustments",
+        "Color balance detection",
+        "Typography pairing",
+        "Accessibility optimization",
+      ],
+      status: "beta",
+    },
+    {
+      id: 14,
+      title: "AI Code Refactor",
+      description:
+        "Automatically clean, refactor, and optimize your codebase without losing functionality.",
+      category: "coder",
+      icon: <FaCode className="text-2xl" />,
+      highlights: [
+        "Dead code removal",
+        "Naming convention fixes",
+        "Code compression",
+        "AI-assisted refactor suggestions",
+      ],
+      status: "beta",
+    },
+    {
+      id: 15,
+      title: "AI Project Generator",
+      description:
+        "Generate full-stack project structures instantly based on your app idea or prompt.",
+      category: "ai",
+      icon: <FaCubes className="text-2xl" />,
+      highlights: [
+        "Custom tech stack selection",
+        "Pre-configured routes & APIs",
+        "Auth-ready setup",
+        "Auto folder structure creation",
+      ],
+      status: "dev",
+    },
+    {
+      id: 16,
+      title: "Smart Collaboration Chat",
+      description:
+        "Chat with your teammates and AI simultaneously for instant suggestions, fixes, or explanations.",
+      category: "collaboration",
+      icon: <FaComments className="text-2xl" />,
+      highlights: [
+        "Human + AI mixed conversation",
+        "@ai command trigger",
+        "Real-time reply generation",
+        "Smart context memory",
+      ],
+      status: "live",
+    },
+    {
+      id: 17,
+      title: "Auto Save & Recovery System",
+      description:
+        "Never lose your progress again. Cobra AI auto-saves every change and lets you restore older versions anytime.",
+      category: "core",
+      icon: <FaSave className="text-2xl" />,
+      highlights: [
+        "Real-time auto-save",
+        "Version history tracking",
+        "Rollback support",
+        "Recovery from crash",
+      ],
+      status: "live",
+    },
+    {
+      id: 18,
+      title: "AI Content Studio",
+      description:
+        "Create, edit, and enhance text, blogs, and marketing content directly inside Cobra AI using intelligent AI tools.",
+      category: "ai",
+      icon: <FaPenNib className="text-2xl" />,
+      highlights: [
+        "AI blog and copywriting",
+        "SEO-optimized content generation",
+        "Tone and style customization",
+        "Auto image suggestion for content",
+      ],
+      status: "beta",
+    },
   ];
 
   const filteredFeatures =
@@ -240,6 +335,93 @@ const Features = () => {
       popular: false,
     },
     {
+      name: "Lite",
+      price: "₹49",
+      period: "/month",
+      description:
+        "For creators who want to explore AI website building on a budget",
+      features: [
+        "10 AI-generated websites",
+        "Access to basic Creator Mode",
+        "Standard templates",
+        "Basic AI content tools",
+        "2GB storage",
+        "Community support",
+      ],
+      cta: "Start with Lite",
+      popular: false,
+    },
+    {
+      name: "Student",
+      price: "₹79",
+      period: "/month",
+      description: "For students and individual learners building with AI",
+      features: [
+        "15 AI-generated websites",
+        "Creator & limited Dev Mode access",
+        "Premium templates (partial)",
+        "AI content + branding assistant",
+        "3GB cloud storage",
+        "Email support",
+      ],
+      cta: "Join Student Plan",
+      popular: false,
+    },
+    {
+      name: "Launch",
+      price: "₹99",
+      period: "/month",
+      description:
+        "For freelancers or startups launching their first AI-powered site",
+      features: [
+        "25 AI-generated websites",
+        "Full Creator Mode access",
+        "Custom branding setup",
+        "Logo & palette generator",
+        "4GB storage",
+        "AI SEO assistant",
+        "Basic analytics",
+      ],
+      cta: "Launch Now",
+      popular: false,
+    },
+    {
+      name: "Creator",
+      price: "₹149",
+      period: "/month",
+      description:
+        "Ideal for non-coders who want to build stunning AI websites easily",
+      features: [
+        "40 AI-generated websites",
+        "Full Creator Mode access",
+        "All premium templates",
+        "AI branding assistant",
+        "Custom image generation",
+        "5GB cloud storage",
+        "Email support",
+      ],
+      cta: "Upgrade to Creator",
+      popular: false,
+    },
+    {
+      name: "Studio",
+      price: "₹249",
+      period: "/month",
+      description:
+        "For creative professionals who want total design control and AI visuals",
+      features: [
+        "Unlimited AI site creation",
+        "Brand Studio visual editor",
+        "AI logo & UI design tools",
+        "Custom animations & effects",
+        "8GB storage",
+        "Priority email support",
+        "Access to Studio-exclusive templates",
+      ],
+      cta: "Unlock Studio",
+      popular: false,
+    },
+    {
       name: "Pro",
       price: "₹349",
       period: "/month",
@@ -257,11 +439,29 @@ const Features = () => {
       popular: true,
     },
     {
+      name: "DevX",
+      price: "₹699",
+      period: "/month",
+      description:
+        "For serious developers who want AI-assisted full-stack creation",
+      features: [
+        "Access to Dev Mode",
+        "Real-time AI coding",
+        "WebContainers live preview",
+        "MCP server integration",
+        "Database setup assistant",
+        "20GB storage",
+        "Private project spaces",
+      ],
+      cta: "Go DevX",
+      popular: false,
+    },
+    {
       name: "Enterprise",
-      price: "₹1999",
+      price: "Custom",
       description: "For large teams and organizations",
       features: [
-        "Everything in Pro",
+        "Everything in Pro & DevX",
         "Dedicated instance",
         "SLA guarantee",
         "Custom AI training",

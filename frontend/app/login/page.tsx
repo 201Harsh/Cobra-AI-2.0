@@ -182,7 +182,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={IsLoading}
-              className={`w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform shadow-lg flex items-center justify-center gap-2
+              className={`cursor-pointer w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform shadow-lg flex items-center justify-center gap-2
     ${
       IsLoading
         ? "bg-gradient-to-r from-emerald-500 to-green-600 opacity-90 cursor-not-allowed animate-pulse"

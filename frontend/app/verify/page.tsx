@@ -10,6 +10,7 @@ import { Slide, toast, Zoom } from "react-toastify";
 const OTPVerification: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
   const [UserEmail, setUserEmail] = useState("Cobra-AI-2.0@gmail.com");
+  const [IsLoading, setIsLoading] = useState<boolean>(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -91,6 +92,7 @@ const OTPVerification: React.FC = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
+    setIsLoading(true);
     const otpString = otp.join("");
 
     if (otpString.length < 4) {
@@ -285,9 +287,22 @@ const OTPVerification: React.FC = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              disabled={IsLoading}
+              className={`w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform shadow-lg flex items-center justify-center gap-2
+    ${
+      IsLoading
+        ? "bg-gradient-to-r from-emerald-500 to-green-600 opacity-90 cursor-not-allowed animate-pulse"
+        : "bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 hover:scale-105"
+    }`}
             >
-              Verify Account
+              {IsLoading ? (
+                <>
+                  <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span>Verifying Account...</span>
+                </>
+              ) : (
+                "Verify Account"
+              )}
             </button>
           </form>
 

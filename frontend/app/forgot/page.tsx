@@ -1,4 +1,5 @@
 "use client";
+import AxiosInstance from "@/config/Axios";
 import Link from "next/link";
 import React, { useState, useRef } from "react";
 import {
@@ -10,6 +11,7 @@ import {
   FaLock,
   FaCheckCircle,
 } from "react-icons/fa";
+import { Slide, toast, Zoom } from "react-toastify";
 
 const ForgotPassword: React.FC = () => {
   const [step, setStep] = useState<number>(1); // 1: Email, 2: OTP, 3: New Password
@@ -25,6 +27,7 @@ const ForgotPassword: React.FC = () => {
     type: "success" | "error";
     text: string;
   } | null>(null);
+  const [resetToken, setResetToken] = useState<string>(""); // Store reset token from OTP verification
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -103,6 +106,49 @@ const ForgotPassword: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
     setMessage(null);
+
+    try {
+      const res = await AxiosInstance.post("/user/forgot", {
+        email,
+      });
+
+      if (res.status === 201) {
+        setMessage({
+          type: "success",
+          text: "Verification code sent to your email!",
+        });
+        setStep(2);
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Failed to send OTP. Please try again.";
+      setMessage({ type: "error", text: errorMessage });
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleVerifyOTP = async (e: React.FormEvent) => {
@@ -110,7 +156,51 @@ const ForgotPassword: React.FC = () => {
     setIsLoading(true);
     setMessage(null);
 
-    setIsLoading(false);
+    const otpString = otp.join("");
+
+    try {
+      const res = await AxiosInstance.post("/user/check", {
+        email,
+        otp: otpString,
+      });
+
+      if (res.status === 201) {
+        setResetToken(res.data.data.resetToken); // Store the reset token for password update
+        setMessage({
+          type: "success",
+          text: "OTP verified successfully!",
+        });
+        setStep(3);
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message || "Invalid OTP. Please try again.";
+      setMessage({ type: "error", text: errorMessage });
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Zoom,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleUpdatePassword = async (e: React.FormEvent) => {
@@ -132,11 +222,54 @@ const ForgotPassword: React.FC = () => {
       setIsLoading(false);
       return;
     }
-  };
 
-  const handleResendOTP = async () => {
-    setIsLoading(true);
-    setMessage(null);
+    try {
+      const res = await AxiosInstance.post("/user/updatePass", {
+        email,
+        password: newPassword,
+      });
+
+      if (res.status === 200) {
+        setMessage({
+          type: "success",
+          text: "Password updated successfully! Redirecting to login...",
+        });
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+
+        // Redirect to login after successful password reset
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Failed to reset password. Please try again.";
+      setMessage({ type: "error", text: errorMessage });
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Zoom,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -180,7 +313,7 @@ const ForgotPassword: React.FC = () => {
           {step === 2 && (
             <div className="mt-4 p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
               <p className="text-sm text-emerald-400">
-                💡 Demo OTP: <strong>123456</strong>
+                💡 Check your email for the verification code
               </p>
             </div>
           )}

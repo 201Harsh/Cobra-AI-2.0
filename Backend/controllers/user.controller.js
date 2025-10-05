@@ -235,7 +235,7 @@ module.exports.forgotPasswordSendOtp = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    res.status(201).json({
       message: "OTP sent successfully",
       User,
     });
@@ -261,7 +261,7 @@ module.exports.checkOtp = async (req, res) => {
       otp,
     });
 
-    res.status(200).json({
+    res.status(201).json({
       message: "OTP verified successfully",
     });
   } catch (error) {

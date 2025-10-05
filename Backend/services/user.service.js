@@ -156,5 +156,7 @@ module.exports.UpdatePassword = async ({ email, password }) => {
     throw new Error("User not found in main collection");
   }
 
+  await TempUser.deleteOne();
+
   return updatedUser;
 };

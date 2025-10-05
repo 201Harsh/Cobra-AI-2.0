@@ -133,23 +133,60 @@ const Welcome = () => {
 
   const templates = [
     {
-      type: "E-commerce",
-      desc: "Online stores with AI-powered product management",
+      type: "E-commerce Store",
+      desc: "AI-powered online store with intelligent product management and seamless checkout experience.",
+      features: [
+        "Product Catalog",
+        "Smart Inventory",
+        "Secure Payments",
+        "Order Tracking",
+      ],
     },
-    { type: "Portfolio", desc: "Professional portfolios with dynamic content" },
+    {
+      type: "Portfolio Website",
+      desc: "Showcase your work with stunning galleries and professional project presentations.",
+      features: [
+        "Project Gallery",
+        "Client Testimonials",
+        "Contact Forms",
+        "Social Integration",
+      ],
+    },
     {
       type: "Blog Platform",
-      desc: "Content-rich blogs with AI writing assistance",
+      desc: "Content-rich blog with AI writing assistance and engaging reader experiences.",
+      features: [
+        "SEO Optimization",
+        "Comment System",
+        "Newsletter",
+        "Analytics Dashboard",
+      ],
     },
     {
-      type: "Gaming Sites",
-      desc: "Interactive gaming portfolios and communities",
+      type: "Gaming Community",
+      desc: "Build engaging gaming communities with forums, leaderboards, and event calendars.",
+      features: ["User Profiles", "Forums", "Achievement System", "Live Chat"],
     },
     {
-      type: "Animated Sites",
-      desc: "GSAP-powered animations and interactions",
+      type: "Animated Portfolio",
+      desc: "GSAP-powered animations and interactive elements that captivate your audience.",
+      features: [
+        "Smooth Animations",
+        "Interactive Elements",
+        "Parallax Effects",
+        "Mobile Optimized",
+      ],
     },
-    { type: "SaaS Dashboards", desc: "Business dashboards with analytics" },
+    {
+      type: "SaaS Dashboard",
+      desc: "Professional business dashboards with real-time analytics and data visualization.",
+      features: [
+        "Data Charts",
+        "User Management",
+        "API Integration",
+        "Custom Reports",
+      ],
+    },
   ];
 
   const languages = [
@@ -329,26 +366,94 @@ const Welcome = () => {
         {/* Template Showcase */}
         <section className="container mx-auto px-6 py-20">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Ready-Made Templates</h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              AI-powered templates that automatically adapt to your brand,
-              content, and style preferences
+            <div className="inline-flex items-center space-x-2 bg-gray-800/50 px-4 py-2 rounded-full mb-4 border border-emerald-500/20">
+              <FaMagic className="text-emerald-400 text-sm" />
+              <span className="text-sm text-gray-300">
+                AI-Powered Templates
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Stunning Templates, Zero Effort
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Choose from professionally designed templates that automatically
+              adapt to your brand. AI handles the customization while you focus
+              on your content.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8 max-w-7xl 2xl:max-w-full mx-auto">
             {templates.map((template, index) => (
               <div
                 key={template.type}
-                className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-emerald-500/30 transition-all duration-300 group hover:transform hover:scale-105"
+                className="cursor-pointer group relative bg-gradient-to-br from-gray-800/40 to-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-emerald-500/40 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/10"
               >
-                <div className="text-emerald-400 mb-3 group-hover:scale-110 transition-transform duration-300">
-                  <FaMagic className="text-xl" />
+                {/* Gradient Border Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-green-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="relative p-8 h-full flex flex-col">
+                  {/* Icon and Header */}
+                  <div className="flex items-center space-x-4 mb-6">
+                    <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <FaMagic className="text-white text-lg" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300">
+                        {template.type}
+                      </h3>
+                      <div className="w-12 h-1 bg-gradient-to-r from-emerald-500 to-green-600 rounded-full mt-2 group-hover:w-16 transition-all duration-300" />
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-gray-300 leading-relaxed mb-6 flex-grow">
+                    {template.desc}
+                  </p>
+
+                  {/* Features List */}
+                  <div className="space-y-3 mb-6">
+                    {template.features?.map((feature, idx) => (
+                      <div key={idx} className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-emerald-400 rounded-full flex-shrink-0" />
+                        <span className="text-sm text-gray-400">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <button className="w-full bg-gray-700/50 hover:bg-gradient-to-r hover:from-emerald-500 hover:to-green-600 border border-gray-600 hover:border-transparent text-gray-300 hover:text-white py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg flex items-center justify-center space-x-2">
+                    <span>Use Template</span>
+                    <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
                 </div>
-                <h4 className="text-lg font-bold mb-2">{template.type}</h4>
-                <p className="text-gray-400 text-sm">{template.desc}</p>
+
+                {/* Hover Effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             ))}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-12">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-emerald-500/20 px-8 py-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center">
+                  <FaRocket className="text-white text-sm" />
+                </div>
+                <div className="text-left">
+                  <h4 className="font-semibold text-white">
+                    Need something custom?
+                  </h4>
+                  <p className="text-sm text-gray-400">
+                    Our AI can create unique designs just for you
+                  </p>
+                </div>
+              </div>
+              <Link href="/register" className="cursor-pointer bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2 whitespace-nowrap">
+                <FaMagic className="text-sm" />
+                <span>Create Custom Template</span>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -556,10 +661,13 @@ const Welcome = () => {
               Join the future of development with Cobra AI 2.0 - where AI meets
               collaborative coding
             </p>
-            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg flex items-center space-x-2 mx-auto hover:scale-105">
+            <Link
+              href={"/register"}
+              className="lg:w-1/4 md:w-2/3 w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg flex items-center space-x-2 mx-auto hover:scale-105"
+            >
               <FaRocket />
               <span>Start with Cobra AI 2.0</span>
-            </button>
+            </Link>
           </div>
         </section>
 

@@ -170,12 +170,12 @@ const Login = () => {
                 />
                 <span className="ml-2 text-sm text-gray-300">Remember me</span>
               </label>
-              <a
-                href="#"
+              <Link
+                href="/forgot"
                 className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
 
             {/* Submit Button */}

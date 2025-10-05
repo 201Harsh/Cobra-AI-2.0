@@ -1,6 +1,7 @@
 "use client";
 import AxiosInstance from "@/config/Axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState, useRef } from "react";
 import {
   FaCode,
@@ -31,9 +32,11 @@ const ForgotPassword: React.FC = () => {
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  const Router = useRouter();
+
   // Password strength indicators
   const passwordRequirements = [
-    { id: 1, text: "At least 8 characters", met: newPassword.length >= 8 },
+    { id: 1, text: "At least 6 characters", met: newPassword.length >= 6 },
     {
       id: 2,
       text: "Contains uppercase letter",
@@ -108,7 +111,7 @@ const ForgotPassword: React.FC = () => {
     setMessage(null);
 
     try {
-      const res = await AxiosInstance.post("/user/forgot", {
+      const res = await AxiosInstance.post("/users/forgot", {
         email,
       });
 
@@ -159,13 +162,12 @@ const ForgotPassword: React.FC = () => {
     const otpString = otp.join("");
 
     try {
-      const res = await AxiosInstance.post("/user/check", {
+      const res = await AxiosInstance.post("/users/check", {
         email,
         otp: otpString,
       });
 
       if (res.status === 201) {
-        setResetToken(res.data.data.resetToken); // Store the reset token for password update
         setMessage({
           type: "success",
           text: "OTP verified successfully!",
@@ -184,6 +186,8 @@ const ForgotPassword: React.FC = () => {
         });
       }
     } catch (error: any) {
+      console.error(error);
+
       const errorMessage =
         error.response?.data?.message || "Invalid OTP. Please try again.";
       setMessage({ type: "error", text: errorMessage });
@@ -224,7 +228,7 @@ const ForgotPassword: React.FC = () => {
     }
 
     try {
-      const res = await AxiosInstance.post("/user/updatePass", {
+      const res = await AxiosInstance.post("/users/updatePass", {
         email,
         password: newPassword,
       });
@@ -245,11 +249,7 @@ const ForgotPassword: React.FC = () => {
           theme: "dark",
           transition: Slide,
         });
-
-        // Redirect to login after successful password reset
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 2000);
+        Router.push("/login");
       }
     } catch (error: any) {
       const errorMessage =
@@ -395,7 +395,7 @@ const ForgotPassword: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading || !email}
-                className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                className="cursor-pointer w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
               >
                 {isLoading ? (
                   <>
@@ -447,7 +447,7 @@ const ForgotPassword: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoading || otp.some((digit) => !digit)}
-                  className="flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                  className="cursor-pointer flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
                 >
                   {isLoading ? (
                     <>
@@ -560,7 +560,7 @@ const ForgotPassword: React.FC = () => {
                   !allRequirementsMet ||
                   newPassword !== confirmPassword
                 }
-                className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                className="cursor-pointer w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
               >
                 {isLoading ? (
                   <>

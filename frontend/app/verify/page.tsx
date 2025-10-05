@@ -129,7 +129,7 @@ const OTPVerification: React.FC = () => {
           transition: Slide,
         });
         localStorage.setItem("token", res.data.token);
-        Router.push("/");
+        Router.push("/home");
         setOtp(["", "", "", ""]);
       }
     } catch (error: any) {

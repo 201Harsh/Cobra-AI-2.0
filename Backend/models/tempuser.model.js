@@ -23,10 +23,11 @@ const TempUserModel = new mongoose.Schema({
   otpExpire: {
     type: Date,
     required: true,
+    index: { expires: 300 },
   },
 });
 
-TempUserModel.index({ otpExpiry: 1 }, { expireAfterSeconds: 300 });
+TempUserModel.index({ otpExpire: 1 }, { expireAfterSeconds: 300 });
 
 const TempUser = mongoose.model("TempUser", TempUserModel);
 

@@ -382,6 +382,8 @@ const ForgotPassword: React.FC = () => {
                     <FaEnvelope className="text-gray-400" />
                   </div>
                   <input
+                    id="email"
+                    name="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

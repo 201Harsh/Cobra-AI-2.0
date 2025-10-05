@@ -1,26 +1,17 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import {
   FaMagic,
   FaRobot,
   FaRocket,
   FaShieldAlt,
   FaCloudUploadAlt,
-  FaPalette,
-  FaImage,
   FaEdit,
-  FaDatabase,
-  FaChartLine,
   FaLaptopCode,
   FaUsers,
   FaLightbulb,
-  FaServer,
   FaBug,
-  FaCogs,
-  FaCodeBranch,
   FaCloud,
-  FaTools,
   FaTerminal,
   FaArrowRight,
 } from "react-icons/fa";
@@ -46,10 +37,9 @@ const HomePage = () => {
         "Just enter your brand name — Cobra AI writes your site text for you.",
     },
     {
-      icon: <FaImage className="text-base" />,
-      title: "AI Image Filler",
-      description:
-        "Auto-generates or uploads brand visuals to match your theme.",
+      icon: <FaRocket className="text-base" />,
+      title: "SEO Optimized",
+      description: "Cobra AI auto-optimizes your site for Google search.",
     },
     {
       icon: <FaCloudUploadAlt className="text-base" />,

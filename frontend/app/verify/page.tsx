@@ -1,12 +1,24 @@
 "use client";
+import AxiosInstance from "@/config/Axios";
 import Link from "next/link";
-import React, { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
+import React, { useState, useRef, useEffect } from "react";
 import { FaCode, FaArrowLeft, FaRedo } from "react-icons/fa";
+import { Slide, toast, Zoom } from "react-toastify";
 
 const OTPVerification: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
   const [UserEmail, setUserEmail] = useState("Cobra-AI-2.0@gmail.com");
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    if (email) {
+      setUserEmail(email);
+    }
+  }, []);
+
+  const Router = useRouter();
 
   const handleChange = (index: number, value: string): void => {
     if (!/^\d?$/.test(value)) return; // Only allow numbers
@@ -54,11 +66,61 @@ const OTPVerification: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     const otpString = otp.join("");
-    console.log("OTP submitted:", otpString);
-    // OTP verification logic will be handled by backend
+
+    if (otpString.length < 4) {
+      toast.error("Please enter the complete OTP before proceeding.", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+      return;
+    }
+
+    try {
+      const res = await AxiosInstance.post("/users/verify", {
+        email: UserEmail,
+        otp: otpString,
+      });
+
+      if (res.status === 200) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+        localStorage.setItem("token", res.data.token);
+        Router.push("/");
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Zoom,
+      });
+    }
   };
 
   const handleResendOTP = (): void => {
@@ -78,7 +140,9 @@ const OTPVerification: React.FC = () => {
           className="flex items-center space-x-2 text-gray-400 hover:text-emerald-400 transition-colors mb-8"
         >
           <FaArrowLeft className="text-xl" />
-          <span className="text-xl font-bold font-h underline" >Back to Register</span>
+          <span className="text-xl font-bold font-h underline">
+            Back to Register
+          </span>
         </Link>
 
         {/* Logo & Header */}

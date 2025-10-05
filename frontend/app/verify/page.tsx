@@ -109,17 +109,34 @@ const OTPVerification: React.FC = () => {
         Router.push("/");
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Zoom,
-      });
+      const errors = error.response.data.errors;
+      toast.error(
+        error.response.data.message ||
+          errors.forEach((e: any) => {
+            toast.error(e.msg, {
+              position: "top-right",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Slide,
+            });
+          }),
+        {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        }
+      );
     }
   };
 

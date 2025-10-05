@@ -36,7 +36,7 @@ const OTPVerification: React.FC = () => {
       });
 
       Router.push("/register");
-    }, 5.5 * 60 * 1000); 
+    }, 5.5 * 60 * 1000);
 
     return () => clearTimeout(timer); // cleanup on unmount
   }, []);
@@ -128,6 +128,7 @@ const OTPVerification: React.FC = () => {
         });
         localStorage.setItem("token", res.data.token);
         Router.push("/");
+        setOtp(["", "", "", ""]);
       }
     } catch (error: any) {
       const errors = error.response.data.errors;
@@ -161,9 +162,56 @@ const OTPVerification: React.FC = () => {
     }
   };
 
-  const handleResendOTP = (): void => {
-    console.log("Resending OTP...");
-    // Resend OTP logic here
+  const handleResendOTP = async (): Promise<void> => {
+    setOtp(["", "", "", ""]);
+    try {
+      const res = await AxiosInstance.post("/users/resend", {
+        email: UserEmail,
+      });
+
+      if (res.status === 200) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+      }
+    } catch (error: any) {
+      const errors = error.response.data.errors;
+      toast.error(
+        error.response.data.message ||
+          errors.forEach((e: any) => {
+            toast.error(e.msg, {
+              position: "top-right",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Slide,
+            });
+          }),
+        {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        }
+      );
+    }
   };
 
   return (

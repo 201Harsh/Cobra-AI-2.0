@@ -1,5 +1,6 @@
 "use client";
 import AxiosInstance from "@/config/Axios";
+import { time } from "console";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
@@ -19,6 +20,26 @@ const OTPVerification: React.FC = () => {
   }, []);
 
   const Router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toast.error("Timeout! Register Again", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Zoom,
+      });
+
+      Router.push("/register");
+    }, 5.5 * 60 * 1000); 
+
+    return () => clearTimeout(timer); // cleanup on unmount
+  }, []);
 
   const handleChange = (index: number, value: string): void => {
     if (!/^\d?$/.test(value)) return; // Only allow numbers

@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <>
       {/* Navigation */}
-      <header className="bg-gray-950/40 backdrop-blur-md text-white fixed top-0 left-0 w-full z-50">
+      <header className="bg-gray-950/20 backdrop-blur-md text-white fixed top-0 left-0 w-full z-50">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <Link href="/" className="flex items-center space-x-2">
@@ -95,8 +95,8 @@ const Header = () => {
       >
         {/* Backdrop */}
         <div
-          className={`absolute inset-0 bg-gray-950 transition-opacity duration-500 ${
-            isMenuOpen ? "opacity-95" : "opacity-0"
+          className={`absolute inset-0 bg-gray-950/50 backdrop-blur-lg transition-opacity duration-500 ${
+            isMenuOpen ? "opacity-100" : "opacity-0"
           }`}
           onClick={closeMenu}
         />

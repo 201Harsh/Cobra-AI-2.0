@@ -1,5 +1,7 @@
 "use client";
+import AxiosInstance from "@/config/Axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import {
   FaCode,
@@ -9,9 +11,11 @@ import {
   FaEnvelope,
   FaLock,
 } from "react-icons/fa";
+import { Flip, toast, Zoom } from "react-toastify";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [IsLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<{
     name: string;
     email: string;
@@ -22,6 +26,8 @@ const Register = () => {
     password: "",
   });
 
+  const Router = useRouter();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -29,10 +35,61 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Register data:", formData);
-    // Add registration logic here
+    setIsLoading(true);
+
+    try {
+      const response = await AxiosInstance.post("/users/register", formData);
+
+      if (response.status === 201) {
+        toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 4500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+        localStorage.setItem("email", response.data.tempuser.email);
+        localStorage.setItem("name", response.data.tempuser.name);
+        Router.push("/verify");
+      }
+    } catch (error: any) {
+      const errors = error.response.data.errors;
+      toast.error(
+        error.response?.data?.message ||
+          errors.forEach((e: any) => {
+            toast.error(e.msg, {
+              position: "top-right",
+              autoClose: 4000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Flip,
+            });
+          }),
+        {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        }
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -161,9 +218,22 @@ const Register = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              disabled={IsLoading}
+              className={`w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform shadow-lg flex items-center justify-center gap-2
+    ${
+      IsLoading
+        ? "bg-gradient-to-r from-emerald-500 to-green-600 opacity-90 cursor-not-allowed animate-pulse"
+        : "bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 hover:scale-105"
+    }`}
             >
-              Create Account
+              {IsLoading ? (
+                <>
+                  <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span>Creating Account...</span>
+                </>
+              ) : (
+                "Create Account"
+              )}
             </button>
           </form>
 

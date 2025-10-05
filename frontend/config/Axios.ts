@@ -1,14 +1,12 @@
-// axios.js
 import axios from "axios";
 
 const AxiosInstance = axios.create({
-  baseURL: process.env.BACKEND_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-// 🔐 Attach token dynamically before every request
 AxiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // Always fresh
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

@@ -26,6 +26,8 @@ const TempUserModel = new mongoose.Schema({
   },
 });
 
+TempUser.index({ otpExpiry: 1 }, { expireAfterSeconds: 300 });
+
 const TempUser = mongoose.model("TempUser", TempUserModel);
 
 module.exports = TempUser;

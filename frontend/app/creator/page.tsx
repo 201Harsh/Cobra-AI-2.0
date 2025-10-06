@@ -6,6 +6,7 @@ import {
   FaCrown,
   FaFreeCodeCamp,
   FaLaptop,
+  FaMagic,
   FaMobile,
   FaPalette,
   FaRocket,
@@ -359,6 +360,84 @@ const page = () => {
         </div>
         <div className="max-w-full px-5 lg:px-10 py-8">
           <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10">
+            <div>
+              {" "}
+              {/* Redirect Page */}
+              <div className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-2xl border border-gray-700 overflow-hidden hover:border-blue-500/30 transition-all duration-300 group hover:transform hover:scale-105">
+                {/* Image Container */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1705787288167-9b21d55bf9b9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y3VzdG9tJTIwdGVtcGxhdGV8ZW58MHwwfDB8fHww"
+                    alt="Template Name"
+                    className="w-full h-48 object-cover"
+                  />
+
+                  {/* Status Badge */}
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-br from-sky-500 to-blue-500 text-white">
+                    <div className="flex items-center space-x-1">
+                      <FaFreeCodeCamp className="text-xs" />
+                      <span>Custom</span>
+                    </div>
+                  </div>
+
+                  {/* Type Badge */}
+                  <div className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold flex items-center space-x-2">
+                    <FaMagic className="text-sky-400" />
+                    <span className="capitalize">Custom</span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">
+                      Custom Template
+                    </h3>
+                  </div>
+
+                  <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                    A custom e-commerce template crafted with AI magic to match
+                    your brand, featuring a modern, responsive design and smart
+                    interactive elements for an enhanced shopping experience.
+                  </p>
+
+                  {/* Features */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="bg-gray-700/50 px-2 py-1 rounded text-xs text-sky-300">
+                      Responsive
+                    </span>
+                    <span className="bg-gray-700/50 px-2 py-1 rounded text-xs text-sky-300">
+                      Product Grid
+                    </span>
+                    <span className="bg-gray-700/50 px-2 py-1 rounded text-xs text-sky-300">
+                      Cart System
+                    </span>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
+                    <div className="flex items-center space-x-1">
+                      <FaStar className="text-yellow-400" />
+                      <span>4.9</span>
+                    </div>
+                    <div>
+                      <span>1,200 uses</span>
+                    </div>
+                  </div>
+
+                  {/* Tech Stack */}
+                  <div className="text-xs text-gray-500 mb-4">
+                    HTML / CSS / JavaScript
+                  </div>
+
+                  {/* Action Button */}
+                  <button className="cursor-pointer w-full py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 bg-gradient-to-r from-sky-500 via-indigo-500 to-blue-600 hover:from-sky-600 hover:via-indigo-600  hover:to-blue-700">
+                    <FaRocket />
+                    <span>Use Template</span>
+                  </button>
+                </div>
+              </div>
+            </div>
             {templates.map((template: any) => (
               <div
                 key={template.code}
@@ -454,7 +533,7 @@ const page = () => {
 
                   {/* Action Button */}
                   <button
-                    className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 ${
+                    className={`w-full cursor-pointer py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 ${
                       template.status === "premium"
                         ? "bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600"
                         : "bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700"

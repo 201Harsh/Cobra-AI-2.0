@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import {
   FaMagic,
@@ -18,6 +19,8 @@ import {
 
 const HomePage = () => {
   const [userName, setUserName] = useState("");
+
+  const Router = useRouter();
 
   useEffect(() => {
     const name = localStorage.getItem("name");
@@ -121,7 +124,12 @@ const HomePage = () => {
           {/* Mode Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
             {/* Creator Mode Card */}
-            <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl border-2 border-emerald-500/30 p-3 sm:p-6 transition-all duration-300 hover:border-emerald-500/50 hover:scale-[1.01]">
+            <div
+              onClick={() => {
+                Router.push("/creator");
+              }}
+              className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-xl border-2 border-emerald-500/30 p-3 sm:p-6 transition-all duration-300 hover:border-emerald-500/50 hover:scale-[1.01]"
+            >
               <div className="text-center mb-3 sm:mb-4">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-2 bg-gradient-to-r from-emerald-400 to-green-500 transition-all duration-300">
                   <FaMagic className="text-xl sm:text-2xl text-white" />
@@ -138,7 +146,7 @@ const HomePage = () => {
               <div className="grid grid-cols-3 xl:grid-cols-3 gap-2 sm:gap-3 mb-3 sm:mb-4">
                 {creatorFeatures.map((feature, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mx-auto mb-1 bg-emerald-500/20 text-emerald-400 transition-all duration-300">
+                    <div className="w-10 h-10 lg:w-14 lg:h-14 rounded-full flex items-center justify-center mx-auto mb-1 bg-emerald-500/20 text-emerald-400 transition-all duration-300">
                       {feature.icon}
                     </div>
                     <h3 className="font-semibold text-xs sm:text-sm leading-tight mb-0.5">
@@ -155,7 +163,7 @@ const HomePage = () => {
                 <p className="text-xs text-gray-400 mb-2 sm:mb-3 leading-tight">
                   Perfect for: Entrepreneurs, Creators
                 </p>
-                <button className="inline-flex items-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 shadow-lg w-full justify-center">
+                <button className="cursor-pointer inline-flex items-center space-x-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 shadow-lg w-full justify-center">
                   <span>Launch Creator</span>
                   <FaArrowRight className="text-xs" />
                 </button>
@@ -163,7 +171,10 @@ const HomePage = () => {
             </div>
 
             {/* Dev Mode Card */}
-            <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl border-2 border-blue-500/30 p-3 sm:p-6 transition-all duration-300 hover:border-blue-500/50 hover:scale-[1.01]">
+            <div
+              onClick={() => Router.push("/dev")}
+              className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-xl border-2 border-blue-500/30 p-3 sm:p-6 transition-all duration-300 hover:border-blue-500/50 hover:scale-[1.01]"
+            >
               <div className="text-center mb-3 sm:mb-4">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-2 bg-gradient-to-r from-blue-400 to-cyan-500 transition-all duration-300">
                   <FaLaptopCode className="text-xl sm:text-2xl text-white" />
@@ -178,7 +189,7 @@ const HomePage = () => {
               <div className="grid grid-cols-3 xl:grid-cols-3 gap-2 sm:gap-3 mb-3 sm:mb-4">
                 {devFeatures.map((feature, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center mx-auto mb-1 bg-blue-500/20 text-blue-400 transition-all duration-300">
+                    <div className="w-10 h-10 lg:w-14 lg:h-14 rounded-full flex items-center justify-center mx-auto mb-1 bg-blue-500/20 text-blue-400 transition-all duration-300">
                       {feature.icon}
                     </div>
                     <h3 className="font-semibold text-xs sm:text-sm leading-tight mb-0.5">
@@ -195,7 +206,7 @@ const HomePage = () => {
                 <p className="text-xs text-gray-400 mb-2 sm:mb-3 leading-tight">
                   Perfect for: Developers, Teams
                 </p>
-                <button className="inline-flex items-center space-x-1 bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 shadow-lg w-full justify-center">
+                <button className="cursor-pointer inline-flex items-center space-x-1 bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 shadow-lg w-full justify-center">
                   <span>Launch Dev</span>
                   <FaArrowRight className="text-xs" />
                 </button>

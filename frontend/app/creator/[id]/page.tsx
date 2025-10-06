@@ -6,21 +6,14 @@ import {
   FaUsers,
   FaCode,
   FaRocket,
-  FaMagic,
   FaCheck,
   FaShoppingCart,
-  FaDownload,
   FaEye,
   FaArrowLeft,
   FaCrown,
-  FaMobile,
-  FaPalette,
-  FaClock,
 } from "react-icons/fa";
 import Link from "next/link";
-import Header from "@/app/Components/Header";
 import Footer from "@/app/Components/Footer";
-import { FaShield } from "react-icons/fa6";
 
 const TemplatePage = () => {
   const [template, setTemplate] = useState<any>(null);

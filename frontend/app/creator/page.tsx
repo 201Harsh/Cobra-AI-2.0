@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
   FaCode,
@@ -16,7 +17,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 
-const page = () => {
+const page = (params: { id: string }) => {
   const [templates, setTemplates] = useState<any>([]);
   const templateData = [
     {
@@ -323,6 +324,11 @@ const page = () => {
     }
   };
 
+  const Router = useRouter();
+  const HandleRouting = (code: string) => {
+    Router.push(`/creator/${code}`);
+  };
+
   return (
     <>
       <div
@@ -456,6 +462,7 @@ const page = () => {
             {/* Templates Cards */}
             {templates.map((template: any) => (
               <div
+                onClick={() => HandleRouting(template.code)}
                 key={template.code}
                 className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-2xl border border-gray-700 overflow-hidden hover:border-emerald-500/30 transition-all duration-300 group hover:transform hover:scale-105"
               >

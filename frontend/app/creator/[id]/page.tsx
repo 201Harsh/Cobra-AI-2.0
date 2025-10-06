@@ -434,22 +434,31 @@ const TemplatePage = () => {
                   </p>
 
                   {/* Rating and Usage */}
-                  <div className="flex items-center space-x-6 text-gray-400">
+                  <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-gray-400">
+                    {/* Rating - Always on first line */}
                     <div className="flex items-center space-x-2">
                       <div className="flex items-center space-x-1">
                         {renderStars(template.rating)}
                       </div>
-                      <span className="text-white font-semibold">
+                      <span className="text-white font-semibold text-sm sm:text-base">
                         {template.rating}
                       </span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <FaUsers />
-                      <span>{template.uses.toLocaleString()} Uses</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <FaCode />
-                      <span>{template.programming_language}</span>
+
+                    {/* Usage Stats - Stack on mobile, row on desktop */}
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+                      <div className="flex items-center space-x-2">
+                        <FaUsers className="flex-shrink-0 text-sm" />
+                        <span className="text-sm sm:text-base">
+                          {template.uses.toLocaleString()} Uses
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <FaCode className="flex-shrink-0 text-sm" />
+                        <span className="text-sm sm:text-base">
+                          {template.programming_language}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

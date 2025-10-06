@@ -357,7 +357,6 @@ const TemplatePage = () => {
 
   return (
     <>
-      <Header />
       <div className="min-h-screen pt-10 bg-gray-950 bg-gradient-to-br from-gray-950 via-emerald-900/30 to-green-700/50 text-white">
         {/* Navigation */}
         <div className="container mx-auto px-6 py-4">

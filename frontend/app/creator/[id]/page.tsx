@@ -338,7 +338,7 @@ const TemplatePage = () => {
             Template Not Found
           </h1>
           <Link
-            href="/templates"
+            href="/creator"
             className="text-emerald-400 hover:text-emerald-300"
           >
             Back to Templates
@@ -354,7 +354,7 @@ const TemplatePage = () => {
         {/* Navigation */}
         <div className="container mx-auto px-6 py-4">
           <Link
-            href="/templates"
+            href="/creator"
             className="inline-flex items-center space-x-2 text-gray-400 hover:text-emerald-400 transition-colors mb-6"
           >
             <FaArrowLeft />
@@ -503,7 +503,7 @@ const TemplatePage = () => {
                       </div>
                       <button
                         onClick={handleUseTemplate}
-                        className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-3"
+                        className="w-full mt-5 cursor-pointer bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-3"
                       >
                         <FaShoppingCart />
                         <span>Get Premium Template</span>

@@ -80,8 +80,8 @@ const page = (params: { id: string }) => {
   };
 
   const Router = useRouter();
-  const HandleRouting = (code: string) => {
-    Router.push(`/creator/${code}`);
+  const HandleRouting = (id: string) => {
+    Router.push(`/creator/${id}`);
   };
 
   return (
@@ -217,7 +217,7 @@ const page = (params: { id: string }) => {
             {/* Templates Cards */}
             {templates.map((template: any) => (
               <div
-                onClick={() => HandleRouting(template.code)}
+                onClick={() => HandleRouting(template._id)}
                 key={template._id}
                 className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-2xl border border-gray-700 overflow-hidden hover:border-emerald-500/30 transition-all duration-300 group hover:transform hover:scale-105"
               >

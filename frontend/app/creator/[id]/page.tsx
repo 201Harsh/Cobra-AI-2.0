@@ -31,12 +31,11 @@ const TemplatePage = () => {
       try {
         const response = await AxiosInstance.get(`/templates/one/${id}`);
         if (response.status === 200) {
-          console.log(response.data.Template);
           setTemplate(response.data.Template);
         }
       } catch (error: any) {
         toast.error(
-          error.respone?.data?.message || "Failed to fetch template",
+          error.response?.data?.message || "Failed to fetch template",
           {
             position: "top-right",
             autoClose: 5000,
@@ -57,9 +56,7 @@ const TemplatePage = () => {
   }, []);
 
   const handleUseTemplate = () => {
-    // Logic to handle template usage
     console.log("Using template:", template?.name);
-    // Redirect to template customization or download
   };
 
   const renderStars = (rating: number) => {
@@ -181,9 +178,12 @@ const TemplatePage = () => {
                   {/* Author Information */}
                   {template.author && (
                     <div className="flex items-center space-x-3 mb-4">
-                      <FaUser className="text-emerald-400" />
+                      <FaUser className="text-emerald-500" />
                       <span className="text-gray-300">
-                        Created by <span className="text-emerald-400 font-semibold">{template.author}</span>
+                        Made with ❤️ by{" "}
+                        <span className="text-yellow-400 font-bold font-h1 uppercase">
+                          {template.author}
+                        </span>
                       </span>
                     </div>
                   )}
@@ -258,7 +258,7 @@ const TemplatePage = () => {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-yellow-400">
-                          ₹{template.price} 
+                          ₹{template.price}
                         </span>
                         <span className="text-gray-400 text-sm">
                           One-time payment

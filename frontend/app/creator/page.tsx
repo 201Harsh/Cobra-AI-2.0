@@ -265,7 +265,7 @@ const page = (params: { id: string }) => {
                     </h3>
                     {template.status === "premium" && (
                       <div className="text-yellow-400 font-bold text-lg">
-                        {template.price}
+                        ₹{template.price}
                       </div>
                     )}
                   </div>

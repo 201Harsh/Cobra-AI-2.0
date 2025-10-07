@@ -27,7 +27,7 @@ const page = (params: { id: string }) => {
   const [Error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const DebounceSearch = Debouncing(Search, 700);
+  const DebounceSearch = Debouncing(Search, 500);
 
   const FetchAllTemplates = async () => {
     setIsLoading(true);

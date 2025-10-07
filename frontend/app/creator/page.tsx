@@ -93,7 +93,22 @@ const page = (params: { id: string }) => {
     Router.push(`/creator/${id}`);
   };
 
-  useEffect(() => {}, [Search]);
+  useEffect(() => {
+    if (Search) {
+      const filter = templates.filter((t: any) => {
+        return (
+          t.type.toLowerCase().includes(Search.toLowerCase()) ||
+          t.programming_language.toLowerCase().includes(Search.toLowerCase()) ||
+          t.features.some((feature: string) =>
+            feature.toLowerCase().includes(Search.toLowerCase())
+          )
+        );
+      });
+      setFilteredTemplates(filter);
+    } else {
+      setFilteredTemplates(templates);
+    }
+  }, [Search]);
 
   return (
     <>
@@ -405,7 +420,150 @@ const page = (params: { id: string }) => {
                 ))}
               </>
             )}
+            {!Error && !isLoading && Search && (
+              <>
+                {FilteredTemplates.map((template: any) => (
+                  <div
+                    onClick={() => HandleRouting(template._id)}
+                    key={template._id}
+                    className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-2xl border border-gray-700 overflow-hidden hover:border-emerald-500/30 transition-all duration-300 group hover:transform hover:scale-105"
+                  >
+                    {/* Image Container */}
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={template.cover_img}
+                        alt={template.name}
+                        className="w-full h-48 object-cover"
+                      />
+
+                      {/* Status Badge */}
+                      <div
+                        className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
+                          template.status === "premium"
+                            ? "bg-gradient-to-r from-yellow-500 to-orange-500 text-white"
+                            : "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
+                        }`}
+                      >
+                        {template.status === "premium" ? (
+                          <div className="flex items-center space-x-1">
+                            <FaCrown className="text-xs" />
+                            <span>PREMIUM</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center space-x-1">
+                            <FaFreeCodeCamp className="text-xs" />
+                            <span>FREE</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Type Badge */}
+                      <div className="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold flex items-center space-x-2">
+                        {getTypeIcon(template.type)}
+                        <span className="capitalize">{template.type}</span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                          {template.name}
+                        </h3>
+                        {template.status === "premium" && (
+                          <div className="text-yellow-400 font-bold text-lg">
+                            ₹{template.price}
+                          </div>
+                        )}
+                      </div>
+
+                      <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                        {template.details}
+                      </p>
+
+                      {/* Features */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {template.features
+                          .slice(0, 3)
+                          .map((feature: string, index: number) => (
+                            <span
+                              key={index}
+                              className="bg-gray-700/50 px-2 py-1 rounded text-xs text-emerald-300"
+                            >
+                              {feature}
+                            </span>
+                          ))}
+                        {template.features.length > 3 && (
+                          <span className="bg-gray-700/50 px-2 py-1 rounded text-xs text-gray-400">
+                            +{template.features.length - 3} more
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Stats */}
+                      <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
+                        <div className="flex items-center space-x-1">
+                          <FaStar className="text-yellow-400" />
+                          <span>{template.rating}</span>
+                        </div>
+                        <div>
+                          <span>{template.uses.toLocaleString()} uses</span>
+                        </div>
+                      </div>
+
+                      {/* Tech Stack */}
+                      <div className="text-xs text-gray-500 mb-4">
+                        {template.programming_language}
+                      </div>
+
+                      {/* Action Button */}
+                      <button
+                        className={`w-full cursor-pointer py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2 ${
+                          template.status === "premium"
+                            ? "bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600"
+                            : "bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700"
+                        }`}
+                      >
+                        {template.status === "premium" ? (
+                          <>
+                            <FaCrown />
+                            <span>Get Premium</span>
+                          </>
+                        ) : (
+                          <>
+                            <FaRocket />
+                            <span>Use Template</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
+          {!FilteredTemplates.length && (
+            <div className="max-w-2xl w-full mx-auto text-center md:mt-10 mt-16">
+              <div className="w-24 h-24 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
+                <span className="text-4xl">🔍</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                No Templates Found
+              </h2>
+              <p className="text-gray-400 text-lg mb-8">
+                We couldn't find any templates matching
+                <span className="text-emerald-400 ml-2 font-bold">
+                  "{Search}"
+                </span>
+              </p>
+              <button
+                onClick={() => setSearch("")}
+                className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg cursor-pointerF"
+              >
+                View All Templates
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
 "use client";
 import AxiosInstance from "@/config/Axios";
+import Debouncing from "@/hooks/Debounce";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -25,6 +26,8 @@ const page = (params: { id: string }) => {
   const [Search, setSearch] = useState<string>("");
   const [Error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const DebounceSearch = Debouncing(Search, 700);
 
   const FetchAllTemplates = async () => {
     setIsLoading(true);
@@ -94,13 +97,15 @@ const page = (params: { id: string }) => {
   };
 
   useEffect(() => {
-    if (Search) {
+    if (DebounceSearch.trim()) {
       const filter = templates.filter((t: any) => {
         return (
-          t.type.toLowerCase().includes(Search.toLowerCase()) ||
-          t.programming_language.toLowerCase().includes(Search.toLowerCase()) ||
+          t.type.toLowerCase().includes(DebounceSearch.toLowerCase()) ||
+          t.programming_language
+            .toLowerCase()
+            .includes(DebounceSearch.toLowerCase()) ||
           t.features.some((feature: string) =>
-            feature.toLowerCase().includes(Search.toLowerCase())
+            feature.toLowerCase().includes(DebounceSearch.toLowerCase())
           )
         );
       });
@@ -108,7 +113,7 @@ const page = (params: { id: string }) => {
     } else {
       setFilteredTemplates(templates);
     }
-  }, [Search]);
+  }, [Search, DebounceSearch]);
 
   return (
     <>

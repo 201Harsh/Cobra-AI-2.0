@@ -85,7 +85,7 @@ module.exports.CreateTemplate = async (req, res) => {
 
 module.exports.GetAllTemplates = async (req, res) => {
   try {
-    const Templates = await TemplateModel.find();
+    const Templates = await TemplateModel.find().sort({ createdAt: -1 });
 
     if (!Templates) {
       return res.status(400).json({
@@ -115,7 +115,7 @@ module.exports.GetOneTemplate = async (req, res) => {
         message: "Template not found",
       });
     }
-    
+
     res.status(200).json({
       message: "Template found",
       Template,

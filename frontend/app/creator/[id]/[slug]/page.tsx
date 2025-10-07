@@ -35,6 +35,7 @@ const SiteGenerationPage = () => {
     description: "",
     logo: null,
     primaryColor: "#10B981", // emerald
+    secondaryColor: "#3B82F6", // blue
     email: "",
     slogan: "",
     tone: "professional",
@@ -96,17 +97,9 @@ const SiteGenerationPage = () => {
   const toneOptions = [
     { value: "professional", label: "Professional" },
     { value: "creative", label: "Creative" },
-    { value: "friendly", label: "Friendly" },
     { value: "luxury", label: "Luxury" },
     { value: "modern", label: "Modern" },
-  ];
-
-  const colorOptions = [
-    { value: "#10B981", name: "Emerald" },
-    { value: "#3B82F6", name: "Blue" },
-    { value: "#8B5CF6", name: "Purple" },
-    { value: "#EF4444", name: "Red" },
-    { value: "#F59E0B", name: "Amber" },
+    { value: "stylish", label: "Stylish" },
   ];
 
   return (
@@ -131,7 +124,7 @@ const SiteGenerationPage = () => {
               <span className="text-sm">AI-Powered Website Builder</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight font-h capitalize">
               Build Your{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">
                 Brand Website
@@ -255,33 +248,6 @@ const SiteGenerationPage = () => {
                       </div>
                     </div>
 
-                    {/* Color Selection */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Primary Color
-                      </label>
-                      <div className="flex space-x-3">
-                        {colorOptions.map((color) => (
-                          <button
-                            key={color.value}
-                            onClick={() =>
-                              setFormData((prev: any) => ({
-                                ...prev,
-                                primaryColor: color.value,
-                              }))
-                            }
-                            className={`w-8 h-8 rounded-full border-2 transition-all duration-300 ${
-                              formData.primaryColor === color.value
-                                ? "border-white scale-110"
-                                : "border-gray-600 hover:border-gray-400"
-                            }`}
-                            style={{ backgroundColor: color.value }}
-                            title={color.name}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
                     {/* Additional Details */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
@@ -309,7 +275,11 @@ const SiteGenerationPage = () => {
                           className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
                         >
                           {toneOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
+                            <option
+                              className="bg-gray-950 text-white"
+                              key={option.value}
+                              value={option.value}
+                            >
                               {option.label}
                             </option>
                           ))}
@@ -322,14 +292,66 @@ const SiteGenerationPage = () => {
                       <label className="block text-sm font-medium text-gray-300 mb-2">
                         Slogan or Tagline
                       </label>
-                      <input
-                        type="text"
-                        name="slogan"
-                        value={formData.slogan}
-                        onChange={handleInputChange}
-                        className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                        placeholder="Your catchy slogan here..."
-                      />
+                      <div className="flex space-x-3">
+                        <input
+                          type="text"
+                          name="slogan"
+                          value={formData.slogan}
+                          onChange={handleInputChange}
+                          className="flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                          placeholder="Craft your perfect slogan or let AI generate one..."
+                        />
+                        <button
+                          type="button"
+                          className="bg-gradient-to-r from-emerald-500/20 to-green-600/20 hover:from-emerald-500/30 hover:to-green-600/30 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 hover:text-emerald-300 px-4 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 whitespace-nowrap"
+                          onClick={() => {
+                            // AI-powered slogan generator based on brand name and description
+                            const brandSlogans = [
+                              `${formData.brandName} - Quality You Can Trust`,
+                              `Experience Excellence with ${formData.brandName}`,
+                              `${formData.brandName}: Where Innovation Meets Quality`,
+                              `Your Vision, Our Passion - ${formData.brandName}`,
+                              `${formData.brandName}: Building Tomorrow, Today`,
+                              `The Future is ${formData.brandName}`,
+                              `${formData.brandName}: Beyond Expectations`,
+                              `Simply Better. ${formData.brandName}.`,
+                              `${formData.brandName} - Made for You`,
+                              `Discover the Difference with ${formData.brandName}`,
+                            ];
+
+                            const genericSlogans = [
+                              "Quality That Speaks for Itself",
+                              "Innovation at Its Finest",
+                              "Where Dreams Become Reality",
+                              "Excellence in Every Detail",
+                              "Your Success is Our Mission",
+                              "Building Better Experiences",
+                              "The Art of Perfection",
+                              "Simply Extraordinary",
+                              "Beyond the Ordinary",
+                              "Creating Tomorrow's Solutions",
+                            ];
+
+                            const slogans = formData.brandName
+                              ? brandSlogans
+                              : genericSlogans;
+                            const randomIndex = Math.floor(
+                              Math.random() * slogans.length
+                            );
+                            setFormData((prev: any) => ({
+                              ...prev,
+                              slogan: slogans[randomIndex],
+                            }));
+                          }}
+                        >
+                          <FaMagic className="text-sm" />
+                          <span className="hidden sm:inline">AI Generate</span>
+                        </button>
+                      </div>
+                      <p className="text-xs text-gray-400 mt-2 font-inter">
+                        Let <span className="font-semibold text-emerald-400">AI craft</span> the perfect slogan based on your brand
+                        identity
+                      </p>
                     </div>
                   </div>
                 </div>

@@ -247,7 +247,7 @@ const TemplatePage = () => {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-yellow-400">
-                          ₹{template.price} 
+                          ₹{template.price}
                         </span>
                         <span className="text-gray-400 text-sm">
                           One-time payment

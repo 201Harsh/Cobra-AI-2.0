@@ -11,6 +11,7 @@ import {
   FaEye,
   FaArrowLeft,
   FaCrown,
+  FaUser,
 } from "react-icons/fa";
 import Link from "next/link";
 import Footer from "@/app/Components/Footer";
@@ -177,6 +178,16 @@ const TemplatePage = () => {
                     {template.details}
                   </p>
 
+                  {/* Author Information */}
+                  {template.author && (
+                    <div className="flex items-center space-x-3 mb-4">
+                      <FaUser className="text-emerald-400" />
+                      <span className="text-gray-300">
+                        Created by <span className="text-emerald-400 font-semibold">{template.author}</span>
+                      </span>
+                    </div>
+                  )}
+
                   {/* Rating and Usage */}
                   <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-gray-400">
                     {/* Rating - Always on first line */}
@@ -247,7 +258,7 @@ const TemplatePage = () => {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-yellow-400">
-                          ₹{template.price}
+                          ₹{template.price} 
                         </span>
                         <span className="text-gray-400 text-sm">
                           One-time payment

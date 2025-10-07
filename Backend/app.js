@@ -7,6 +7,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const USerRouter = require("./routes/user.route");
+const TemplateRouter = require("./routes/template.route");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,5 +20,6 @@ app.use(
 );
 
 app.use("/users", USerRouter);
+app.use("/templates", TemplateRouter);
 
 module.exports = app;

@@ -28,9 +28,10 @@ const TemplatePage = () => {
   useEffect(() => {
     const fetchOneTemplate = async () => {
       try {
-        const response = await AxiosInstance.get(`/templates/${id}`);
+        const response = await AxiosInstance.get(`/templates/one/${id}`);
         if (response.status === 200) {
-          setTemplate(response.data.template);
+          console.log(response.data.Template);
+          setTemplate(response.data.Template);
         }
       } catch (error: any) {
         toast.error(
@@ -123,7 +124,7 @@ const TemplatePage = () => {
               <div className="space-y-4">
                 <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 overflow-hidden">
                   <img
-                    src={template.cover_image}
+                    src={template.cover_img}
                     alt={template.name}
                     className="w-full h-80 object-cover"
                   />
@@ -131,25 +132,23 @@ const TemplatePage = () => {
 
                 {/* Thumbnail Gallery */}
                 <div className="grid grid-cols-2 gap-4">
-                  {template.example_images.map(
-                    (image: string, index: number) => (
-                      <div
-                        key={index}
-                        className={`bg-gray-800/30 backdrop-blur-sm rounded-xl border-2 cursor-pointer transition-all duration-300 ${
-                          activeImage === index
-                            ? "border-emerald-500"
-                            : "border-gray-700 hover:border-emerald-500/50"
-                        }`}
-                        onClick={() => setActiveImage(index)}
-                      >
-                        <img
-                          src={image}
-                          alt={`${template.name} preview ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg"
-                        />
-                      </div>
-                    )
-                  )}
+                  {template.examples_img.map((image: string, index: number) => (
+                    <div
+                      key={index}
+                      className={`bg-gray-800/30 backdrop-blur-sm rounded-xl border-2 cursor-pointer transition-all duration-300 ${
+                        activeImage === index
+                          ? "border-emerald-500"
+                          : "border-gray-700 hover:border-emerald-500/50"
+                      }`}
+                      onClick={() => setActiveImage(index)}
+                    >
+                      <img
+                        src={image}
+                        alt={`${template.name} preview ${index + 1}`}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -175,7 +174,7 @@ const TemplatePage = () => {
                   </div>
 
                   <p className="text-xl text-gray-300 mb-4">
-                    {template.detail}
+                    {template.details}
                   </p>
 
                   {/* Rating and Usage */}
@@ -230,8 +229,8 @@ const TemplatePage = () => {
                     <FaCode className="text-emerald-400" />
                     <span>Technology Stack</span>
                   </h3>
-                  {/* <div className="flex flex-wrap gap-2">
-                    {template.programming_language.map((tech: string, index: number) => (
+                  <div className="flex flex-wrap gap-2">
+                    {template.tech_stack.map((tech: string, index: number) => (
                       <span
                         key={index}
                         className="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-sm border border-emerald-500/30"
@@ -239,7 +238,7 @@ const TemplatePage = () => {
                         {tech}
                       </span>
                     ))}
-                  </div> */}
+                  </div>
                 </div>
 
                 {/* Action Buttons */}
@@ -247,8 +246,8 @@ const TemplatePage = () => {
                   {template.status === "premium" ? (
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-2xl font-bold text-emerald-400">
-                          {template.price}
+                        <span className="text-2xl font-bold text-yellow-400">
+                          ₹{template.price} 
                         </span>
                         <span className="text-gray-400 text-sm">
                           One-time payment

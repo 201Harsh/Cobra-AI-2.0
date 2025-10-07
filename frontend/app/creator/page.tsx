@@ -547,7 +547,7 @@ const page = (params: { id: string }) => {
               </>
             )}
           </div>
-          {!FilteredTemplates.length && (
+          {!FilteredTemplates.length && Search && (
             <div className="max-w-2xl w-full mx-auto text-center md:mt-10 mt-16">
               <div className="w-24 h-24 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/30">
                 <span className="text-4xl">🔍</span>

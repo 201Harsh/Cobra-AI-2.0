@@ -82,3 +82,24 @@ module.exports.CreateTemplate = async (req, res) => {
     });
   }
 };
+
+module.exports.GetAllTemplates = async (req, res) => {
+  try {
+    const Templates = await TemplateModel.find();
+
+    if (!Templates) {
+      return res.status(400).json({
+        message: "Templates not found",
+      });
+    }
+    res.status(200).json({
+      message: "Templates found",
+      Templates,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server Error",
+      error: error.message,
+    });
+  }
+};

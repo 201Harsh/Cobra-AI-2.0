@@ -85,4 +85,6 @@ router.post(
   TemplateController.CreateTemplate
 );
 
+router.get("/all", TemplateController.GetAllTemplates);
+
 module.exports = router;

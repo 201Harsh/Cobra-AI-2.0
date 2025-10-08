@@ -19,6 +19,7 @@ module.exports.CreateTemplate = async (req, res) => {
       code,
       demo_url,
       uses,
+      prompt,
     } = req.body;
 
     if (
@@ -36,7 +37,8 @@ module.exports.CreateTemplate = async (req, res) => {
       !features ||
       !rating ||
       !tech_stack ||
-      !uses
+      !uses ||
+      !prompt
     ) {
       throw new Error("Missing required fields");
     }
@@ -63,6 +65,7 @@ module.exports.CreateTemplate = async (req, res) => {
       code,
       demo_url,
       uses,
+      prompt,
     });
 
     if (!Template) {

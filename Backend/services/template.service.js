@@ -16,6 +16,7 @@ module.exports.CreatingTemplate = async ({
   code,
   demo_url,
   uses,
+  prompt,
 }) => {
   if (
     !name ||
@@ -32,12 +33,18 @@ module.exports.CreatingTemplate = async ({
     !features ||
     !rating ||
     !tech_stack ||
-    !uses
+    !uses ||
+    !prompt
   ) {
     throw new Error("Missing required fields");
   }
 
-  const ifTemplateExists = await TemplateModel.findOne({ name });
+  const ifTemplateExists = await TemplateModel.findOne({
+    name,
+    details,
+    prompt,
+    features,
+  });
 
   if (ifTemplateExists) {
     throw new Error("Template already exists");
@@ -59,6 +66,7 @@ module.exports.CreatingTemplate = async ({
     code,
     demo_url,
     uses,
+    prompt,
   });
 
   return Template;

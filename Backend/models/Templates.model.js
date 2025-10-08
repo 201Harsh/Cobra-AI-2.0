@@ -60,7 +60,7 @@ const TemplatesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  code_url: {
+  code: {
     type: String,
     required: true,
   },

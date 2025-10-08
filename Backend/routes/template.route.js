@@ -64,7 +64,7 @@ router.post(
 
     body("author").notEmpty().withMessage("Author is required"),
 
-    body("code_url")
+    body("code")
       .notEmpty()
       .withMessage("Code URL is required")
       .isURL()

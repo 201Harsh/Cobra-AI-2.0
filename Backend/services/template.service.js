@@ -13,7 +13,7 @@ module.exports.CreatingTemplate = async ({
   rating,
   tech_stack,
   author,
-  code_url,
+  code,
   demo_url,
   uses,
 }) => {
@@ -24,7 +24,7 @@ module.exports.CreatingTemplate = async ({
     !details ||
     !cover_img ||
     !author ||
-    !code_url ||
+    !code ||
     !demo_url ||
     !status ||
     !price ||
@@ -56,7 +56,7 @@ module.exports.CreatingTemplate = async ({
     rating,
     tech_stack,
     author,
-    code_url,
+    code,
     demo_url,
     uses,
   });

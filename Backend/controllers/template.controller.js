@@ -16,7 +16,7 @@ module.exports.CreateTemplate = async (req, res) => {
       rating,
       tech_stack,
       author,
-      code_url,
+      code,
       demo_url,
       uses,
     } = req.body;
@@ -28,7 +28,7 @@ module.exports.CreateTemplate = async (req, res) => {
       !details ||
       !cover_img ||
       !author ||
-      !code_url ||
+      !code ||
       !demo_url ||
       !status ||
       !price ||
@@ -60,7 +60,7 @@ module.exports.CreateTemplate = async (req, res) => {
       rating,
       tech_stack,
       author,
-      code_url,
+      code,
       demo_url,
       uses,
     });

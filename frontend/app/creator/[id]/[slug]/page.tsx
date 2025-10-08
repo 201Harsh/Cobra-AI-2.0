@@ -1417,27 +1417,31 @@ const SiteGenerationPage = () => {
               {/* Left Column - Input Form */}
               <div className="space-y-8">
                 {/* Selected Template Preview */}
-                <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
-                  <h2 className="text-2xl font-bold mb-4 flex items-center space-x-3">
-                    <FaRocket className="text-emerald-400" />
+                <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-4 sm:p-6">
+                  <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center space-x-3">
+                    <FaRocket className="text-emerald-400 text-lg sm:text-xl" />
                     <span>Selected Template</span>
                   </h2>
 
-                  <div className="flex items-start space-x-4">
-                    <img
-                      src={selectedTemplate.cover_img}
-                      alt={selectedTemplate.name}
-                      className="w-24 h-24 object-cover rounded-lg"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-2">
+                  <div className="flex flex-col sm:items-start gap-4">
+                    <div className="flex justify-center sm:justify-start">
+                      <img
+                        src={selectedTemplate.cover_img}
+                        alt={selectedTemplate.name}
+                        className="w-full h-full  object-cover rounded-lg flex-shrink-0"
+                      />
+                    </div>
+
+                    <div className="flex-1 text-center sm:text-left">
+                      <h3 className="text-lg sm:text-xl font-bold mb-2">
                         {selectedTemplate.name}
                       </h3>
-                      <p className="text-gray-400 mb-2">
+                      <p className="text-gray-400 text-sm sm:text-base mb-3">
                         {selectedTemplate.type} •{" "}
                         {selectedTemplate.programming_language}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-3">
+
+                      <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-4">
                         {selectedTemplate.features
                           .slice(0, 3)
                           .map((feature: string, index: number) => (
@@ -1449,10 +1453,13 @@ const SiteGenerationPage = () => {
                             </span>
                           ))}
                       </div>
-                      <button className="text-emerald-400 cursor-pointer hover:text-emerald-300 text-sm flex items-center space-x-2">
-                        <FaEye className="text-xs" />
-                        <span>View Demo</span>
-                      </button>
+
+                      <div className="flex justify-center sm:justify-start">
+                        <button className="text-emerald-400 cursor-pointer hover:text-emerald-300 text-sm flex items-center space-x-2">
+                          <FaEye className="text-xs" />
+                          <span>View Demo</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

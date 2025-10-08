@@ -272,11 +272,11 @@ const SiteGenerationPage = () => {
                           name="tone"
                           value={formData.tone}
                           onChange={handleInputChange}
-                          className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                          className="cusror-pointer w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
                         >
                           {toneOptions.map((option) => (
                             <option
-                              className="bg-gray-950 text-white"
+                              className="bg-gray-950 text-white cursor-pointer"
                               key={option.value}
                               value={option.value}
                             >
@@ -303,7 +303,7 @@ const SiteGenerationPage = () => {
                         />
                         <button
                           type="button"
-                          className="bg-gradient-to-r from-emerald-500/20 to-green-600/20 hover:from-emerald-500/30 hover:to-green-600/30 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 hover:text-emerald-300 px-4 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 whitespace-nowrap"
+                          className="cursor-pointer bg-gradient-to-r from-emerald-500/20 to-green-600/20 hover:from-emerald-500/30 hover:to-green-600/30 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 hover:text-emerald-300 px-4 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 whitespace-nowrap"
                           onClick={() => {
                             // AI-powered slogan generator based on brand name and description
                             const brandSlogans = [
@@ -349,8 +349,11 @@ const SiteGenerationPage = () => {
                         </button>
                       </div>
                       <p className="text-xs text-gray-400 mt-2 font-inter">
-                        Let <span className="font-semibold text-emerald-400">AI craft</span> the perfect slogan based on your brand
-                        identity
+                        Let{" "}
+                        <span className="font-semibold text-emerald-400">
+                          AI craft
+                        </span>{" "}
+                        the perfect slogan based on your brand identity
                       </p>
                     </div>
                   </div>
@@ -362,7 +365,7 @@ const SiteGenerationPage = () => {
                   disabled={
                     isGenerating || !formData.brandName || !formData.description
                   }
-                  className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-3"
+                  className="cursor-pointer w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-3"
                 >
                   {isGenerating ? (
                     <>
@@ -413,11 +416,11 @@ const SiteGenerationPage = () => {
                       </div>
 
                       <div className="flex space-x-4">
-                        <button className="flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2">
+                        <button className="cursor-pointer flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2">
                           <FaEye />
                           <span>View Live</span>
                         </button>
-                        <button className="flex-1 border border-emerald-500/30 hover:border-emerald-400 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-2">
+                        <button className="cursor-pointer flex-1 border border-emerald-500/30 hover:border-emerald-400 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-2">
                           <FaDownload />
                           <span>Download Code</span>
                         </button>
@@ -435,18 +438,18 @@ const SiteGenerationPage = () => {
                   )}
                 </div>
 
-                {/* AI Features */}
+                {/* What You'll Get */}
                 <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-emerald-500/20 p-6">
-                  <h3 className="text-lg font-bold mb-4 text-emerald-400">
-                    AI-Powered Features
+                  <h3 className="text-2xl font-bold mb-4 text-emerald-400 font-h">
+                    What You'll Get
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-3 font-inter font-light text-lg">
                     {[
-                      "Automatic content generation",
-                      "Smart layout optimization",
-                      "SEO-friendly structure",
+                      "Fully functional website in minutes",
+                      "SEO-optimized content and structure",
                       "Mobile-responsive design",
                       "Brand-consistent styling",
+                      "Clean, professional code",
                     ].map((feature, index) => (
                       <div key={index} className="flex items-center space-x-3">
                         <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>

@@ -180,7 +180,7 @@ const SiteGenerationPage = () => {
                             </span>
                           ))}
                       </div>
-                      <button className="text-emerald-400 hover:text-emerald-300 text-sm flex items-center space-x-2">
+                      <button className="text-emerald-400 cursor-pointer hover:text-emerald-300 text-sm flex items-center space-x-2">
                         <FaEye className="text-xs" />
                         <span>View Demo</span>
                       </button>

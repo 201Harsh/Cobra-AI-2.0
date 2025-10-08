@@ -1413,9 +1413,9 @@ const SiteGenerationPage = () => {
 
         <section className="container mx-auto px-6 py-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
-              {/* Left Column - Input Form */}
-              <div className="space-y-8">
+            <div className="grid grid-cols-1 gap-12">
+              {/* Input Sections in Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Selected Template Preview */}
                 <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-4 sm:p-6">
                   <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center space-x-3">
@@ -1423,12 +1423,12 @@ const SiteGenerationPage = () => {
                     <span>Selected Template</span>
                   </h2>
 
-                  <div className="flex flex-col sm:items-start gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                     <div className="flex justify-center sm:justify-start">
                       <img
                         src={selectedTemplate.cover_img}
                         alt={selectedTemplate.name}
-                        className="w-full h-full  object-cover rounded-lg flex-shrink-0"
+                        className="w-full h-48 sm:w-24 sm:h-24 object-cover rounded-lg flex-shrink-0"
                       />
                     </div>
 
@@ -1464,247 +1464,6 @@ const SiteGenerationPage = () => {
                   </div>
                 </div>
 
-                {/* Brand Information Form */}
-                <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
-                  <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-                    <FaUser className="text-emerald-400" />
-                    <span>Brand Information</span>
-                  </h2>
-
-                  <div className="space-y-6">
-                    {/* Brand Name */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Brand Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="brandName"
-                        value={formData.brandName}
-                        onChange={handleInputChange}
-                        className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                        placeholder="Enter your brand name"
-                      />
-                    </div>
-
-                    {/* Description */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Brand Description *
-                      </label>
-                      <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleInputChange}
-                        rows={4}
-                        className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                        placeholder="Describe what your brand does, your mission, or what makes you unique..."
-                      />
-                    </div>
-
-                    {/* Additional Details */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                          Contact Email
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                          placeholder="contact@yourbrand.com"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                          Brand Tone
-                        </label>
-                        <select
-                          name="tone"
-                          value={formData.tone}
-                          onChange={handleInputChange}
-                          className="cusror-pointer w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                        >
-                          {toneOptions.map((option) => (
-                            <option
-                              className="bg-gray-950 text-white cursor-pointer"
-                              key={option.value}
-                              value={option.value}
-                            >
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* Slogan */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        Slogan or Tagline
-                      </label>
-                      <div className="flex space-x-3">
-                        <textarea
-                          name="slogan"
-                          value={formData.slogan}
-                          onChange={handleInputChange}
-                          rows={2}
-                          className="resize-none flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                          placeholder="Craft your perfect slogan or let AI generate one..."
-                        />
-                        <button
-                          type="button"
-                          className="cursor-pointer bg-gradient-to-r from-emerald-500/20 to-green-600/20 hover:from-emerald-500/30 hover:to-green-600/30 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 hover:text-emerald-300 px-4 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 whitespace-nowrap"
-                          onClick={() => {
-                            // AI-powered slogan generator based on brand name and description
-                            const brandSlogans = [
-                              `${formData.brandName} - Quality You Can Trust`,
-                              `Experience Excellence with ${formData.brandName}`,
-                              `${formData.brandName}: Where Innovation Meets Quality`,
-                              `Your Vision, Our Passion - ${formData.brandName}`,
-                              `${formData.brandName}: Building Tomorrow, Today`,
-                              `The Future is ${formData.brandName}`,
-                              `${formData.brandName}: Beyond Expectations`,
-                              `Simply Better. ${formData.brandName}.`,
-                              `${formData.brandName} - Made for You`,
-                              `Discover the Difference with ${formData.brandName}`,
-                            ];
-
-                            const genericSlogans = [
-                              "Quality That Speaks for Itself",
-                              "Innovation at Its Finest",
-                              "Where Dreams Become Reality",
-                              "Excellence in Every Detail",
-                              "Your Success is Our Mission",
-                              "Building Better Experiences",
-                              "The Art of Perfection",
-                              "Simply Extraordinary",
-                              "Beyond the Ordinary",
-                              "Creating Tomorrow's Solutions",
-                            ];
-
-                            const slogans = formData.brandName
-                              ? brandSlogans
-                              : genericSlogans;
-                            const randomIndex = Math.floor(
-                              Math.random() * slogans.length
-                            );
-                            setFormData((prev: any) => ({
-                              ...prev,
-                              slogan: slogans[randomIndex],
-                            }));
-                          }}
-                        >
-                          <FaMagic className="text-sm" />
-                          <span className="hidden sm:inline">AI Generate</span>
-                        </button>
-                      </div>
-                      <p className="text-xs text-gray-400 mt-2 font-inter">
-                        Let{" "}
-                        <span className="font-semibold text-emerald-400">
-                          AI craft
-                        </span>{" "}
-                        the perfect slogan based on your brand identity
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Generate Button */}
-                <button
-                  onClick={handleGenerateWebsite}
-                  disabled={
-                    isGenerating || !formData.brandName || !formData.description
-                  }
-                  className="cursor-pointer w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-3"
-                >
-                  {isGenerating ? (
-                    <>
-                      <FaSpinner className="animate-spin" />
-                      <span>Generating Your Website...</span>
-                    </>
-                  ) : (
-                    <>
-                      <FaMagic />
-                      <span>Generate Website with AI</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Right Column - Preview */}
-              <div className="space-y-6">
-                <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
-                  <h2 className="text-2xl font-bold mb-4 flex items-center space-x-3">
-                    <FaEye className="text-emerald-400" />
-                    <span>Live Preview</span>
-                  </h2>
-
-                  {isGenerating ? (
-                    <div className="flex flex-col items-center justify-center py-20">
-                      <FaSpinner className="animate-spin text-4xl text-emerald-400 mb-4" />
-                      <p className="text-gray-400 text-lg">
-                        AI is building your website...
-                      </p>
-                      <p className="text-gray-500 text-sm mt-2">
-                        This may take a few moments
-                      </p>
-                    </div>
-                  ) : isGenerated ? (
-                    <div className="space-y-4">
-                      <div className="bg-gray-900 rounded-lg p-4 border border-gray-700 relative">
-                        <div className="aspect-video bg-gray-950 overflow-hidden">
-                          <img
-                            className="absolute top-0 left-0 w-full h-full object-cover"
-                            src={selectedTemplate.cover_img}
-                            alt=""
-                          />
-                          <div
-                            className="absolute top-0 left-0 w-full h-full z-30 bg-gray-950/70
-                           backdrop-blur-xs flex items-center justify-center"
-                          >
-                            <div className="text-center">
-                              <div className="text-4xl mb-4">🚀</div>
-                              <h3 className="text-xl font-bold mb-2">
-                                Website Ready!
-                              </h3>
-                              <p className="text-gray-100">
-                                Your AI-generated website is complete
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex space-x-4 mt-5">
-                        <button
-                          onClick={handleViewLive}
-                          className="cursor-pointer flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
-                        >
-                          <FaEye />
-                          <span>View Live</span>
-                        </button>
-                        <button className="cursor-pointer flex-1 border border-emerald-500/30 hover:border-emerald-400 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-2">
-                          <FaRockrms />
-                          <span>Deploy Website</span>
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="bg-gray-900 rounded-lg p-8 border border-gray-700 text-center">
-                      <div className="text-6xl mb-4">✨</div>
-                      <h3 className="text-xl font-bold mb-2">Preview Area</h3>
-                      <p className="text-gray-400">
-                        Your generated website will appear here after you click
-                        "Generate Website"
-                      </p>
-                    </div>
-                  )}
-                </div>
-
                 {/* What You'll Get */}
                 <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-emerald-500/20 p-6">
                   <h3 className="text-2xl font-bold mb-4 text-emerald-400 font-h">
@@ -1726,6 +1485,230 @@ const SiteGenerationPage = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Brand Information Form */}
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
+                <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
+                  <FaUser className="text-emerald-400" />
+                  <span>Brand Information</span>
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Brand Name */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Brand Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="brandName"
+                      value={formData.brandName}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Enter your brand name"
+                    />
+                  </div>
+
+                  {/* Description */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Brand Description *
+                    </label>
+                    <textarea
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                      rows={4}
+                      className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Describe what your brand does, your mission, or what makes you unique..."
+                    />
+                  </div>
+
+                  {/* Contact Email */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Contact Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                      placeholder="contact@yourbrand.com"
+                    />
+                  </div>
+
+                  {/* Brand Tone */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Brand Tone
+                    </label>
+                    <select
+                      name="tone"
+                      value={formData.tone}
+                      onChange={handleInputChange}
+                      className="cusror-pointer w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                    >
+                      {toneOptions.map((option) => (
+                        <option
+                          className="bg-gray-950 text-white cursor-pointer"
+                          key={option.value}
+                          value={option.value}
+                        >
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Slogan */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Slogan or Tagline
+                    </label>
+                    <div className="flex space-x-3">
+                      <textarea
+                        name="slogan"
+                        value={formData.slogan}
+                        onChange={handleInputChange}
+                        rows={2}
+                        className="resize-none flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                        placeholder="Craft your perfect slogan or let AI generate one..."
+                      />
+                      <button
+                        type="button"
+                        className="cursor-pointer bg-gradient-to-r from-emerald-500/20 to-green-600/20 hover:from-emerald-500/30 hover:to-green-600/30 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 hover:text-emerald-300 px-4 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 whitespace-nowrap"
+                        onClick={() => {
+                          // AI-powered slogan generator based on brand name and description
+                          const brandSlogans = [
+                            `${formData.brandName} - Quality You Can Trust`,
+                            `Experience Excellence with ${formData.brandName}`,
+                            `${formData.brandName}: Where Innovation Meets Quality`,
+                            `Your Vision, Our Passion - ${formData.brandName}`,
+                            `${formData.brandName}: Building Tomorrow, Today`,
+                            `The Future is ${formData.brandName}`,
+                            `${formData.brandName}: Beyond Expectations`,
+                            `Simply Better. ${formData.brandName}.`,
+                            `${formData.brandName} - Made for You`,
+                            `Discover the Difference with ${formData.brandName}`,
+                          ];
+
+                          const genericSlogans = [
+                            "Quality That Speaks for Itself",
+                            "Innovation at Its Finest",
+                            "Where Dreams Become Reality",
+                            "Excellence in Every Detail",
+                            "Your Success is Our Mission",
+                            "Building Better Experiences",
+                            "The Art of Perfection",
+                            "Simply Extraordinary",
+                            "Beyond the Ordinary",
+                            "Creating Tomorrow's Solutions",
+                          ];
+
+                          const slogans = formData.brandName
+                            ? brandSlogans
+                            : genericSlogans;
+                          const randomIndex = Math.floor(
+                            Math.random() * slogans.length
+                          );
+                          setFormData((prev: any) => ({
+                            ...prev,
+                            slogan: slogans[randomIndex],
+                          }));
+                        }}
+                      >
+                        <FaMagic className="text-sm" />
+                        <span className="hidden sm:inline">AI Generate</span>
+                      </button>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-2 font-inter">
+                      Let{" "}
+                      <span className="font-semibold text-emerald-400">
+                        AI craft
+                      </span>{" "}
+                      the perfect slogan based on your brand identity
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Generate Button */}
+              <button
+                onClick={handleGenerateWebsite}
+                disabled={
+                  isGenerating ||
+                  !formData.brandName ||
+                  !formData.description ||
+                  !formData.slogan ||
+                  !formData.tone ||
+                  !formData.email
+                }
+                className="cursor-pointer w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-3"
+              >
+                {isGenerating ? (
+                  <>
+                    <FaSpinner className="animate-spin" />
+                    <span>Generating Your Website...</span>
+                  </>
+                ) : (
+                  <>
+                    <FaMagic />
+                    <span>Generate Website with AI</span>
+                  </>
+                )}
+              </button>
+
+              {/* Live Preview Section - Only shown after generation */}
+              {isGenerated && (
+                <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
+                  <h2 className="text-2xl font-bold mb-4 flex items-center space-x-3">
+                    <FaEye className="text-emerald-400" />
+                    <span>Live Preview</span>
+                  </h2>
+
+                  <div className="space-y-4">
+                    <div className="bg-gray-900 rounded-lg p-4 border border-gray-700 relative">
+                      <div className="aspect-video bg-gray-950 overflow-hidden">
+                        <img
+                          className="absolute top-0 left-0 w-full h-full object-cover"
+                          src={selectedTemplate.cover_img}
+                          alt=""
+                        />
+                        <div
+                          className="absolute top-0 left-0 w-full h-full z-30 bg-gray-950/70
+                         backdrop-blur-xs flex items-center justify-center"
+                        >
+                          <div className="text-center">
+                            <div className="text-4xl mb-4">🚀</div>
+                            <h3 className="text-xl font-bold mb-2">
+                              Website Ready!
+                            </h3>
+                            <p className="text-gray-100">
+                              Your AI-generated website is complete
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex space-x-4 mt-5">
+                      <button
+                        onClick={handleViewLive}
+                        className="cursor-pointer flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                      >
+                        <FaEye />
+                        <span>View Live</span>
+                      </button>
+                      <button className="cursor-pointer flex-1 border border-emerald-500/30 hover:border-emerald-400 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-2">
+                        <FaRockrms />
+                        <span>Deploy Website</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>

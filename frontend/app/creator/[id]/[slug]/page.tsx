@@ -1374,7 +1374,7 @@ const SiteGenerationPage = () => {
             className="cursor-pointer inline-flex items-center space-x-2 text-gray-400 hover:text-emerald-400 transition-colors mb-6"
           >
             <FaArrowLeft />
-            <span>Back to Templates</span>
+            <span>Back to Template</span>
           </button>
         </div>
 
@@ -1661,41 +1661,98 @@ const SiteGenerationPage = () => {
                   </h2>
 
                   <div className="space-y-4">
-                    <div className="bg-gray-900 rounded-lg p-4 border border-gray-700 relative">
-                      <div className="aspect-video bg-gray-950 overflow-hidden">
-                        <img
-                          className="absolute top-0 left-0 w-full h-full object-cover"
-                          src={selectedTemplate.cover_img}
-                          alt=""
-                        />
-                        <div
-                          className="absolute top-0 left-0 w-full h-full z-30 bg-gray-950/70
-                         backdrop-blur-xs flex items-center justify-center"
+                    {/* Site Status */}
+                    <div className="bg-gradient-to-r from-emerald-500/10 to-green-600/10 border border-emerald-500/20 rounded-xl p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                          <span className="text-emerald-400 font-semibold">
+                            Site is Live!
+                          </span>
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          Your website is now live and accessible
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Site Link */}
+                    <div className="bg-gray-900 rounded-lg p-4 border border-gray-700">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-gray-400 text-sm">
+                          Your Site URL:
+                        </span>
+                        <span className="text-emerald-400 text-sm flex items-center space-x-1">
+                          <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                          <span>Live</span>
+                        </span>
+                      </div>
+                      <div className="bg-gray-800 rounded-lg p-3 border border-gray-600">
+                        <code
+                          onClick={handleViewLive}
+                          className="text-emerald-300 font-mono text-sm break-all cursor-pointer 
+                            hover:text-emerald-400 underline"
                         >
+                          https://
+                          {formData.brandName.toLowerCase().replace(/\s+/g, "")}
+                          .cobraai.com
+                        </code>
+                      </div>
+                      <p className="text-xs text-gray-400 mt-2">
+                        Share this link with your customers and team members
+                      </p>
+                    </div>
+
+                    {/* Preview Card */}
+                    <div className="bg-gray-900 rounded-lg p-4 border border-gray-700 relative">
+                      <div className="aspect-video bg-gray-950 overflow-hidden rounded-lg">
+                        <img
+                          className="w-full h-full object-cover"
+                          src={selectedTemplate.cover_img}
+                          alt="Website Preview"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent flex items-end justify-center p-6">
                           <div className="text-center">
-                            <div className="text-4xl mb-4">🚀</div>
-                            <h3 className="text-xl font-bold mb-2">
-                              Website Ready!
+                            <h3 className="text-xl font-bold text-white mb-2">
+                              {formData.brandName}
                             </h3>
-                            <p className="text-gray-100">
-                              Your AI-generated website is complete
+                            <p className="text-gray-200 text-sm">
+                              {formData.slogan ||
+                                "Your professional website is ready"}
                             </p>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex space-x-4 mt-5">
+                    {/* Action Buttons */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <button
                         onClick={handleViewLive}
-                        className="cursor-pointer flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                        className="cursor-pointer bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
                       >
                         <FaEye />
-                        <span>View Live</span>
+                        <span>Visit Live Site</span>
                       </button>
-                      <button className="cursor-pointer flex-1 border border-emerald-500/30 hover:border-emerald-400 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-2">
+                      <button className="cursor-pointer border border-emerald-500/30 hover:border-emerald-400 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-2">
                         <FaRockrms />
-                        <span>Deploy Website</span>
+                        <span>Website Dashboard</span>
+                      </button>
+                    </div>
+
+                    {/* Additional Options */}
+                    <div className="flex flex-wrap gap-3 justify-center pt-4 border-t border-gray-700">
+                      <button className="cursor-pointer text-emerald-400 hover:text-emerald-300 text-sm flex items-center space-x-2 px-4 py-2 bg-emerald-500/10 rounded-lg transition-all duration-300">
+                        <FaDownload className="text-xs" />
+                        <span>Download Source Code</span>
+                      </button>
+                      <button className="cursor-pointer text-blue-400 hover:text-blue-300 text-sm flex items-center space-x-2 px-4 py-2 bg-blue-500/10 rounded-lg transition-all duration-300">
+                        <FaPalette className="text-xs" />
+                        <span>Customize Design</span>
+                      </button>
+                      <button className="cursor-pointer text-purple-400 hover:text-purple-300 text-sm flex items-center space-x-2 px-4 py-2 bg-purple-500/10 rounded-lg transition-all duration-300">
+                        <FaMagic className="text-xs" />
+                        <span>AI Enhance</span>
                       </button>
                     </div>
                   </div>

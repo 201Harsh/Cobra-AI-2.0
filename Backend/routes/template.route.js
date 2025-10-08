@@ -76,6 +76,8 @@ router.post(
       .optional()
       .isInt({ min: 0 })
       .withMessage("Uses must be a non-negative integer"),
+
+    body("prompt").notEmpty().withMessage("Prompt is required"),
   ],
   ValidationMiddleware.validateUser,
   TemplateController.CreateTemplate

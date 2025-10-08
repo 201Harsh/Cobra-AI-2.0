@@ -11,6 +11,7 @@ import {
   FaArrowLeft,
   FaSpinner,
   FaRockrms,
+  FaCopy,
 } from "react-icons/fa";
 import Link from "next/link";
 import { Slide, toast } from "react-toastify";
@@ -56,12 +57,6 @@ const SiteGenerationPage = () => {
 
     fetchOneTemplate();
   }, [id]);
-
-  useEffect(() => {
-    if (selectedTemplate) {
-      console.log("✅ Template Loaded:", selectedTemplate);
-    }
-  }, [selectedTemplate]);
 
   const [formData, setFormData] = useState<any>({
     brandName: "",
@@ -142,6 +137,14 @@ const SiteGenerationPage = () => {
     if (generatedSite && generatedSite.url) {
       window.open("/creator/preview", "_blank");
     }
+  };
+
+  const handleCopyLink = () => {
+    const siteURL = `https://${formData.brandName
+      .toLowerCase()
+      .replace(/\s+/g, "")}.cobraai.com`;
+    navigator.clipboard.writeText(siteURL);
+    toast.success("Site URL copied to clipboard!");
   };
 
   return (
@@ -472,7 +475,7 @@ const SiteGenerationPage = () => {
                           <span>Live</span>
                         </span>
                       </div>
-                      <div className="bg-gray-800 rounded-lg p-3 border border-gray-600">
+                      <div className="bg-gray-800 rounded-lg p-3 border border-gray-600 relative">
                         <code
                           onClick={handleViewLive}
                           className="text-emerald-300 font-mono text-sm break-all cursor-pointer 
@@ -482,6 +485,12 @@ const SiteGenerationPage = () => {
                           {formData.brandName.toLowerCase().replace(/\s+/g, "")}
                           .cobraai.com
                         </code>
+                        <button>
+                          <FaCopy
+                            onClick={handleCopyLink}
+                            className="text-gray-400 hover:text-emerald-400 mt-2 cursor-pointer absolute top-2 right-2"
+                          />
+                        </button>
                       </div>
                       <p className="text-xs text-gray-400 mt-2">
                         Share this link with your customers and team members

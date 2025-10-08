@@ -10,6 +10,7 @@ import {
   FaUser,
   FaArrowLeft,
   FaSpinner,
+  FaRockrms,
 } from "react-icons/fa";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -132,8 +133,11 @@ const SiteGenerationPage = () => {
             </h1>
 
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Just describe your brand, and let Cobra AI do the rest. No coding
-              required.
+              Just describe your brand, and let{" "}
+              <span className="font-bold text-emerald-400 font-h">
+                Cobra AI
+              </span>{" "}
+              do the rest. No coding required.
             </p>
           </div>
         </section>
@@ -293,12 +297,12 @@ const SiteGenerationPage = () => {
                         Slogan or Tagline
                       </label>
                       <div className="flex space-x-3">
-                        <input
-                          type="text"
+                        <textarea
                           name="slogan"
                           value={formData.slogan}
                           onChange={handleInputChange}
-                          className="flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+                          rows={2}
+                          className="resize-none flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
                           placeholder="Craft your perfect slogan or let AI generate one..."
                         />
                         <button
@@ -421,8 +425,8 @@ const SiteGenerationPage = () => {
                           <span>View Live</span>
                         </button>
                         <button className="cursor-pointer flex-1 border border-emerald-500/30 hover:border-emerald-400 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-2">
-                          <FaDownload />
-                          <span>Download Code</span>
+                          <FaRockrms />
+                          <span>Deploy Website</span>
                         </button>
                       </div>
                     </div>

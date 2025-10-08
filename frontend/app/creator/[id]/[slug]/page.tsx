@@ -1739,22 +1739,6 @@ const SiteGenerationPage = () => {
                         <span>Website Dashboard</span>
                       </button>
                     </div>
-
-                    {/* Additional Options */}
-                    <div className="flex flex-wrap gap-3 justify-center pt-4 border-t border-gray-700">
-                      <button className="cursor-pointer text-emerald-400 hover:text-emerald-300 text-sm flex items-center space-x-2 px-4 py-2 bg-emerald-500/10 rounded-lg transition-all duration-300">
-                        <FaDownload className="text-xs" />
-                        <span>Download Source Code</span>
-                      </button>
-                      <button className="cursor-pointer text-blue-400 hover:text-blue-300 text-sm flex items-center space-x-2 px-4 py-2 bg-blue-500/10 rounded-lg transition-all duration-300">
-                        <FaPalette className="text-xs" />
-                        <span>Customize Design</span>
-                      </button>
-                      <button className="cursor-pointer text-purple-400 hover:text-purple-300 text-sm flex items-center space-x-2 px-4 py-2 bg-purple-500/10 rounded-lg transition-all duration-300">
-                        <FaMagic className="text-xs" />
-                        <span>AI Enhance</span>
-                      </button>
-                    </div>
                   </div>
                 </div>
               )}

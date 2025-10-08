@@ -16,7 +16,7 @@ const CodePreview = ({ code }: any) => {
     <iframe
       ref={iframeRef}
       sandbox="allow-scripts allow-same-origin"
-      className="w-full h-screen rounded-2xl bg-gray-900 border border-gray-700"
+      className="w-full h-screen"
     />
   );
 };

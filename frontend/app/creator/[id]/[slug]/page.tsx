@@ -112,6 +112,12 @@ const SiteGenerationPage = () => {
     Router.push(`/creator/${id}`);
   };
 
+  const handleViewLive = () => {
+    if (generatedSite && generatedSite.url) {
+      window.open("/creator/preview", "_blank");
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen pt-10 bg-gray-950 bg-gradient-to-br from-gray-950 via-emerald-900/30 to-green-700/50 text-white">
@@ -429,7 +435,10 @@ const SiteGenerationPage = () => {
                       </div>
 
                       <div className="flex space-x-4">
-                        <button className="cursor-pointer flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2">
+                        <button
+                          onClick={handleViewLive}
+                          className="cursor-pointer flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                        >
                           <FaEye />
                           <span>View Live</span>
                         </button>

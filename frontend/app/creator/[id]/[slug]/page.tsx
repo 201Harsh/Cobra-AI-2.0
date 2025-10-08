@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FaMagic,
   FaRocket,
@@ -1297,6 +1297,13 @@ const SiteGenerationPage = () => {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [isGenerated, setIsGenerated] = useState<boolean>(false);
   const [generatedSite, setGeneratedSite] = useState<any>(null);
+  const livePreviewRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    if (isGenerated) {
+      livePreviewRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isGenerated]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -1654,7 +1661,10 @@ const SiteGenerationPage = () => {
 
               {/* Live Preview Section - Only shown after generation */}
               {isGenerated && (
-                <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-6">
+                <div
+                  ref={livePreviewRef}
+                  className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700 p-6"
+                >
                   <h2 className="text-2xl font-bold mb-4 flex items-center space-x-3">
                     <FaEye className="text-emerald-400" />
                     <span>Live Preview</span>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 
-const page = ({ code }: any) => {
+const CodePreview = ({ code }: any) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const page = ({ code }: any) => {
   );
 };
 
-export default page;
+export default CodePreview;

@@ -69,6 +69,10 @@ const TemplatesSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  prompt: {
+    type: String,
+    required: true,
+  },
   uses: {
     type: Number,
     default: 0,

@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { toast } from "react-toastify";
 import Footer from "@/app/Components/Footer";
+import { useParams, useRouter } from "next/navigation";
 
 const SiteGenerationPage = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<any>({
@@ -103,14 +104,22 @@ const SiteGenerationPage = () => {
     { value: "stylish", label: "Stylish" },
   ];
 
+  const Router = useRouter();
+
+  const param = useParams();
+  const id = param.id;
+  const BackNavigation = () => {
+    Router.push(`/creator/${id}`);
+  };
+
   return (
     <>
       <div className="min-h-screen pt-10 bg-gray-950 bg-gradient-to-br from-gray-950 via-emerald-900/30 to-green-700/50 text-white">
         {/* Navigation */}
         <div className="container mx-auto px-6 py-4">
           <button
-            onClick={() => window.history.back()}
-            className="inline-flex items-center space-x-2 text-gray-400 hover:text-emerald-400 transition-colors mb-6"
+            onClick={BackNavigation}
+            className="cursor-pointer inline-flex items-center space-x-2 text-gray-400 hover:text-emerald-400 transition-colors mb-6"
           >
             <FaArrowLeft />
             <span>Back to Templates</span>

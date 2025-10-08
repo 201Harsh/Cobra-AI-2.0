@@ -1289,9 +1289,6 @@ const SiteGenerationPage = () => {
   const [formData, setFormData] = useState<any>({
     brandName: "",
     description: "",
-    logo: null,
-    primaryColor: "#10B981", // emerald
-    secondaryColor: "#3B82F6", // blue
     email: "",
     slogan: "",
     tone: "professional",
@@ -1309,19 +1306,14 @@ const SiteGenerationPage = () => {
     }));
   };
 
-  const handleFileUpload = (e: any) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData((prev: any) => ({
-        ...prev,
-        logo: URL.createObjectURL(file),
-      }));
-    }
-  };
-
   const handleGenerateWebsite = async () => {
-    if (!formData.brandName || !formData.description) {
-      toast.error("Please fill in brand name and description");
+    if (
+      !formData.brandName ||
+      !formData.description ||
+      !formData.email ||
+      !formData.slogan
+    ) {
+      toast.error("Please fill in all fields.");
       return;
     }
 

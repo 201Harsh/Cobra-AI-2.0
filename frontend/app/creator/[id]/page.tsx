@@ -1,5 +1,5 @@
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
   FaStar,
@@ -17,6 +17,7 @@ import Link from "next/link";
 import Footer from "@/app/Components/Footer";
 import { Slide, toast } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
+import { Router } from "next/router";
 
 const TemplatePage = () => {
   const [template, setTemplate] = useState<any>(null);
@@ -55,8 +56,10 @@ const TemplatePage = () => {
     fetchOneTemplate();
   }, []);
 
+  const Router = useRouter();
+
   const handleUseTemplate = () => {
-    console.log("Using template:", template?.name);
+    Router.push(`/creator/${id}/customize`);
   };
 
   const renderStars = (rating: number) => {

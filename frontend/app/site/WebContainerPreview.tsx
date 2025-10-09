@@ -10,7 +10,6 @@ export default function WebContainerPreview({ code }: any) {
     setLogs([]);
     await runReactApp(
       code,
-      (data: any) => setLogs((prev) => [...prev, data]),
       (url: string) => setPreviewUrl(url)
     );
   };
@@ -23,12 +22,6 @@ export default function WebContainerPreview({ code }: any) {
       >
         ▶ Run in WebContainer
       </button>
-
-      <div className="border p-2 h-40 overflow-y-auto bg-black text-green-400 text-sm">
-        {logs.map((log, i) => (
-          <div key={i}>{log}</div>
-        ))}
-      </div>
 
       {previewUrl && (
         <iframe

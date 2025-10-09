@@ -2,7 +2,6 @@ import { getWebContainer } from "./WebContainerInstance";
 
 export async function runReactApp(
   userCode: any,
-  onLog: any,
   onServerReady: any
 ) {
   const webcontainer = await getWebContainer();
@@ -38,13 +37,11 @@ export async function runReactApp(
 
   // Install dependencies
   const installProcess = await webcontainer.spawn("npm", ["install"]);
-  installProcess.output.pipeTo(new WritableStream({ write: onLog }));
 
   await installProcess.exit;
 
   // Run Vite server
   const devServer = await webcontainer.spawn("npm", ["run", "dev"]);
-  devServer.output.pipeTo(new WritableStream({ write: onLog }));
 
   webcontainer.on("server-ready", (port: number, url: string) => {
     onServerReady(url);

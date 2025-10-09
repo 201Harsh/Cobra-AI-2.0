@@ -135,8 +135,11 @@ const SiteGenerationPage = () => {
 
   const handleViewLive = () => {
     if (generatedSite && generatedSite.url) {
-      window.open("/creator/preview", "_blank");
+      window.open("/demo/preview", "_blank");
     }
+  };
+  const handleViewDemo = () => {
+    window.open("/demo/preview", "_blank");
   };
 
   const handleCopyLink = () => {
@@ -231,7 +234,10 @@ const SiteGenerationPage = () => {
                         </div>
 
                         <div className="flex justify-center sm:justify-start">
-                          <button className="text-emerald-400 cursor-pointer hover:text-emerald-300 text-sm flex items-center space-x-2">
+                          <button
+                            onClick={handleViewDemo}
+                            className="text-emerald-400 cursor-pointer hover:text-emerald-300 text-sm flex items-center space-x-2"
+                          >
                             <FaEye className="text-xs" />
                             <span>View Demo</span>
                           </button>

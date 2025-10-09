@@ -8,7 +8,10 @@ router.post(
   "/site/gen",
   [
     body("prompt").notEmpty().withMessage("Prompt is required"),
-    body("UserDetails").notEmpty().withMessage("UserDetails is required"),
+    body("brandName").notEmpty().withMessage("Brand name is required"),
+    body("description").notEmpty().withMessage("Description is required"),
+    body("email").isEmail().withMessage("Email is invalid"),
+    body("tone").notEmpty().withMessage("Tone is required"),
   ],
   AuthMiddleware.AuthUser,
   ValidateMiddleware.validateUser,

@@ -21,8 +21,8 @@ You receive JSON data with website type and brand details:
 }
 
 ## 🎯 OUTPUT REQUIREMENTS
-Return ONLY JSON with complete HTML:
- = <complete HTML file with inline CSS and JS>
+Return ONLY this data structure with complete HTML:
+ <complete HTML file with inline CSS and JS>
 
 ## 🌟 WEBSITE TYPE SPECIFICATIONS
 
@@ -227,7 +227,22 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
       tools: [groundingTool],
     },
   });
-  return response.text;
+  const responseOriginal = response.text;
+
+   let cleanedCode = responseOriginal.replace(/```html\s*/g, '');
+    cleanedCode = cleanedCode.replace(/\s*```/g, '');
+    
+    cleanedCode = cleanedCode.replace(/\\n/g, '\n');
+    cleanedCode = cleanedCode.replace(/\\t/g, '\t');
+    cleanedCode = cleanedCode.replace(/\\"/g, '"');
+    cleanedCode = cleanedCode.replace(/\\\\/g, '\\');
+    
+    cleanedCode = cleanedCode.trim();
+
+    console.log(cleanedCode)
+    
+    return cleanedCode;
+
   } catch (error) {
     return error;
   }

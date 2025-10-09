@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const WebsiteSchema = new mongoose.Schema({
+  TemplatId: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   WebsiteName: [
     {
       type: String,
@@ -47,7 +53,6 @@ const WebsiteSchema = new mongoose.Schema({
   LiveUrl: [
     {
       type: String,
-      required: true,
       unique: true,
     },
   ],

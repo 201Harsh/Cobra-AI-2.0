@@ -12,10 +12,22 @@ module.exports.GenerateWebsite = async (req, res) => {
 
     const CurrentUser = await UserModel.findById(UserId);
 
+    const WebsiteExists = await WebsiteModel.findOne({
+      WebsiteName: brandName,
+    });
+
+    if (WebsiteExists) {
+      return res.status(400).json({
+        error: "Website already Exists",
+      });
+    }
+
     const Template = await TemplateModel.findById(TemplateId);
 
     if (!CurrentUser) {
-      return res.status(400).json({ error: "User not found" });
+      return res.status(400).json({
+        error: "User not found",
+      });
     }
 
     if (CurrentUser.siteGenToken <= 0) {
@@ -35,6 +47,7 @@ module.exports.GenerateWebsite = async (req, res) => {
     }
 
     const userSites = await WebsiteModel.find({ UserId });
+
     if (userSites.length >= 3)
       return res.status(400).json({
         error:
@@ -65,25 +78,28 @@ module.exports.GenerateWebsite = async (req, res) => {
       });
     }
 
-    const newWebsite = new WebsiteModel({
-      TemplateId,
-      UserId,
-      WebsiteName: brandName,
-      WebsiteType: Template.type,
-      programming_language: Template.programming_language,
-      cover_img: Template.cover_img,
-      tech_stack: Template.tech_stack,
-      author: Template.author,
-      code: response || "No Code Generated",
-    });
+    if (response) {
+      const newWebsite = new WebsiteModel({
+        TemplateId,
+        UserId,
+        WebsiteName: brandName,
+        WebsiteType: Template.type,
+        programming_language: Template.programming_language,
+        cover_img: Template.cover_img,
+        tech_stack: Template.tech_stack,
+        author: Template.author,
+        code: response || "No Code Generated",
+      });
 
-    await newWebsite.save();
+      await newWebsite.save();
+    }
 
     res.status(200).json({
       code: response,
       message: "Website Generated Successfully",
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       error: error.message,
     });

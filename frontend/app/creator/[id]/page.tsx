@@ -285,10 +285,10 @@ const TemplatePage = () => {
                     </button>
                   )}
 
-                  <button className="cursor-pointer w-full border border-emerald-500/30 hover:border-emerald-400 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-3">
+                  <Link href={"/demo/preview"} className="cursor-pointer w-full border border-emerald-500/30 hover:border-emerald-400 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:bg-emerald-500/10 flex items-center justify-center space-x-3">
                     <FaEye />
                     <span>Live Preview</span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

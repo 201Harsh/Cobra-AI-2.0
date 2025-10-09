@@ -1,4 +1,3 @@
-// /src/lib/webcontainerInstance.js
 import { WebContainer } from "@webcontainer/api";
 
 let webcontainerInstance: any = null;

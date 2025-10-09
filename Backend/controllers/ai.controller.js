@@ -13,7 +13,9 @@ module.exports.GenerateWebsite = async (req, res) => {
 
     const response = await CreatorService({ prompt, UserDetails });
     
-    res.status(200).json({ data: response });
+    res.status(200).json({
+       code: response 
+      });
   } catch (error) {
     res.status(500).json({
       error: error.message,

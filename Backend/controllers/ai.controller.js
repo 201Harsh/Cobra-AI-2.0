@@ -81,6 +81,7 @@ module.exports.GenerateWebsite = async (req, res) => {
 
     res.status(200).json({
       code: response,
+      message: "Website Generated Successfully",
     });
   } catch (error) {
     res.status(500).json({

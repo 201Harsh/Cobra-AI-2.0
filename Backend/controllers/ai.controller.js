@@ -1,11 +1,26 @@
 const TemplateModel = require("../models/Templates.model");
 const CreatorService = require("../services/creator-ai.service");
 const WebsiteModel = require("../models/Website.model");
+const UserModel = require("../models/user.model");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
     const { prompt, brandName, description, email, tone, TemplateId } =
       req.body;
+
+    const UserId = req.user._id;
+
+    const CurrentUser = await UserModel.findById(UserId);
+
+    if (!CurrentUser) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    if (CurrentUser.siteGenToken <= 0) {
+      return res.status(400).json({
+        error: "You have reached your Website Generation limit for this Month",
+      });
+    }
 
     if (!prompt) {
       return res.status(400).json({ error: "Prompt is required" });
@@ -48,6 +63,9 @@ module.exports.GenerateWebsite = async (req, res) => {
         });
         await newWebsite.save();
       }
+
+      CurrentUser.siteGenToken -= 1;
+      await CurrentUser.save();
     }
 
     res.status(200).json({

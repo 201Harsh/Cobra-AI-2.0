@@ -3,7 +3,7 @@ const CreatorService = require("../services/creator-ai.service");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
-    const { prompt, brandName, description, email, tone } = req.body;
+    const { prompt, brandName, description, email, tone , TemplateId} = req.body;
 
     if (!prompt) {
       return res.status(400).json({ error: "Prompt is required" });

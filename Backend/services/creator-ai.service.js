@@ -22,9 +22,7 @@ You receive JSON data with website type and brand details:
 
 ## 🎯 OUTPUT REQUIREMENTS
 Return ONLY JSON with complete HTML:
-{
-  "code": "<complete HTML file with inline CSS and JS>"
-}
+ = <complete HTML file with inline CSS and JS>
 
 ## 🌟 WEBSITE TYPE SPECIFICATIONS
 
@@ -38,12 +36,17 @@ Return ONLY JSON with complete HTML:
 - Checkout form with validation
 - Order confirmation screen
 - Customer reviews section
+- Wishlist feature
+- Admin dashboard for product management
+- Responsive design
 
 **Technical Requirements:**
 - Cart persistence using localStorage
 - Responsive product grid
 - Image zoom functionality
 - Stock status indicators
+- Smooth page transitions
+- Product hover effects
 
 ### 2. 🚀 LANDING PAGE
 **Required Features:**
@@ -55,12 +58,14 @@ Return ONLY JSON with complete HTML:
 - Contact form
 - FAQ section
 - Social proof elements
+- Responsive design
 
 **Technical Requirements:**
 - Smooth scrolling navigation
 - Animated counters/statistics
 - Newsletter signup
 - Mobile-optimized layout
+- Responsive images
 
 ### 3. 💼 PORTFOLIO WEBSITE
 **Required Features:**
@@ -72,6 +77,7 @@ Return ONLY JSON with complete HTML:
 - Contact information
 - Resume/CV download
 - Social media links
+- Responsive design
 
 **Technical Requirements:**
 - Image lightbox for projects
@@ -126,19 +132,11 @@ Return ONLY JSON with complete HTML:
 - **SEO optimization**: meta tags, structured data
 - **Performance focused**: lazy loading, optimized assets
 
-## 🎨 BRAND PERSONALIZATION
-
-### Color Themes:
-- **Luxury**: #0B1120 background, #D4AF37 gold accents, elegant serif fonts
-- **Modern**: #FFFFFF background, #10B981 emerald accents, clean sans-serif
-- **Friendly**: #F8FAFC background, #F59E0B amber accents, rounded elements
-- **Tech**: #111827 background, #3B82F6 blue accents, modern interfaces
-- **Default**: #0B1120 background, #10B981 emerald accents
-
 ### Dynamic Content:
 - Inject brand name, details, and contact information
 - Generate relevant sample content based on website type
 - Create appropriate imagery and icons
+- use Icons and images from Internet and make sure that they are free to use and working.
 
 ## 💻 CODE QUALITY STANDARDS
 
@@ -207,20 +205,25 @@ Every website must include:
 - Test on all modern browsers
 
 ## ⚡ FINAL RULES
-1. Return ONLY JSON with "code" property containing complete HTML
+1. Return "code" containing complete HTML
 2. No additional text, explanations, or comments
 3. Ensure immediate functionality upon browser open
 4. Prioritize user experience and performance
 5. Make websites production-ready and professional
+6. Try to use real and relevant Image from Internet
 
 --- END OF INSTRUCTION ---
 Deliver perfect, single-file websites that work instantly. No excuses, just results.`;
 
+  const groundingTool = {
+    googleSearch: {},
+  };
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: prompt,
     config: {
       systemInstruction: systemInstruction,
+      tools: [groundingTool],
     },
   });
   return response.text;

@@ -218,7 +218,8 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
   const groundingTool = {
     googleSearch: {},
   };
-  const response = await ai.models.generateContent({
+  try {
+    const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: prompt,
     config: {
@@ -227,6 +228,9 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
     },
   });
   return response.text;
+  } catch (error) {
+    return error;
+  }
 }
 
 module.exports = main;

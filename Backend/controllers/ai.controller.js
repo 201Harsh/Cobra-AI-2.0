@@ -3,19 +3,24 @@ const CreatorService = require("../services/creator-ai.service");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
-    const { prompt, UserDetails } = req.body;
+    const { prompt, brandName, description, email, tone } = req.body;
 
-    if (!prompt || !UserDetails) {
-      return res
-        .status(400)
-        .json({ error: "Prompt and UserDetails are required" });
+    if (!prompt) {
+      return res.status(400).json({ error: "Prompt is required" });
     }
 
+    const UserDetails = {
+      BrandName: brandName,
+      BrandDeatail: description,
+      ContactEmail: email,
+      BrandTone: tone,
+    };
+
     const response = await CreatorService({ prompt, UserDetails });
-    
+
     res.status(200).json({
-       code: response 
-      });
+      code: response,
+    });
   } catch (error) {
     res.status(500).json({
       error: error.message,

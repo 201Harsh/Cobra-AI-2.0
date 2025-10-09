@@ -62,8 +62,7 @@ const SiteGenerationPage = () => {
     brandName: "",
     description: "",
     email: "",
-    slogan: "",
-    tone: "professional",
+    tone: "luxury",
   });
 
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
@@ -90,7 +89,7 @@ const SiteGenerationPage = () => {
       !formData.brandName ||
       !formData.description ||
       !formData.email ||
-      !formData.slogan
+      !formData.tone
     ) {
       toast.error("Please fill in all fields.");
       return;
@@ -344,76 +343,6 @@ const SiteGenerationPage = () => {
                       ))}
                     </select>
                   </div>
-
-                  {/* Slogan */}
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Slogan or Tagline
-                    </label>
-                    <div className="flex space-x-3">
-                      <textarea
-                        name="slogan"
-                        value={formData.slogan}
-                        onChange={handleInputChange}
-                        rows={2}
-                        className="resize-none flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                        placeholder="Craft your perfect slogan or let AI generate one..."
-                      />
-                      <button
-                        type="button"
-                        className="cursor-pointer bg-gradient-to-r from-emerald-500/20 to-green-600/20 hover:from-emerald-500/30 hover:to-green-600/30 border border-emerald-500/30 hover:border-emerald-400 text-emerald-400 hover:text-emerald-300 px-4 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 whitespace-nowrap"
-                        onClick={() => {
-                          // AI-powered slogan generator based on brand name and description
-                          const brandSlogans = [
-                            `${formData.brandName} - Quality You Can Trust`,
-                            `Experience Excellence with ${formData.brandName}`,
-                            `${formData.brandName}: Where Innovation Meets Quality`,
-                            `Your Vision, Our Passion - ${formData.brandName}`,
-                            `${formData.brandName}: Building Tomorrow, Today`,
-                            `The Future is ${formData.brandName}`,
-                            `${formData.brandName}: Beyond Expectations`,
-                            `Simply Better. ${formData.brandName}.`,
-                            `${formData.brandName} - Made for You`,
-                            `Discover the Difference with ${formData.brandName}`,
-                          ];
-
-                          const genericSlogans = [
-                            "Quality That Speaks for Itself",
-                            "Innovation at Its Finest",
-                            "Where Dreams Become Reality",
-                            "Excellence in Every Detail",
-                            "Your Success is Our Mission",
-                            "Building Better Experiences",
-                            "The Art of Perfection",
-                            "Simply Extraordinary",
-                            "Beyond the Ordinary",
-                            "Creating Tomorrow's Solutions",
-                          ];
-
-                          const slogans = formData.brandName
-                            ? brandSlogans
-                            : genericSlogans;
-                          const randomIndex = Math.floor(
-                            Math.random() * slogans.length
-                          );
-                          setFormData((prev: any) => ({
-                            ...prev,
-                            slogan: slogans[randomIndex],
-                          }));
-                        }}
-                      >
-                        <FaMagic className="text-sm" />
-                        <span className="hidden sm:inline">AI Generate</span>
-                      </button>
-                    </div>
-                    <p className="text-xs text-gray-400 mt-2 font-inter">
-                      Let{" "}
-                      <span className="font-semibold text-emerald-400">
-                        AI craft
-                      </span>{" "}
-                      the perfect slogan based on your brand identity
-                    </p>
-                  </div>
                 </div>
               </div>
 
@@ -424,7 +353,6 @@ const SiteGenerationPage = () => {
                   isGenerating ||
                   !formData.brandName ||
                   !formData.description ||
-                  !formData.slogan ||
                   !formData.tone ||
                   !formData.email
                 }

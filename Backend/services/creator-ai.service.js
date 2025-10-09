@@ -16,7 +16,6 @@ You receive JSON data with website type and brand details:
     "BrandDeatail": "${UserDetails.BrandDeatail}",           
     "ContactEmail": "${UserDetails.ContactEmail}",
     "BrandTone": "${UserDetails.BrandTone}",
-    "Slogan/TagLine": "${UserDetails.Slogan}"
   }
 }
 

@@ -1,9 +1,6 @@
 import { getWebContainer } from "./WebContainerInstance";
 
-export async function runReactApp(
-  userCode: any,
-  onServerReady: any
-) {
+export async function runReactApp(userCode: any, onServerReady: any) {
   const webcontainer = await getWebContainer();
 
   // Create basic project structure
@@ -19,8 +16,24 @@ export async function runReactApp(
 
   // Write Vite main files
   await webcontainer.fs.mkdir("src", { recursive: true });
-  await webcontainer.fs.writeFile("src/main.jsx", userCode);
 
+  await webcontainer.fs.writeFile(
+    "src/main.jsx",
+    `
+  import React from "react";
+  import { createRoot } from "react-dom/client";
+  import UserApp from "./UserApp.jsx";
+
+  const root = createRoot(document.getElementById("root"));
+  root.render(
+    <React.StrictMode>
+      <UserApp />
+    </React.StrictMode>
+  );
+  `
+  );
+
+  await webcontainer.fs.writeFile("src/UserApp.jsx", userCode);
   await webcontainer.fs.writeFile(
     "index.html",
     `

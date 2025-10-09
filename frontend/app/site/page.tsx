@@ -4,12 +4,15 @@ import WebContainerPreview from "./WebContainerPreview";
 
 export default function EditorPage() {
   const [code, setCode] = useState(`
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-function App() {
-  return <h1>Hello from WebContainer React!</h1>;
+import React from 'react'
+
+const page = () => {
+  return (
+    <div>page</div>
+  )
 }
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+export default page
 `);
 
   return (

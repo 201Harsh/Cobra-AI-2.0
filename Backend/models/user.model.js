@@ -33,6 +33,10 @@ const UserModel = new mongoose.Schema({
     enum: ["creator", "developer"],
     default: "creator",
   },
+  siteGenToken: {
+    type: Number,
+    default: 3,
+  },
 });
 
 UserModel.methods.Jwt_token = function () {

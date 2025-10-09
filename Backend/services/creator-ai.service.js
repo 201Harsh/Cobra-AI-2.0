@@ -236,10 +236,7 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
     cleanedCode = cleanedCode.replace(/\\"/g, '"');
     cleanedCode = cleanedCode.replace(/\\\\/g, '\\');
     
-    cleanedCode = cleanedCode.trim();
-
-    console.log(cleanedCode)
-    
+    cleanedCode = cleanedCode.trim();    
     return cleanedCode;
 
   } catch (error) {

@@ -30,7 +30,7 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                         key={i}
                         className="absolute w-2 h-2 bg-emerald-400 rounded-full animate-orbit"
                         style={{
-                          animationDelay: `${i * 0.5}s`,
+                          animationDelay: `${i * 10}s`,
                           transformOrigin: `${
                             50 + 40 * Math.cos((i * 60 * Math.PI) / 180)
                           }% ${50 + 40 * Math.sin((i * 60 * Math.PI) / 180)}%`,

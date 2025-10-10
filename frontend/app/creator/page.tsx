@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreatorHeader from "../Components/Creator/CreatorHeader";
 import Sidebar from "../Components/Creator/Sidebar";
 import BottomNavigation from "../Components/Creator/BottomNavigation";
@@ -7,11 +7,14 @@ import CreatorPage from "../Components/Creator/CreatorPage";
 import MySitePage from "../Components/Creator/MySitePage";
 import SettingsPage from "../Components/Creator/SettingsPage";
 import DashboardPage from "../Components/Creator/DashboardPage";
+import { toast, Zoom } from "react-toastify";
+import AxiosInstance from "@/config/Axios";
 
 const CreatorDashboard = () => {
-  const [activeTab, setActiveTab] = useState("create");
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("create");
+  const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [generatedSites, setgeneratedSites] = useState<any>([]);
   const [websiteData, setWebsiteData] = useState({
     prompt: "",
     name: "",
@@ -57,23 +60,20 @@ const CreatorDashboard = () => {
     { value: "gradient", label: "Gradient" },
   ];
 
-  // Sample generated websites data
-  const generatedSites = [
-    {
-      id: 1,
-      name: "Portfolio Pro",
-      type: "Portfolio",
-      date: "2024-01-15",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Tech Blog",
-      type: "Blog",
-      date: "2024-01-10",
-      status: "Active",
-    },
-  ];
+  const GetWebsites = async () => {
+    try {
+      const res = await AxiosInstance.get("/websites/all");
+
+      if (res.status === 200) {
+        setgeneratedSites(res.data.data);
+      }
+    } catch (error: any) {
+    }
+  };
+
+  useEffect(() => {
+    GetWebsites();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-inter">

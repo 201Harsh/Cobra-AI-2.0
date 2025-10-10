@@ -19,7 +19,7 @@ const CreatorDashboard = () => {
     prompt: "",
     name: "",
     type: "custom",
-    theme: "dark",
+    theme: "light",
   });
 
   const handleGenerate = () => {
@@ -58,6 +58,7 @@ const CreatorDashboard = () => {
     { value: "dark", label: "Dark" },
     { value: "light", label: "Light" },
     { value: "gradient", label: "Gradient" },
+    { value: "custom", label: "Custom (Prompt Based)" },
   ];
 
   const GetWebsites = async () => {

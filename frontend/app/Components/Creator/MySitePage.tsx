@@ -20,10 +20,10 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
                 {generatedSites.map((site: any) => (
                   <div
                     key={site.id}
-                    className="bg-gray-700/30 rounded-2xl p-6 border border-gray-600/50 hover:border-emerald-400/30 transition-all duration-300 hover:scale-105"
+                    className="bg-gray-700/30 rounded-2xl p-6 border border-gray-600/50 hover:border-emerald-400/30 transition-all duration-300 hover:scale-105 cursor-pointer"
                   >
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="font-bold text-lg text-white">
+                      <h3 className="font-bold text-lg text-emerald-400 font-h capitalize">
                         {site.Name}
                       </h3>
                       <span className="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full">
@@ -31,14 +31,16 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
                       </span>
                     </div>
                     <div className="space-y-2 text-sm text-gray-300">
-                      <p>Type: {site.type}</p>
-                      <p>Created: {site.date}</p>
+                      <p>Type: {site.SiteType}</p>
+                      <p>
+                        Created: {new Date(site.createdAt).toLocaleString()}
+                      </p>
                     </div>
                     <div className="flex space-x-3 mt-4">
-                      <button className="flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 py-2 px-3 rounded-lg transition-all duration-300 text-sm">
+                      <button className="cursor-pointer flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 py-2 px-3 rounded-lg transition-all duration-300 text-sm">
                         View
                       </button>
-                      <button className="flex-1 bg-gray-600/50 hover:bg-gray-600/70 text-gray-300 py-2 px-3 rounded-lg transition-all duration-300 text-sm">
+                      <button className="cursor-pointer flex-1 bg-gray-600/50 hover:bg-gray-600/70 text-gray-300 py-2 px-3 rounded-lg transition-all duration-300 text-sm">
                         Deploy Website
                       </button>
                     </div>

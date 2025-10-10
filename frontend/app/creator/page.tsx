@@ -45,7 +45,7 @@ const CreatorDashboard = () => {
         GetWebsites();
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
+      toast.error(error.response.data.error, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

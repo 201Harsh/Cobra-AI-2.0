@@ -1,45 +1,23 @@
 const mongoose = require("mongoose");
 
 const WebsiteSchema = new mongoose.Schema({
-  TemplateId: {
-    type: String,
-    required: true,
-  },
   UserId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  WebsiteName: {
+  Prompt: {
     type: String,
     required: true,
+  },
+  Code: {
+    type: String,
+    required: true,
+  },
+  LiveUrl: {
+    type: String,
     unique: true,
-  },
-  WebsiteType: {
-    type: String,
-    required: true,
-  },
-  programming_language: {
-    type: String,
-    required: true,
-  },
-  cover_img: {
-    type: String,
-    required: true,
-  },
-  tech_stack: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  author: {
-    type: String,
-    required: true,
-  },
-  code: {
-    type: String,
-    required: true,
+    sparse: true, // allows multiple nulls
   },
   createdAt: {
     type: Date,
@@ -47,6 +25,4 @@ const WebsiteSchema = new mongoose.Schema({
   },
 });
 
-const Website = mongoose.model("Website", WebsiteSchema);
-
-module.exports = Website;
+module.exports = mongoose.model("Website", WebsiteSchema);

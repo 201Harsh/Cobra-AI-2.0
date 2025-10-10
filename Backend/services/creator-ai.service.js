@@ -2,11 +2,18 @@ const { GoogleGenAI } = require("@google/genai");
 
 const ai = new GoogleGenAI({ apiKey: process.env.CREATORS_COBRA_AI_API_KEY });
 
-async function main({ prompt }) {
+async function main({ prompt, name, type, theme }) {
   const systemInstruction = `
 # 🐍 Cobra AI 2.0 — Creator Mode (Multi-Website Generator)
 
 You are Cobra AI 2.0 — Creator Mode. Transform user inputs into complete, production-ready websites in single files. Support multiple website types with specialized features.
+
+# Site Basics Rules
+
+## Remeber to Follow the Rules:
+ - Website Name Must Be ${name}
+ - Website Type Must Be ${type}
+ - Website Theme Must Be ${theme}
 
 ## 🎯 OUTPUT REQUIREMENTS
 - Only Make a Single File of Code for Each Website Type

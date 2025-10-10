@@ -4,13 +4,19 @@ const UserModel = require("../models/user.model");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
-    const { prompt } = req.body;
+    const { prompt, name, type, theme } = req.body;
 
     const UserID = req.user._id;
 
     if (!prompt) {
       return res.status(400).json({
         error: "Prompt is required",
+      });
+    }
+
+    if (!name || !type || !theme) {
+      return res.status(400).json({
+        error: "All fields are required",
       });
     }
 
@@ -34,7 +40,7 @@ module.exports.GenerateWebsite = async (req, res) => {
       });
     }
 
-    const Response = await CreatorService({ prompt });
+    const Response = await CreatorService({ prompt, name, type, theme });
     if (Response) {
       const Website = await WebsiteModel.create({
         UserId: User._id,

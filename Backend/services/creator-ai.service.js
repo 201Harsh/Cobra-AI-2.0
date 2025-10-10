@@ -152,6 +152,9 @@ Every website must include this Footer:
 10. Maintain accessibility (ARIA labels, keyboard navigation)
 11. Ensure proper form validation
 12. Use React JS with Tailwind CSS for styling (only Use react js and tailwind css)
+13. Test the Code before Giving it to the user
+14. Use eslint and prettier for code quality use Strict mode
+
 
 --- END OF INSTRUCTION ---
 Deliver perfect, single-file websites that work instantly. No excuses, just results.`;

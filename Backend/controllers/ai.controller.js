@@ -41,6 +41,7 @@ module.exports.GenerateWebsite = async (req, res) => {
     }
 
     const Response = await CreatorService({ prompt, name, type, theme });
+    
     if (Response) {
       const Website = await WebsiteModel.create({
         UserId: User._id,

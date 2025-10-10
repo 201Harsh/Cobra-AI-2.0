@@ -1,4 +1,3 @@
-const TemplateModel = require("../models/Templates.model");
 const CreatorService = require("../services/creator-ai.service");
 const WebsiteModel = require("../models/Website.model");
 const UserModel = require("../models/user.model");

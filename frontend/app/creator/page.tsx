@@ -18,7 +18,7 @@ const CreatorDashboard = () => {
   const [websiteData, setWebsiteData] = useState({
     prompt: "",
     name: "",
-    type: "portfolio",
+    type: "custom",
     theme: "dark",
   });
 
@@ -41,17 +41,17 @@ const CreatorDashboard = () => {
     { value: "portfolio", label: "Portfolio" },
     { value: "blog", label: "Blog" },
     { value: "ecommerce", label: "E-commerce" },
-    { value: "business", label: "Business" },
     { value: "restaurant", label: "Restaurant" },
     { value: "travel", label: "Travel" },
     { value: "education", label: "Education" },
-    { value: "health", label: "Health" },
-    { value: "sports", label: "Sports" },
+    { value: "health", label: "Health & Wellness" },
+    { value: "sports", label: "Sports & Fitness" },
     { value: "photography", label: "Photography" },
-    { value: "design", label: "Design" },
-    { value: "marketing", label: "Marketing" },
-    { value: "finance", label: "Finance" },
     { value: "real-estate", label: "Real Estate" },
+    { value: "agency", label: "Business / Agency" },
+    { value: "landing-page", label: "Landing Page" },
+    { value: "gaming", label: "Gaming" },
+    { value: "custom", label: "Custom (Prompt Based)" },
   ];
 
   const themes = [
@@ -67,8 +67,7 @@ const CreatorDashboard = () => {
       if (res.status === 200) {
         setgeneratedSites(res.data.data);
       }
-    } catch (error: any) {
-    }
+    } catch (error: any) {}
   };
 
   useEffect(() => {

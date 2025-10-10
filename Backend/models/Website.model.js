@@ -9,7 +9,6 @@ const WebsiteSchema = new mongoose.Schema({
   Name: {
     type: String,
     required: true,
-    unique: true,
   },
   SiteType: {
     type: String,

@@ -15,7 +15,6 @@ const page = () => {
 export default page
 `);
 
-
   return (
     <div className="p-6 min-h-screen">
       <WebContainerPreview code={code} />

@@ -167,6 +167,7 @@ Every website must include this Footer:
 12. Use React JS with Tailwind CSS for styling (only Use react js and tailwind css)
 13. Test the Code before Giving it to the user
 14. Use eslint and prettier for code quality use Strict mode
+15. **STRICTLY USE**: Website Name = "\${name}", Type = "\${type}", Theme = "\${theme}"
 
 
 --- END OF INSTRUCTION ---

@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Sidebar from "../Components/Sidebar";
-import BottomNavigation from "../Components/BottomNavigation";
-import CreatorHeader from "../Components/CreatorHeader";
+import CreatorHeader from "../Components/Creator/CreatorHeader";
+import Sidebar from "../Components/Creator/Sidebar";
+import BottomNavigation from "../Components/Creator/BottomNavigation";
 
 const CreatorDashboard = () => {
   const [activeTab, setActiveTab] = useState("create");

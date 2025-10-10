@@ -1,23 +1,6 @@
 import React from "react";
 
-const MySitePage = ({ activeTab, setActiveTab }: any) => {
-  // Sample generated websites data
-  const generatedSites = [
-    {
-      id: 1,
-      name: "Portfolio Pro",
-      type: "Portfolio",
-      date: "2024-01-15",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Tech Blog",
-      type: "Blog",
-      date: "2024-01-10",
-      status: "Active",
-    },
-  ];
+const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
   return (
     <>
       {activeTab === "sites" && (
@@ -34,7 +17,7 @@ const MySitePage = ({ activeTab, setActiveTab }: any) => {
           <div className="bg-gray-800/50 backdrop-blur-xl rounded-3xl border border-emerald-500/20 p-6 sm:p-8 shadow-2xl">
             {generatedSites.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {generatedSites.map((site) => (
+                {generatedSites.map((site: any) => (
                   <div
                     key={site.id}
                     className="bg-gray-700/30 rounded-2xl p-6 border border-gray-600/50 hover:border-emerald-400/30 transition-all duration-300 hover:scale-105"

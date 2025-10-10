@@ -120,7 +120,11 @@ const CreatorDashboard = () => {
           />
 
           {/* My Sites Page */}
-          <MySitePage activeTab={activeTab} setActiveTab={setActiveTab} />
+          <MySitePage
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            generatedSites={generatedSites}
+          />
 
           {/* Dashboard Page */}
           <DashboardPage

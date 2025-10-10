@@ -5,7 +5,7 @@ const UserModel = require("../models/user.model");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
-    const { prompt, brandName, description, email, tone, TemplateId } =
+    const {brandName, description, email, tone, TemplateId } =
       req.body;
 
     const UserId = req.user._id;
@@ -35,6 +35,8 @@ module.exports.GenerateWebsite = async (req, res) => {
         error: "You have reached your Website Generation limit for this Month",
       });
     }
+
+    const prompt = Template.prompt;
 
     if (!prompt) {
       return res.status(400).json({ error: "Prompt is required" });

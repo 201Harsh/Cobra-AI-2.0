@@ -5,8 +5,7 @@ const UserModel = require("../models/user.model");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
-    const {brandName, description, email, tone, TemplateId } =
-      req.body;
+    const { brandName, description, email, tone, TemplateId } = req.body;
 
     const UserId = req.user._id;
 
@@ -24,6 +23,12 @@ module.exports.GenerateWebsite = async (req, res) => {
 
     const Template = await TemplateModel.findById(TemplateId);
 
+    if (!Template) {
+      return res.status(400).json({
+        error: "Template not found",
+      });
+    }
+
     if (!CurrentUser) {
       return res.status(400).json({
         error: "User not found",
@@ -37,6 +42,9 @@ module.exports.GenerateWebsite = async (req, res) => {
     }
 
     const prompt = Template.prompt;
+    console.log(prompt)
+
+    const Language = Template.programming_language;
 
     if (!prompt) {
       return res.status(400).json({ error: "Prompt is required" });
@@ -72,6 +80,7 @@ module.exports.GenerateWebsite = async (req, res) => {
     const response = await CreatorService({
       prompt,
       UserDetails,
+      Language,
     });
 
     if (!response) {
@@ -92,8 +101,10 @@ module.exports.GenerateWebsite = async (req, res) => {
         author: Template.author,
         code: response || "No Code Generated",
       });
-
       await newWebsite.save();
+
+      Template.uses += 1;
+      Template.save();
     }
 
     res.status(200).json({
@@ -101,6 +112,7 @@ module.exports.GenerateWebsite = async (req, res) => {
       message: "Website Generated Successfully",
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       error: error.message,
     });

@@ -7,7 +7,6 @@ const { body } = require("express-validator");
 router.post(
   "/site/gen",
   [
-    body("prompt").notEmpty().withMessage("Prompt is required"),
     body("brandName").notEmpty().withMessage("Brand name is required"),
     body("description").notEmpty().withMessage("Description is required"),
     body("email").isEmail().withMessage("Email is invalid"),

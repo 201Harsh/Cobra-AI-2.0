@@ -41,9 +41,6 @@ const WebsiteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  LiveUrl: {
-    type: String,
-  },
   createdAt: {
     type: Date,
     default: Date.now,

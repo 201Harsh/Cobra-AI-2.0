@@ -121,7 +121,7 @@ const CreatorPage = ({
               <button
                 onClick={handleGenerate}
                 disabled={!websiteData.prompt || isGenerating}
-                className="relative w-full sm:w-auto px-6 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-emerald-500 to-green-500 rounded-2xl font-bold text-white text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed group"
+                className="relative w-full cursor-pointer  sm:w-auto px-6 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-emerald-500 to-green-500 rounded-2xl font-bold text-white text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed group"
               >
                 <span className="relative z-10 flex items-center justify-center space-x-2 sm:space-x-3">
                   <span>🪄 Generate Website</span>
@@ -131,7 +131,7 @@ const CreatorPage = ({
                 </span>
 
                 {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-2xl blur-sm group-hover:blur-md transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-700 rounded-2xl blur-sm group-hover:blur-md transition-all duration-300"></div>
 
                 {/* Light Ray Effect */}
                 <div className="absolute inset-0 rounded-2xl overflow-hidden">

@@ -39,7 +39,7 @@ const DashboardPage = ({ activeTab, setActiveTab, generatedSites }: any) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <button
                 onClick={() => setActiveTab("create")}
-                className="bg-gradient-to-r from-emerald-500 to-green-500 text-white py-4 px-6 rounded-2xl font-bold transition-all duration-300 hover:scale-105 text-left"
+                className="cursor-pointer bg-gradient-to-r from-emerald-500 to-green-500 text-white py-4 px-6 rounded-2xl font-bold transition-all duration-300 text-left"
               >
                 <div className="text-2xl mb-2">⚡</div>
                 <div className="font-bold">Create New Website</div>
@@ -48,7 +48,7 @@ const DashboardPage = ({ activeTab, setActiveTab, generatedSites }: any) => {
 
               <button
                 onClick={() => setActiveTab("sites")}
-                className="bg-gray-700/50 hover:bg-gray-700/70 text-white py-4 px-6 rounded-2xl font-bold transition-all duration-300 hover:scale-105 text-left border border-gray-600/50"
+                className="cursor-pointer bg-gray-700/50 hover:bg-gray-700/70 text-white py-4 px-6 rounded-2xl font-bold transition-all duration-300 text-left border border-gray-600/50"
               >
                 <div className="text-2xl mb-2">🌐</div>
                 <div className="font-bold">View My Sites</div>

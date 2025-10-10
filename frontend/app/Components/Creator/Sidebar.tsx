@@ -11,7 +11,7 @@ const Sidebar = ({ activeTab, setActiveTab, navigationItems }: any) => {
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`relative group p-3 rounded-2xl transition-all duration-300 ${
+              className={`relative group p-3 rounded-2xl transition-all duration-300 cursor-pointer ${
                 activeTab === item.id
                   ? "bg-emerald-500/20 border border-emerald-500/30"
                   : "bg-gray-700/30 hover:bg-gray-700/50"

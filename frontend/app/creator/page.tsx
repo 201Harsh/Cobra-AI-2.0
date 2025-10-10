@@ -215,11 +215,48 @@ const page = (params: { id: string }) => {
             {!Error && !isLoading && !Search && (
               <>
                 {/* Custom Template Card */}
-                <div>
+                <div className="relative">
                   <div
                     className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-2xl border 
               border-sky-500/50 overflow-hidden hover:border-blue-500/30 transition-all duration-300 group hover:transform hover:scale-105"
                   >
+                    <div className="h-full w-full bg-black/50 absolute z-30 backdrop-blur-sm">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="h-full w-full bg-gradient-to-br from-gray-800/60 to-gray-900/70 rounded-2xl flex items-center justify-center backdrop-blur-md border border-gray-600/30 shadow-2xl">
+                          <div className="text-center space-y-6">
+                            {/* Animated Cobra Logo/Icon */}
+                            <div className="flex justify-center">
+                              <div className="relative">
+                                <div className="w-16 h-16 border-2 border-emerald-400 rounded-full animate-pulse">
+                                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-emerald-400 rounded-full animate-ping"></div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Animated Text */}
+                            <div className="text-4xl font-bold text-white">
+                              <span className="bg-gradient-to-r from-emerald-400 to-red-400 bg-clip-text text-transparent animate-gradient-x">
+                                Coming soon...
+                              </span>
+                            </div>
+
+                            {/* Loading Animation */}
+                            <div className="flex justify-center space-x-2">
+                              {[...Array(3)].map((_, i) => (
+                                <div
+                                  key={i}
+                                  className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"
+                                  style={{ animationDelay: `${i * 0.1}s` }}
+                                ></div>
+                              ))}
+                            </div>
+
+                            {/* Subtle Pulse Effect */}
+                            <div className="absolute inset-0 rounded-2xl border-2 border-emerald-400/20 animate-pulse-slow pointer-events-none"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {/* Image Container */}
                     <div className="relative overflow-hidden">
                       <img

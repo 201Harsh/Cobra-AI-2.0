@@ -39,7 +39,7 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
                         View
                       </button>
                       <button className="flex-1 bg-gray-600/50 hover:bg-gray-600/70 text-gray-300 py-2 px-3 rounded-lg transition-all duration-300 text-sm">
-                        Edit
+                        Deploy Website
                       </button>
                     </div>
                   </div>
@@ -72,7 +72,7 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
                 </p>
                 <button
                   onClick={() => setActiveTab("create")}
-                  className="bg-gradient-to-r from-emerald-500 to-green-500 text-white py-3 px-8 rounded-2xl font-bold transition-all duration-300 hover:scale-105"
+                  className="bg-gradient-to-r from-emerald-500 to-green-500 text-white py-3 px-8 rounded-2xl font-bold transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
                   Create Your First Site
                 </button>

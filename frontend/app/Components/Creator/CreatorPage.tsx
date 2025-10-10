@@ -177,7 +177,13 @@ const CreatorPage = ({
 
                 <button
                   onClick={handleGenerate}
-                  disabled={!websiteData.prompt || isGenerating}
+                  disabled={
+                    !websiteData.prompt ||
+                    !websiteData.name ||
+                    !websiteData.type ||
+                    !websiteData.theme ||
+                    isGenerating
+                  }
                   className="relative w-full max-w-md cursor-pointer px-8 sm:px-16 py-4 sm:py-6 bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 rounded-2xl font-black text-white text-lg sm:text-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/40 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 group overflow-hidden"
                 >
                   {/* Main Content */}

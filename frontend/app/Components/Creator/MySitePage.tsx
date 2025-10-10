@@ -24,7 +24,7 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
                   >
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="font-bold text-lg text-white">
-                        {site.name}
+                        {site.Name}
                       </h3>
                       <span className="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full">
                         {site.status}

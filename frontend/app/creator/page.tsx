@@ -97,7 +97,7 @@ const CreatorDashboard = () => {
       const res = await AxiosInstance.get("/websites/all");
 
       if (res.status === 200) {
-        setgeneratedSites(res.data.data);
+        setgeneratedSites(res.data.Websites);
       }
     } catch (error: any) {}
   };

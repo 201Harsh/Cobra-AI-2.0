@@ -14,11 +14,6 @@ const WebsiteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  LiveUrl: {
-    type: String,
-    unique: true,
-    sparse: true, // allows multiple nulls
-  },
   createdAt: {
     type: Date,
     default: Date.now,

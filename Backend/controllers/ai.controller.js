@@ -48,6 +48,7 @@ module.exports.GenerateWebsite = async (req, res) => {
         Code: Response,
         Name: name,
         SiteType: type,
+        status: "Active",
       });
 
       User.siteGenToken -= 1;

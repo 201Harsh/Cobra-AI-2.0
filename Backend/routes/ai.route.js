@@ -7,10 +7,11 @@ const { body } = require("express-validator");
 router.post(
   "/site/gen",
   [
-    body("brandName").notEmpty().withMessage("Brand name is required"),
-    body("description").notEmpty().withMessage("Description is required"),
-    body("email").isEmail().withMessage("Email is invalid"),
-    body("tone").notEmpty().withMessage("Tone is required"),
+    body("prompt")
+      .notEmpty()
+      .withMessage("Prompt is required")
+      .isLength({ min: 10 })
+      .withMessage("Prompt must be at least 10 characters"),
   ],
   AuthMiddleware.AuthUser,
   ValidateMiddleware.validateUser,

@@ -34,7 +34,7 @@ module.exports.GenerateWebsite = async (req, res) => {
       });
     }
 
-    const Response = CreatorService({ prompt });
+    const Response = await CreatorService({ prompt });
     if (Response) {
       const Website = await WebsiteModel.create({
         UserId: User._id,
@@ -51,7 +51,6 @@ module.exports.GenerateWebsite = async (req, res) => {
       code: Response,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       error: error.message,
     });

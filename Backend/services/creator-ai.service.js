@@ -201,6 +201,7 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
     cleanedCode = cleanedCode.trim();
     return cleanedCode;
   } catch (error) {
+    console.log(error)
     return error;
   }
 }

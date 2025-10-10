@@ -15,15 +15,9 @@ const page = () => {
 export default page
 `);
 
+
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">React WebContainer Playground</h1>
-      <textarea
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        rows={10}
-        className="w-full border p-2 font-mono text-sm rounded"
-      />
+    <div className="p-6 min-h-screen">
       <WebContainerPreview code={code} />
     </div>
   );

@@ -1,9 +1,8 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import BottomNavigation from "../Components/BottomNavigation";
+import CreatorHeader from "../Components/CreatorHeader";
 
 const CreatorDashboard = () => {
   const [activeTab, setActiveTab] = useState("create");
@@ -37,6 +36,15 @@ const CreatorDashboard = () => {
     { value: "ecommerce", label: "E-commerce" },
     { value: "business", label: "Business" },
     { value: "restaurant", label: "Restaurant" },
+    { value: "travel", label: "Travel" },
+    { value: "education", label: "Education" },
+    { value: "health", label: "Health" },
+    { value: "sports", label: "Sports" },
+    { value: "photography", label: "Photography" },
+    { value: "design", label: "Design" },
+    { value: "marketing", label: "Marketing" },
+    { value: "finance", label: "Finance" },
+    { value: "real-estate", label: "Real Estate" },
   ];
 
   const themes = [
@@ -70,73 +78,13 @@ const CreatorDashboard = () => {
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/10 via-gray-900/0 to-gray-900/80"></div>
 
       {/* Top Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-xl border-b border-emerald-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo & Mobile Menu Button */}
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center">
-                <Image
-                  priority
-                  src="/img/logo.png"
-                  alt="logo"
-                  width={100}
-                  height={100}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-lg md:text-xl font-extrabold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent capitalize font-h1">
-                Cobra AI 2.0
-              </span>
-            </Link>
-
-            {/* AI Status - Hidden on mobile */}
-            <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20">
-              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-              <span className="text-xs text-emerald-400">AI Active</span>
-            </div>
-
-            {/* User Profile */}
-            <div className="flex items-center space-x-4">
-              <div className="hidden sm:block text-right">
-                <p className="text-sm font-medium">John Doe</p>
-                <p className="text-xs text-emerald-400">Creator Plan</p>
-              </div>
-              <div className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full flex items-center justify-center text-white font-bold">
-                JD
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden bg-gray-800/95 backdrop-blur-xl border-t border-emerald-500/20">
-            <div className="px-4 py-3 space-y-2">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    setActiveTab(item.id);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className={`w-full flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 ${
-                    activeTab === item.id
-                      ? "bg-emerald-500/20 border border-emerald-500/30"
-                      : "bg-gray-700/30 hover:bg-gray-700/50"
-                  }`}
-                >
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className="font-medium">{item.label}</span>
-                  {activeTab === item.id && (
-                    <div className="ml-auto w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
+      <CreatorHeader
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+        navigationItems={navigationItems}
+      />
 
       {/* Desktop Sidebar */}
       <Sidebar
@@ -160,7 +108,7 @@ const CreatorDashboard = () => {
             <div className="w-full max-w-4xl mx-auto">
               {/* Header Section */}
               <div className="text-center mb-8 lg:mb-12">
-                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent animate-gradient-x">
+                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-400 bg-clip-text text-transparent animate-gradient-x">
                   Creator Mode
                 </h1>
                 <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 lg:mb-8">
@@ -171,7 +119,7 @@ const CreatorDashboard = () => {
                 <div className="hidden lg:block relative">
                   <div className="absolute -top-4 -left-4 w-3 h-3 bg-emerald-400 rounded-full animate-float"></div>
                   <div
-                    className="absolute -top-2 -right-4 w-2 h-2 bg-cyan-400 rounded-full animate-float"
+                    className="absolute -top-2 -right-4 w-2 h-2 bg-green-400 rounded-full animate-float"
                     style={{ animationDelay: "1s" }}
                   ></div>
                   <div
@@ -265,7 +213,7 @@ const CreatorDashboard = () => {
                   <button
                     onClick={handleGenerate}
                     disabled={!websiteData.prompt || isGenerating}
-                    className="relative w-full sm:w-auto px-6 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl font-bold text-white text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed group"
+                    className="relative w-full sm:w-auto px-6 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-emerald-500 to-green-500 rounded-2xl font-bold text-white text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed group"
                   >
                     <span className="relative z-10 flex items-center justify-center space-x-2 sm:space-x-3">
                       <span>🪄 Generate Website</span>
@@ -275,7 +223,7 @@ const CreatorDashboard = () => {
                     </span>
 
                     {/* Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur-sm group-hover:blur-md transition-all duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-2xl blur-sm group-hover:blur-md transition-all duration-300"></div>
 
                     {/* Light Ray Effect */}
                     <div className="absolute inset-0 rounded-2xl overflow-hidden">
@@ -291,7 +239,7 @@ const CreatorDashboard = () => {
           {activeTab === "sites" && (
             <div className="w-full max-w-6xl mx-auto">
               <div className="text-center mb-8 lg:mb-12">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
                   My Generated Websites
                 </h1>
                 <p className="text-base sm:text-lg text-gray-300">
@@ -357,7 +305,7 @@ const CreatorDashboard = () => {
                     </p>
                     <button
                       onClick={() => setActiveTab("create")}
-                      className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-3 px-8 rounded-2xl font-bold transition-all duration-300 hover:scale-105"
+                      className="bg-gradient-to-r from-emerald-500 to-green-500 text-white py-3 px-8 rounded-2xl font-bold transition-all duration-300 hover:scale-105"
                     >
                       Create Your First Site
                     </button>
@@ -371,7 +319,7 @@ const CreatorDashboard = () => {
           {activeTab === "settings" && (
             <div className="w-full max-w-4xl mx-auto">
               <div className="text-center mb-8 lg:mb-12">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
                   Settings
                 </h1>
                 <p className="text-base sm:text-lg text-gray-300">
@@ -435,13 +383,13 @@ const CreatorDashboard = () => {
                         </div>
                         <div className="w-full bg-gray-600 rounded-full h-2">
                           <div
-                            className="bg-gradient-to-r from-emerald-400 to-cyan-400 h-2 rounded-full"
+                            className="bg-gradient-to-r from-emerald-400 to-green-400 h-2 rounded-full"
                             style={{ width: "20%" }}
                           ></div>
                         </div>
                       </div>
 
-                      <button className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 text-sm">
+                      <button className="w-full bg-gradient-to-r from-emerald-500 to-green-500 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 text-sm">
                         Upgrade Plan
                       </button>
                     </div>
@@ -481,7 +429,7 @@ const CreatorDashboard = () => {
           {activeTab === "dashboard" && (
             <div className="w-full max-w-6xl mx-auto">
               <div className="text-center mb-8 lg:mb-12">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
                   Dashboard
                 </h1>
                 <p className="text-base sm:text-lg text-gray-300">
@@ -518,7 +466,7 @@ const CreatorDashboard = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <button
                     onClick={() => setActiveTab("create")}
-                    className="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-4 px-6 rounded-2xl font-bold transition-all duration-300 hover:scale-105 text-left"
+                    className="bg-gradient-to-r from-emerald-500 to-green-500 text-white py-4 px-6 rounded-2xl font-bold transition-all duration-300 hover:scale-105 text-left"
                   >
                     <div className="text-2xl mb-2">⚡</div>
                     <div className="font-bold">Create New Website</div>
@@ -559,7 +507,7 @@ const CreatorDashboard = () => {
 
                 {/* Progress Bar */}
                 <div className="w-full max-w-xs h-2 bg-gray-700 rounded-full mx-auto overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full animate-progress"></div>
+                  <div className="h-full bg-gradient-to-r from-emerald-400 to-green-500 rounded-full animate-progress"></div>
                 </div>
               </div>
             </div>

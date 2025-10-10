@@ -7,7 +7,7 @@ import CreatorPage from "../Components/Creator/CreatorPage";
 import MySitePage from "../Components/Creator/MySitePage";
 import SettingsPage from "../Components/Creator/SettingsPage";
 import DashboardPage from "../Components/Creator/DashboardPage";
-import { toast, Zoom } from "react-toastify";
+import { Bounce, Flip, toast, Zoom } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
 
 const CreatorDashboard = () => {
@@ -22,12 +22,42 @@ const CreatorDashboard = () => {
     theme: "light",
   });
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     setIsGenerating(true);
-    // Simulate AI generation
-    setTimeout(() => {
+
+    try {
+      const res = await AxiosInstance.post("/ai/site/gen", websiteData);
+
+      if (res.status === 200) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+        console.log(res.data);
+        GetWebsites();
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    } finally {
       setIsGenerating(false);
-    }, 3000);
+    }
   };
 
   const navigationItems = [

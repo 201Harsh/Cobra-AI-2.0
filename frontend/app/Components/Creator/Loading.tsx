@@ -30,7 +30,7 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                         key={i}
                         className="absolute w-2 h-2 bg-emerald-400 rounded-full animate-orbit"
                         style={{
-                          animationDelay: `${i * 10}s`,
+                          animationDelay: `${i * 3}s`,
                           transformOrigin: `${
                             50 + 40 * Math.cos((i * 60 * Math.PI) / 180)
                           }% ${50 + 40 * Math.sin((i * 60 * Math.PI) / 180)}%`,
@@ -43,8 +43,21 @@ const Loading = ({ isGenerating, websiteData }: any) => {
 
               {/* Main Title */}
               <h3 className="text-2xl sm:text-3xl font-black mb-6 bg-gradient-to-r from-emerald-300 via-green-300 to-emerald-300 bg-clip-text text-transparent">
-                Cobra AI is Building Your Website
+                Cobra AI is Crafting Your Website
               </h3>
+
+              {/* Time Estimation Banner */}
+              <div className="mb-8 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl">
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
+                  <p className="text-amber-300 text-sm font-medium">
+                    ⏱️ This may take 10-15 minutes for best quality
+                  </p>
+                </div>
+                <p className="text-amber-400/80 text-xs mt-2">
+                  Cobra AI is carefully building every component with attention to detail
+                </p>
+              </div>
 
               {/* Progress Steps Container */}
               <div className="relative mb-8">
@@ -58,97 +71,104 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                   {[
                     {
                       id: 1,
-                      text: "📋 Analyzing your requirements...",
-                      duration: 2,
+                      text: "🧠 Analyzing your prompt and requirements...",
+                      duration: 5,
+                      time: "1-2 min",
                     },
                     {
                       id: 2,
-                      text: "📁 Creating project structure...",
-                      duration: 4,
+                      text: "📁 Creating optimal project structure...",
+                      duration: 30,
+                      time: "2-3 min",
                     },
                     {
                       id: 3,
-                      text: "🎨 Designing UI components...",
-                      duration: 6,
+                      text: "🎨 Designing beautiful UI components...",
+                      duration: 60,
+                      time: "3-4 min",
                     },
                     {
                       id: 4,
-                      text: "⚡ Writing React code...",
-                      duration: 8,
+                      text: "⚡ Writing clean React code...",
+                      duration: 120,
+                      time: "4-5 min",
                     },
                     {
                       id: 5,
-                      text: "🎯 Adding animations...",
-                      duration: 10,
+                      text: "✨ Adding smooth animations...",
+                      duration: 180,
+                      time: "2-3 min",
                     },
                     {
                       id: 6,
-                      text: "📱 Making it responsive...",
-                      duration: 12,
+                      text: "📱 Making it fully responsive...",
+                      duration: 240,
+                      time: "1-2 min",
                     },
                     {
                       id: 7,
-                      text: "🔍 Testing functionality...",
-                      duration: 14,
+                      text: "🔍 Testing all functionality...",
+                      duration: 300,
+                      time: "2-3 min",
                     },
-                    { id: 8, text: "✨ Final polishing...", duration: 16 },
+                    {
+                      id: 8,
+                      text: "🎯 Final optimization and polishing...",
+                      duration: 360,
+                      time: "1-2 min",
+                    },
                   ].map((step, index) => (
                     <div
                       key={step.id}
-                      className="flex items-center space-x-4 opacity-0 animate-step-fade"
+                      className="flex items-center justify-between opacity-0 animate-step-fade"
                       style={{ animationDelay: `${step.duration}s` }}
                     >
-                      <div className="relative">
-                        <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center border-2 border-emerald-400/30">
-                          <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                      <div className="flex items-center space-x-4">
+                        <div className="relative">
+                          <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center border-2 border-emerald-400/30">
+                            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                          </div>
+                          <div className="absolute inset-0 border-2 border-emerald-400 rounded-full animate-ping-slow"></div>
                         </div>
-                        <div className="absolute inset-0 border-2 border-emerald-400 rounded-full animate-ping-slow"></div>
+                        <div>
+                          <span className="text-gray-300 font-medium text-sm sm:text-base animate-text-glow block">
+                            {step.text}
+                          </span>
+                          <span className="text-emerald-400 text-xs">
+                            {step.time}
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-gray-300 font-medium text-sm sm:text-base animate-text-glow">
-                        {step.text}
-                      </span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Progress Stats */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <div className="text-center">
-                  <div
-                    className="text-2xl font-bold text-emerald-400 animate-count-up"
-                    data-target="100"
-                  >
-                    0%
+              {/* Current Project Info */}
+              <div className="bg-gray-800/50 rounded-xl p-4 mb-6 border border-emerald-500/20">
+                <h4 className="text-emerald-400 font-semibold mb-2">Current Project</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-400">Website:</span>
+                    <p className="text-white font-medium">"{websiteData.name}"</p>
                   </div>
-                  <div className="text-xs text-gray-400">Code Quality</div>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="text-2xl font-bold text-green-400 animate-count-up"
-                    data-target="100"
-                  >
-                    0%
+                  <div>
+                    <span className="text-gray-400">Type:</span>
+                    <p className="text-white font-medium capitalize">{websiteData.type}</p>
                   </div>
-                  <div className="text-xs text-gray-400">Performance</div>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="text-2xl font-bold text-emerald-400 animate-count-up"
-                    data-target="100"
-                  >
-                    0%
+                  <div>
+                    <span className="text-gray-400">Theme:</span>
+                    <p className="text-white font-medium capitalize">{websiteData.theme}</p>
                   </div>
-                  <div className="text-xs text-gray-400">Responsive</div>
                 </div>
               </div>
 
               {/* Enhanced Progress Bar */}
               <div className="relative mb-6">
                 <div className="flex justify-between text-xs text-gray-400 mb-2">
-                  <span>Starting...</span>
-                  <span className="animate-pulse">Building in progress</span>
-                  <span>Complete!</span>
+                  <span>Starting (0%)</span>
+                  <span className="animate-pulse">Building (50%)</span>
+                  <span>Complete (100%)</span>
                 </div>
                 <div className="w-full h-3 bg-gray-700 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-500 rounded-full animate-progress-expand relative">
@@ -156,14 +176,50 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                     <div className="absolute top-0 right-0 bottom-0 w-20 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-progress-shine"></div>
                   </div>
                 </div>
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>~2 min</span>
+                  <span>~8 min</span>
+                  <span>~15 min</span>
+                </div>
+              </div>
+
+              {/* Helpful Tips */}
+              <div className="bg-gray-800/30 rounded-xl p-4 mb-6 border border-gray-600/50">
+                <h4 className="text-green-400 font-semibold mb-3 flex items-center justify-center space-x-2">
+                  <span>💡</span>
+                  <span>While You Wait</span>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-400">
+                  <div className="flex items-center space-x-2">
+                    <span>☕</span>
+                    <span>Grab a coffee or tea</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span>📝</span>
+                    <span>Plan your next website</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span>🔧</span>
+                    <span>Check your website settings</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span>⚡</span>
+                    <span>Quality takes time - worth the wait!</span>
+                  </div>
+                </div>
               </div>
 
               {/* Status Message */}
-              <div className="text-gray-400 text-sm animate-pulse">
-                <span className="inline-block animate-typing">
-                  Crafting your {websiteData.type} website "{websiteData.name}"
-                  with {websiteData.theme} theme...
-                </span>
+              <div className="text-gray-400 text-sm mb-4">
+                <div className="animate-pulse">
+                  <span className="text-emerald-400 font-semibold">Status:</span>{" "}
+                  Crafting your {websiteData.type} website "{websiteData.name}" with {websiteData.theme} theme...
+                </div>
+              </div>
+
+              {/* Estimated Completion */}
+              <div className="text-amber-400 text-sm font-medium mb-4">
+                ⏰ Estimated completion: 10-15 minutes
               </div>
 
               {/* Floating Code Elements */}
@@ -190,6 +246,11 @@ const Loading = ({ isGenerating, websiteData }: any) => {
               </div>
             </div>
           </div>
+
+          {/* Custom Styles */}
+          <style jsx>{`
+           
+          `}</style>
         </div>
       )}
     </>

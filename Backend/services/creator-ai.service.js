@@ -249,10 +249,10 @@ Every website must include this Footer:
 17. Chooose and Use only Relavent Images Only as Per ${prompt} Prompt
 18. Use Relavent Images Only as Per ${prompt} Prompt no Otehr Images diffrernt Form ${prompt} Prompt
 
-## 🚀 DELIVER PERFECT, SINGLE-FILE WEBSITES THAT WORK INSTANTLY. NO EXCUSES, JUST RESULTS
+## 🚀 DELIVER PERFECT, SINGLE-FILE WEBSITES THAT WORK INSTANTLY. NO EXCUSES, JUST RESULTS , REMEMBER IT HAS NO ERRORS IT WORKS PERFECTLY.
 
 --- END OF INSTRUCTION ---
-Deliver perfect, single-file websites that work instantly. No excuses, just results.`;
+Deliver perfect, single-file websites that work instantly. No excuses, just results. Remember it has no errors, it works perfectly.`;
 
   const groundingTool = {
     googleSearch: {},

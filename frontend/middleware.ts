@@ -7,12 +7,12 @@ export function middleware(req: NextRequest) {
 
   // --- 1️⃣ Auto Redirect Logged-In Users ---
   if (token && ["/login", "/register" , "/forgot", "/verify"].includes(pathname)) {
-    const dashboardUrl = new URL("/creator", req.url);
+    const dashboardUrl = new URL("/home", req.url);
     return NextResponse.redirect(dashboardUrl);
   }
 
   // --- 2️⃣ Protect Private Routes ---
-  const protectedRoutes = ["/dashboard", "/creator", "/dev"];
+  const protectedRoutes = ["/home", "/creator", "/dev"];
   const isProtected = protectedRoutes.some((route) => pathname.startsWith(route));
 
   if (isProtected && !token) {

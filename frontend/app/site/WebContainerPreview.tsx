@@ -32,7 +32,7 @@ export default function WebContainerPreview({ code }: any) {
       {previewUrl && (
         <iframe
           src={previewUrl}
-          className="w-full h-full border"
+          className="w-full h-full"
           title="Cobra AI Preview"
         />
       )}

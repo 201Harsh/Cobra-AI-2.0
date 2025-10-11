@@ -53,6 +53,7 @@ module.exports.GenerateWebsite = async (req, res) => {
       });
 
       User.siteGenToken -= 1;
+      User.sitegenerated += 1;
       await User.save();
     }
 
@@ -61,7 +62,7 @@ module.exports.GenerateWebsite = async (req, res) => {
       code: Response,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       error: error.message,
     });

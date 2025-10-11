@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
 import LoadingScreen from "./LoadingScreen";
 
-const layout = () => {
+const page = () => {
   const [IsLoading, setIsLoading] = useState<boolean>(true);
   const Router = useRouter();
   const getUser = async () => {
@@ -59,4 +59,4 @@ const layout = () => {
   }
 };
 
-export default layout;
+export default page;

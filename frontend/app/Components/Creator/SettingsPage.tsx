@@ -38,8 +38,8 @@ const SettingsPage = ({
   };
 
   const getUsagePercentage = () => {
-    if (UserData.siteGenToken === 0) return 100; // Handle division by zero
-    return (UserData.siteGen / UserData.siteGenToken) * 100;
+    if (UserData.maxSitegeneration === 0) return 0; // Handle division by zero
+    return (UserData.siteGen / UserData.maxSitegeneration) * 100;
   };
 
   const getRemainingSites = () => {
@@ -190,7 +190,7 @@ const SettingsPage = ({
                     <div className="flex justify-between text-sm text-gray-400 mb-2">
                       <span>Sites Generated</span>
                       <span>
-                        {UserData.siteGen} / {UserData.siteGenToken}
+                        {UserData.siteGen} / {UserData.maxSitegeneration}
                       </span>
                     </div>
                     <div className="w-full bg-gray-600 rounded-full h-2 mb-2">
@@ -201,7 +201,7 @@ const SettingsPage = ({
                     </div>
                     <p className="text-xs text-gray-400 text-center">
                       {UserData.siteGen} sites generated •{" "}
-                      {UserData.siteGenToken - UserData.siteGen} remaining
+                      {UserData.siteGenToken} remaining
                     </p>
                   </div>
 

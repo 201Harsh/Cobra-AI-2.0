@@ -10,6 +10,7 @@ import DashboardPage from "../Components/Creator/DashboardPage";
 import { Bounce, Flip, toast, Zoom } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
 import Loading from "../Components/Creator/Loading";
+import { useRouter } from "next/navigation";
 
 const CreatorDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("create");
@@ -23,6 +24,8 @@ const CreatorDashboard = () => {
     theme: "light",
   });
 
+  const Router = useRouter();
+
   const [UserData, setUserData] = useState<any>({
     name: "",
     email: "",
@@ -31,6 +34,7 @@ const CreatorDashboard = () => {
     mode: "",
     apiKey: "",
     siteGen: 0,
+    maxSitegeneration: 0,
   });
 
   const getUserData = async () => {
@@ -38,6 +42,7 @@ const CreatorDashboard = () => {
       const response = await AxiosInstance.get("/users/me");
 
       if (response.status === 200) {
+        console.log(response.data)
         setUserData({
           name: response.data.user.name,
           email: response.data.user.email,
@@ -46,9 +51,11 @@ const CreatorDashboard = () => {
           mode: response.data.user.mode,
           apiKey: response.data.user._id + "-Cobra_AI_by_Harsh",
           siteGen: response.data.user.sitegenerated,
+          maxSitegeneration: response.data.user.maxSitegeneration,
         });
       }
     } catch (error: any) {
+      Router.push("/");
       toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: 5000,

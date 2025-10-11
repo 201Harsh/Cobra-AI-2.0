@@ -102,10 +102,10 @@ const CreatorHeader = ({
               </div>
 
               {/* Profile Avatar - Clickable */}
-              <button onClick={handleProfileClick} className="relative group">
+              <button onClick={handleProfileClick} className="relative group cursor-pointer">
                 <div className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full flex items-center justify-center text-white font-bold hover:scale-105 transition-all duration-300">
-                  {UserData?.name?.charAt(0) || "J"}
-                  {UserData?.name?.split(" ")[1]?.charAt(0) || "D"}
+                  {UserData?.name?.charAt(0) || "C"}
+                  {UserData?.name?.split(" ")[1]?.charAt(0)}
                 </div>
 
                 {/* Hover glow effect */}
@@ -132,7 +132,7 @@ const CreatorHeader = ({
                   <div className="py-2">
                     <button
                       onClick={handleSettings}
-                      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-emerald-500/10 hover:text-emerald-400 transition-all duration-200 group"
+                      className="cursor-pointer w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-emerald-500/10 hover:text-emerald-400 transition-all duration-200 group"
                     >
                       <span className="text-lg">⚙️</span>
                       <span>Settings</span>
@@ -141,7 +141,7 @@ const CreatorHeader = ({
 
                     <button
                       onClick={handleLogoutClick}
-                      className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 group"
+                      className="cursor-pointer w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-red-500/10 hover:text-red-400 transition-all duration-200 group"
                     >
                       <span className="text-lg">🚪</span>
                       <span>Logout</span>

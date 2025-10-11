@@ -39,7 +39,7 @@ module.exports.registerUser = async (req, res) => {
 
     if (existingUser) {
       return res.status(400).json({
-        message: "User already exists",
+        message: "User already exists Please Verify your email",
       });
     }
 
@@ -47,7 +47,7 @@ module.exports.registerUser = async (req, res) => {
 
     if (ifUserExists) {
       return res.status(400).json({
-        message: "User already exists",
+        message: "User already exists Please Login",
       });
     }
 

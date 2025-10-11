@@ -20,8 +20,10 @@ const layout = () => {
 
         if (res.data.user.mode === "creator") {
           Router.push("/creator");
-        } else {
+        } else if (res.data.user.mode === "developer") {
           Router.push("/dev");
+        } else {
+          Router.push("/home");
         }
       }
     } catch (error: any) {

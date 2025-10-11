@@ -47,7 +47,7 @@ const Login = () => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("name", response.data.user.name);
         localStorage.setItem("email", response.data.user.email);
-        Router.push("/home");
+        Router.push("/auto");
       }
     } catch (error: any) {
       const errors = error.response.data.errors;

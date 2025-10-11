@@ -40,8 +40,6 @@ const layout = ({ children }: any) => {
   useEffect(() => {
     getUser();
   }, []);
-
-  return <>{children}</>;
 };
 
 export default layout;

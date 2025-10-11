@@ -88,6 +88,7 @@ const CreatorDashboard = () => {
           type: "custom",
           theme: "light",
         });
+        setActiveTab("sites");
       }
     } catch (error: any) {
       toast.error(error.response.data.error, {

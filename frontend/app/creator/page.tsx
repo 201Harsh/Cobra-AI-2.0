@@ -42,7 +42,6 @@ const CreatorDashboard = () => {
       const response = await AxiosInstance.get("/users/me");
 
       if (response.status === 200) {
-        console.log(response.data);
         setUserData({
           name: response.data.user.name,
           email: response.data.user.email,

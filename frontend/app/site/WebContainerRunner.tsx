@@ -41,6 +41,11 @@ export async function runReactApp(userCode: any, onServerReady: any) {
     <html>
       <head>
       <title>React Preview</title>
+      <style>
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      </style>
       <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
       </head>
       <body>

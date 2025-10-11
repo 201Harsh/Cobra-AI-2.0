@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast, Zoom } from "react-toastify";
 
 const SettingsPage = ({
   activeTab,
@@ -23,7 +24,17 @@ const SettingsPage = ({
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    // You can add a toast notification here
+    toast.success("API Key copied to clipboard!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Zoom,
+    });
   };
 
   const getUsagePercentage = () => {
@@ -38,7 +49,7 @@ const SettingsPage = ({
   return (
     <>
       {activeTab === "settings" && (
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full max-w-4xl mx-auto py-6">
           <div className="text-center mb-8 lg:mb-12">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
               Settings

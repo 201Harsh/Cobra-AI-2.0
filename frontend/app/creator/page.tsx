@@ -30,6 +30,7 @@ const CreatorDashboard = () => {
     siteGenToken: 0,
     mode: "",
     apiKey: "",
+    siteGen: 0,
   });
 
   const getUserData = async () => {
@@ -44,6 +45,7 @@ const CreatorDashboard = () => {
           siteGenToken: response.data.user.siteGenToken,
           mode: response.data.user.mode,
           apiKey: response.data.user._id + "-Cobra_AI_by_Harsh",
+          siteGen: response.data.user.sitegenerated,
         });
       }
     } catch (error: any) {

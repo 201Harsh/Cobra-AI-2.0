@@ -42,7 +42,7 @@ const CreatorDashboard = () => {
       const response = await AxiosInstance.get("/users/me");
 
       if (response.status === 200) {
-        console.log(response.data)
+        console.log(response.data);
         setUserData({
           name: response.data.user.name,
           email: response.data.user.email,
@@ -114,6 +114,33 @@ const CreatorDashboard = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      const res = await AxiosInstance.post("/users/logout");
+
+      if (res.status === 200) {
+        localStorage.clear();
+        Router.push("/");
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Zoom,
+      });
+    }
+  };
+
+  const handleSettingsClick = () => {
+    setActiveTab("settings");
+  };
+
   const navigationItems = [
     { id: "create", icon: "⚡", label: "Create" },
     { id: "sites", icon: "🌐", label: "My Sites" },
@@ -173,6 +200,10 @@ const CreatorDashboard = () => {
         isMobileMenuOpen={isMobileMenuOpen}
         setIsMobileMenuOpen={setIsMobileMenuOpen}
         navigationItems={navigationItems}
+        UserData={UserData}
+        setUserData={setUserData}
+        handleLogout={handleLogout}
+        handleSettingsClick={handleSettingsClick}
       />
 
       {/* Desktop Sidebar */}

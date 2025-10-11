@@ -136,6 +136,40 @@ const CreatorDashboard = () => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const res = await AxiosInstance.post("/users/del");
+
+      if (res.status === 200) {
+        localStorage.clear();
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+        Router.push("/");
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    }
+  };
+
   const handleSettingsClick = () => {
     setActiveTab("settings");
   };
@@ -256,6 +290,7 @@ const CreatorDashboard = () => {
             setActiveTab={setActiveTab}
             UserData={UserData}
             setUserData={setUserData}
+            handleDelete={handleDelete}
           />
 
           {/* Loading Overlay */}

@@ -6,6 +6,7 @@ const SettingsPage = ({
   setActiveTab,
   UserData,
   setUserData,
+  handleDelete,
 }: any) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState(UserData);
@@ -283,7 +284,10 @@ const SettingsPage = ({
                       Permanently delete your account and all associated data
                     </p>
                   </div>
-                  <button className="cursor-pointer px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-300 text-sm font-medium">
+                  <button
+                    onClick={handleDelete}
+                    className="cursor-pointer px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-300 text-sm font-medium"
+                  >
                     Delete Account
                   </button>
                 </div>

@@ -216,7 +216,7 @@ const SettingsPage = ({
                     Account Type
                   </h4>
                   <div className="flex items-center justify-between">
-                    <span className="text-emerald-400 font-bold font-h uppercase text-sm capitalize">
+                    <span className="text-emerald-400 font-bold font-h uppercase text-sm">
                       {UserData.mode}
                     </span>
                     {isEditing && (

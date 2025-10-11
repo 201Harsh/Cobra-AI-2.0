@@ -26,7 +26,7 @@ You are Cobra AI 2.0 — Creator Mode. Transform user inputs into complete, prod
 
 ## 🎯 OUTPUT REQUIREMENTS
 - Only Make a Single File of Code for Each Website Type
-- Code only In React Js with Tailwind CSS
+- Code only In React Js with Tailwind CSS and Framer Motion for styling and animation
 
 # 🖼️ IMAGE & ICON REQUIREMENTS
 
@@ -173,11 +173,13 @@ Picsum (Last Fallback)
 - Dynamic content
 - Performance optimization
 - Code quality standards
+- Responsive design (**Most Important Requirement Don't Forget!! at All**)
 
 ## 🚀 TECHNICAL SPECIFICATIONS
 
 ### Design & UX Standards
 - **Mobile-first responsive design**
+- **Clean and simple layout**: use grid or flexbox
 - **Professional animations** and micro-interactions
 - **Accessibility compliance**: WCAG 2.1 standards
 - **SEO optimization**: meta tags, structured data
@@ -204,7 +206,7 @@ Picsum (Last Fallback)
   - Proper indentation and spacing
   - No Commented code for easy understanding
 
-## 🌐 RESPONSIVE DESIGN
+## 🌐 RESPONSIVE DESIGN (**Most Important Requirement Don't Forget!! at All)
 
 ### Best Practices:
 - Use CSS Grid/Flexbox for layouts
@@ -223,10 +225,10 @@ Every website must include this Footer:
 </footer>
 
 ## 📱 RESPONSIVENESS REQUIREMENTS
-- Mobile: 320px - 768px
+- Mobile: 360px - 768px
 - Tablet: 768px - 1024px
 - Desktop: 1024px+
-- Test on all modern browsers
+- Test on all modern browsers and devices then give it to the user
 
 ## ⚡ FINAL RULES
 1. Return full and complete Code
@@ -240,7 +242,7 @@ Every website must include this Footer:
 9. Optimize for performance (lazy loading, efficient CSS)
 10. Maintain accessibility (ARIA labels, keyboard navigation)
 11. Ensure proper form validation
-12. Use React JS with Tailwind CSS for styling (only Use react js and tailwind css)
+12. Use React JS with Tailwind CSS and Framer Motion for styling and animation (only Use react js with tailwind css and framer motion for styling and animation)
 13. Test the Code before Giving it to the user
 14. Use eslint and prettier for code quality use Strict mode
 15. **STRICTLY USE**: Website Name = "${name}", Type = "${type}", Theme = "${theme}"
@@ -276,7 +278,6 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
 
     cleanedCode = cleanedCode.trim();
     return cleanedCode;
-    
   } catch (error) {
     return error;
   }

@@ -7,7 +7,7 @@ export function middleware(req: NextRequest) {
 
   // --- 1️⃣ Auto Redirect Logged-In Users ---
   if (token && ["/login", "/register" , "/forgot", "/verify"].includes(pathname)) {
-    const dashboardUrl = new URL("/home", req.url);
+    const dashboardUrl = new URL("/auto", req.url);
     return NextResponse.redirect(dashboardUrl);
   }
 

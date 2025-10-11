@@ -63,7 +63,7 @@ const SettingsPage = ({
             {/* Header with Edit Toggle */}
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-xl font-bold text-white">Account Settings</h2>
-              <div className="flex space-x-3">
+              {/* <div className="flex space-x-3">
                 {isEditing ? (
                   <>
                     <button
@@ -87,7 +87,7 @@ const SettingsPage = ({
                     Edit Profile
                   </button>
                 )}
-              </div>
+              </div> */}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -205,7 +205,7 @@ const SettingsPage = ({
                     </p>
                   </div>
 
-                  <button className="w-full bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 text-sm">
+                  <button className="cursor-pointer w-full bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 text-sm">
                     Upgrade Plan
                   </button>
                 </div>
@@ -216,7 +216,7 @@ const SettingsPage = ({
                     Account Type
                   </h4>
                   <div className="flex items-center justify-between">
-                    <span className="text-white text-sm capitalize">
+                    <span className="text-emerald-400 font-bold font-h uppercase text-sm capitalize">
                       {UserData.mode}
                     </span>
                     {isEditing && (

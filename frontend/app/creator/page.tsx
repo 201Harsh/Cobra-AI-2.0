@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 
 const CreatorDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("create");
-  const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [isGenerating, setIsGenerating] = useState<boolean>(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [generatedSites, setgeneratedSites] = useState<any>([]);
   const [websiteData, setWebsiteData] = useState<any>({

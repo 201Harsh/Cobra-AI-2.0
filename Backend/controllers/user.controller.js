@@ -1,5 +1,6 @@
 const TempUserModel = require("../models/tempuser.model");
 const UserModel = require("../models/user.model");
+const WebsiteModel = require("../models/Website.model");
 const UserService = require("../services/user.service");
 
 module.exports.registerUser = async (req, res) => {
@@ -388,6 +389,45 @@ module.exports.updateMode = async (req, res) => {
     res.status(200).json({
       message: "Mode updated successfully",
       user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+module.exports.deleteUser = async (req, res) => {
+  try {
+    const UserId = req.user._id;
+
+    if (!UserId) {
+      return res.status(400).json({
+        message: "User ID is required",
+      });
+    }
+
+    const User = await UserModel.findById(UserId);
+
+    if (!User) {
+      return res.status(400).json({
+        message: "User not found",
+      });
+    }
+
+    await User.deleteOne();
+    res.clearCookie("token");
+
+    const Websites = await WebsiteModel.find({ UserId });
+
+    if (Websites) {
+      Websites.forEach(async (website) => {
+        await website.deleteOne();
+      });
+    }
+
+    res.status(200).json({
+      message: "User deleted successfully",
     });
   } catch (error) {
     res.status(500).json({

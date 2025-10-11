@@ -92,4 +92,6 @@ router.post(
   ValidateMiddleware.validateUser
 );
 
+router.post("/del", AuthMiddleware.AuthUser, UserController.deleteUser);
+
 module.exports = router;

@@ -41,6 +41,10 @@ const UserModel = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  maxSitegeneration: {
+    type: Number,
+    default: 3,
+  },
 });
 
 UserModel.methods.Jwt_token = function () {

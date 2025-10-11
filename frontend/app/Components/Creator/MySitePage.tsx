@@ -1,6 +1,13 @@
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
+  const Router = useRouter();
+
+  const handleView = async () => {
+    Router.push(`/site/${generatedSites._id}`);
+  };
+
   return (
     <>
       {activeTab === "sites" && (
@@ -37,7 +44,10 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
                       </p>
                     </div>
                     <div className="flex space-x-3 mt-4">
-                      <button className="cursor-pointer flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 py-2 px-3 rounded-lg transition-all duration-300 text-sm">
+                      <button
+                        onClick={handleView}
+                        className="cursor-pointer flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 py-2 px-3 rounded-lg transition-all duration-300 text-sm"
+                      >
                         View
                       </button>
                       <button className="cursor-pointer flex-1 bg-gray-600/50 hover:bg-gray-600/70 text-gray-300 py-2 px-3 rounded-lg transition-all duration-300 text-sm">

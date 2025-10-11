@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
 import LoadingScreen from "./LoadingScreen";
 
-const layout = ({ children }: any) => {
+const layout = () => {
   const [IsLoading, setIsLoading] = useState<boolean>(true);
   const Router = useRouter();
   const getUser = async () => {

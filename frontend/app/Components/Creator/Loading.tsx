@@ -55,7 +55,8 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                   </p>
                 </div>
                 <p className="text-amber-400/80 text-xs mt-2">
-                  Cobra AI is carefully building every component with attention to detail
+                  Cobra AI is carefully building every component with attention
+                  to detail
                 </p>
               </div>
 
@@ -146,19 +147,27 @@ const Loading = ({ isGenerating, websiteData }: any) => {
 
               {/* Current Project Info */}
               <div className="bg-gray-800/50 rounded-xl p-4 mb-6 border border-emerald-500/20">
-                <h4 className="text-emerald-400 font-semibold mb-2">Current Project</h4>
+                <h4 className="text-emerald-400 font-semibold mb-2">
+                  Current Project
+                </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                   <div>
                     <span className="text-gray-400">Website:</span>
-                    <p className="text-white font-medium">"{websiteData.name}"</p>
+                    <p className="text-white font-medium">
+                      "{websiteData.name}"
+                    </p>
                   </div>
                   <div>
                     <span className="text-gray-400">Type:</span>
-                    <p className="text-white font-medium capitalize">{websiteData.type}</p>
+                    <p className="text-white font-medium capitalize">
+                      {websiteData.type}
+                    </p>
                   </div>
                   <div>
                     <span className="text-gray-400">Theme:</span>
-                    <p className="text-white font-medium capitalize">{websiteData.theme}</p>
+                    <p className="text-white font-medium capitalize">
+                      {websiteData.theme}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -212,8 +221,11 @@ const Loading = ({ isGenerating, websiteData }: any) => {
               {/* Status Message */}
               <div className="text-gray-400 text-sm mb-4">
                 <div className="animate-pulse">
-                  <span className="text-emerald-400 font-semibold">Status:</span>{" "}
-                  Crafting your {websiteData.type} website "{websiteData.name}" with {websiteData.theme} theme...
+                  <span className="text-emerald-400 font-semibold">
+                    Status:
+                  </span>{" "}
+                  Crafting your {websiteData.type} website "{websiteData.name}"
+                  with {websiteData.theme} theme...
                 </div>
               </div>
 
@@ -247,10 +259,6 @@ const Loading = ({ isGenerating, websiteData }: any) => {
             </div>
           </div>
 
-          {/* Custom Styles */}
-          <style jsx>{`
-           
-          `}</style>
         </div>
       )}
     </>

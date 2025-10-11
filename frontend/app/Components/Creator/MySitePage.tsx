@@ -19,7 +19,7 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {generatedSites.map((site: any) => (
                   <div
-                    key={site.id}
+                    key={site._id}
                     className="bg-gray-700/30 rounded-2xl p-6 border border-gray-600/50 hover:border-emerald-400/30 transition-all duration-300 hover:scale-105 cursor-pointer"
                   >
                     <div className="flex items-center justify-between mb-4">

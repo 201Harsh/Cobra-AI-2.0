@@ -55,15 +55,6 @@ const CreatorHeader = ({
           <div className="flex justify-between items-center h-16">
             {/* Logo & Mobile Menu Button */}
             <div className="flex items-center space-x-3">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 rounded-lg bg-gray-800/50 border border-gray-600/50"
-              >
-                <div className="w-6 h-6 flex items-center justify-center">
-                  {isMobileMenuOpen ? "✕" : "☰"}
-                </div>
-              </button>
-
               <Link href="/" className="flex items-center space-x-2">
                 <div className="w-16 h-16 rounded-lg flex items-center justify-center">
                   <Image
@@ -163,7 +154,7 @@ const CreatorHeader = ({
                         className="bg-gradient-to-r from-emerald-400 to-green-400 h-1 rounded-full transition-all duration-500"
                         style={{
                           width: `${
-                            UserData?.maxSiteGen
+                            UserData?.maxSitegeneration
                               ? (UserData.siteGen /
                                   UserData.maxSitegeneration) *
                                 100

@@ -26,7 +26,7 @@ export default page
       const res = await AxiosInstance.get(`websites/g/${id}`);
 
       if (res.status === 200) {
-        console.log(res.data);
+        setCode(res.data.Website.Code);
       }
     } catch (error: any) {
       toast.error(error.response.data.message, {

@@ -16,12 +16,12 @@ export default function WebContainerPreview({ code }: any) {
   }, [code]);
 
   return (
-    <div className="p-4 space-y-4 h-screen  w-full">
+    <div className="space-y-4 h-screen  w-full">
       {previewUrl && (
         <iframe
           src={previewUrl}
           className="w-full h-full border"
-          title="Preview"
+          title="Cobra AI Preview"
         />
       )}
     </div>

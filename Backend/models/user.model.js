@@ -31,7 +31,7 @@ const UserModel = new mongoose.Schema({
   mode: {
     type: String,
     enum: ["creator", "developer"],
-    default: "",
+    default: "creator",
   },
   siteGenToken: {
     type: Number,

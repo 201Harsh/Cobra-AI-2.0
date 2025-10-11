@@ -39,6 +39,7 @@ const page = () => {
         theme: "dark",
         transition: Slide,
       });
+      localStorage.clear();
     } finally {
       setTimeout(() => {
         setIsLoading(false);

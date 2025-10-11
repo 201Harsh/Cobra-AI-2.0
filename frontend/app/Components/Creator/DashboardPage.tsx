@@ -4,7 +4,7 @@ const DashboardPage = ({ activeTab, setActiveTab, generatedSites }: any) => {
   return (
     <>
       {activeTab === "dashboard" && (
-        <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full max-w-6xl mx-auto py-6">
           <div className="text-center mb-8 lg:mb-12">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
               Dashboard

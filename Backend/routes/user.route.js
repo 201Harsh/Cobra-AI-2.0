@@ -84,4 +84,12 @@ router.get("/me", AuthMiddleware.AuthUser, UserController.getUser);
 
 router.get("/all", UserController.getAllUsers);
 
+router.post(
+  "/updateMode",
+  [body("mode").notEmpty().withMessage("Mode is required")],
+  AuthMiddleware.AuthUser,
+  UserController.updateMode,
+  ValidateMiddleware.validateUser
+);
+
 module.exports = router;

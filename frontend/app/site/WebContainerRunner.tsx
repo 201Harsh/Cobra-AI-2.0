@@ -15,6 +15,10 @@ export async function runReactApp(userCode: any, onServerReady: any) {
         "react-dom": "latest",
         vite: "latest",
         "framer-motion": "latest",
+        "lucide-react": "latest",
+        "@heroicons/react": "latest",
+        "react-icons": "latest",
+        clsx: "latest",
       },
     })
   );

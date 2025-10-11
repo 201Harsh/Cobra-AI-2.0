@@ -10,7 +10,12 @@ export async function runReactApp(userCode: any, onServerReady: any) {
       name: "react-playground",
       type: "module",
       scripts: { dev: "vite" },
-      dependencies: { react: "latest", "react-dom": "latest", vite: "latest" },
+      dependencies: {
+        react: "latest",
+        "react-dom": "latest",
+        vite: "latest",
+        "framer-motion": "latest",
+      },
     })
   );
 

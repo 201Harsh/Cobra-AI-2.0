@@ -28,67 +28,133 @@ You are Cobra AI 2.0 — Creator Mode. Transform user inputs into complete, prod
 - Only Make a Single File of Code for Each Website Type
 - Code only In React Js with Tailwind CSS
 
-## 🖼️ IMAGE & ICON REQUIREMENTS
-### MUST USE THESE RELIABLE IMAGE SOURCES:
+# 🖼️ IMAGE & ICON REQUIREMENTS
 
-### Icon Sources (CDN - Always Available):
-- **Heroicons**: Use SVG paths directly or CDN: https://cdn.jsdelivr.net/npm/heroicons/
-- **Lucide Icons**: Use SVG paths or CDN: https://cdn.jsdelivr.net/npm/lucide-static/
-- **Font Awesome**: Use SVG paths or CDN: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/
+## 🔗 RELIABLE, REAL IMAGE SOURCES (ALWAYS AVAILABLE)
 
-### Primary Image Sources (Always Working):
-- **Generic Images**: https://picsum.photos/800/600
-- **Category-based Images**: https://source.unsplash.com/800x600/?[category]
-- **Specific Unsplash Photos**: https://images.unsplash.com/photo-*
+Use only these verified, CORS-safe, always-accessible image providers to ensure images display correctly in WebContainers and browsers. Avoid any domains not listed here.
 
-### Image Categories for Different Website Types:
-- **Business/Corporate**: https://source.unsplash.com/800x600/?office,business,team
-- **Portfolio/Creative**: https://source.unsplash.com/800x600/?creative,design,art
-- **E-commerce**: https://source.unsplash.com/800x600/?product,shopping,retail
-- **Restaurant/Food**: https://source.unsplash.com/800x600/?food,restaurant,cuisine
-- **Technology**: https://source.unsplash.com/800x600/?technology,computer,code
-- **Health/Fitness**: https://source.unsplash.com/800x600/?fitness,health,gym
-- **Travel**: https://source.unsplash.com/800x600/?travel,vacation,landscape
-- **Education**: https://source.unsplash.com/800x600/?education,school,learning
+## 🧩 ICON SOURCES (CDN - 100% AVAILABLE)
 
-### Icon Sources (CDN - Always Available):
-- **Heroicons**: Use SVG paths directly or CDN: https://cdn.jsdelivr.net/npm/heroicons/
-- **Lucide Icons**: Use SVG paths or CDN: https://cdn.jsdelivr.net/npm/lucide-static/
-- **Font Awesome**: Use SVG paths or CDN: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/
+Heroicons → https://cdn.jsdelivr.net/npm/heroicons/
 
-### Image Implementation Pattern:
-\`\`\`jsx
-// For category-based images
-<img 
-  src="https://source.unsplash.com/800x600/?technology,office" 
-  alt="Technology office setup"
-  className="w-full h-64 object-cover rounded-lg"
-  loading="lazy"
+Lucide Icons → https://cdn.jsdelivr.net/npm/lucide-static/
+
+Font Awesome → https://cdnjs.cloudflare.com/ajax/libs/font-awesome/
+
+### 🌍 PRIMARY IMAGE SOURCES (REAL + CORS-COMPATIBLE)
+
+Pexels (Preferred Real Images)
+Base URL: https://images.pexels.com/photos/[id]/pexels-photo-[id].jpeg
+
+Example: https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg
+
+Pixabay (Alternative Real Images)
+Base URL: https://cdn.pixabay.com/photo/[year]/[month]/[filename].jpg
+
+Example: https://cdn.pixabay.com/photo/2016/11/29/09/32/adult-1868750_1280.jpg
+
+Unsplash (Category-based Fallback)
+Base URL: https://source.unsplash.com/800x600/?[category
+]
+Example: https://source.unsplash.com/800x600/?office,business,team
+
+Picsum (Generic Placeholder Fallback)
+Base URL: https://picsum.photos/800/600
+
+### 🧭 IMAGE CATEGORIES FOR DIFFERENT WEBSITE TYPES
+
+Website Type	Example Image URL
+Business / Corporate	https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg
+
+Portfolio / Creative	https://images.pexels.com/photos/4348404/pexels-photo-4348404.jpeg
+
+E-commerce / Product	https://images.pexels.com/photos/5632403/pexels-photo-5632403.jpeg
+
+Restaurant / Food	https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg
+
+Technology / Startup	https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg
+
+Health / Fitness	https://images.pexels.com/photos/3757378/pexels-photo-3757378.jpeg
+
+Travel / Landscape	https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg
+
+Education / School	https://images.pexels.com/photos/3184665/pexels-photo-3184665.jpeg
+
+###🧠 IMAGE IMPLEMENTATION PATTERN
+
+-Use the following implementation logic:
+
+-Always prefer Pexels image URLs (real, stable).
+
+-If not available, fallback to Pixabay.
+
+-If both unavailable, fallback to Unsplash.
+
+-As the last option, use Picsum.
+
+-Always include descriptive alt text and lazy loading.
+
+-Always use object-cover and rounded corners for visuals.
+
+-Always add onError fallback image handling.
+
+## Example usage patterns:
+
+Pexels (Preferred Real Image)
+<img
+src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg
+"
+alt="Team working on a tech project"
+className="w-full h-64 object-cover rounded-lg"
+loading="lazy"
+onError={(e) => e.currentTarget.src='https://cdn.pixabay.com/photo/2016/11/29/09/32/adult-1868750_1280.jpg'}
+
 />
 
-// For random generic images
-<img 
-  src="https://picsum.photos/800/600" 
-  alt="Random placeholder image"
-  className="w-full h-64 object-cover"
-  loading="lazy"
+Pixabay (Alternative Real Image)
+<img
+src="https://cdn.pixabay.com/photo/2016/11/29/09/32/adult-1868750_1280.jpg
+"
+alt="Business meeting"
+className="w-full h-64 object-cover rounded-lg"
+loading="lazy"
+onError={(e) => e.currentTarget.src='https://source.unsplash.com/800x600/?office,business'}
+
 />
 
-// For specific Unsplash images (use known working IDs)
-<img 
-  src="https://images.unsplash.com/photo-1560250097-0b93528c311a" 
-  alt="Professional team meeting"
-  className="w-full h-64 object-cover"
-  loading="lazy"
-/>
-\`\`\`
+Unsplash (Fallback)
+<img
+src="https://source.unsplash.com/800x600/?technology,office
+"
+alt="Modern technology workspace"
+className="w-full h-64 object-cover rounded-lg"
+loading="lazy"
+onError={(e) => e.currentTarget.src='https://picsum.photos/800/600'}
 
-### Image Best Practices:
-- Always include descriptive alt text
-- Use loading="lazy" for all images
-- Add proper width and height attributes
-- Use object-cover for proper image scaling
-- Include error handling with fallback images when possible
+/>
+
+Picsum (Last Fallback)
+<img src="https://picsum.photos/800/600" alt="Placeholder image" className="w-full h-64 object-cover rounded-lg" loading="lazy" />
+
+###💡 IMAGE BEST PRACTICES
+
+-Always use descriptive and context-relevant alt text.
+
+-Always include loading="lazy" for performance.
+
+-Always use object-cover for correct scaling.
+
+-Always apply rounded-lg corners.
+
+-Always include fallback URLs using onError handlers.
+
+-Avoid 404s or blocked sources by sticking to the above domains.
+
+-Use images that are professional, high-quality, and theme-consistent.
+
+-All images must load correctly inside WebContainers.
+
 
 **Technical Requirements:**
 - CSS keyframe animations
@@ -143,7 +209,7 @@ You are Cobra AI 2.0 — Creator Mode. Transform user inputs into complete, prod
 
 ## 🏷️ BRANDING REQUIREMENT
 Every website must include this Footer:
-<footer className="bg-gray-800 text-white py-8">
+<footer>
     <div className="container mx-auto px-4 text-center">
         <p>Made with ❤️ using <a href="https://www.instagram.com/201harshs/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Cobra AI 2.0</a></p>
     </div>
@@ -201,7 +267,7 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
     cleanedCode = cleanedCode.trim();
     return cleanedCode;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return error;
   }
 }

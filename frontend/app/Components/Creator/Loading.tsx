@@ -42,7 +42,7 @@ const Loading = ({ isGenerating, websiteData }: any) => {
               {/* Progress Steps Container */}
               <div className="relative mb-3 lg:mb-4 max-h-48 lg:max-h-56 overflow-y-scroll scrollbar-hide">
                 {/* Steps */}
-                <div className="space-y-2 lg:space-y-3">
+                <div className="space-y-2 lg:space-y-3 grid grid-cols-2 items-center justify-between gap-2">
                   {[
                     {
                       id: 1,
@@ -95,7 +95,7 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                           <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
                         </div>
                       </div>
-                      <span className="text-gray-300 font-medium text-xs lg:text-sm flex-1 text-left">
+                      <span className="text-gray-300 font-medium text-sm lg:text-lg flex-1 text-left">
                         {step.text}
                       </span>
                     </div>
@@ -110,7 +110,7 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                   <h4 className="text-emerald-400 font-semibold mb-2 text-sm lg:text-base text-center">
                     Current Project
                   </h4>
-                  <div className="flex flex-col sm:flex-row justify-between gap-2 text-xs lg:text-sm">
+                  <div className="flex flex-col sm:flex-row justify-between gap-2 text-sm lg:text-lg">
                     <div className="text-center sm:text-left">
                       <div className="text-gray-400">Website</div>
                       <div className="text-white font-medium truncate">
@@ -144,14 +144,14 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                       <div className="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-progress-shine"></div>
                     </div>
                   </div>
-                  <div className="text-amber-400 text-xs font-medium text-center mt-2">
-                    ⏰ 5-10 minutes remaining
+                  <div className="text-amber-400 text-sm font-medium text-center mt-4">
+                    ⏰ 2-5 minutes left
                   </div>
                 </div>
 
                 {/* Helpful Tips */}
                 <div className="bg-gray-800/30 rounded-lg p-3 border border-gray-600/50">
-                  <h4 className="text-green-400 font-semibold mb-2 text-sm text-center">
+                  <h4 className="text-green-400 font-semibold mb-2 text-sm md:text-lg text-center">
                     💡 While You Wait
                   </h4>
                   <div className="flex justify-center gap-3 text-xs text-gray-400">

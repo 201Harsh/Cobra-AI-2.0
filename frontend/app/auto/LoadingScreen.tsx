@@ -18,21 +18,37 @@ const LoadingScreen = () => {
 
           {/* Main Title */}
           <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-emerald-300 to-green-300 bg-clip-text text-transparent">
-            Cobra AI Initializing
+            Compiling Your Website
           </h3>
 
-          {/* Verification Steps */}
+          {/* Compilation Steps */}
           <div className="space-y-3 mb-6">
             {[
               {
                 id: 1,
-                text: "🔐 Verifying user authentication...",
+                text: "⚡ Compiling React components...",
                 delay: 0.5,
               },
-              { id: 2, text: "📡 Connecting to AI services...", delay: 1.5 },
-              { id: 3, text: "⚡ Loading creator modules...", delay: 2.5 },
-              { id: 4, text: "🎯 Preparing website builder...", delay: 3.5 },
-              { id: 5, text: "🚀 Almost ready...", delay: 4.5 },
+              {
+                id: 2,
+                text: "🎨 Processing Tailwind styles...",
+                delay: 1.5,
+              },
+              {
+                id: 3,
+                text: "🔧 Bundling dependencies...",
+                delay: 2.5,
+              },
+              {
+                id: 4,
+                text: "🚀 Starting development server...",
+                delay: 3.5,
+              },
+              {
+                id: 5,
+                text: "🌐 Launching live preview...",
+                delay: 4.5,
+              },
             ].map((step, index) => (
               <div
                 key={step.id}
@@ -45,16 +61,53 @@ const LoadingScreen = () => {
             ))}
           </div>
 
-          {/* Simple Progress Bar */}
+          {/* Live Preview Status */}
+          <div className="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+              <span className="text-emerald-400 text-sm font-semibold">
+                Live Preview Starting...
+              </span>
+            </div>
+            <p className="text-emerald-400/80 text-xs">
+              Your website will be ready instantly after compilation
+            </p>
+          </div>
+
+          {/* Compilation Progress */}
           <div className="mb-4">
+            <div className="flex justify-between text-xs text-gray-400 mb-2">
+              <span>Compiling</span>
+              <span className="animate-pulse">Building</span>
+              <span>Live</span>
+            </div>
             <div className="w-full bg-gray-700 rounded-full h-1.5">
               <div className="bg-gradient-to-r from-emerald-400 to-green-400 h-1.5 rounded-full animate-pulse"></div>
             </div>
           </div>
 
           {/* Status Message */}
-          <div className="text-gray-400 text-sm animate-pulse">
-            Preparing your workspace...
+          <div className="text-gray-400 text-sm animate-pulse mb-4">
+            Almost ready to launch your live website...
+          </div>
+
+          {/* Terminal-style Output */}
+          <div className="bg-black/50 rounded-lg p-3 border border-gray-700/50 mb-4">
+            <div className="text-left font-mono text-xs text-green-400 space-y-1">
+              <div className="flex items-center space-x-2">
+                <span className="text-gray-400">$</span>
+                <span>npm run build</span>
+              </div>
+              <div className="text-gray-400">
+                {" "}
+                Building optimized bundles...
+              </div>
+              <div className="text-gray-400"> Compiled successfully!</div>
+              <div className="text-emerald-400 animate-pulse">
+                {" "}
+                Live server running on http://localhost:3000
+              </div>
+            </div>
           </div>
 
           {/* Simple Floating Elements */}
@@ -73,11 +126,6 @@ const LoadingScreen = () => {
           ></div>
         </div>
       </div>
-
-      {/* Optimized CSS Animations */}
-      <style jsx>{`
-       
-      `}</style>
     </div>
   );
 };

@@ -105,7 +105,11 @@ const LoadingScreen = () => {
               <div className="text-gray-400"> Compiled successfully!</div>
               <div className="text-emerald-400 animate-pulse">
                 {" "}
-                Live server running on http://localhost:3000
+                Live server running on http://localhost:3000 Soon...
+              </div>
+              <div className="text-sky-400 animate-pulse">
+                {" "}
+                Installing dependencies...
               </div>
             </div>
           </div>

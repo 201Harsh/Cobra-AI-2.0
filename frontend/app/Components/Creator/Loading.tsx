@@ -137,7 +137,7 @@ const Loading = ({ isGenerating, websiteData }: any) => {
                   <div className="flex justify-between text-xs text-gray-400 mb-2">
                     <span>Start</span>
                     <span className="animate-pulse">Building</span>
-                    <span>Complete</span>
+                    <span>Testing with Cobra AI 2.0 🤖</span>
                   </div>
                   <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-emerald-400 to-green-500 rounded-full animate-progress-expand relative">

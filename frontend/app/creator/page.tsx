@@ -23,6 +23,14 @@ const CreatorDashboard = () => {
     theme: "light",
   });
 
+  const [UserData, setUserData] = useState({
+    name: "",
+    email: "",
+    plan: "",
+    siteGenToken: 0,
+    mode: "",
+  });
+
   const handleGenerate = async () => {
     setIsGenerating(true);
 
@@ -162,10 +170,17 @@ const CreatorDashboard = () => {
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             generatedSites={generatedSites}
+            UserData={UserData}
+            setUserData={setUserData}
           />
 
           {/* Settings Page */}
-          <SettingsPage activeTab={activeTab} setActiveTab={setActiveTab} />
+          <SettingsPage
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            UserData={UserData}
+            setUserData={setUserData}
+          />
 
           {/* Loading Overlay */}
           <Loading isGenerating={isGenerating} websiteData={websiteData} />

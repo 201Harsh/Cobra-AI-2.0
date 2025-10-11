@@ -3,11 +3,13 @@ import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
+import LoadingScreen from "./LoadingScreen";
 
 const layout = ({ children }: any) => {
   const [IsLoading, setIsLoading] = useState<boolean>(true);
   const Router = useRouter();
   const getUser = async () => {
+    setIsLoading(true);
     try {
       const res = await AxiosInstance.get("/users/me");
 
@@ -23,6 +25,7 @@ const layout = ({ children }: any) => {
         }
       }
     } catch (error: any) {
+      Router.push("/");
       toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: 5000,
@@ -34,12 +37,24 @@ const layout = ({ children }: any) => {
         theme: "dark",
         transition: Slide,
       });
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3500);
     }
   };
 
   useEffect(() => {
     getUser();
   }, []);
+
+  if (IsLoading) {
+    return (
+      <>
+        <LoadingScreen />
+      </>
+    );
+  }
 };
 
 export default layout;

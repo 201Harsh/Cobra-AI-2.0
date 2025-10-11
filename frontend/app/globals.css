@@ -257,3 +257,36 @@
     border-color: #10b981;
   }
 }
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+  animation-fill-mode: both;
+}
+
+/* Reduced motion for low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-pulse {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .animate-bounce {
+    animation: none;
+  }
+}

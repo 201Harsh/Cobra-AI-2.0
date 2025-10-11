@@ -249,13 +249,13 @@ const SettingsPage = ({
                     <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex space-x-1">
                       <button
                         onClick={() => setShowApiKey(!showApiKey)}
-                        className="px-3 py-1 bg-gray-500 hover:bg-gray-600 text-white rounded text-xs transition-all duration-300"
+                        className="cursor-pointer px-3 py-1 bg-gray-500 hover:bg-gray-600 text-white rounded text-xs transition-all duration-300"
                       >
                         {showApiKey ? "Hide" : "Show"}
                       </button>
                       <button
                         onClick={() => copyToClipboard(UserData.apiKey)}
-                        className="px-3 py-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded text-xs transition-all duration-300"
+                        className="cursor-pointer px-3 py-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded text-xs transition-all duration-300"
                       >
                         Copy
                       </button>
@@ -274,7 +274,7 @@ const SettingsPage = ({
                 Danger Zone
               </h3>
               <div className="bg-red-500/10 rounded-xl p-4 border border-red-500/20">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col gap-5 lg:flex-row justify-between items-center">
                   <div>
                     <h4 className="text-sm font-medium text-red-300 mb-1">
                       Delete Account
@@ -283,7 +283,7 @@ const SettingsPage = ({
                       Permanently delete your account and all associated data
                     </p>
                   </div>
-                  <button className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-300 text-sm font-medium">
+                  <button className="cursor-pointer px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-300 text-sm font-medium">
                     Delete Account
                   </button>
                 </div>

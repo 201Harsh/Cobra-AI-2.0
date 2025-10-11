@@ -104,7 +104,7 @@ const HomePage = () => {
 
   const handleCreatorClick = async () => {
     try {
-      const res = await AxiosInstance.post("/users/creator", {
+      const res = await AxiosInstance.post("/users/updateMode", {
         mode: "creator",
       });
 
@@ -123,6 +123,7 @@ const HomePage = () => {
         });
       }
     } catch (error: any) {
+      console.log(error);
       toast.error(error.response.data.message || "Something went wrong", {
         position: "top-right",
         autoClose: 5000,
@@ -139,7 +140,7 @@ const HomePage = () => {
 
   const handleDevClick = async () => {
     try {
-      const res = await AxiosInstance.post("/users/creator", {
+      const res = await AxiosInstance.post("/users/updateMode", {
         mode: "developer",
       });
 
@@ -158,6 +159,7 @@ const HomePage = () => {
         });
       }
     } catch (error: any) {
+      console.log(error);
       toast.error(error.response.data.message || "Something went wrong", {
         position: "top-right",
         autoClose: 5000,

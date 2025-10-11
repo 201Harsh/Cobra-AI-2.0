@@ -5,7 +5,7 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
   const Router = useRouter();
 
   const handleView = async () => {
-    Router.push(`/site/${generatedSites._id}`);
+    Router.push(`/site/${generatedSites.map((site: any) => site._id)}`);
   };
 
   return (

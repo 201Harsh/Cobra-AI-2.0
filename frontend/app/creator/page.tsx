@@ -81,8 +81,13 @@ const CreatorDashboard = () => {
           theme: "dark",
           transition: Bounce,
         });
-        console.log(res.data);
         GetWebsites();
+        setWebsiteData({
+          prompt: "",
+          name: "",
+          type: "custom",
+          theme: "light",
+        });
       }
     } catch (error: any) {
       toast.error(error.response.data.error, {

@@ -1,6 +1,12 @@
 import React from "react";
 
-const DashboardPage = ({ activeTab, setActiveTab, generatedSites }: any) => {
+const DashboardPage = ({
+  activeTab,
+  setActiveTab,
+  generatedSites,
+  UserData,
+  setUserData,
+}: any) => {
   return (
     <>
       {activeTab === "dashboard" && (
@@ -18,19 +24,25 @@ const DashboardPage = ({ activeTab, setActiveTab, generatedSites }: any) => {
             {/* Stats Cards */}
             <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl p-6 border border-emerald-500/20">
               <div className="text-3xl font-bold text-white mb-2">
-                {generatedSites.length}
+                {UserData.siteGen}
               </div>
               <div className="text-sm text-gray-400">Websites Generated</div>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl p-6 border border-emerald-500/20">
-              <div className="text-3xl font-bold text-white mb-2">8</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {UserData.siteGenToken}
+              </div>
               <div className="text-sm text-gray-400">Sites Remaining</div>
             </div>
 
             <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl p-6 border border-emerald-500/20">
-              <div className="text-3xl font-bold text-white mb-2">2</div>
-              <div className="text-sm text-gray-400">Active Projects</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                {UserData.maxSitegeneration}
+              </div>
+              <div className="text-sm text-gray-400">
+                Website Generation Limit
+              </div>
             </div>
           </div>
 

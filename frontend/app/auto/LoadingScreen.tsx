@@ -17,7 +17,7 @@ const LoadingScreen = () => {
           </div>
 
           {/* Main Title */}
-          <h3 className="text-xl font-bold text-white mb-6 bg-gradient-to-r from-emerald-300 to-green-300 bg-clip-text text-transparent">
+          <h3 className="text-xl font-bold mb-6 bg-gradient-to-r from-emerald-300 to-green-300 bg-clip-text text-transparent">
             Cobra AI Initializing
           </h3>
 

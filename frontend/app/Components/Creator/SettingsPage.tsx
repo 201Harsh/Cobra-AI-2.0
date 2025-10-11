@@ -239,14 +239,14 @@ const SettingsPage = ({
                   API Key
                 </label>
                 <div className="flex space-x-3 mb-3">
-                  <div className="flex-1 relative">
+                  <div className="relative flex-1">
                     <input
                       type={showApiKey ? "text" : "password"}
                       value={UserData.apiKey}
                       className="w-full px-4 py-3 bg-gray-600/30 rounded-lg border border-gray-500 text-white text-sm font-mono pr-24"
                       readOnly
                     />
-                    <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex space-x-1">
+                    <div className="absolute right-1 -top-8 md:right-2 md:top-1/2 md:transform md:-translate-y-1/2 flex space-x-1 md:flex-row flex-col gap-5 md:gap-1">
                       <button
                         onClick={() => setShowApiKey(!showApiKey)}
                         className="cursor-pointer px-3 py-1 bg-gray-500 hover:bg-gray-600 text-white rounded text-xs transition-all duration-300"

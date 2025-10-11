@@ -58,7 +58,7 @@ const CreatorPage = ({
                     🎯 Describe Your Website Vision
                   </label>
                   <span className="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full">
-                    {websiteData.prompt.length}/10000
+                    {websiteData.prompt.length}/500
                   </span>
                 </div>
                 <div className="relative">
@@ -69,7 +69,7 @@ const CreatorPage = ({
                     }
                     placeholder="A modern portfolio website with dark theme, animated sections, contact form, and project showcase. Include smooth animations and professional layout..."
                     className="w-full h-40 px-6 py-4 bg-gray-900/60 border-2 border-gray-600/50 rounded-2xl focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/20 transition-all duration-500 resize-none text-white placeholder-gray-500 text-base leading-relaxed backdrop-blur-sm"
-                    maxLength={10000}
+                    maxLength={500}
                   />
                   {/* Input Decoration */}
                   <div className="absolute bottom-4 right-4 text-gray-500">

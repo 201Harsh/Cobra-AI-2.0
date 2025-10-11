@@ -18,6 +18,11 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         "Content-Type": contentType,
         "Cross-Origin-Resource-Policy": "cross-origin",
         "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Max-Age": "86400",
+        "Cache-Control": "public, max-age=31536000, immutable",
+        "Content-Security-Policy": "default-src 'none'",
       },
     });
   } catch (error) {

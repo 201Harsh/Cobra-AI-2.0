@@ -2,17 +2,31 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const token =
-    req.cookies.get("token")?.value || req.headers.get("token")?.split(" ")[1];
+  const token = req.cookies.get("token")?.value;
+  const { pathname } = req.nextUrl;
 
-  // Redirect to login if token missing
-  if (!token) {
-    return NextResponse.redirect(new URL("/", req.url));
+  // --- 1️⃣ Auto Redirect Logged-In Users ---
+  if (token && ["/login", "/register" , "/forgot", "/verify"].includes(pathname)) {
+    const dashboardUrl = new URL("/creator", req.url);
+    return NextResponse.redirect(dashboardUrl);
   }
 
+  // --- 2️⃣ Protect Private Routes ---
+  const protectedRoutes = ["/dashboard", "/creator", "/dev"];
+  const isProtected = protectedRoutes.some((route) => pathname.startsWith(route));
+
+  if (isProtected && !token) {
+    const loginUrl = new URL("/", req.url);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // --- Default: Allow Request ---
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dev/:path*", "/creator/:path*"],
+  matcher: [
+    // Match everything except static assets
+    "/((?!_next/static|_next/image|favicon.ico|api).*)",
+  ],
 };

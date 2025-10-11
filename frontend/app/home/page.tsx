@@ -1,4 +1,5 @@
 "use client";
+import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import {
@@ -16,6 +17,7 @@ import {
   FaTerminal,
   FaArrowRight,
 } from "react-icons/fa";
+import { Flip, toast, Zoom } from "react-toastify";
 
 const HomePage = () => {
   const [userName, setUserName] = useState("");
@@ -30,8 +32,9 @@ const HomePage = () => {
   const creatorFeatures = [
     {
       icon: <FaMagic className="text-base" />,
-      title: "AI Templates",
-      description: "Choose from 100+ stunning AI-powered website templates.",
+      title: "AI Website Generator",
+      description:
+        "Instantly generate stunning websites just by entering a Simple Prompt",
     },
     {
       icon: <FaRobot className="text-base" />,
@@ -99,6 +102,76 @@ const HomePage = () => {
     },
   ];
 
+  const handleCreatorClick = async () => {
+    try {
+      const res = await AxiosInstance.post("/users/creator", {
+        mode: "creator",
+      });
+
+      if (res.status === 200) {
+        Router.push("/creator");
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message || "Something went wrong", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    }
+  };
+
+  const handleDevClick = async () => {
+    try {
+      const res = await AxiosInstance.post("/users/creator", {
+        mode: "developer",
+      });
+
+      if (res.status === 200) {
+        Router.push("/creator");
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message || "Something went wrong", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 bg-gradient-to-br from-gray-950 via-emerald-900/30 to-green-700/50 text-white">
       {/* Main Content */}
@@ -125,9 +198,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
             {/* Creator Mode Card */}
             <div
-              onClick={() => {
-                Router.push("/creator");
-              }}
+              onClick={handleCreatorClick}
               className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-xl border-2 border-emerald-500/30 p-3 sm:p-6 transition-all duration-300 hover:border-emerald-500/50 hover:scale-[1.01]"
             >
               <div className="text-center mb-3 sm:mb-4">
@@ -172,7 +243,7 @@ const HomePage = () => {
 
             {/* Dev Mode Card */}
             <div
-              onClick={() => Router.push("/dev")}
+              onClick={handleDevClick}
               className="bg-gray-800/30 cursor-pointer backdrop-blur-sm rounded-xl border-2 border-blue-500/30 p-3 sm:p-6 transition-all duration-300 hover:border-blue-500/50 hover:scale-[1.01]"
             >
               <div className="text-center mb-3 sm:mb-4">

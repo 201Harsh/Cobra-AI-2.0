@@ -16,20 +16,50 @@ const CreatorDashboard = () => {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [generatedSites, setgeneratedSites] = useState<any>([]);
-  const [websiteData, setWebsiteData] = useState({
+  const [websiteData, setWebsiteData] = useState<any>({
     prompt: "",
     name: "",
     type: "custom",
     theme: "light",
   });
 
-  const [UserData, setUserData] = useState({
+  const [UserData, setUserData] = useState<any>({
     name: "",
     email: "",
     plan: "",
     siteGenToken: 0,
     mode: "",
+    apiKey: "",
   });
+
+  const getUserData = async () => {
+    try {
+      const response = await AxiosInstance.get("/users/me");
+
+      if (response.status === 200) {
+        setUserData({
+          name: response.data.user.name,
+          email: response.data.user.email,
+          plan: response.data.user.plan,
+          siteGenToken: response.data.user.siteGenToken,
+          mode: response.data.user.mode,
+          apiKey: response.data.user._id + "-Cobra_AI_by_Harsh",
+        });
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    }
+  };
 
   const handleGenerate = async () => {
     setIsGenerating(true);
@@ -111,6 +141,7 @@ const CreatorDashboard = () => {
   };
 
   useEffect(() => {
+    getUserData();
     GetWebsites();
   }, []);
 

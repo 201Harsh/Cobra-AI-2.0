@@ -86,13 +86,6 @@ Use these EXACT URLs that are verified to work:
 - Home Decor: https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg
 - Beauty: https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg
 
-## 🥈 FALLBACK SOURCE - UNSPLASH (Category-based)
-Use when Pexels doesn't have perfect match:
-https://source.unsplash.com/800x600/?[relevant-keywords]
-
-## 🥉 LAST RESORT - PICSUM (Always Works)
-https://picsum.photos/800/600
-
 ### 🧠 SMART IMAGE SELECTION ALGORITHM
 
 1. **ANALYZE PROMPT**: "${prompt}"
@@ -110,23 +103,6 @@ https://picsum.photos/800/600
   className="w-full h-64 object-cover rounded-lg"
   loading="lazy"
   onError={(e) => e.currentTarget.src='https://source.unsplash.com/800x600/?programming,code'}
-/>
-
-## UNSPLASH (Fallback - Category-based)
-<img 
-  src="https://source.unsplash.com/800x600/?${getRelevantKeywords(prompt)}"
-  alt="${generateAltText(prompt, name)}"
-  className="w-full h-64 object-cover rounded-lg"
-  loading="lazy"
-  onError={(e) => e.currentTarget.src='https://picsum.photos/800/600'}
-/>
-
-## PICSUM (Last Resort - Generic)
-<img 
-  src="https://picsum.photos/800/600"
-  alt="${name} website"
-  className="w-full h-64 object-cover rounded-lg"
-  loading="lazy"
 />
 
 ### 💡 STRICT IMAGE BEST PRACTICES

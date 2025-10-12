@@ -19,6 +19,7 @@ export async function runReactApp(userCode: any, onServerReady: any) {
         "@heroicons/react": "latest",
         "react-icons": "latest",
         clsx: "latest",
+        "react-router-dom": "latest",
       },
     })
   );

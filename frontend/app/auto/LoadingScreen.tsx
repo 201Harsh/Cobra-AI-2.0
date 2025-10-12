@@ -94,22 +94,40 @@ const LoadingScreen = () => {
           {/* Terminal-style Output */}
           <div className="bg-black/50 rounded-lg p-3 border border-gray-700/50 mb-4">
             <div className="text-left font-mono text-xs text-green-400 space-y-1">
-              <div className="flex items-center space-x-2">
+              {/* Line 1 - Immediate */}
+              <div className="flex items-center space-x-2 animate-fadeIn">
                 <span className="text-gray-400">$</span>
                 <span>npm run build</span>
               </div>
-              <div className="text-gray-400">
-                {" "}
-                Building optimized bundles...
+
+              {/* Line 2 - After 2 seconds */}
+              <div className="text-gray-400 animate-fadeIn animation-delay-2000">
+                {">"} Building optimized bundles...
               </div>
-              <div className="text-gray-400"> Compiled successfully!</div>
-              <div className="text-sky-400 animate-pulse">
-                {" "}
-                Installing dependencies...
+
+              {/* Line 3 - After 4 seconds */}
+              <div className="text-gray-400 animate-fadeIn animation-delay-4000">
+                {">"} Compiled successfully!
               </div>
-              <div className="text-emerald-400 animate-pulse">
-                {" "}
-                Live server running on http://localhost:3000 Soon...
+
+              {/* Line 4 - After 6 seconds */}
+              <div className="text-sky-400 animate-fadeIn animation-delay-6000">
+                {">"} Installing dependencies...
+              </div>
+
+              {/* Line 5 - After 8 seconds */}
+              <div className="text-emerald-400 animate-fadeIn animation-delay-8000">
+                {">"} Live server starting...
+              </div>
+
+              {/* Line 6 - After 10 seconds */}
+              <div className="text-green-400 animate-fadeIn animation-delay-10000 font-semibold">
+                {">"} Live server running on http://localhost:3000
+              </div>
+
+              {/* Line 7 - After 12 seconds */}
+              <div className="text-emerald-300 animate-fadeIn animation-delay-12000">
+                {">"} Website ready! Opening preview...
               </div>
             </div>
           </div>

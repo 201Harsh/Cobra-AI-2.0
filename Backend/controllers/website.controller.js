@@ -52,3 +52,30 @@ module.exports.GetWebsiteById = async (req, res) => {
     });
   }
 };
+
+module.exports.DeleteWebsite = async (req, res) => {
+  try {
+    const WebsiteId = req.params.id;
+    const UserId = req.user._id;
+
+    const Website = await WebsiteModel.findOne({
+      _id: WebsiteId,
+      UserId,
+    });
+
+    if (!Website) {
+      return res.status(400).json({
+        message: "Website not found",
+      });
+    }
+
+    await Website.deleteOne();
+    res.status(200).json({
+      message: "Website deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

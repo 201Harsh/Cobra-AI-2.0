@@ -13,4 +13,6 @@ router.post(
   ValidateMiddleware.validateUser
 );
 
+router.get("/all", VenomLabController.getVenomLabs);
+
 module.exports = router;

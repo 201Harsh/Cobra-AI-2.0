@@ -195,28 +195,6 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
                   </p>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <button
-                  onClick={() => setActiveSection("chat")}
-                  className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                    activeSection === "chat"
-                      ? "bg-gradient-to-r from-red-600 to-pink-500 text-white shadow-[0_0_15px_rgba(255,0,80,0.3)]"
-                      : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                  }`}
-                >
-                  💬 AI Chat
-                </button>
-                <button
-                  onClick={() => setActiveSection("code")}
-                  className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                    activeSection === "code"
-                      ? "bg-gradient-to-r from-emerald-600 to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                      : "bg-gray-800 text-gray-400 hover:bg-gray-700"
-                  }`}
-                >
-                  💻 Code Editor
-                </button>
-              </div>
             </div>
           </div>
         </div>

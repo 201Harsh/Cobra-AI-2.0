@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import VenomLab from "../Components/Dev/VenomLab";
 import CreateLabs from "../Components/Dev/CreateLabs";
 import DevHeader from "../Components/Dev/DevHeader";
+import { Slide, toast } from "react-toastify";
+import AxiosInstance from "@/config/Axios";
 
 const Devpage = () => {
   const [venomLabs, setVenomLabs] = useState<any>([]);
@@ -10,27 +12,71 @@ const Devpage = () => {
   const [newLabName, setNewLabName] = useState("");
 
   // You can replace this with actual user data from your auth system
-  const [currentUser] = useState({
-    name: "Alex Developer", // This would come from your user context/auth
-  });
+  const [currentUser, setcurrentUser] = useState<string>("Cobra AI");
 
-  const handleCreateLab = (environment: string) => {
+  const handleGetAllLabs = async () => {
+    try {
+      const res = await AxiosInstance.get("/lab/all");
+
+      if (res.status === 200) {
+        setVenomLabs(res.data.VenomLabs);
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleGetAllLabs();
+  }, []);
+
+  const handleCreateLab = async (environment: string) => {
     if (newLabName.trim() && environment) {
-      setVenomLabs([
-        ...venomLabs,
-        {
-          id: Date.now(),
+      try {
+        const res = await AxiosInstance.post("/lab/create", {
           name: newLabName,
-          members: 1,
-          lastActive: "Just now",
           environment: environment,
-          environmentName: getEnvironmentName(environment),
-          creator: {
-            name: currentUser.name,
-          },
-          createdAt: new Date().toLocaleDateString(),
-        },
-      ]);
+          creator: currentUser,
+          status: "Active",
+        });
+
+        if (res.status === 200) {
+          toast.success(res.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Slide,
+          });
+          handleGetAllLabs();
+        }
+      } catch (error: any) {
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+      }
       setNewLabName("");
       setIsCreating(false);
     }

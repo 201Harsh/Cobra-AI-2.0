@@ -12,6 +12,14 @@ module.exports.createVenomLab = async (req, res) => {
       });
     }
 
+    const iflabExists = await VenomLabModel.findOne({ name });
+
+    if (iflabExists) {
+      return res.status(400).json({
+        message: "Lab already exists",
+      });
+    }
+
     const UserID = req.user._id;
 
     const User = await UserModel.findById(UserID);

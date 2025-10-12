@@ -34,7 +34,7 @@ const VenomLab = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {venomLabs.map((lab: any) => (
             <div
-              key={lab.id}
+              key={lab._id}
               className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300 group"
             >
               <div className="flex items-center justify-between mb-4">
@@ -55,11 +55,11 @@ const VenomLab = ({
               {lab.creator && (
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-xs text-white font-bold">
-                    {lab.creator.name.charAt(0)}
+                    {lab.creator.charAt(0)}
                   </div>
                   <div className="flex flex-col">
                     <span className="text-sm text-gray-300 font-medium">
-                      {lab.creator.name}
+                      {lab.creator}
                     </span>
                     <span className="text-xs text-red-300">Creator</span>
                   </div>

@@ -4,6 +4,7 @@ const VenomLabSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   members: {
     type: Number,

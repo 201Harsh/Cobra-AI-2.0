@@ -17,9 +17,6 @@ const VenomLabSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  ChatID: {
-    type: String,
-  },
   status: {
     type: String,
     required: true,

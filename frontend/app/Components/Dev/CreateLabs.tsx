@@ -10,10 +10,10 @@ const CreateLabs = ({
   const [selectedEnvironment, setSelectedEnvironment] = useState<string>("");
 
   const codingEnvironments = [
-    { id: "fullstack", name: "Full Stack Web Development", available: true },
+    { id: "web-development", name: "Full Stack Web Development", available: true },
     { id: "python", name: "Python", available: true },
     { id: "ai-ml", name: "AI/ML", available: false },
-    { id: "mobile", name: "Mobile Development", available: false },
+    { id: "mobile-development", name: "Mobile Development", available: false },
     { id: "data-science", name: "Data Science", available: false },
     { id: "devops", name: "DevOps", available: false },
   ];

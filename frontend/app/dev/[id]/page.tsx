@@ -179,8 +179,8 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
   return (
     <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">
       {/* Desktop Top Navigation */}
-      <div className="hidden lg:block">
-        <div className="p-4 border-b border-red-500/20">
+      <div className="hidden lg:block fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-xl border-b border-red-500/20 z-50">
+        <div className="p-4">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -194,7 +194,44 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
                   </p>
                 </div>
               </div>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setActiveSection("chat")}
+                  className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                    activeSection === "chat"
+                      ? "bg-gradient-to-r from-red-600 to-pink-500 text-white shadow-[0_0_15px_rgba(255,0,80,0.3)]"
+                      : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                  }`}
+                >
+                  💬 AI Chat
+                </button>
+                <button
+                  onClick={() => setActiveSection("code")}
+                  className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                    activeSection === "code"
+                      ? "bg-gradient-to-r from-emerald-600 to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                      : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                  }`}
+                >
+                  💻 Code Editor
+                </button>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-xl border-b border-red-500/20 z-50 pt-4 pb-4 px-4">
+        <div className="flex items-center gap-3">
+          <div className="text-2xl">🧪</div>
+          <div className="flex-1">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider font-mono">
+              Venom Lab AI
+            </h1>
+            <p className="text-gray-300 text-xs">
+              {activeSection === "chat" ? "AI Coding Mentor" : "Code Editor"}
+            </p>
           </div>
         </div>
       </div>
@@ -227,29 +264,14 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
         </div>
       </div>
 
-      {/* Mobile Header */}
-      <div className="lg:hidden p-4 border-b border-red-500/20">
-        <div className="flex items-center gap-3">
-          <div className="text-2xl">🧪</div>
-          <div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider font-mono">
-              Venom Lab AI
-            </h1>
-            <p className="text-gray-300 text-xs">
-              {activeSection === "chat" ? "AI Coding Mentor" : "Code Editor"}
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto lg:p-4">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-6 lg:h-[calc(100vh-120px)]">
+      <div className="pt-20 lg:pt-24 pb-0 lg:pb-4 px-2 lg:px-0">
+        <div className="max-w-7xl mx-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:h-[calc(100vh-140px)]">
           {/* Chat Section */}
           <div
             className={`${
               activeSection === "chat" ? "block" : "hidden"
-            } lg:block h-[calc(100vh-140px)] lg:h-auto`}
+            } lg:block h-[calc(100vh-180px)] lg:h-full`}
           >
             <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-red-500/20 h-full flex flex-col">
               {/* Chat Header */}
@@ -275,7 +297,7 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
                       }`}
                     >
                       <div
-                        className={`max-w-[85%] rounded-2xl p-4 ${
+                        className={`max-w-[85%] rounded-2xl p-3 lg:p-4 ${
                           message.type === "system"
                             ? "bg-gray-700/50 text-gray-400"
                             : message.sender === "user"
@@ -283,7 +305,7 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
                             : "bg-gradient-to-r from-emerald-600 to-green-500 text-white"
                         }`}
                       >
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center gap-2 mb-1 lg:mb-2">
                           <span className="text-sm font-semibold">
                             {message.sender}
                           </span>
@@ -320,18 +342,21 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
 
               {/* Input Area */}
               <div className="p-4 border-t border-red-500/20">
-                <form onSubmit={handleSendMessage} className="flex gap-3">
+                <form
+                  onSubmit={handleSendMessage}
+                  className="flex gap-2 lg:gap-3"
+                >
                   <input
                     type="text"
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    placeholder="Ask about programming concepts, debugging, or code help..."
-                    className="flex-1 bg-gray-800 border border-red-500/30 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0_10px_rgba(255,0,80,0.3)]"
+                    placeholder="Ask about programming..."
+                    className="flex-1 bg-gray-800 border border-red-500/30 rounded-xl px-3 lg:px-4 py-2 lg:py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0_10px_rgba(255,0,80,0.3)] text-sm lg:text-base"
                   />
                   <button
                     type="submit"
                     disabled={!inputMessage.trim() || isGenerating}
-                    className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 disabled:from-gray-700 disabled:to-gray-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,0,80,0.5)]"
+                    className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 disabled:from-gray-700 disabled:to-gray-600 text-white font-semibold px-4 lg:px-6 py-2 lg:py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,0,80,0.5)] text-sm lg:text-base whitespace-nowrap"
                   >
                     Send
                   </button>
@@ -344,7 +369,7 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
           <div
             className={`${
               activeSection === "code" ? "block" : "hidden"
-            } lg:block h-[calc(100vh-140px)] lg:h-auto`}
+            } lg:block h-[calc(100vh-180px)] lg:h-full`}
           >
             <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-red-500/20 h-full flex flex-col">
               {/* Editor Header */}
@@ -355,7 +380,7 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
                   </h2>
                   <button
                     onClick={handleRunCode}
-                    className="bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-700 hover:to-green-600 text-white font-semibold px-6 py-2 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]"
+                    className="bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-700 hover:to-green-600 text-white font-semibold px-4 lg:px-6 py-2 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] text-sm lg:text-base"
                   >
                     🚀 Run Code
                   </button>
@@ -371,31 +396,38 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
                   onChange={(value) => setCode(value || "")}
                   theme="vs-dark"
                   options={{
-                    minimap: { enabled: true },
-                    fontSize: 14,
+                    minimap: { enabled: false },
+                    fontSize: 13,
                     wordWrap: "on",
                     automaticLayout: true,
                     tabSize: 2,
                     scrollBeyondLastLine: false,
                     padding: { top: 16 },
+                    lineNumbersMinChars: 3,
+                    folding: false,
+                    renderLineHighlight: "all",
                   }}
                 />
               </div>
 
               {/* Output & Console */}
-              <div className="p-4 border-t border-red-500/20 space-y-4">
+              <div className="p-3 lg:p-4 border-t border-red-500/20 space-y-3 lg:space-y-4">
                 {/* Output */}
-                <div className="bg-gray-950 rounded-xl border border-red-500/20 p-4">
-                  <h3 className="text-white font-semibold mb-2">Output</h3>
-                  <div className="text-green-400 font-mono text-sm min-h-[60px] whitespace-pre-wrap">
+                <div className="bg-gray-950 rounded-xl border border-red-500/20 p-3 lg:p-4">
+                  <h3 className="text-white font-semibold mb-2 text-sm lg:text-base">
+                    Output
+                  </h3>
+                  <div className="text-green-400 font-mono text-xs lg:text-sm min-h-[50px] lg:min-h-[60px] whitespace-pre-wrap overflow-auto max-h-[80px]">
                     {output || "// Run your code to see output here"}
                   </div>
                 </div>
 
                 {/* Console Logs */}
-                <div className="bg-gray-950 rounded-xl border border-red-500/20 p-4">
-                  <h3 className="text-white font-semibold mb-2">Console</h3>
-                  <div className="text-gray-300 font-mono text-sm max-h-[100px] overflow-y-auto">
+                <div className="bg-gray-950 rounded-xl border border-red-500/20 p-3 lg:p-4">
+                  <h3 className="text-white font-semibold mb-2 text-sm lg:text-base">
+                    Console
+                  </h3>
+                  <div className="text-gray-300 font-mono text-xs lg:text-sm max-h-[80px] overflow-y-auto">
                     {consoleLogs.length > 0 ? (
                       consoleLogs.map((log, index) => (
                         <div key={index} className="text-green-400">
@@ -414,9 +446,6 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
           </div>
         </div>
       </div>
-
-      {/* Mobile Bottom Padding */}
-      <div className="lg:hidden h-20"></div>
     </div>
   );
 };

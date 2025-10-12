@@ -119,6 +119,17 @@ const CreatorDashboard = () => {
 
       if (res.status === 200) {
         localStorage.clear();
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        })
         Router.push("/");
       }
     } catch (error: any) {

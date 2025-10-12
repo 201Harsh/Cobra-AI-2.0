@@ -68,7 +68,29 @@ module.exports.getVenomLabs = async (req, res) => {
       message: "Labs Found",
       VenomLabs,
     });
-    
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+module.exports.getVenomLabById = async (req, res) => {
+  try {
+    const VenomLabId = req.params.id;
+
+    const VenomLab = await VenomLabModel.findById(VenomLabId);
+
+    if (!VenomLab) {
+      return res.status(400).json({
+        message: "Lab not found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Lab found",
+      VenomLab,
+    });
   } catch (error) {
     res.status(500).json({
       message: error.message,

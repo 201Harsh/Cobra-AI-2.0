@@ -15,4 +15,6 @@ router.post(
 
 router.get("/all", VenomLabController.getVenomLabs);
 
+router.get("/one/:id", VenomLabController.getVenomLabById);
+
 module.exports = router;

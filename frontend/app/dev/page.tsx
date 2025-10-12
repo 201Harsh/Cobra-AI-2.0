@@ -9,8 +9,8 @@ const Devpage = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [newLabName, setNewLabName] = useState("");
 
-  const handleCreateLab = () => {
-    if (newLabName.trim()) {
+  const handleCreateLab = (environment: string) => {
+    if (newLabName.trim() && environment) {
       setVenomLabs([
         ...venomLabs,
         {
@@ -18,11 +18,39 @@ const Devpage = () => {
           name: newLabName,
           members: 1,
           lastActive: "Just now",
+          environment: environment, // Add the selected environment
+          environmentName: getEnvironmentName(environment), // Human readable name
         },
       ]);
       setNewLabName("");
       setIsCreating(false);
     }
+  };
+
+  // Helper function to get environment display name
+  const getEnvironmentName = (envId: string) => {
+    const environments: { [key: string]: string } = {
+      fullstack: "Full Stack Web Dev",
+      python: "Python",
+      "ai-ml": "AI/ML",
+      mobile: "Mobile Development",
+      "data-science": "Data Science",
+      devops: "DevOps",
+    };
+    return environments[envId] || envId;
+  };
+
+  // Helper function to get environment icon
+  const getEnvironmentIcon = (envId: string) => {
+    const icons: { [key: string]: string } = {
+      fullstack: "🌐",
+      python: "🐍",
+      "ai-ml": "🤖",
+      mobile: "📱",
+      "data-science": "📊",
+      devops: "⚙️",
+    };
+    return icons[envId] || "🧪";
   };
 
   return (
@@ -33,8 +61,13 @@ const Devpage = () => {
 
         {/* Main Content */}
         <div className="max-w-6xl mx-auto">
-          {/*Venom Labs Section */}
-          <VenomLab venomLabs={venomLabs} setIsCreating={setIsCreating} />
+          {/* Venom Labs Section */}
+          <VenomLab
+            venomLabs={venomLabs}
+            setIsCreating={setIsCreating}
+            getEnvironmentIcon={getEnvironmentIcon}
+            getEnvironmentName={getEnvironmentName}
+          />
 
           {/* Features Section */}
         </div>

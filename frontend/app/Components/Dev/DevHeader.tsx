@@ -10,7 +10,7 @@ const DevHeader = () => {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider font-mono">
               Venom Lab
             </h1>
-            <p className="text-gray-300 text-lg mt-1">
+            <p className="text-gray-300 text-lg mt-1 bg-red-400/20 px-2 py-1 rounded-md">
               by <span className="bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent font-semibold">Cobra AI 2.0</span>
             </p>
           </div>

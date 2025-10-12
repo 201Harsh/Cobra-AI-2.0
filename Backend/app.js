@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const USerRouter = require("./routes/user.route");
 const AIRouter = require("./routes/ai.route");
 const WebsiteRouter = require("./routes/website.route");
+const LabRouter = require("./routes/venomlab.route");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,5 +24,6 @@ app.use(
 app.use("/users", USerRouter);
 app.use("/ai", AIRouter);
 app.use("/websites", WebsiteRouter);
+app.use("/lab", LabRouter);
 
 module.exports = app;

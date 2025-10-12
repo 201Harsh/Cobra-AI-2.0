@@ -95,7 +95,9 @@ const VenomLab = ({
                   Enter Lab
                 </button>
                 <button
-                  onClick={handleDeleteLab(lab._id)}
+                  onClick={() => {
+                    handleDeleteLab(lab._id);
+                  }}
                   className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg transition-colors cursor-pointer"
                   title="Dismantle Venom Lab"
                 >

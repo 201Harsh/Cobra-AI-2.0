@@ -83,7 +83,36 @@ const Devpage = () => {
   };
 
   const handleDeleteLab = async (labId: string) => {
-    console.log("deleted");
+    try {
+      const res = await AxiosInstance.delete(`/lab/delete/${labId}`);
+
+      if (res.status === 200) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+        handleGetAllLabs();
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    }
   };
 
   // Helper function to get environment display name

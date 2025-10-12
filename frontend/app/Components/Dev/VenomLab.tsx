@@ -36,7 +36,7 @@ const VenomLab = ({
           {venomLabs.map((lab: any) => (
             <div
               key={lab._id}
-              className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300 group"
+              className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300 group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="mx-auto">

@@ -47,9 +47,6 @@ const VenomLab = ({
                     </h3>
                   </div>
                 </div>
-                <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded">
-                  {lab.members} member{lab.members !== 1 ? "s" : ""}
-                </span>
               </div>
 
               {/* Creator Info */}

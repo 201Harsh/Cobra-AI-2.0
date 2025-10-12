@@ -50,7 +50,6 @@ console.log(greeting());`);
       text: inputMessage,
       sender: "user",
       type: "user",
-      timestamp: new Date(),
     };
 
     setMessages((prev: any) => [...prev, userMessage]);

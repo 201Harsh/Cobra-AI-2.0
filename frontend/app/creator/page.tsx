@@ -170,6 +170,39 @@ const CreatorDashboard = () => {
     }
   };
 
+  const handleDeleteSite = async (id: string) => {
+    try {
+      const res = await AxiosInstance.delete(`/websites/delete/${id}`);
+
+      if (res.status === 200) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+        GetWebsites();
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
+    }
+  };
+
   const handleSettingsClick = () => {
     setActiveTab("settings");
   };
@@ -273,6 +306,7 @@ const CreatorDashboard = () => {
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             generatedSites={generatedSites}
+            handleDeleteSite={handleDeleteSite}
           />
 
           {/* Dashboard Page */}

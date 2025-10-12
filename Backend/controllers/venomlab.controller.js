@@ -22,6 +22,12 @@ module.exports.createVenomLab = async (req, res) => {
       });
     }
 
+    if (User.mode === "creator") {
+      return res.status(400).json({
+        message: "You are not a developer",
+      });
+    }
+
     const StatusTelling = "Active";
 
     const Lab = await VenomLabService.createVenomLab({

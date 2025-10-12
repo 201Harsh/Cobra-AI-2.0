@@ -27,3 +27,7 @@ const VenomLabSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+const VenomLab = mongoose.model("VenomLab", VenomLabSchema);
+
+module.exports = VenomLab;

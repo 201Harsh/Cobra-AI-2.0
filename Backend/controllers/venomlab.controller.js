@@ -36,6 +36,12 @@ module.exports.createVenomLab = async (req, res) => {
       });
     }
 
+    if (User.labGenToken <= 0) {
+      return res.status(400).json({
+        message: "You have reached your lab generation limit",
+      });
+    }
+
     const StatusTelling = "Active";
 
     const Lab = await VenomLabService.createVenomLab({
@@ -49,6 +55,12 @@ module.exports.createVenomLab = async (req, res) => {
       return res.status(400).json({
         message: "Failed to create Lab",
       });
+    }
+
+    if (Lab) {
+      User.labGenToken += 1;
+      User.labUsed += 1;
+      await User.save();
     }
 
     res.status(200).json({

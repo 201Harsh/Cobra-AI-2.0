@@ -82,6 +82,10 @@ const Devpage = () => {
     }
   };
 
+  const handleDeleteLab = async (labId: string) => {
+    console.log("deleted");
+  };
+
   // Helper function to get environment display name
   const getEnvironmentName = (envId: string) => {
     const environments: { [key: string]: string } = {
@@ -122,6 +126,7 @@ const Devpage = () => {
             setIsCreating={setIsCreating}
             getEnvironmentIcon={getEnvironmentIcon}
             getEnvironmentName={getEnvironmentName}
+            handleDeleteLab={handleDeleteLab}
           />
 
           {/* Features Section */}

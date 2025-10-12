@@ -145,7 +145,7 @@ const HomePage = () => {
       });
 
       if (res.status === 200) {
-        Router.push("/creator");
+        Router.push("/dev");
         toast.success(res.data.message, {
           position: "top-right",
           autoClose: 5000,

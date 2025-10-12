@@ -124,23 +124,7 @@ src="https://cdn.pixabay.com/photo/2016/11/29/09/32/adult-1868750_1280.jpg
 alt="Business meeting"
 className="w-full h-64 object-cover rounded-lg"
 loading="lazy"
-onError={(e) => e.currentTarget.src='https://source.unsplash.com/800x600/?office,business'}
-
 />
-
-Unsplash (Fallback)
-<img
-src="https://source.unsplash.com/800x600/?technology,office
-"
-alt="Modern technology workspace"
-className="w-full h-64 object-cover rounded-lg"
-loading="lazy"
-onError={(e) => e.currentTarget.src='https://picsum.photos/800/600'}
-
-/>
-
-Picsum (Last Fallback)
-<img src="https://picsum.photos/800/600" alt="Placeholder image" className="w-full h-64 object-cover rounded-lg" loading="lazy" />
 
 ###💡 IMAGE BEST PRACTICES
 

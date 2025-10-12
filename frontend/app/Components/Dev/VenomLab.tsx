@@ -1,4 +1,3 @@
-// Updated VenomLab component
 import React from "react";
 
 const VenomLab = ({
@@ -39,16 +38,33 @@ const VenomLab = ({
               className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300 group"
             >
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl">🧪</span>
-                  <h3 className="font-semibold text-white group-hover:text-red-400 transition-colors">
-                    {lab.name}
-                  </h3>
+                <div className="mx-auto">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">🧪</span>
+                    <h3 className="uppercase font-bold font-h text-white group-hover:text-red-400 transition-colors">
+                      {lab.name}
+                    </h3>
+                  </div>
                 </div>
                 <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded">
                   {lab.members} member{lab.members !== 1 ? "s" : ""}
                 </span>
               </div>
+
+              {/* Creator Info */}
+              {lab.creator && (
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-xs text-white font-bold">
+                    {lab.creator.name.charAt(0)}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-gray-300 font-medium">
+                      {lab.creator.name}
+                    </span>
+                    <span className="text-xs text-red-300">Creator</span>
+                  </div>
+                </div>
+              )}
 
               {/* Environment Display */}
               {lab.environment && (
@@ -62,9 +78,17 @@ const VenomLab = ({
                 </div>
               )}
 
-              <p className="text-gray-400 text-sm mb-4">
-                Last active: {lab.lastActive}
-              </p>
+              <div className="flex justify-between items-center mb-4">
+                <p className="text-gray-400 text-sm">
+                  Last active: {lab.lastActive}
+                </p>
+                {lab.createdAt && (
+                  <p className="text-gray-500 text-xs">
+                    Created: {lab.createdAt}
+                  </p>
+                )}
+              </div>
+
               <div className="flex gap-2">
                 <button className="flex-1 bg-red-500/20 hover:bg-red-500/30 text-red-300 py-2 rounded-lg transition-colors">
                   Enter Lab

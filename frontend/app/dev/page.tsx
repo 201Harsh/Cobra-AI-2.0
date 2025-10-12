@@ -9,6 +9,11 @@ const Devpage = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [newLabName, setNewLabName] = useState("");
 
+  // You can replace this with actual user data from your auth system
+  const [currentUser] = useState({
+    name: "Alex Developer", // This would come from your user context/auth
+  });
+
   const handleCreateLab = (environment: string) => {
     if (newLabName.trim() && environment) {
       setVenomLabs([
@@ -18,8 +23,12 @@ const Devpage = () => {
           name: newLabName,
           members: 1,
           lastActive: "Just now",
-          environment: environment, // Add the selected environment
-          environmentName: getEnvironmentName(environment), // Human readable name
+          environment: environment,
+          environmentName: getEnvironmentName(environment),
+          creator: {
+            name: currentUser.name,
+          },
+          createdAt: new Date().toLocaleDateString(),
         },
       ]);
       setNewLabName("");

@@ -21,7 +21,7 @@ const VenomLab = ({
             No Venom Labs yet
           </h3>
           <p className="text-gray-400 mb-6">
-            Launch your first Lab and invite your team
+            Launch your first Lab and invite your team members to join!
           </p>
           <button
             onClick={() => setIsCreating(true)}

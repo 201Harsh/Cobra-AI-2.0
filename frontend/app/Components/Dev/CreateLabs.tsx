@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
-const CreateLabs = ({ isCreating, setIsCreating, newLabName, setNewLabName, handleCreateLab } : any) => {
+const CreateLabs = ({
+  isCreating,
+  setIsCreating,
+  newLabName,
+  setNewLabName,
+  handleCreateLab,
+}: any) => {
+  const [selectedEnvironment, setSelectedEnvironment] = useState<string>("");
+
+  const codingEnvironments = [
+    { id: "fullstack", name: "Full Stack Web Development", available: true },
+    { id: "python", name: "Python", available: true },
+    { id: "ai-ml", name: "AI/ML", available: false },
+    { id: "mobile", name: "Mobile Development", available: false },
+    { id: "data-science", name: "Data Science", available: false },
+    { id: "devops", name: "DevOps", available: false },
+  ];
+
+  const handleEnvironmentSelect = (envId: string) => {
+    const env = codingEnvironments.find((e) => e.id === envId);
+    if (env?.available) {
+      setSelectedEnvironment(envId);
+    }
+  };
+
+  const handleCreate = () => {
+    if (newLabName.trim() && selectedEnvironment) {
+      handleCreateLab(selectedEnvironment);
+    }
+  };
+
   return (
     <>
       {isCreating && (
@@ -28,16 +58,50 @@ const CreateLabs = ({ isCreating, setIsCreating, newLabName, setNewLabName, hand
                 />
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-3">
+                  Coding Environment
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {codingEnvironments.map((env) => (
+                    <button
+                      key={env.id}
+                      onClick={() => handleEnvironmentSelect(env.id)}
+                      disabled={!env.available}
+                      className={`p-3 rounded-xl border transition-all duration-200 text-sm font-medium cursor-pointer ${
+                        selectedEnvironment === env.id
+                          ? "border-red-500 bg-emerald-500/10 text-red-400 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                          : env.available
+                          ? "border-gray-600 bg-gray-800/50 text-gray-300 hover:border-gray-500 hover:bg-gray-700/50"
+                          : "border-gray-700 bg-gray-900/30 text-gray-500 cursor-not-allowed"
+                      }`}
+                    >
+                      <div className="text-center">
+                        <div className="font-medium">{env.name}</div>
+                        {!env.available && (
+                          <div className="text-xs text-amber-500 mt-1">
+                            Coming Soon
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="flex gap-3 pt-4">
                 <button
-                  onClick={handleCreateLab}
-                  disabled={!newLabName.trim()}
+                  onClick={handleCreate}
+                  disabled={!newLabName.trim() || !selectedEnvironment}
                   className="flex-1 bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 disabled:from-gray-700 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,0,80,0.5)] cursor-pointer"
                 >
                   Create Venom Lab
                 </button>
                 <button
-                  onClick={() => setIsCreating(false)}
+                  onClick={() => {
+                    setIsCreating(false);
+                    setSelectedEnvironment("");
+                  }}
                   className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl transition-colors"
                 >
                   Cancel

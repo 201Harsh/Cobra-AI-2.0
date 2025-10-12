@@ -187,6 +187,7 @@ const CreatorDashboard = () => {
           transition: Zoom,
         });
         GetWebsites();
+        window.location.reload();
       }
     } catch (error: any) {
       toast.error(error.response.data.message, {

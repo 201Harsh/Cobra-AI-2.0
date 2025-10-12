@@ -342,25 +342,25 @@
 }
 
 .animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
   animation-delay: 4s;
 }
 
-.animation-delay-6000 {
-  animation-delay: 6s;
-}
-
-.animation-delay-8000 {
+.animation-delay-4000 {
   animation-delay: 8s;
 }
 
+.animation-delay-6000 {
+  animation-delay: 12s;
+}
+
+.animation-delay-8000 {
+  animation-delay: 18s;
+}
+
 .animation-delay-10000 {
-  animation-delay: 10s;
+  animation-delay: 20s;
 }
 
 .animation-delay-12000 {
-  animation-delay: 12s;
+  animation-delay: 25s;
 }

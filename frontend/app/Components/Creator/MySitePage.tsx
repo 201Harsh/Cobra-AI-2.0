@@ -1,7 +1,11 @@
 import React from "react";
 
-const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
-
+const MySitePage = ({
+  activeTab,
+  setActiveTab,
+  generatedSites,
+  handleDeleteSite,
+}: any) => {
   const handleView = async () => {
     window.open(
       `/site/${generatedSites.map((site: any) => site._id)}`,
@@ -51,8 +55,13 @@ const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
                       >
                         View
                       </button>
-                      <button className="cursor-pointer flex-1 bg-gray-600/50 hover:bg-gray-600/70 text-gray-300 py-2 px-3 rounded-lg transition-all duration-300 text-sm">
-                        Deploy Website
+                      <button
+                        onClick={() => {
+                          handleDeleteSite(site._id);
+                        }}
+                        className="cursor-pointer flex-1 bg-red-700 hover:bg-red-600/70 text-gray-300 py-2 px-3 rounded-lg transition-all duration-300 text-sm"
+                      >
+                        Delete Website
                       </button>
                     </div>
                   </div>

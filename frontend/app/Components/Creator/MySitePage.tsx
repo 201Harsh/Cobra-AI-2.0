@@ -1,11 +1,12 @@
-import { useRouter } from "next/navigation";
 import React from "react";
 
 const MySitePage = ({ activeTab, setActiveTab, generatedSites }: any) => {
-  const Router = useRouter();
 
   const handleView = async () => {
-    Router.push(`/site/${generatedSites.map((site: any) => site._id)}`);
+    window.open(
+      `/site/${generatedSites.map((site: any) => site._id)}`,
+      "_blank"
+    );
   };
 
   return (

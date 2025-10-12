@@ -45,6 +45,14 @@ const UserModel = new mongoose.Schema({
     type: Number,
     default: 3,
   },
+  labGenToken: {
+    type: Number,
+    default: 2,
+  },
+  labUsed: {
+    type: Number,
+    default: 0,
+  },
 });
 
 UserModel.methods.Jwt_token = function () {

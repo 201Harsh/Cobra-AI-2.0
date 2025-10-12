@@ -102,7 +102,7 @@ const CreateLabs = ({
                     setIsCreating(false);
                     setSelectedEnvironment("");
                   }}
-                  className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl transition-colors"
+                  className="cursor-pointer px-6 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl transition-colors"
                 >
                   Cancel
                 </button>

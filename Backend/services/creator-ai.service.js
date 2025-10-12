@@ -129,54 +129,6 @@ https://picsum.photos/800/600
   loading="lazy"
 />
 
-### 🎯 HELPER FUNCTIONS FOR SMART IMAGE SELECTION
-
-function getRelevantKeywords(prompt) {
-  // Extract keywords from user prompt for image search
-  const promptLower = prompt.toLowerCase();
-  
-  if (promptLower.includes('portfolio') || promptLower.includes('developer') || promptLower.includes('programmer')) {
-    return 'programming,code,developer,laptop';
-  }
-  if (promptLower.includes('designer') || promptLower.includes('creative') || promptLower.includes('art')) {
-    return 'design,creative,art,sketch';
-  }
-  if (promptLower.includes('photographer') || promptLower.includes('camera') || promptLower.includes('photo')) {
-    return 'photography,camera,photo,portrait';
-  }
-  if (promptLower.includes('business') || promptLower.includes('corporate') || promptLower.includes('office')) {
-    return 'office,business,team,meeting';
-  }
-  if (promptLower.includes('ecommerce') || promptLower.includes('shop') || promptLower.includes('store')) {
-    return 'shopping,products,ecommerce,retail';
-  }
-  if (promptLower.includes('restaurant') || promptLower.includes('food') || promptLower.includes('cafe')) {
-    return 'food,restaurant,dining,cuisine';
-  }
-  
-  return 'business,professional,work';
-}
-
-function generateAltText(prompt, name) {
-  // Create descriptive alt text based on prompt and website name
-  const promptLower = prompt.toLowerCase();
-  
-  if (promptLower.includes('portfolio')) {
-    return \`Professional work from \${name}\`;
-  }
-  if (promptLower.includes('business')) {
-    return \`\${name} business team and services\`;
-  }
-  if (promptLower.includes('ecommerce')) {
-    return \`Products available at \${name}\`;
-  }
-  if (promptLower.includes('restaurant')) {
-    return \`Delicious food at \${name}\`;
-  }
-  
-  return \`\${name} - professional website\`;
-}
-
 ### 💡 STRICT IMAGE BEST PRACTICES
 
 - **RELEVANCE FIRST**: Every image must directly relate to "${prompt}"
@@ -259,7 +211,7 @@ Every website must include this Footer:
 - Test on all modern browsers and devices then give it to the user
 
 ## ⚡ FINAL RULES - STRICT ENFORCEMENT
-1. Return full and complete Code
+1. Return full and complete Code only.
 2. No additional text, explanations, or comments
 3. Ensure immediate functionality upon browser open
 4. Prioritize user experience and performance
@@ -298,12 +250,7 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
     const responseOriginal = response.text;
 
     let cleanedCode = responseOriginal.replace(/```jsx\s*/g, "");
-    cleanedCode = cleanedCode.replace(/\s*```/g, "");
-
     cleanedCode = cleanedCode.replace(/\\n/g, "\n");
-    cleanedCode = cleanedCode.replace(/\\t/g, "\t");
-    cleanedCode = cleanedCode.replace(/\\"/g, '"');
-    cleanedCode = cleanedCode.replace(/\\\\/g, "\\");
 
     cleanedCode = cleanedCode.trim();
     return cleanedCode;
@@ -311,6 +258,76 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
     console.log("AI Generation Error:", error);
     return `// Error generating website: ${error.message}\n// Please try again with a different prompt.`;
   }
+}
+
+function getRelevantKeywords(prompt) {
+  // Extract keywords from user prompt for image search
+  const promptLower = prompt.toLowerCase();
+
+  if (
+    promptLower.includes("portfolio") ||
+    promptLower.includes("developer") ||
+    promptLower.includes("programmer")
+  ) {
+    return "programming,code,developer,laptop";
+  }
+  if (
+    promptLower.includes("designer") ||
+    promptLower.includes("creative") ||
+    promptLower.includes("art")
+  ) {
+    return "design,creative,art,sketch";
+  }
+  if (
+    promptLower.includes("photographer") ||
+    promptLower.includes("camera") ||
+    promptLower.includes("photo")
+  ) {
+    return "photography,camera,photo,portrait";
+  }
+  if (
+    promptLower.includes("business") ||
+    promptLower.includes("corporate") ||
+    promptLower.includes("office")
+  ) {
+    return "office,business,team,meeting";
+  }
+  if (
+    promptLower.includes("ecommerce") ||
+    promptLower.includes("shop") ||
+    promptLower.includes("store")
+  ) {
+    return "shopping,products,ecommerce,retail";
+  }
+  if (
+    promptLower.includes("restaurant") ||
+    promptLower.includes("food") ||
+    promptLower.includes("cafe")
+  ) {
+    return "food,restaurant,dining,cuisine";
+  }
+
+  return "business,professional,work";
+}
+
+function generateAltText(prompt, name) {
+  // Create descriptive alt text based on prompt and website name
+  const promptLower = prompt.toLowerCase();
+
+  if (promptLower.includes("portfolio")) {
+    return `Professional work from name}`;
+  }
+  if (promptLower.includes("business")) {
+    return `${name} business team and services`;
+  }
+  if (promptLower.includes("ecommerce")) {
+    return `Products available at ${name}`;
+  }
+  if (promptLower.includes("restaurant")) {
+    return `Delicious food at ${name}`;
+  }
+
+  return `${name} - professional website`;
 }
 
 module.exports = main;

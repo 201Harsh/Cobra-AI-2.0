@@ -105,3 +105,41 @@ module.exports.getVenomLabById = async (req, res) => {
     });
   }
 };
+
+module.exports.deleteVenomLab = async (req, res) => {
+  try {
+    const VenomLabId = req.params.id;
+    const UserID = req.user._id;
+
+    const VenomLab = await VenomLabModel.findById(VenomLabId);
+    const User = await UserModel.findById(UserID);
+
+    if (!VenomLab) {
+      return res.status(400).json({
+        message: "Lab not found",
+      });
+    }
+
+    if (User.mode === "creator") {
+      return res.status(400).json({
+        message: "You are not a developer",
+      });
+    }
+
+    if (VenomLab.creator !== User.name) {
+      return res.status(400).json({
+        message: "You can't delete this lab because you are not the creator",
+      });
+    }
+
+    await VenomLab.deleteOne();
+
+    res.status(200).json({
+      message: "Lab deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};

@@ -17,4 +17,10 @@ router.get("/all", VenomLabController.getVenomLabs);
 
 router.get("/one/:id", VenomLabController.getVenomLabById);
 
+router.delete(
+  "/delete/:id",
+  AuthMiddleware.AuthUser,
+  VenomLabController.deleteVenomLab
+);
+
 module.exports = router;

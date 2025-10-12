@@ -62,6 +62,7 @@ const Devpage = () => {
             theme: "dark",
             transition: Slide,
           });
+          setcurrentUser(res.data.Lab.creator);
           handleGetAllLabs();
         }
       } catch (error: any) {

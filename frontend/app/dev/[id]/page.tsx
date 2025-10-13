@@ -64,20 +64,39 @@ console.log(greeting());`);
     setMessages((prev: any) => [...prev, userMessage]);
     setInputMessage("");
 
-    // Simulate AI thinking
     setIsGenerating(true);
+    // Simulate AI thinking
 
-    setTimeout(() => {
-      const aiResponse = {
-        id: messages.length + 2,
-        text: generateAIResponse(inputMessage),
-        sender: "Cobra AI",
-        type: "ai",
-        timestamp: new Date(),
-      };
-      setMessages((prev: any) => [...prev, aiResponse]);
+    try {
+      const response = await AxiosInstance.post("/ai/chat/gen", {
+        prompt: inputMessage,
+      });
+
+      if (response.status === 200) {
+        const aiResponse = {
+          id: messages.length + 2,
+          text: response.data.aiReply,
+          sender: "Cobra AI",
+          type: "ai",
+          timestamp: new Date(),
+        };
+        setMessages((prev: any) => [...prev, aiResponse]);
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    } finally {
       setIsGenerating(false);
-    }, 1500);
+    }
   };
 
   const generateAIResponse = (message: string) => {

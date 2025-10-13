@@ -2,11 +2,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import Chat from "@/app/Components/Dev/Chat";
-import HeaderandNavigation from "@/app/Components/Creator/HeaderandNavigation";
 import Code from "@/app/Components/Dev/Code";
 import { Slide, toast } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
 import { useParams } from "next/navigation";
+import HeaderandNavigation from "@/app/Components/Dev/HeaderandNavigation";
 
 const CodeSection = () => {
   const [activeSection, setActiveSection] = useState<"chat" | "code">("chat");

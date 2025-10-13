@@ -40,6 +40,11 @@ const HeaderandNavigation = ({
     setIsDropdownOpen(false);
   };
 
+  const handlehome = () => {
+    setActiveSection("chat");
+    setIsDropdownOpen(false);
+  };
+
   return (
     <>
       {/* Desktop Top Navigation */}
@@ -50,7 +55,10 @@ const HeaderandNavigation = ({
               <div className="flex items-center gap-3">
                 <div className="text-2xl">🧪</div>
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider font-mono">
+                  <h1
+                    onClick={handlehome}
+                    className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider font-h cursor-pointer"
+                  >
                     Venom Lab AI
                   </h1>
                   <p className="text-gray-300 text-sm">
@@ -62,26 +70,6 @@ const HeaderandNavigation = ({
               {/* Desktop Navigation Buttons */}
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setActiveSection("chat")}
-                    className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                      activeSection === "chat"
-                        ? "bg-red-500/20 text-white border border-red-500/30"
-                        : "text-gray-400 hover:text-white hover:bg-gray-800/50"
-                    }`}
-                  >
-                    💬 Chat
-                  </button>
-                  <button
-                    onClick={() => setActiveSection("code")}
-                    className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                      activeSection === "code"
-                        ? "bg-emerald-500/20 text-white border border-emerald-500/30"
-                        : "text-gray-400 hover:text-white hover:bg-gray-800/50"
-                    }`}
-                  >
-                    💻 Code
-                  </button>
                   <button
                     onClick={() => setActiveSection("dashboard")}
                     className={`px-4 py-2 rounded-lg transition-all duration-300 ${
@@ -186,7 +174,10 @@ const HeaderandNavigation = ({
           <div className="flex items-center gap-3">
             <div className="text-2xl">🧪</div>
             <div className="flex-1">
-              <h1 className="text-xl font-bold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider font-mono">
+              <h1
+                onClick={handlehome}
+                className="text-xl font-bold bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent uppercase tracking-wider font-mono"
+              >
                 Venom Lab AI
               </h1>
               <p className="text-gray-300 text-xs">

@@ -14,8 +14,13 @@ const ChatSchema = new mongoose.Schema(
           required: true,
         },
         ai: {
-          type: String,
-          required: true,
+          PlainText: {
+            type: String,
+          },
+          CodeBlock: {
+            type: Array,
+            default: [],
+          },
         },
         createdAt: {
           type: Date,

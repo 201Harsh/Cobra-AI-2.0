@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Slide, toast, Zoom } from "react-toastify";
+import AxiosInstance from "@/config/Axios";
 
 const HeaderandNavigation = ({
   activeSection,
@@ -28,11 +30,39 @@ const HeaderandNavigation = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    // Add your logout logic here
-    console.log("Logging out...");
-    router.push("/login");
-    setIsDropdownOpen(false);
+  const handleLogout = async () => {
+    try {
+      const res = await AxiosInstance.post("/users/logout");
+
+      if (res.status === 200) {
+        router.push("/");
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+        localStorage.clear();
+        setIsDropdownOpen(false);
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    }
   };
 
   const handleDashboard = () => {

@@ -364,3 +364,21 @@
 .animation-delay-12000 {
   animation-delay: 30s;
 }
+
+.scrollbar-small::-webkit-scrollbar {
+  width: 8px; /* Even smaller width */
+  height: 6px; /* Even smaller height */
+}
+
+.scrollbar-small::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.scrollbar-small::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.scrollbar-small::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

@@ -59,7 +59,7 @@ const Chat = ({
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 p-4 overflow-y-auto scrollbar-hide">
+          <div className="flex-1 p-4 overflow-y-auto scrollbar-small">
             <div className="space-y-6">
               {messages.map((message: any) => (
                 <div

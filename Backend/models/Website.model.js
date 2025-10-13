@@ -32,4 +32,6 @@ const WebsiteSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Website", WebsiteSchema);
+const WebsiteModel = mongoose.model("Website", WebsiteSchema);
+
+module.exports = WebsiteModel;

@@ -4,6 +4,9 @@ import Editor from "@monaco-editor/react";
 import Chat from "@/app/Components/Dev/Chat";
 import HeaderandNavigation from "@/app/Components/Creator/HeaderandNavigation";
 import Code from "@/app/Components/Dev/Code";
+import { Slide, toast } from "react-toastify";
+import AxiosInstance from "@/config/Axios";
+import { useParams } from "next/navigation";
 
 const CodeSection = () => {
   const [activeSection, setActiveSection] = useState<"chat" | "code">("chat");
@@ -39,6 +42,9 @@ console.log(greeting());`);
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const Param = useParams();
+  const id = Param.id;
 
   // AI Chat Functions
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -177,6 +183,32 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
       setMessages((prev: any) => [...prev, errorMessage]);
     }
   };
+
+  const GetCurrentVenomLab = async () => {
+    try {
+      const res = await AxiosInstance.get(`/lab/one/${id}`);
+
+      if (res.status === 200) {
+        console.log(res.data);
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    }
+  };
+
+  useEffect(() => {
+    GetCurrentVenomLab();
+  }, []);
 
   return (
     <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">

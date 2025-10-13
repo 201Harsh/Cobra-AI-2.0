@@ -6,6 +6,7 @@ const VenomLab = ({
   getEnvironmentIcon,
   getEnvironmentName,
   handleDeleteLab,
+  handleEnterLab,
 }: any) => {
   return (
     <div className="mb-8">
@@ -25,7 +26,7 @@ const VenomLab = ({
           </p>
           <button
             onClick={() => setIsCreating(true)}
-            className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,0,80,0.5)] hover:scale-105"
+            className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,0,80,0.5)] hover:scale-105 cursor-pointer"
           >
             Create Venom Lab
           </button>
@@ -88,7 +89,12 @@ const VenomLab = ({
               </div>
 
               <div className="flex gap-2">
-                <button className="flex-1 bg-red-500/20 hover:bg-red-500/30 text-red-300 py-2 rounded-lg transition-colors cursor-pointer">
+                <button
+                  onClick={() => {
+                    handleEnterLab(lab._id);
+                  }}
+                  className="flex-1 bg-red-500/20 hover:bg-red-500/30 text-red-300 py-2 rounded-lg transition-colors cursor-pointer"
+                >
                   Enter Lab
                 </button>
                 <button

@@ -83,11 +83,9 @@ module.exports.GenerateChat = async (req, res) => {
     if (!user) return res.status(400).json({ error: "User not found" });
 
     if (user.mode === "creator") {
-      return res
-        .status(400)
-        .json({
-          error: "You are not a developer! This feature is only for developers",
-        });
+      return res.status(400).json({
+        error: "You are not a developer! This feature is only for developers",
+      });
     }
 
     if (user.chatGenToken <= 0) {
@@ -127,6 +125,8 @@ module.exports.GenerateChat = async (req, res) => {
       aiReply: response,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({
+      error: error.message,
+    });
   }
 };

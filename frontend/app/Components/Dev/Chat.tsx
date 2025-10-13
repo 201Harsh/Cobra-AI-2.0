@@ -1,10 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import Prism from "prismjs";
-import "prismjs/components/prism-jsx";
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-bash";
-import "prismjs/themes/prism-tomorrow.css";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const Chat = ({
   messages,
@@ -19,11 +16,6 @@ const Chat = ({
   const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>(
     {}
   );
-
-  // Initialize Prism highlighting
-  useEffect(() => {
-    Prism.highlightAll();
-  }, [messages]);
 
   // Auto-resize textarea based on content
   useEffect(() => {
@@ -68,12 +60,6 @@ const Chat = ({
     language: string,
     messageId: string
   ) => {
-    const highlightedCode = Prism.highlight(
-      code,
-      Prism.languages[language] || Prism.languages.javascript,
-      language
-    );
-
     const isCopied = copiedStates[messageId] || false;
 
     return (
@@ -127,12 +113,34 @@ const Chat = ({
             )}
           </button>
         </div>
-        <pre className="p-4 bg-gray-900 overflow-x-auto max-w-full">
-          <code
-            className={`language-${language} whitespace-pre-wrap break-words`}
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          />
-        </pre>
+        {/* Code Content */}
+        <div className="relative overflow-x-auto">
+          <SyntaxHighlighter
+            language={language === "jsx" ? "javascript" : language}
+            style={vscDarkPlus}
+            customStyle={{
+              margin: 0,
+              padding: "0.75rem",
+              borderBottomLeftRadius: "0.5rem",
+              borderBottomRightRadius: "0.5rem",
+              background: "#030712",
+              fontSize: "0.75rem",
+              maxWidth: "100%",
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              overflowX: "auto",
+            }}
+            codeTagProps={{
+              style: {
+                fontFamily: "Fira Code, Monaco, Consolas, monospace",
+              },
+            }}
+            wrapLongLines={true}
+            showLineNumbers={false}
+          >
+            {code}
+          </SyntaxHighlighter>
+        </div>
       </div>
     );
   };
@@ -158,9 +166,9 @@ const Chat = ({
           {/* Messages Container */}
           <div className="flex-1 p-4 overflow-y-auto scrollbar-small">
             <div className="space-y-6">
-              {messages.map((message: any) => (
+              {messages.map((message: any, idx: number) => (
                 <div
-                  key={message.id}
+                  key={idx}
                   className={`${
                     message.sender === "user" ? "flex justify-end" : "w-full"
                   }`}
@@ -276,7 +284,7 @@ const Chat = ({
                   rows={1}
                   style={{
                     height: "auto",
-                    minHeight: "44px",
+                    minHeight: "50px",
                   }}
                 />
               </div>

@@ -53,6 +53,10 @@ const UserModel = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  chatGenToken: {
+    type: Number,
+    default: 50,
+  },
 });
 
 UserModel.methods.Jwt_token = function () {

@@ -1,6 +1,7 @@
 const CreatorService = require("../services/creator-ai.service");
 const WebsiteModel = require("../models/Website.model");
 const UserModel = require("../models/user.model");
+const CobraChatbotService = require("../services/cobra-chatbot.service");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
@@ -66,4 +67,48 @@ module.exports.GenerateWebsite = async (req, res) => {
       error: error.message,
     });
   }
+};
+
+module.exports.GenerateChat = async (req, res) => {
+  const { prompt } = req.body;
+
+  const UserId = req.user._id;
+
+  if (!prompt) {
+    return res.status(400).json({
+      error: "Prompt is required",
+    });
+  }
+
+  const user = await UserModel.findById(UserId);
+
+  if (!user) {
+    return res.status(400).json({
+      error: "User not found",
+    });
+  }
+
+  if (user.mode === "creator") {
+    return res.status(400).json({
+      error: "You are not a developer! feature is only for developers",
+    });
+  }
+
+  if (user.chatGenToken <= 0) {
+    return res.status(400).json({
+      error: "You have reached the limit of chat generation",
+    });
+  }
+
+  const response = await CobraChatbotService({ prompt });
+
+  if (response) {
+    user.chatGenToken -= 1;
+    await user.save();
+  }
+
+  res.status(200).json({
+    message: "Chat generated successfully",
+    code: response,
+  });
 };

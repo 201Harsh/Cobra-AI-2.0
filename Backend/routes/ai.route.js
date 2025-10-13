@@ -18,4 +18,12 @@ router.post(
   AIController.GenerateWebsite
 );
 
+router.post(
+  "/chat/gen",
+  [body("prompt").notEmpty().withMessage("Prompt is required")],
+  AuthMiddleware.AuthUser,
+  ValidateMiddleware.validateUser,
+  AIController.GenerateChat
+);
+
 module.exports = router;

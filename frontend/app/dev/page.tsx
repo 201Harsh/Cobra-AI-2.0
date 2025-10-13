@@ -5,6 +5,7 @@ import CreateLabs from "../Components/Dev/CreateLabs";
 import DevHeader from "../Components/Dev/DevHeader";
 import { Slide, toast } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
+import { useRouter } from "next/navigation";
 
 const Devpage = () => {
   const [venomLabs, setVenomLabs] = useState<any>([]);
@@ -13,6 +14,8 @@ const Devpage = () => {
 
   // You can replace this with actual user data from your auth system
   const [currentUser, setcurrentUser] = useState<string>("Cobra AI");
+
+  const Router = useRouter();
 
   const handleGetAllLabs = async () => {
     try {
@@ -116,6 +119,10 @@ const Devpage = () => {
     }
   };
 
+  const handleEnterLab = (labId: string) => {
+    Router.push(`/dev/${labId}`);
+  };
+
   // Helper function to get environment display name
   const getEnvironmentName = (envId: string) => {
     const environments: { [key: string]: string } = {
@@ -157,6 +164,7 @@ const Devpage = () => {
             getEnvironmentIcon={getEnvironmentIcon}
             getEnvironmentName={getEnvironmentName}
             handleDeleteLab={handleDeleteLab}
+            handleEnterLab={handleEnterLab}
           />
 
           {/* Features Section */}

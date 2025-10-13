@@ -7,9 +7,12 @@ import { Slide, toast } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
 import { useParams } from "next/navigation";
 import HeaderandNavigation from "@/app/Components/Dev/HeaderandNavigation";
+import DevDash from "@/app/Components/Dev/DevDash";
 
 const CodeSection = () => {
-  const [activeSection, setActiveSection] = useState<"chat" | "code">("chat");
+  const [activeSection, setActiveSection] = useState<
+    "chat" | "code" | "dashboard"
+  >("chat");
   const [messages, setMessages] = useState<any>([
     {
       id: 1,
@@ -213,35 +216,42 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
   return (
     <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">
       {/* Header/Bottom and Navigation */}
-
       <HeaderandNavigation
         activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
 
       {/* Main Content */}
-      <div className="pt-20 lg:pt-24 pb-0 lg:pb-4 px-2 lg:px-0">
-        <div className="max-w-7xl mx-auto lg:grid lg:grid-cols-2 lg:gap-6 max-h-screen">
-          {/* Chat Section */}
-          <Chat
-            messages={messages}
-            activeSection={activeSection}
-            isGenerating={isGenerating}
-            messagesEndRef={messagesEndRef}
-            handleSendMessage={handleSendMessage}
-            inputMessage={inputMessage}
-            setInputMessage={setInputMessage}
-          />
+      <div className="pt-20 lg:pt-24 pb-20 lg:pb-4 px-2 lg:px-0">
+        <div className="max-w-7xl mx-auto">
+          {/* Chat and Code Sections - Only show when dashboard is not active */}
+          {activeSection !== "dashboard" ? (
+            <div className="lg:grid lg:grid-cols-2 lg:gap-6 max-h-screen">
+              {/* Chat Section */}
+              <Chat
+                messages={messages}
+                activeSection={activeSection}
+                isGenerating={isGenerating}
+                messagesEndRef={messagesEndRef}
+                handleSendMessage={handleSendMessage}
+                inputMessage={inputMessage}
+                setInputMessage={setInputMessage}
+              />
 
-          {/* Code Section */}
-          <Code
-            code={code}
-            setCode={setCode}
-            output={output}
-            consoleLogs={consoleLogs}
-            handleRunCode={handleRunCode}
-            activeSection={activeSection}
-          />
+              {/* Code Section */}
+              <Code
+                code={code}
+                setCode={setCode}
+                output={output}
+                consoleLogs={consoleLogs}
+                handleRunCode={handleRunCode}
+                activeSection={activeSection}
+              />
+            </div>
+          ) : (
+            /* Dashboard Section - Full width when active */
+            <DevDash activeSection={activeSection} />
+          )}
         </div>
       </div>
     </div>

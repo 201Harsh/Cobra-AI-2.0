@@ -16,6 +16,9 @@ const Chat = ({
   setInputMessage,
 }: any) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   // Initialize Prism highlighting
   useEffect(() => {
@@ -49,35 +52,84 @@ const Chat = ({
     }
   };
 
+  // Copy code to clipboard
+  const handleCopyCode = (code: string, messageId: string) => {
+    navigator.clipboard.writeText(code).then(() => {
+      setCopiedStates((prev) => ({ ...prev, [messageId]: true }));
+      setTimeout(() => {
+        setCopiedStates((prev) => ({ ...prev, [messageId]: false }));
+      }, 2000);
+    });
+  };
+
   // Function to render code with syntax highlighting
-  const renderCodeBlock = (code: string, language: string) => {
+  const renderCodeBlock = (
+    code: string,
+    language: string,
+    messageId: string
+  ) => {
     const highlightedCode = Prism.highlight(
       code,
       Prism.languages[language] || Prism.languages.javascript,
       language
     );
 
+    const isCopied = copiedStates[messageId] || false;
+
     return (
-      <div className="mt-3 rounded-lg overflow-hidden border border-gray-600">
+      <div className="mt-3 rounded-lg overflow-hidden border border-gray-600 max-w-full">
         <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-600">
           <span className="text-xs font-mono text-gray-300 uppercase">
-            {language === "jsx" ? "React JSX" : 
-             language === "javascript" ? "JavaScript" : 
-             language === "bash" ? "Bash" : language}
+            {language === "jsx"
+              ? "React JSX"
+              : language === "javascript"
+              ? "JavaScript"
+              : language === "bash"
+              ? "Bash"
+              : language}
           </span>
           <button
-            onClick={() => {
-              navigator.clipboard.writeText(code);
-              // You can add a toast notification here
-            }}
-            className="text-xs text-gray-400 hover:text-white transition-colors"
+            onClick={() => handleCopyCode(code, messageId)}
+            className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-gray-700"
           >
-            Copy
+            {isCopied ? (
+              <>
+                <svg
+                  className="w-3 h-3 text-green-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Copied!</span>
+              </>
+            ) : (
+              <>
+                <svg
+                  className="w-3 h-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>Copy</span>
+              </>
+            )}
           </button>
         </div>
-        <pre className="p-4 bg-gray-900 overflow-x-auto">
-          <code 
-            className={`language-${language}`}
+        <pre className="p-4 bg-gray-900 overflow-x-auto max-w-full">
+          <code
+            className={`language-${language} whitespace-pre-wrap break-words`}
             dangerouslySetInnerHTML={{ __html: highlightedCode }}
           />
         </pre>
@@ -142,7 +194,7 @@ const Chat = ({
                               {message.sender}
                             </span>
                           </div>
-                          
+
                           {/* Render text content */}
                           {message.contentType === "text" && (
                             <div className="text-gray-200 text-sm lg:text-base whitespace-pre-wrap leading-relaxed">
@@ -151,14 +203,18 @@ const Chat = ({
                           )}
 
                           {/* Render code blocks with syntax highlighting */}
-                          {message.contentType === "code-jsx" && 
-                            renderCodeBlock(message.text, "jsx")}
-                          
-                          {message.contentType === "code-js" && 
-                            renderCodeBlock(message.text, "javascript")}
-                          
-                          {message.contentType === "code-bash" && 
-                            renderCodeBlock(message.text, "bash")}
+                          {message.contentType === "code-jsx" &&
+                            renderCodeBlock(message.text, "jsx", message.id)}
+
+                          {message.contentType === "code-js" &&
+                            renderCodeBlock(
+                              message.text,
+                              "javascript",
+                              message.id
+                            )}
+
+                          {message.contentType === "code-bash" &&
+                            renderCodeBlock(message.text, "bash", message.id)}
                         </div>
                       )}
                     </div>

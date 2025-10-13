@@ -311,7 +311,10 @@ const DevDash = ({ activeSection }: { activeSection: string }) => {
 
         {/* Quick Actions */}
         <div className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-red-500/20 p-6">
-          <h2 className="text-2xl font-bold text-white mb-6">Quick Actions</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Quick Actions{" "}
+            <span className="text-red-400">(Comming Soon...)</span>
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button className="p-4 bg-gray-800/50 hover:bg-gray-700/50 rounded-xl border border-gray-700 hover:border-red-500/30 transition-all duration-300 group">

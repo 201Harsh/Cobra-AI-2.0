@@ -67,7 +67,6 @@ const DevDash = ({ activeSection }: { activeSection: string }) => {
     try {
       const res = await AxiosInstance.get(`/lab/one/${id}`);
       if (res.status === 200) {
-        console.log(res.data);
         setLabData(res.data.VenomLab);
         const createdDate = new Date(res.data.VenomLab.createdAt);
 
@@ -313,7 +312,9 @@ const DevDash = ({ activeSection }: { activeSection: string }) => {
         <div className="bg-gray-900/50 backdrop-blur-xl rounded-2xl border border-red-500/20 p-6">
           <h2 className="text-2xl font-bold text-white mb-6">
             Quick Actions{" "}
-            <span className="text-red-400 text-sm md:text-lg">(Comming Soon...)</span>
+            <span className="text-red-400 text-sm md:text-lg">
+              (Comming Soon...)
+            </span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

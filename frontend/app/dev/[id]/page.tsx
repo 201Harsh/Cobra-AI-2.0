@@ -42,6 +42,50 @@ console.log(greeting());`);
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const GetAllChats = async () => {
+    try {
+      const res = await AxiosInstance.get("/chat/get/all");
+
+      if (res.status === 200) {
+        const FormattedChats = res.data.Chats.Chats.flatMap(
+          (items: any, index: number) => [
+            {
+              id: Date.now() + index * 2,
+              text: items.user,
+              sender: "user",
+              type: "text",
+              timestamp: new Date(items.timestamp),
+            },
+            {
+              id: Date.now() + index * 2 + 1,
+              text: items.ai,
+              sender: "Cobra AI",
+              type: "ai",
+              timestamp: new Date(items.timestamp),
+            },
+          ]
+        );
+        setMessages(FormattedChats);
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    }
+  };
+
+  useEffect(() => {
+    GetAllChats();
+  }, []);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -205,32 +249,6 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
       setMessages((prev: any) => [...prev, errorMessage]);
     }
   };
-
-  const GetCurrentVenomLab = async () => {
-    try {
-      const res = await AxiosInstance.get(`/lab/one/${id}`);
-
-      if (res.status === 200) {
-        console.log(res.data);
-      }
-    } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide,
-      });
-    }
-  };
-
-  useEffect(() => {
-    GetCurrentVenomLab();
-  }, []);
 
   return (
     <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">

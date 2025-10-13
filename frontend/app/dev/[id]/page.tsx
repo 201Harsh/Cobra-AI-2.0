@@ -46,7 +46,7 @@ console.log(greeting());`);
     try {
       const res = await AxiosInstance.get("/chat/get/all");
 
-      if (res.status === 200) {
+      if (res.status === 200 && res.data.Chats) {
         const FormattedChats = res.data.Chats.Chats.flatMap(
           (items: any, index: number) => [
             {

@@ -17,7 +17,15 @@ const ChatSchema = new mongoose.Schema(
           PlainText: {
             type: String,
           },
-          CodeBlock: {
+          jsxCodeBlocks: {
+            type: Array,
+            default: [],
+          },
+          jsCodeBlocks: {
+            type: Array,
+            default: [],
+          },
+          bashCodeBlocks: {
             type: Array,
             default: [],
           },

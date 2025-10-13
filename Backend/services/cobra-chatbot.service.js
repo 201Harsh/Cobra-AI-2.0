@@ -134,7 +134,9 @@ Remember: You are a code generation engine only. Generate code + explain it. Not
     // Return both plain text and separated code
     const NewResponse = {
       PlainText,
-      CodeBlock,
+      jsxCodeBlocks,
+      jsCodeBlocks,
+      bashCodeBlocks,
     };
     return NewResponse;
   } catch (error) {

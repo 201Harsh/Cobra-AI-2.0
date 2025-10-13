@@ -1,5 +1,10 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import Prism from "prismjs";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-bash";
+import "prismjs/themes/prism-tomorrow.css";
 
 const Chat = ({
   messages,
@@ -12,12 +17,17 @@ const Chat = ({
 }: any) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  // Initialize Prism highlighting
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [messages]);
+
   // Auto-resize textarea based on content
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = "auto";
-      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`; // Max height 200px
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
     }
   }, [inputMessage]);
 
@@ -30,7 +40,6 @@ const Chat = ({
       e.preventDefault();
       if (inputMessage.trim() && !isGenerating) {
         handleSendMessage(e);
-        // Reset textarea height after sending
         setTimeout(() => {
           if (textareaRef.current) {
             textareaRef.current.style.height = "auto";
@@ -38,6 +47,42 @@ const Chat = ({
         }, 0);
       }
     }
+  };
+
+  // Function to render code with syntax highlighting
+  const renderCodeBlock = (code: string, language: string) => {
+    const highlightedCode = Prism.highlight(
+      code,
+      Prism.languages[language] || Prism.languages.javascript,
+      language
+    );
+
+    return (
+      <div className="mt-3 rounded-lg overflow-hidden border border-gray-600">
+        <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-600">
+          <span className="text-xs font-mono text-gray-300 uppercase">
+            {language === "jsx" ? "React JSX" : 
+             language === "javascript" ? "JavaScript" : 
+             language === "bash" ? "Bash" : language}
+          </span>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(code);
+              // You can add a toast notification here
+            }}
+            className="text-xs text-gray-400 hover:text-white transition-colors"
+          >
+            Copy
+          </button>
+        </div>
+        <pre className="p-4 bg-gray-900 overflow-x-auto">
+          <code 
+            className={`language-${language}`}
+            dangerouslySetInnerHTML={{ __html: highlightedCode }}
+          />
+        </pre>
+      </div>
+    );
   };
 
   return (
@@ -87,8 +132,8 @@ const Chat = ({
                           </p>
                         </div>
                       ) : (
-                        // AI message - full width
-                        <div className="w-full  rounded-2xl p-4 lg:p-6">
+                        // AI message with code blocks
+                        <div className="w-full rounded-2xl p-4 lg:p-6">
                           <div className="flex items-center gap-3 mb-3">
                             <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                               AI
@@ -97,9 +142,23 @@ const Chat = ({
                               {message.sender}
                             </span>
                           </div>
-                          <div className="text-gray-200 text-sm lg:text-base whitespace-pre-wrap leading-relaxed">
-                            {message.text}
-                          </div>
+                          
+                          {/* Render text content */}
+                          {message.contentType === "text" && (
+                            <div className="text-gray-200 text-sm lg:text-base whitespace-pre-wrap leading-relaxed">
+                              {message.text}
+                            </div>
+                          )}
+
+                          {/* Render code blocks with syntax highlighting */}
+                          {message.contentType === "code-jsx" && 
+                            renderCodeBlock(message.text, "jsx")}
+                          
+                          {message.contentType === "code-js" && 
+                            renderCodeBlock(message.text, "javascript")}
+                          
+                          {message.contentType === "code-bash" && 
+                            renderCodeBlock(message.text, "bash")}
                         </div>
                       )}
                     </div>

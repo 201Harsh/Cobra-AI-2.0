@@ -48,23 +48,81 @@ console.log(greeting());`);
 
       if (res.status === 200 && res.data.Chats) {
         const FormattedChats = res.data.Chats.Chats.flatMap(
-          (items: any, index: number) => [
-            {
-              id: Date.now() + index * 2,
-              text: items.user,
-              sender: "user",
-              type: "text",
-              timestamp: new Date(items.timestamp),
-            },
-            {
-              id: Date.now() + index * 2 + 1,
-              text: items.ai,
-              sender: "Cobra AI",
-              type: "ai",
-              timestamp: new Date(items.timestamp),
-            },
-          ]
+          (items: any, index: number) => {
+            const aiResponse = items.ai;
+
+            // Prepare array for the AI messages (PlainText + Code blocks)
+            const aiMessages = [];
+
+            // 1️⃣ Add PlainText (if available)
+            if (aiResponse.PlainText && aiResponse.PlainText.trim() !== "") {
+              aiMessages.push({
+                id: Date.now() + index * 2 + 1,
+                text: aiResponse.PlainText.trim(),
+                sender: "Cobra AI",
+                type: "ai",
+                contentType: "text",
+                timestamp: new Date(items.timestamp),
+              });
+            }
+
+            // 2️⃣ Add JSX Code Blocks
+            if (aiResponse.jsxCodeBlocks?.length > 0) {
+              aiResponse.jsxCodeBlocks.forEach((code: string, i: number) => {
+                aiMessages.push({
+                  id: Date.now() + index * 100 + i,
+                  text: code,
+                  sender: "Cobra AI",
+                  type: "ai",
+                  contentType: "code-jsx",
+                  timestamp: new Date(items.timestamp),
+                });
+              });
+            }
+
+            // 3️⃣ Add JavaScript Code Blocks
+            if (aiResponse.jsCodeBlocks?.length > 0) {
+              aiResponse.jsCodeBlocks.forEach((code: string, i: number) => {
+                aiMessages.push({
+                  id: Date.now() + index * 200 + i,
+                  text: code,
+                  sender: "Cobra AI",
+                  type: "ai",
+                  contentType: "code-js",
+                  timestamp: new Date(items.timestamp),
+                });
+              });
+            }
+
+            // 4️⃣ Add Bash Code Blocks
+            if (aiResponse.bashCodeBlocks?.length > 0) {
+              aiResponse.bashCodeBlocks.forEach((code: string, i: number) => {
+                aiMessages.push({
+                  id: Date.now() + index * 300 + i,
+                  text: code,
+                  sender: "Cobra AI",
+                  type: "ai",
+                  contentType: "code-bash",
+                  timestamp: new Date(items.timestamp),
+                });
+              });
+            }
+
+            // Return both user and AI message sequence
+            return [
+              {
+                id: Date.now() + index * 2,
+                text: items.user,
+                sender: "user",
+                type: "text",
+                contentType: "text",
+                timestamp: new Date(items.timestamp),
+              },
+              ...aiMessages,
+            ];
+          }
         );
+
         setMessages(FormattedChats);
       }
     } catch (error: any) {
@@ -103,13 +161,13 @@ console.log(greeting());`);
       text: inputMessage,
       sender: "user",
       type: "user",
+      contentType: "text",
     };
 
     setMessages((prev: any) => [...prev, userMessage]);
     setInputMessage("");
 
     setIsGenerating(true);
-    // Simulate AI thinking
 
     try {
       const response = await AxiosInstance.post("/ai/chat/gen", {
@@ -117,14 +175,66 @@ console.log(greeting());`);
       });
 
       if (response.status === 200) {
-        const aiResponse = {
-          id: messages.length + 2,
-          text: response.data.aiReply,
-          sender: "Cobra AI",
-          type: "ai",
-          timestamp: new Date(),
-        };
-        setMessages((prev: any) => [...prev, aiResponse]);
+        const aiResponse = response.data.aiReply;
+
+        // Create messages for PlainText and all code blocks
+        const newMessages: any = [];
+
+        // Add PlainText if available
+        if (aiResponse.PlainText && aiResponse.PlainText.trim() !== "") {
+          newMessages.push({
+            id: Date.now() + 1,
+            text: aiResponse.PlainText.trim(),
+            sender: "Cobra AI",
+            type: "ai",
+            contentType: "text",
+            timestamp: new Date(),
+          });
+        }
+
+        // Add JSX Code Blocks
+        if (aiResponse.jsxCodeBlocks?.length > 0) {
+          aiResponse.jsxCodeBlocks.forEach((code: string, i: number) => {
+            newMessages.push({
+              id: Date.now() + 100 + i,
+              text: code,
+              sender: "Cobra AI",
+              type: "ai",
+              contentType: "code-jsx",
+              timestamp: new Date(),
+            });
+          });
+        }
+
+        // Add JavaScript Code Blocks
+        if (aiResponse.jsCodeBlocks?.length > 0) {
+          aiResponse.jsCodeBlocks.forEach((code: string, i: number) => {
+            newMessages.push({
+              id: Date.now() + 200 + i,
+              text: code,
+              sender: "Cobra AI",
+              type: "ai",
+              contentType: "code-js",
+              timestamp: new Date(),
+            });
+          });
+        }
+
+        // Add Bash Code Blocks
+        if (aiResponse.bashCodeBlocks?.length > 0) {
+          aiResponse.bashCodeBlocks.forEach((code: string, i: number) => {
+            newMessages.push({
+              id: Date.now() + 300 + i,
+              text: code,
+              sender: "Cobra AI",
+              type: "ai",
+              contentType: "code-bash",
+              timestamp: new Date(),
+            });
+          });
+        }
+
+        setMessages((prev: any) => [...prev, ...newMessages]);
       }
     } catch (error: any) {
       toast.error(error.response.data.message, {
@@ -141,57 +251,6 @@ console.log(greeting());`);
     } finally {
       setIsGenerating(false);
     }
-  };
-
-  const generateAIResponse = (message: string) => {
-    const lowerMessage = message.toLowerCase();
-
-    // Code-related questions
-    if (lowerMessage.includes("error") || lowerMessage.includes("bug")) {
-      return "I can help you debug that! Share your code in the code editor and I'll help you find the issue. You can also describe the error you're seeing.";
-    }
-
-    if (lowerMessage.includes("react") || lowerMessage.includes("component")) {
-      return `**React Components:**\n\nReact components are reusable UI pieces. Here's a simple example:\n\n\`\`\`jsx
-function Welcome({ name }) {
-  return <h1>Hello, {name}!</h1>;
-}\n\n// Usage: <Welcome name="Venom Lab" />
-\`\`\`\n\nTry implementing this in the code editor!`;
-    }
-
-    if (lowerMessage.includes("function") || lowerMessage.includes("define")) {
-      return `**JavaScript Functions:**\n\nFunctions are blocks of code designed to perform specific tasks. Here are different ways to define them:\n\n\`\`\`javascript
-// Function declaration
-function greet(name) {
-  return "Hello, " + name;
-}\n\n// Arrow function
-const greet = (name) => "Hello, " + name;\n\n// Function expression
-const greet = function(name) {
-  return "Hello, " + name;
-};
-\`\`\``;
-    }
-
-    if (lowerMessage.includes("array") || lowerMessage.includes("loop")) {
-      return `**Array Methods:**\n\nJavaScript arrays have powerful built-in methods:\n\n\`\`\`javascript
-const numbers = [1, 2, 3, 4, 5];\n\n// map - transform each element
-const doubled = numbers.map(n => n * 2);\n\n// filter - select elements
-const even = numbers.filter(n => n % 2 === 0);\n\n// reduce - accumulate values
-const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled); // [2, 4, 6, 8, 10]
-\`\`\``;
-    }
-
-    const generalResponses = [
-      "That's a great question! Let me help you understand that better.",
-      "I'd be happy to explain that concept. Here's what you need to know:",
-      "Understanding this is key to programming. Let me break it down for you.",
-      "That's an important concept! Here's how it works in practice:",
-      "Let me explain this with some examples to make it clearer.",
-    ];
-
-    return `${
-      generalResponses[Math.floor(Math.random() * generalResponses.length)]
-    }\n\nFeel free to ask more specific questions or try implementing concepts in the code editor!`;
   };
 
   // Code Execution Functions
@@ -232,6 +291,7 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
         text: `Code executed successfully! Check the output panel.`,
         sender: "system",
         type: "system",
+        contentType: "text",
         timestamp: new Date(),
       };
       setMessages((prev: any) => [...prev, runMessage]);
@@ -244,6 +304,7 @@ const sum = numbers.reduce((total, n) => total + n, 0);\n\nconsole.log(doubled);
         text: `Code execution failed: ${error.message}`,
         sender: "system",
         type: "system",
+        contentType: "text",
         timestamp: new Date(),
       };
       setMessages((prev: any) => [...prev, errorMessage]);

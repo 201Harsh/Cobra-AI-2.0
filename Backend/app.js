@@ -10,6 +10,7 @@ const USerRouter = require("./routes/user.route");
 const AIRouter = require("./routes/ai.route");
 const WebsiteRouter = require("./routes/website.route");
 const LabRouter = require("./routes/venomlab.route");
+const ChatRouter = require("./routes/chat.route");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,5 +26,6 @@ app.use("/users", USerRouter);
 app.use("/ai", AIRouter);
 app.use("/websites", WebsiteRouter);
 app.use("/lab", LabRouter);
+app.use("/chat", ChatRouter);
 
 module.exports = app;

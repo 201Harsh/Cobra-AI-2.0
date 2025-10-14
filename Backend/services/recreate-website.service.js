@@ -303,13 +303,13 @@ Deliver perfectly enhanced, optimized websites that maintain all existing functi
     googleSearch: {},
   };
 
-  const UpdatedPrompt =
-    newPrompt + "and here is the Code for it " + existingCode;
+  const UpdatedPrompt = [newPrompt, existingCode];
+  console.log(UpdatedPrompt);
 
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: UpdatedPrompt,
+      contents: [UpdatedPrompt],
       config: {
         systemInstruction: systemInstruction,
         tools: [groundingTool],
@@ -322,7 +322,7 @@ Deliver perfectly enhanced, optimized websites that maintain all existing functi
     cleanedCode = cleanedCode.replace(/\s*```/g, "");
     cleanedCode = cleanedCode.trim();
 
-    return cleanedCode;
+    return responseOriginal;
   } catch (error) {
     return `// Error enhancing website: ${error.message}\n// Please try again with a different enhancement request.`;
   }

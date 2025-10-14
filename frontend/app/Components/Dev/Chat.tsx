@@ -75,44 +75,72 @@ const Chat = ({
               ? "Bash"
               : language}
           </span>
-          <button
-            onClick={() => handleCopyCode(code, messageId)}
-            className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-gray-700"
-          >
-            {isCopied ? (
-              <>
-                <svg
-                  className="w-3 h-3 text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <svg
-                  className="w-3 h-3"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                  />
-                </svg>
-                <span>Copy</span>
-              </>
-            )}
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Test Code Button */}
+            <button
+              onClick={() => {
+                // Add your test code logic here
+                console.log("Test code:", code);
+              }}
+              className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors px-2 py-1 rounded hover:bg-blue-500/10 border border-blue-500/30"
+              title="Test this code"
+            >
+              <svg
+                className="w-3 h-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Test</span>
+            </button>
+
+            {/* Copy Button */}
+            <button
+              onClick={() => handleCopyCode(code, messageId)}
+              className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-gray-700"
+            >
+              {isCopied ? (
+                <>
+                  <svg
+                    className="w-3 h-3 text-green-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <svg
+                    className="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span>Copy</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
         {/* Code Content */}
         <div className="relative overflow-x-auto">
@@ -155,7 +183,7 @@ const Chat = ({
       >
         <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-red-500/20 h-full flex flex-col">
           {/* Chat Header */}
-          <div className="p-4 border-b border-red-500/20">
+          <div className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold text-white flex items-center gap-2">
@@ -283,7 +311,7 @@ const Chat = ({
           </div>
 
           {/* Input Area */}
-          <div className="p-4 border-t border-red-500/20">
+          <div className="p-4">
             <form
               onSubmit={handleSendMessage}
               className="flex gap-2 lg:gap-3 items-end"

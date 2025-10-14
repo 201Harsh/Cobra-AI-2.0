@@ -366,19 +366,16 @@
 }
 
 .scrollbar-small::-webkit-scrollbar {
-  width: 8px; /* Even smaller width */
-  height: 6px; /* Even smaller height */
+  width: 5px;
+  height: 4px; /* Very slim height */
+
 }
 
 .scrollbar-small::-webkit-scrollbar-track {
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 .scrollbar-small::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 10px;
-}
-
-.scrollbar-small::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #d1d1d1;
+  border-radius: 40px;
 }

@@ -66,26 +66,6 @@ const Code = ({
                 {output || "// Run your code to see output here"}
               </div>
             </div>
-
-            {/* Console Logs */}
-            <div className="bg-gray-950 rounded-xl border border-red-500/20 p-3 lg:p-4">
-              <h3 className="text-white font-semibold mb-2 text-sm lg:text-base">
-                Console
-              </h3>
-              <div className="text-gray-300 font-mono text-xs lg:text-sm max-h-[80px] overflow-y-auto">
-                {consoleLogs.length > 0 ? (
-                  consoleLogs.map((log: string, index: number) => (
-                    <div key={index} className="text-green-400">
-                      {">"} {log}
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-gray-500">
-                    {">"} // Console output will appear here
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
         </div>
       </div>

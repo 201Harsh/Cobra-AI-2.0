@@ -11,6 +11,7 @@ const Chat = ({
   handleSendMessage,
   inputMessage,
   setInputMessage,
+  handleDeleteAllChats,
 }: any) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>(
@@ -155,12 +156,35 @@ const Chat = ({
         <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-red-500/20 h-full flex flex-col">
           {/* Chat Header */}
           <div className="p-4 border-b border-red-500/20">
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
-              💬 AI Coding Mentor
-            </h2>
-            <p className="text-gray-400 text-sm">
-              Ask me anything about programming
-            </p>
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  💬 AI Coding Mentor
+                </h2>
+                <p className="text-gray-400 text-sm">
+                  Ask me anything about programming
+                </p>
+              </div>
+              <button
+                onClick={handleDeleteAllChats}
+                className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-red-500/30 rounded-lg transition-all duration-200 hover:border-red-500/50"
+                title="Delete All Chats"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* Messages Container */}

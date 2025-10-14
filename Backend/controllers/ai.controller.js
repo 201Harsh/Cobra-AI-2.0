@@ -129,6 +129,7 @@ module.exports.UpdateWebsite = async (req, res) => {
       Website.Code = NewResponse;
       Website.createdAt = Date.now();
       await user.save();
+      await Website.save();
     }
 
     res.status(200).json({

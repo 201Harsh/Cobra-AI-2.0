@@ -35,7 +35,7 @@ const UserModel = new mongoose.Schema({
   },
   siteGenToken: {
     type: Number,
-    default: 3,
+    default: 4,
   },
   sitegenerated: {
     type: Number,
@@ -43,7 +43,7 @@ const UserModel = new mongoose.Schema({
   },
   maxSitegeneration: {
     type: Number,
-    default: 3,
+    default: 4,
   },
   labGenToken: {
     type: Number,

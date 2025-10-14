@@ -73,7 +73,9 @@ module.exports.GenerateWebsite = async (req, res) => {
 
 module.exports.UpdateWebsite = async (req, res) => {
   try {
-    const { newPrompt} = req.body;
+    const { newPrompt } = req.body;
+
+    const WebsiteId = req.params.id;
 
     const UserId = req.user._id;
 
@@ -91,8 +93,43 @@ module.exports.UpdateWebsite = async (req, res) => {
       });
     }
 
-    const Code = await WebsiteModel.findOne({})
+    const Website = await WebsiteModel.findOne({
+      UserId: UserId,
+      _id: WebsiteId,
+    });
 
+    if (!Website) {
+      return res.status(400).json({
+        error: "Website not found",
+      });
+    }
+
+    const Code = Website.Code;
+
+    if (user.siteGenToken <= 0) {
+      return res.status(400).json({
+        error: "You have reached the limit of website generation or editing",
+      });
+    }
+
+    const NewResponse = await ReCreateWebsiteService({ newPrompt, Code });
+
+    if (!NewResponse) {
+      return res.status(500).json({
+        error: "AI did not return a response",
+      });
+    }
+
+    if (NewResponse) {
+      user.siteGenToken -= 1;
+      user.sitegenerated += 1;
+      await user.save();
+    }
+
+    res.status(200).json({
+      message: "Website updated successfully",
+      code: NewResponse,
+    });
   } catch (error) {
     res.status(500).json({
       error: error.message,

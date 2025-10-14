@@ -1,5 +1,5 @@
 import { Editor } from "@monaco-editor/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Code = ({
   code,
@@ -9,24 +9,8 @@ const Code = ({
   handleRunCode,
   activeSection,
 }: any) => {
-  const [activeFile, setActiveFile] = useState<any>("frontend.jsx");
-
-  const editorOptions: any = {
-    minimap: { enabled: false },
-    fontSize: 13,
-    wordWrap: "on",
-    automaticLayout: true,
-    tabSize: 2,
-    scrollBeyondLastLine: false,
-    padding: { top: 16 },
-    lineNumbersMinChars: 3,
-    folding: false,
-    touchSupported: true,
-    renderLineHighlight: "all",
-  };
-
-  // Default file contents
-  const files: any = {
+  const [activeFile, setActiveFile] = useState<string>("frontend.jsx");
+  const [files, setFiles] = useState<any>({
     "frontend.jsx": `// Frontend React Component
 import React, { useState } from 'react';
 
@@ -98,6 +82,76 @@ app.listen(PORT, () => {
     "@vitejs/plugin-react": "^4.0.3"
   }
 }`,
+  });
+
+  const editorOptions: any = {
+    minimap: { enabled: false },
+    fontSize: 13,
+    wordWrap: "on",
+    automaticLayout: true,
+    tabSize: 2,
+    scrollBeyondLastLine: false,
+    padding: { top: 16 },
+    lineNumbersMinChars: 3,
+    folding: false,
+    touchSupported: true,
+    renderLineHighlight: "all",
+  };
+
+  // Initialize code with active file content on mount
+  useEffect(() => {
+    setCode(files[activeFile]);
+  }, []); // Empty dependency array - only run once on mount
+
+  // Handle external code updates (from test button)
+  useEffect(() => {
+    if (code) {
+      // Determine which file should receive the code based on content
+      const targetFile = determineTargetFile(code);
+
+      if (targetFile !== activeFile) {
+        // Switch to the appropriate file tab
+        setActiveFile(targetFile);
+      }
+
+      // Update the file content
+      setFiles((prev: any) => ({
+        ...prev,
+        [targetFile]: code,
+      }));
+    }
+  }, [code]); // Only run when code prop changes
+
+  const determineTargetFile = (code: string): string => {
+    // Check if it's JSX code (contains JSX syntax)
+    const isJSX =
+      code.includes("</") ||
+      code.includes("/>") ||
+      code.includes("className=") ||
+      (code.includes("return (") && code.includes("</")) ||
+      code.includes("React") ||
+      code.includes("useState") ||
+      code.includes("useEffect");
+
+    // Check if it's backend code (contains Express/Node.js patterns)
+    const isBackend =
+      code.includes("require(") ||
+      code.includes("express") ||
+      code.includes("app.listen") ||
+      code.includes("app.get") ||
+      code.includes("app.post") ||
+      code.includes("module.exports") ||
+      code.includes("res.json") ||
+      code.includes("res.send");
+
+    if (isJSX && !isBackend) {
+      return "frontend.jsx";
+    } else if (isBackend) {
+      return "backend.js";
+    } else {
+      // Default to frontend for generic JavaScript
+      return "frontend.jsx";
+    }
   };
 
   const getLanguage = (filename: string) => {
@@ -105,6 +159,23 @@ app.listen(PORT, () => {
     if (filename.endsWith(".js")) return "javascript";
     if (filename.endsWith(".json")) return "json";
     return "javascript";
+  };
+
+  const handleFileChange = (value: string | undefined) => {
+    if (value !== undefined) {
+      setFiles((prev: any) => ({
+        ...prev,
+        [activeFile]: value,
+      }));
+      // Update the main code state when user edits the file
+      setCode(value);
+    }
+  };
+
+  const handleFileSwitch = (filename: string) => {
+    setActiveFile(filename);
+    // Update the main code state with the new file's content
+    setCode(files[filename]);
   };
 
   return (
@@ -133,7 +204,7 @@ app.listen(PORT, () => {
             {Object.keys(files).map((filename) => (
               <button
                 key={filename}
-                onClick={() => setActiveFile(filename)}
+                onClick={() => handleFileSwitch(filename)}
                 className={`px-4 py-3 text-sm font-medium border-b-2 transition-all duration-200 ${
                   activeFile === filename
                     ? "border-emerald-500 text-emerald-400 bg-gray-900/50"
@@ -151,10 +222,7 @@ app.listen(PORT, () => {
               height="100%"
               language={getLanguage(activeFile)}
               value={files[activeFile]}
-              onChange={(value) => {
-                // Update the specific file content
-                files[activeFile] = value || "";
-              }}
+              onChange={handleFileChange}
               theme="vs-dark"
               options={editorOptions}
             />

@@ -80,7 +80,7 @@ const Chat = ({
             {/* Test Code Button */}
             <button
               onClick={() => {
-                handleTestCode(code);
+                handleTestCode(code, language);
               }}
               className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors px-2 py-1 rounded hover:bg-blue-500/10 border border-blue-500/30"
               title="Test this code"

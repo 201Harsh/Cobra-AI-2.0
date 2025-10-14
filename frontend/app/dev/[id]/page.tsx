@@ -353,10 +353,27 @@ console.log(greeting());`);
     }
   };
 
-  const handleTestCode = (code: any) => {
-    setCode(code);
-    setActiveSection("code");
-  };
+  const handleTestCode = (code: string, language: string) => {
+  // Only handle JSX and JavaScript, ignore bash
+  if (language === "bash") {
+    toast.info("Bash commands cannot be tested in the code editor", {
+      position: "top-right",
+      autoClose: 3000,
+      theme: "dark",
+    });
+    return;
+  }
+
+  // Set the code directly - the Code component will handle file assignment
+  setCode(code);
+  setActiveSection("code");
+  
+  toast.success(`Code loaded into ${language === "jsx" ? "frontend.jsx" : "backend.js"}`, {
+    position: "top-right",
+    autoClose: 3000,
+    theme: "dark",
+  });
+};
 
   return (
     <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">

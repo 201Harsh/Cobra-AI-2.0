@@ -4,6 +4,7 @@ import WebContainerPreview from "../WebContainerPreview";
 import { toast, Zoom } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
 import { useParams } from "next/navigation";
+import Head from "next/head";
 
 export default function EditorPage() {
   const [code, setCode] = useState(`
@@ -17,6 +18,9 @@ const page = () => {
 
 export default page
 `);
+  const [PageTitle, setPageTitle] = useState<string>(
+    "Cobra AI 2.0 - Web Site Preview"
+  );
 
   const params = useParams();
   const id = params.id;
@@ -27,6 +31,7 @@ export default page
 
       if (res.status === 200) {
         setCode(res.data.Website.Code);
+        setPageTitle(res.data.Website.Name);
       }
     } catch (error: any) {
       toast.error(error.response.data.message, {
@@ -48,8 +53,14 @@ export default page
   }, []);
 
   return (
-    <div className="scrollbar-hide min-h-screen">
-      <WebContainerPreview code={code} />
-    </div>
+    <>
+      <Head>
+        <title>{PageTitle}</title>
+      </Head>
+
+      <div className="scrollbar-hide min-h-screen">
+        <WebContainerPreview code={code} />
+      </div>
+    </>
   );
 }

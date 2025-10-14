@@ -8,6 +8,7 @@ import AxiosInstance from "@/config/Axios";
 import { useParams } from "next/navigation";
 import HeaderandNavigation from "@/app/Components/Dev/HeaderandNavigation";
 import DevDash from "@/app/Components/Dev/DevDash";
+import { runDevProject } from "@/app/config/DevCodeRunner";
 
 const CodeSection = () => {
   const [activeSection, setActiveSection] = useState<
@@ -36,6 +37,7 @@ console.log(greeting());`);
   const [isGenerating, setIsGenerating] = useState(false);
   const [output, setOutput] = useState("");
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -296,84 +298,60 @@ console.log(greeting());`);
   };
 
   // Code Execution Functions
-  const handleRunCode = () => {
+  const handleRunCode = async ({ files }: any) => {
     setConsoleLogs([]);
-    setOutput("Running code...");
+    setOutput("⚙️ Booting Dev Project...");
+    setPreviewUrl(null);
 
     try {
-      // Capture console.log outputs
-      const originalConsoleLog = console.log;
-      const logs: string[] = [];
-
-      console.log = (...args) => {
-        logs.push(
-          args
-            .map((arg) =>
-              typeof arg === "object"
-                ? JSON.stringify(arg, null, 2)
-                : String(arg)
-            )
-            .join(" ")
-        );
-        originalConsoleLog(...args);
-      };
-
-      // Execute the code
-      const result = eval(code);
-
-      // Restore original console.log
-      console.log = originalConsoleLog;
-
-      setConsoleLogs(logs);
-      setOutput(`Execution completed successfully.\nResult: ${result}`);
-
-      // Add to chat
-      const runMessage = {
-        id: messages.length + 1,
-        text: `Code executed successfully! Check the output panel.`,
-        sender: "system",
-        type: "system",
-        contentType: "text",
-        timestamp: new Date(),
-      };
-      setMessages((prev: any) => [...prev, runMessage]);
+      await runDevProject(
+        files,
+        (msg: string) => setOutput((prev) => prev + "\n" + msg),
+        (frontendUrl: string) => setPreviewUrl(frontendUrl)
+      );
+      setOutput("✅ Dev Project booted successfully!");
+      toast.success("Dev Project booted successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
     } catch (error: any) {
-      setOutput(`Error: ${error.message}`);
-      setConsoleLogs([`Error: ${error.message}`]);
-
-      const errorMessage = {
-        id: messages.length + 1,
-        text: `Code execution failed: ${error.message}`,
-        sender: "system",
-        type: "system",
-        contentType: "text",
-        timestamp: new Date(),
-      };
-      setMessages((prev: any) => [...prev, errorMessage]);
+      console.log(error);
+      setOutput(`❌ Error: ${error.message}`);
+      setConsoleLogs([`❌ Error: ${error.message}`]);
     }
   };
 
   const handleTestCode = (code: string, language: string) => {
-  // Only handle JSX and JavaScript, ignore bash
-  if (language === "bash") {
-    toast.info("Bash commands cannot be tested in the code editor", {
-      position: "top-right",
-      autoClose: 3000,
-      theme: "dark",
-    });
-    return;
-  }
+    // Only handle JSX and JavaScript, ignore bash
+    if (language === "bash") {
+      toast.info("Bash commands cannot be tested in the code editor", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "dark",
+      });
+      return;
+    }
 
-  // Set the code directly - the Code component will handle file assignment
-  setCode(code);
-  setActiveSection("code");
-  
-  toast.success(`Code loaded into ${language === "jsx" ? "frontend.jsx" : "backend.js"}`, {
-    position: "top-right",
-    autoClose: 3000,
-    theme: "dark",
-  });
-};
+    // Set the code directly - the Code component will handle file assignment
+    setCode(code);
+    setActiveSection("code");
+
+    toast.success(
+      `Code loaded into ${language === "jsx" ? "frontend.jsx" : "backend.js"}`,
+      {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "dark",
+      }
+    );
+  };
 
   return (
     <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">
@@ -410,6 +388,8 @@ console.log(greeting());`);
                 consoleLogs={consoleLogs}
                 handleRunCode={handleRunCode}
                 activeSection={activeSection}
+                setPreviewUrl={setPreviewUrl}
+                previewUrl={previewUrl}
               />
             </div>
           ) : (

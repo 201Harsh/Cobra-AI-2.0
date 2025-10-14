@@ -6,11 +6,8 @@ const MySitePage = ({
   generatedSites,
   handleDeleteSite,
 }: any) => {
-  const handleView = async () => {
-    window.open(
-      `/site/${generatedSites.map((site: any) => site._id)}`,
-      "_blank"
-    );
+  const handleView = async ({ id }: any) => {
+    window.open(`/site/${id}`, "_blank");
   };
 
   return (
@@ -50,7 +47,9 @@ const MySitePage = ({
                     </div>
                     <div className="flex space-x-3 mt-4">
                       <button
-                        onClick={handleView}
+                        onClick={() => {
+                          handleView({ id: site._id });
+                        }}
                         className="cursor-pointer flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 py-2 px-3 rounded-lg transition-all duration-300 text-sm"
                       >
                         View

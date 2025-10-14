@@ -149,7 +149,7 @@ const HeaderandNavigation = ({
                       </div>
 
                       <button
-                        onClick={handleDashboard}
+                        onMouseDown={handleDashboard}
                         className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors"
                       >
                         <svg
@@ -170,7 +170,7 @@ const HeaderandNavigation = ({
 
                       <div className="border-t border-gray-700 mt-1">
                         <button
-                          onClick={handleLogout}
+                          onMouseDown={handleLogout}
                           className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
                         >
                           <svg

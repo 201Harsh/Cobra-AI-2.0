@@ -17,7 +17,7 @@ const WebPreview: React.FC<WebPreviewProps> = ({ previewUrl }) => {
   return (
     <iframe
       src={previewUrl}
-      className="w-full h-[400px] mt-4 border border-gray-700 rounded-lg"
+      className="w-full h-[400px] mt-4 rounded-lg"
       sandbox="allow-scripts allow-same-origin"
     />
   );

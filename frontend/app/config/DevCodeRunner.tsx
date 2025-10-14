@@ -41,6 +41,9 @@ root.render(
     `.trim(),
 
     "index.css": `
+    body::-webkit-scrollbar {
+  display: none;
+}
 body {
   margin: 0;
   font-family: sans-serif;
@@ -118,25 +121,20 @@ export default defineConfig({
   installProcess.output.pipeTo(
     new WritableStream({
       write(data) {
-        onOutput(data);
       },
     })
   );
   const installExit = await installProcess.exit;
   if (installExit !== 0) {
-    onOutput("❌ Dependency installation failed.");
     return;
   }
-  onOutput("✅ Dependencies installed successfully.");
 
   // Start backend
   onOutput("🚀 Starting backend server...");
   const backendProcess = await container.spawn("npm", ["run", "start"]);
   backendProcess.output.pipeTo(
     new WritableStream({
-      write(data) {
-        onOutput(data);
-      },
+      write(data) {},
     })
   );
 
@@ -145,9 +143,7 @@ export default defineConfig({
   const frontendProcess = await container.spawn("npm", ["run", "dev"]);
   frontendProcess.output.pipeTo(
     new WritableStream({
-      write(data) {
-        onOutput(data);
-      },
+      write(data) {},
     })
   );
 
@@ -155,10 +151,8 @@ export default defineConfig({
   container.on("server-ready", (port: number, url: string) => {
     if (port === 5173) {
       onPreviewReady(url); // frontend iframe
-      onOutput(`🌐 Frontend preview ready at: ${url}`);
     }
     if (port === 3000) {
-      onOutput(`🖥️ Backend API available at: ${url}`);
     }
   });
 

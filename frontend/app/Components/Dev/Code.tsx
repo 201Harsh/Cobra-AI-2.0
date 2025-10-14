@@ -289,8 +289,11 @@ app.listen(PORT, () => {
             ))}
           </div>
 
-          {/* Monaco Editor */}
-          <div className="flex-1 min-h-[300px]">
+          {/* Monaco Editor - Fixed Height */}
+          <div
+            className="flex-1"
+            style={{ minHeight: "300px", maxHeight: "60vh" }}
+          >
             <Editor
               height="100%"
               language={getLanguage(activeFile)}
@@ -301,53 +304,68 @@ app.listen(PORT, () => {
             />
           </div>
 
-          {/* Output & Console */}
-          <div className="p-3 lg:p-4 border-t border-red-500/20 space-y-3 lg:space-y-4">
-            {/* Preview Section */}
-            {previewUrl && (
-              <div className="bg-gray-950 rounded-xl border border-red-500/20 p-3 lg:p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-white font-semibold text-sm lg:text-base">
-                    Preview
+          {/* Preview & Output Side by Side - Fixed Height */}
+          <div
+            className="border-t border-red-500/20"
+            style={{ maxHeight: "30vh", minHeight: "150px" }}
+          >
+            <div className="grid grid-cols-2 h-full divide-x divide-red-500/20">
+              {/* Preview Section */}
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between p-3 bg-gray-800/50 border-b border-red-500/20">
+                  <h3 className="text-white font-semibold text-sm">
+                    Live Preview
                   </h3>
-                  <button
-                    onClick={toggleFullScreen}
-                    className="text-blue-400 hover:text-blue-300 text-xs flex items-center gap-1"
-                  >
-                    <svg
-                      className="w-3 h-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  {previewUrl && (
+                    <button
+                      onClick={toggleFullScreen}
+                      className="text-blue-400 hover:text-blue-300 text-xs flex items-center gap-1"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                      />
-                    </svg>
-                    Full Screen
-                  </button>
+                      <svg
+                        className="w-3 h-3"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                        />
+                      </svg>
+                      Full Screen
+                    </button>
+                  )}
                 </div>
-                <div className="bg-black rounded-lg overflow-hidden border border-gray-700 h-40">
-                  <iframe
-                    src={previewUrl}
-                    className="w-full h-full"
-                    title="Code Preview"
-                    sandbox="allow-scripts allow-same-origin"
-                  />
+                <div className="flex-1 bg-black p-2 overflow-hidden">
+                  {previewUrl ? (
+                    <iframe
+                      src={previewUrl}
+                      className="w-full h-full rounded border border-gray-700"
+                      title="Code Preview"
+                      sandbox="allow-scripts allow-same-origin"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-500 text-sm">
+                      Run code to see preview
+                    </div>
+                  )}
                 </div>
               </div>
-            )}
 
-            {/* Output Section */}
-            <div className="bg-gray-950 rounded-xl border border-red-500/20 p-3 lg:p-4">
-              <h3 className="text-white font-semibold mb-2 text-sm lg:text-base">
-                Output
-              </h3>
-              <div className="text-green-400 font-mono text-xs lg:text-sm min-h-[50px] lg:min-h-[60px] whitespace-pre-wrap overflow-auto max-h-[80px]">
-                {output || "// Run your code to see output here"}
+              {/* Output Section */}
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between p-3 bg-gray-800/50 border-b border-red-500/20">
+                  <h3 className="text-white font-semibold text-sm">
+                    Console Output
+                  </h3>
+                </div>
+                <div className="flex-1 bg-gray-950 p-3 overflow-auto">
+                  <div className="text-green-400 font-mono text-xs whitespace-pre-wrap h-full">
+                    {output || "// Run your code to see output here"}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

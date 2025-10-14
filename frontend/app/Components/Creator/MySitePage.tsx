@@ -1,19 +1,32 @@
+import AxiosInstance from "@/config/Axios";
 import React, { useState, useRef, useEffect } from "react";
+import { Bounce, toast, Zoom } from "react-toastify";
 
 const MySitePage = ({
   activeTab,
   setActiveTab,
   generatedSites,
   handleDeleteSite,
+  setIsGenerating,
 }: any) => {
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
+  const [customizePopup, setCustomizePopup] = useState<string | null>(null);
+  const [newPrompt, setNewPrompt] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setMenuOpen(null);
+      }
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        setCustomizePopup(null);
+        setNewPrompt("");
       }
     };
 
@@ -25,26 +38,180 @@ const MySitePage = ({
     window.open(`/site/${id}`, "_blank");
   };
 
-  const handleCustomize = (siteId: string) => {
-    console.log("Customize site:", siteId);
-    // Add your customize logic here
+  const handleCustomize = (id: string, site: any) => {
+    setCustomizePopup(id);
+    setNewPrompt(site.prompt || "");
     setMenuOpen(null);
   };
 
-  const handleEdit = (siteId: string) => {
-    console.log("Edit site:", siteId);
-    // Add your edit logic here
-    setMenuOpen(null);
+  const handleSaveCustomization = async (id: string) => {
+    setIsGenerating(true);
+    try {
+      const res = await AxiosInstance.post(`/ai/recreate/${id}`, {
+        newPrompt,
+      });
+
+      if (res.status === 200) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.message || "Something went wrong", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    } finally {
+      setCustomizePopup(null);
+      setNewPrompt("");
+      setIsGenerating(false);
+    }
   };
 
-  const handleDuplicate = (siteId: string) => {
-    console.log("Duplicate site:", siteId);
-    // Add your duplicate logic here
-    setMenuOpen(null);
+  const getCurrentSite = () => {
+    return generatedSites.find((site: any) => site._id === customizePopup);
   };
+
+  const currentSite = getCurrentSite();
 
   return (
     <>
+      {/* Customize/Edit Popup */}
+      {customizePopup && currentSite && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-xl flex items-center justify-center z-50 p-4">
+          <div
+            ref={popupRef}
+            className="bg-gray-800/90 backdrop-blur-xl rounded-3xl border border-emerald-500/30 p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
+                ✨ Customize Website
+              </h2>
+              <button
+                onClick={() => {
+                  setCustomizePopup(null);
+                  setNewPrompt("");
+                }}
+                className="p-2 hover:bg-gray-700/50 rounded-lg transition-colors cursor-pointer"
+              >
+                <svg
+                  className="w-6 h-6 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Website Details */}
+            <div className="bg-gray-700/50 rounded-2xl p-4 mb-6">
+              <h3 className="text-lg font-semibold text-white mb-3">
+                Current Website Details
+              </h3>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="text-gray-400">Name</p>
+                  <p className="text-white font-medium">{currentSite.Name}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400">Type</p>
+                  <p className="text-white font-medium">
+                    {currentSite.SiteType}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-400">Status</p>
+                  <p className="text-emerald-400 font-medium">
+                    {currentSite.status}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-400">Created</p>
+                  <p className="text-white font-medium">
+                    {new Date(currentSite.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Customize Prompt */}
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <label className="block text-lg font-semibold text-gray-200">
+                  🎯 Describe Your Website Vision
+                </label>
+                <span className="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full">
+                  {newPrompt.length}/5000
+                </span>
+              </div>
+              <div className="relative">
+                <textarea
+                  value={newPrompt}
+                  onChange={(e) => setNewPrompt(e.target.value)}
+                  placeholder="A modern portfolio website with dark theme, animated sections, contact form, and project showcase. Include smooth animations and professional layout..."
+                  className="w-full h-40 px-6 py-4 bg-gray-900/60 border-2 border-gray-600/50 rounded-2xl focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/20 transition-all duration-500 resize-none text-white scrollbar-small placeholder-gray-500 text-base leading-relaxed backdrop-blur-sm"
+                  maxLength={5000}
+                />
+                {/* Input Decoration */}
+                <div className="absolute bottom-4 right-4 text-gray-500">
+                  <div className="w-6 h-6 border-2 border-gray-600 rounded-lg flex items-center justify-center">
+                    <span className="text-xs">✨</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-400 mt-2">
+                Enter your new requirements to customize and regenerate this
+                website.
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setCustomizePopup(null);
+                  setNewPrompt("");
+                }}
+                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 px-6 rounded-xl transition-all duration-300 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleSaveCustomization(currentSite._id)}
+                disabled={!newPrompt.trim()}
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-white py-3 px-6 rounded-xl transition-all duration-300 cursor-pointer"
+              >
+                Save & Regenerate
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {activeTab === "sites" && (
         <div className="w-full max-w-6xl mx-auto">
           <div className="text-center mb-8 lg:mb-12">
@@ -91,7 +258,7 @@ const MySitePage = ({
                       {menuOpen === site._id && (
                         <div className="absolute right-0 top-10 w-48 bg-gray-800/95 backdrop-blur-xl border border-emerald-500/20 rounded-xl shadow-lg py-2 z-50">
                           <button
-                            onClick={() => handleCustomize(site._id)}
+                            onClick={() => handleCustomize(site._id, site)}
                             className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-300 hover:bg-emerald-500/20 transition-colors cursor-pointer"
                           >
                             <svg

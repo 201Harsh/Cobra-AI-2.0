@@ -328,6 +328,7 @@ const CreatorDashboard = () => {
               setActiveTab={setActiveTab}
               generatedSites={generatedSites}
               handleDeleteSite={handleDeleteSite}
+              setIsGenerating={setIsGenerating}
             />
 
             {/* Dashboard Page */}

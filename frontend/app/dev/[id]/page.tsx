@@ -353,6 +353,11 @@ console.log(greeting());`);
     }
   };
 
+  const handleTestCode = (code: any) => {
+    setCode(code);
+    setActiveSection("code");
+  };
+
   return (
     <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">
       {/* Header/Bottom and Navigation */}
@@ -377,6 +382,7 @@ console.log(greeting());`);
                 inputMessage={inputMessage}
                 setInputMessage={setInputMessage}
                 handleDeleteAllChats={handleDeleteAllChats}
+                handleTestCode={handleTestCode}
               />
 
               {/* Code Section */}

@@ -12,6 +12,7 @@ const Chat = ({
   inputMessage,
   setInputMessage,
   handleDeleteAllChats,
+  handleTestCode,
 }: any) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>(
@@ -79,8 +80,7 @@ const Chat = ({
             {/* Test Code Button */}
             <button
               onClick={() => {
-                // Add your test code logic here
-                console.log("Test code:", code);
+                handleTestCode(code);
               }}
               className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors px-2 py-1 rounded hover:bg-blue-500/10 border border-blue-500/30"
               title="Test this code"

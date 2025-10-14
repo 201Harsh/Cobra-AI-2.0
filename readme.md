@@ -96,8 +96,8 @@ npm install
 npm run dev
 ```
 
-**Backend runs on:** `http://localhost:3000`  
-**Frontend runs on:** `http://localhost:5173` (or the next available port)
+**Backend runs on:** `http://localhost:4000`  
+**Frontend runs on:** `http://localhost:3000` (or the next available port)
 
 ---
 

@@ -172,7 +172,7 @@ const SettingsPage = ({
               </div>
 
               {/* Plan & Usage */}
-              <div className="space-y-6">
+              <div className="space-y-6 overflow-hidden">
                 <h3 className="text-lg font-bold text-white border-b border-gray-600/50 pb-2">
                   Plan & Usage
                 </h3>

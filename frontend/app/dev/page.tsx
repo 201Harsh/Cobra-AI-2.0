@@ -6,11 +6,15 @@ import DevHeader from "../Components/Dev/DevHeader";
 import { Slide, toast } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
+import Head from "next/head";
 
 const Devpage = () => {
   const [venomLabs, setVenomLabs] = useState<any>([]);
   const [isCreating, setIsCreating] = useState(false);
   const [newLabName, setNewLabName] = useState("");
+  const [PageTitle, setPageTitle] = useState<string>(
+    "Cobra AI - Dev Dashboard"
+  );
 
   // You can replace this with actual user data from your auth system
   const [currentUser, setcurrentUser] = useState<string>("Cobra AI");
@@ -151,6 +155,10 @@ const Devpage = () => {
 
   return (
     <>
+      <Head>
+        <title>{PageTitle}</title>
+      </Head>
+
       <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-500/20 to-rose-700/30 p-8">
         {/* Header Section */}
         <DevHeader />

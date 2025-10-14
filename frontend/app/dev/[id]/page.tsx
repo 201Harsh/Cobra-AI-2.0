@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import HeaderandNavigation from "@/app/Components/Dev/HeaderandNavigation";
 import DevDash from "@/app/Components/Dev/DevDash";
 import { runDevProject } from "@/app/config/DevCodeRunner";
+import Head from "next/head";
 
 const CodeSection = () => {
   const [activeSection, setActiveSection] = useState<
@@ -38,6 +39,9 @@ console.log(greeting());`);
   const [output, setOutput] = useState("");
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [PageTitle, setPageTitle] = useState<string>(
+    "Cobra AI - Venom Lab AI Assistant"
+  );
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -354,51 +358,57 @@ console.log(greeting());`);
   };
 
   return (
-    <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">
-      {/* Header/Bottom and Navigation */}
-      <HeaderandNavigation
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-      />
+    <>
+      <Head>
+        <title>{PageTitle}</title>
+      </Head>
 
-      {/* Main Content */}
-      <div className="pt-20 lg:pt-24 pb-20 lg:pb-4 px-2 lg:px-0">
-        <div className="w-full">
-          {/* Chat and Code Sections - Only show when dashboard is not active */}
-          {activeSection !== "dashboard" ? (
-            <div className="lg:grid lg:grid-cols-2 lg:gap-6 max-h-screen">
-              {/* Chat Section */}
-              <Chat
-                messages={messages}
-                activeSection={activeSection}
-                isGenerating={isGenerating}
-                messagesEndRef={messagesEndRef}
-                handleSendMessage={handleSendMessage}
-                inputMessage={inputMessage}
-                setInputMessage={setInputMessage}
-                handleDeleteAllChats={handleDeleteAllChats}
-                handleTestCode={handleTestCode}
-              />
+      <div className="min-h-screen w-full bg-gray-950 bg-gradient-to-br from-gray-950 via-red-400/20 to-rose-500/30">
+        {/* Header/Bottom and Navigation */}
+        <HeaderandNavigation
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
 
-              {/* Code Section */}
-              <Code
-                code={code}
-                setCode={setCode}
-                output={output}
-                consoleLogs={consoleLogs}
-                handleRunCode={handleRunCode}
-                activeSection={activeSection}
-                setPreviewUrl={setPreviewUrl}
-                previewUrl={previewUrl}
-              />
-            </div>
-          ) : (
-            /* Dashboard Section - Full width when active */
-            <DevDash activeSection={activeSection} />
-          )}
+        {/* Main Content */}
+        <div className="pt-20 lg:pt-24 pb-20 lg:pb-4 px-2 lg:px-0">
+          <div className="w-full">
+            {/* Chat and Code Sections - Only show when dashboard is not active */}
+            {activeSection !== "dashboard" ? (
+              <div className="lg:grid lg:grid-cols-2 lg:gap-6 max-h-screen">
+                {/* Chat Section */}
+                <Chat
+                  messages={messages}
+                  activeSection={activeSection}
+                  isGenerating={isGenerating}
+                  messagesEndRef={messagesEndRef}
+                  handleSendMessage={handleSendMessage}
+                  inputMessage={inputMessage}
+                  setInputMessage={setInputMessage}
+                  handleDeleteAllChats={handleDeleteAllChats}
+                  handleTestCode={handleTestCode}
+                />
+
+                {/* Code Section */}
+                <Code
+                  code={code}
+                  setCode={setCode}
+                  output={output}
+                  consoleLogs={consoleLogs}
+                  handleRunCode={handleRunCode}
+                  activeSection={activeSection}
+                  setPreviewUrl={setPreviewUrl}
+                  previewUrl={previewUrl}
+                />
+              </div>
+            ) : (
+              /* Dashboard Section - Full width when active */
+              <DevDash activeSection={activeSection} />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -11,12 +11,16 @@ import { Bounce, Flip, toast, Zoom } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
 import Loading from "../Components/Creator/Loading";
 import { useRouter } from "next/navigation";
+import Head from "next/head";
 
 const CreatorDashboard = () => {
   const [activeTab, setActiveTab] = useState<string>("create");
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [generatedSites, setgeneratedSites] = useState<any>([]);
+  const [PageTitle, setPageTitle] = useState<string>(
+    "Cobra AI - Creator Dashboard"
+  );
   const [websiteData, setWebsiteData] = useState<any>({
     prompt: "",
     name: "",
@@ -266,84 +270,90 @@ const CreatorDashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-inter">
-      {/* Background Effects */}
-      <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/10 via-gray-900/0 to-gray-900/80"></div>
+    <>
+      <Head>
+        <title>{PageTitle}</title>
+      </Head>
 
-      {/* Top Navigation */}
-      <CreatorHeader
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        isMobileMenuOpen={isMobileMenuOpen}
-        setIsMobileMenuOpen={setIsMobileMenuOpen}
-        navigationItems={navigationItems}
-        UserData={UserData}
-        setUserData={setUserData}
-        handleLogout={handleLogout}
-        handleSettingsClick={handleSettingsClick}
-      />
+      <div className="min-h-screen bg-gray-900 text-white font-inter">
+        {/* Background Effects */}
+        <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
+        <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-500/10 via-gray-900/0 to-gray-900/80"></div>
 
-      {/* Desktop Sidebar */}
-      <Sidebar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        navigationItems={navigationItems}
-      />
+        {/* Top Navigation */}
+        <CreatorHeader
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isMobileMenuOpen={isMobileMenuOpen}
+          setIsMobileMenuOpen={setIsMobileMenuOpen}
+          navigationItems={navigationItems}
+          UserData={UserData}
+          setUserData={setUserData}
+          handleLogout={handleLogout}
+          handleSettingsClick={handleSettingsClick}
+        />
 
-      {/* Bottom Navigation for Mobile & Tablet */}
-      <BottomNavigation
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        navigationItems={navigationItems}
-      />
+        {/* Desktop Sidebar */}
+        <Sidebar
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          navigationItems={navigationItems}
+        />
 
-      {/* Main Content */}
-      <div className="pt-16 pb-20 md:pb-20 lg:pb-8 min-h-screen lg:ml-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Create Page */}
-          <CreatorPage
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            websiteData={websiteData}
-            setWebsiteData={setWebsiteData}
-            handleGenerate={handleGenerate}
-            isGenerating={isGenerating}
-            websiteTypes={websiteTypes}
-            themes={themes}
-          />
+        {/* Bottom Navigation for Mobile & Tablet */}
+        <BottomNavigation
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          navigationItems={navigationItems}
+        />
 
-          {/* My Sites Page */}
-          <MySitePage
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            generatedSites={generatedSites}
-            handleDeleteSite={handleDeleteSite}
-          />
+        {/* Main Content */}
+        <div className="pt-16 pb-20 md:pb-20 lg:pb-8 min-h-screen lg:ml-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Create Page */}
+            <CreatorPage
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              websiteData={websiteData}
+              setWebsiteData={setWebsiteData}
+              handleGenerate={handleGenerate}
+              isGenerating={isGenerating}
+              websiteTypes={websiteTypes}
+              themes={themes}
+            />
 
-          {/* Dashboard Page */}
-          <DashboardPage
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            generatedSites={generatedSites}
-            UserData={UserData}
-            setUserData={setUserData}
-          />
+            {/* My Sites Page */}
+            <MySitePage
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              generatedSites={generatedSites}
+              handleDeleteSite={handleDeleteSite}
+            />
 
-          {/* Settings Page */}
-          <SettingsPage
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            UserData={UserData}
-            setUserData={setUserData}
-            handleDelete={handleDelete}
-          />
+            {/* Dashboard Page */}
+            <DashboardPage
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              generatedSites={generatedSites}
+              UserData={UserData}
+              setUserData={setUserData}
+            />
 
-          {/* Loading Overlay */}
-          <Loading isGenerating={isGenerating} websiteData={websiteData} />
+            {/* Settings Page */}
+            <SettingsPage
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              UserData={UserData}
+              setUserData={setUserData}
+              handleDelete={handleDelete}
+            />
+
+            {/* Loading Overlay */}
+            <Loading isGenerating={isGenerating} websiteData={websiteData} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

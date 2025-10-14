@@ -129,7 +129,7 @@ const CreatorDashboard = () => {
           progress: undefined,
           theme: "dark",
           transition: Zoom,
-        })
+        });
         Router.push("/");
       }
     } catch (error: any) {
@@ -198,7 +198,7 @@ const CreatorDashboard = () => {
           transition: Zoom,
         });
         GetWebsites();
-        window.location.reload();
+        setgeneratedSites([]);
       }
     } catch (error: any) {
       toast.error(error.response.data.message, {

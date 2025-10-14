@@ -23,7 +23,7 @@ const Code = ({
               <h2 className="text-xl font-bold text-white">💻 Code Editor</h2>
               <button
                 onClick={handleRunCode}
-                className="bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-700 hover:to-green-600 text-white font-semibold px-4 lg:px-6 py-2 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] text-sm lg:text-base"
+                className="bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-700 hover:to-green-600 text-white font-semibold px-4 lg:px-6 py-2 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] text-sm lg:text-base cursor-pointer"
               >
                 🚀 Run Code
               </button>

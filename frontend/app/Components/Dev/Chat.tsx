@@ -167,7 +167,7 @@ const Chat = ({
               </div>
               <button
                 onClick={handleDeleteAllChats}
-                className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-red-500/30 rounded-lg transition-all duration-200 hover:border-red-500/50"
+                className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-red-500/30 rounded-lg transition-all duration-200 hover:border-red-500/50 cursor-pointer"
                 title="Delete All Chats"
               >
                 <svg
@@ -315,7 +315,7 @@ const Chat = ({
               <button
                 type="submit"
                 disabled={!inputMessage.trim() || isGenerating}
-                className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 disabled:from-gray-700 disabled:to-gray-600 text-white font-semibold px-4 lg:px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,0,80,0.5)] text-sm lg:text-base whitespace-nowrap disabled:cursor-not-allowed flex items-center justify-center min-h-[44px]"
+                className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 disabled:from-gray-700 disabled:to-gray-600 text-white font-semibold px-4 lg:px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,0,80,0.5)] text-sm lg:text-base whitespace-nowrap cursor-pointer disabled:cursor-not-allowed flex items-center justify-center min-h-[44px]"
               >
                 {isGenerating ? (
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

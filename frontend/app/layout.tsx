@@ -58,7 +58,6 @@ export const metadata: Metadata = {
   ],
   creator: "Cobra AI 2.0",
   publisher: "Cobra AI 2.0",
-  viewport: "width=device-width, initial-scale=1.0",
   openGraph: {
     title: "Cobra AI 2.0 – Intelligent Coding Platform",
     description:

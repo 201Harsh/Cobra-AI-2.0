@@ -11,7 +11,7 @@ const CreateLabs = ({
 
   const codingEnvironments = [
     { id: "web-development", name: "Full Stack Web Development", available: true },
-    { id: "python", name: "Python", available: true },
+    { id: "python", name: "Python", available: false },
     { id: "ai-ml", name: "AI/ML", available: false },
     { id: "mobile-development", name: "Mobile Development", available: false },
     { id: "data-science", name: "Data Science", available: false },

@@ -1,6 +1,8 @@
 # 🐍 Cobra AI 2.0 — Next-Gen AI-Powered Development Platform
 
 [![MIT License](https://img.shields.io/badge/License-MIT-red.svg)](https://choosealicense.com/licenses/mit/)
+
+
 ![Cobra AI Banner](https://img.shields.io/badge/🚀_Cobra_AI_2.0-Coding_+_Website_Builder-EA1E63?style=for-the-badge&logo=code&logoColor=white)
 
 **Cobra AI 2.0** is the ultimate AI-powered coding and website-building platform for developers and creators. Build, run, debug, and deploy full-stack projects in real-time with intelligent AI assistance — all within your browser.

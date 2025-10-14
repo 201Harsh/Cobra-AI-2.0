@@ -152,7 +152,7 @@ const Chat = ({
               padding: "0.75rem",
               borderBottomLeftRadius: "0.5rem",
               borderBottomRightRadius: "0.5rem",
-              background: "#030712",
+              background: "#101418",
               fontSize: "0.75rem",
               maxWidth: "100%",
               whiteSpace: "pre-wrap",
@@ -181,7 +181,7 @@ const Chat = ({
           activeSection === "chat" ? "block" : "hidden"
         } lg:block h-[calc(100vh-170px)] lg:h-[calc(100vh-120px)]`}
       >
-        <div className="bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-red-500/20 h-full flex flex-col">
+        <div className="bg-gray-950 backdrop-blur-xl rounded-2xl border border-red-500/20 h-full flex flex-col">
           {/* Chat Header */}
           <div className="p-4">
             <div className="flex items-center justify-between">
@@ -216,7 +216,7 @@ const Chat = ({
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 p-4 overflow-y-auto scrollbar-small">
+          <div className="flex-1 p-4 overflow-y-auto scrollbar-small bg-gray-950">
             <div className="space-y-6">
               {messages.map((message: any, idx: number) => (
                 <div

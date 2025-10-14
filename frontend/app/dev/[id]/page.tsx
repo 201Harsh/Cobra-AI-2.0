@@ -368,7 +368,7 @@ console.log(greeting());`);
 
       {/* Main Content */}
       <div className="pt-20 lg:pt-24 pb-20 lg:pb-4 px-2 lg:px-0">
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full">
           {/* Chat and Code Sections - Only show when dashboard is not active */}
           {activeSection !== "dashboard" ? (
             <div className="lg:grid lg:grid-cols-2 lg:gap-6 max-h-screen">

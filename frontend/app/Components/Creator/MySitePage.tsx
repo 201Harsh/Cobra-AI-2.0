@@ -52,6 +52,7 @@ const MySitePage = ({
       });
 
       if (res.status === 200) {
+        console.log(res.data);
         toast.success(res.data.message, {
           position: "top-right",
           autoClose: 5000,
@@ -65,7 +66,6 @@ const MySitePage = ({
         });
       }
     } catch (error: any) {
-      console.log(error);
       toast.error(error.response.data.message || "Something went wrong", {
         position: "top-right",
         autoClose: 5000,
@@ -165,16 +165,16 @@ const MySitePage = ({
                   🎯 Describe Your Website Vision
                 </label>
                 <span className="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full">
-                  {newPrompt.length}/5000
+                  {newPrompt.length}/1000
                 </span>
               </div>
               <div className="relative">
                 <textarea
                   value={newPrompt}
                   onChange={(e) => setNewPrompt(e.target.value)}
-                  placeholder="A modern portfolio website with dark theme, animated sections, contact form, and project showcase. Include smooth animations and professional layout..."
+                  placeholder="Enhance my website by adding a new feature..."
                   className="w-full h-40 px-6 py-4 bg-gray-900/60 border-2 border-gray-600/50 rounded-2xl focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/20 transition-all duration-500 resize-none text-white scrollbar-small placeholder-gray-500 text-base leading-relaxed backdrop-blur-sm"
-                  maxLength={5000}
+                  maxLength={1000}
                 />
                 {/* Input Decoration */}
                 <div className="absolute bottom-4 right-4 text-gray-500">

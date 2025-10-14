@@ -9,6 +9,19 @@ const Code = ({
   handleRunCode,
   activeSection,
 }: any) => {
+  const editorOptions: any = {
+    minimap: { enabled: false },
+    fontSize: 13,
+    wordWrap: "on",
+    automaticLayout: true,
+    tabSize: 2,
+    scrollBeyondLastLine: false,
+    padding: { top: 16 },
+    lineNumbersMinChars: 3,
+    folding: false,
+    touchSupported: true,
+    renderLineHighlight: "all",
+  };
   return (
     <>
       <div
@@ -38,18 +51,7 @@ const Code = ({
               value={code}
               onChange={(value) => setCode(value || "")}
               theme="vs-dark"
-              options={{
-                minimap: { enabled: false },
-                fontSize: 13,
-                wordWrap: "on",
-                automaticLayout: true,
-                tabSize: 2,
-                scrollBeyondLastLine: false,
-                padding: { top: 16 },
-                lineNumbersMinChars: 3,
-                folding: false,
-                renderLineHighlight: "all",
-              }}
+              options={editorOptions}
             />
           </div>
 

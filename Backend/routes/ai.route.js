@@ -26,6 +26,15 @@ router.post(
   AIController.GenerateChat
 );
 
-router.post("/recreate/:id", AuthMiddleware.AuthUser, AIController.UpdateWebsite);
+router.post(
+  "/recreate/:id",
+  [
+    body("newPrompt")
+      .notEmpty()
+      .withMessage("Prompt is required")
+  ],
+  AuthMiddleware.AuthUser,
+  AIController.UpdateWebsite
+);
 
 module.exports = router;

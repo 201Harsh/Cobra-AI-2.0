@@ -112,7 +112,10 @@ module.exports.UpdateWebsite = async (req, res) => {
       });
     }
 
-    const NewResponse = await ReCreateWebsiteService({ newPrompt, Code });
+    const NewResponse = await ReCreateWebsiteService({
+      newPrompt,
+      existingCode: Code,
+    });
 
     if (!NewResponse) {
       return res.status(500).json({
@@ -123,6 +126,7 @@ module.exports.UpdateWebsite = async (req, res) => {
     if (NewResponse) {
       user.siteGenToken -= 1;
       user.sitegenerated += 1;
+      Website.Code = NewResponse;
       await user.save();
     }
 

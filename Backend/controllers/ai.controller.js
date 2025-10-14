@@ -3,6 +3,7 @@ const WebsiteModel = require("../models/Website.model");
 const UserModel = require("../models/user.model");
 const CobraChatbotService = require("../services/cobra-chatbot.service");
 const ChatModel = require("../models/chat.model");
+const ReCreateWebsiteService = require("../services/recreate-website.service");
 
 module.exports.GenerateWebsite = async (req, res) => {
   try {
@@ -72,7 +73,7 @@ module.exports.GenerateWebsite = async (req, res) => {
 
 module.exports.UpdateWebsite = async (req, res) => {
   try {
-    const { newPrompt } = req.body;
+    const { newPrompt} = req.body;
 
     const UserId = req.user._id;
 
@@ -89,6 +90,9 @@ module.exports.UpdateWebsite = async (req, res) => {
         error: "User not found",
       });
     }
+
+    const Code = await WebsiteModel.findOne({})
+
   } catch (error) {
     res.status(500).json({
       error: error.message,

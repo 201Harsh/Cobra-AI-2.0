@@ -26,6 +26,6 @@ router.post(
   AIController.GenerateChat
 );
 
-router.post("/recreate", AuthMiddleware.AuthUser, AIController.UpdateWebsite);
+router.post("/recreate/:id", AuthMiddleware.AuthUser, AIController.UpdateWebsite);
 
 module.exports = router;

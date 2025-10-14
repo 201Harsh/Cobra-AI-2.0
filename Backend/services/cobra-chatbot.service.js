@@ -22,6 +22,8 @@ async function main({ prompt }) {
 - **Help me plan my application
 - **Review my project architecture
 - **Debug this code
+-** also if user aks for package installation or other commands.
+-** give user package.json file Only.
 
 
 # 🚀 APPROVED TECHNOLOGIES

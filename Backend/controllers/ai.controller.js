@@ -127,6 +127,7 @@ module.exports.UpdateWebsite = async (req, res) => {
       user.siteGenToken -= 1;
       user.sitegenerated += 1;
       Website.Code = NewResponse;
+      Website.createdAt = Date.now();
       await user.save();
     }
 

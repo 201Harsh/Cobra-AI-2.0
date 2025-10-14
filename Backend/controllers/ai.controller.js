@@ -70,6 +70,32 @@ module.exports.GenerateWebsite = async (req, res) => {
   }
 };
 
+module.exports.UpdateWebsite = async (req, res) => {
+  try {
+    const { newPrompt } = req.body;
+
+    const UserId = req.user._id;
+
+    if (!UserId) {
+      return res.status(400).json({
+        error: "User ID is required",
+      });
+    }
+
+    const user = await UserModel.findById(UserId);
+
+    if (!user) {
+      return res.status(400).json({
+        error: "User not found",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
 module.exports.GenerateChat = async (req, res) => {
   try {
     const { prompt } = req.body;

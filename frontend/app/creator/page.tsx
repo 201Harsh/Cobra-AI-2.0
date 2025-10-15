@@ -18,9 +18,6 @@ const CreatorDashboard = () => {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [generatedSites, setgeneratedSites] = useState<any>([]);
-  const [PageTitle, setPageTitle] = useState<string>(
-    "Cobra AI - Creator Dashboard"
-  );
   const [websiteData, setWebsiteData] = useState<any>({
     prompt: "",
     name: "",
@@ -271,10 +268,6 @@ const CreatorDashboard = () => {
 
   return (
     <>
-      <Head>
-        <title>{PageTitle}</title>
-      </Head>
-
       <div className="min-h-screen bg-gray-900 text-white font-inter">
         {/* Background Effects */}
         <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>

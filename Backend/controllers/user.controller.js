@@ -851,7 +851,10 @@ module.exports.loginUser = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      domain: "https://cobra-aing.vercel.app/",
+      domain:
+        process.env.NODE_ENV === "production"
+          ? "https://cobra-aing.vercel.app/"
+          : undefined,
     });
 
     res.status(200).json({

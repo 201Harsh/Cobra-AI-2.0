@@ -3,10 +3,13 @@ import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
+import CobraAILoading from "./CobraLoading";
 
 const page = () => {
+  const [IsLoading, setIsLoading] = useState<boolean>(true);
   const Router = useRouter();
   const getUser = async () => {
+    setIsLoading(true);
     try {
       const res = await AxiosInstance.get("/users/me");
 
@@ -42,12 +45,22 @@ const page = () => {
         }
       );
       localStorage.clear();
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getUser();
   }, []);
+
+  if (IsLoading) {
+    return (
+      <>
+        <CobraAILoading />
+      </>
+    );
+  }
 };
 
 export default page;

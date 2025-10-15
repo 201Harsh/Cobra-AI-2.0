@@ -9,6 +9,9 @@ export const metadata = {
   title: "Cobra AI - Creator Dashboard",
   description:
     "Cobra AI 2.0 Creator Dashboard — Build, manage, and deploy AI-powered websites effortlessly.",
+  authors: [
+    { name: "Harsh Pandey", url: "https://www.instagram.com/201harshs/" },
+  ],
   icons: {
     icon: "/img/logo.png",
     shortcut: "/img/logo.png",

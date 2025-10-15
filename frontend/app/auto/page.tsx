@@ -3,7 +3,7 @@ import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
-import LoadingScreen from "./LoadingScreen";
+import CobraAILoading from "./CobraLoading";
 
 const page = () => {
   const [IsLoading, setIsLoading] = useState<boolean>(true);
@@ -19,11 +19,17 @@ const page = () => {
         localStorage.setItem("mode", res.data.user.mode);
 
         if (res.data.user.mode === "creator") {
-          Router.push("/creator");
+          setTimeout(() => {
+            Router.push("/creator");
+          }, 3000);
         } else if (res.data.user.mode === "developer") {
-          Router.push("/dev");
+          setTimeout(() => {
+            Router.push("/dev");
+          }, 3500);
         } else {
-          Router.push("/home");
+          setTimeout(() => {
+            Router.push("/home");
+          }, 3000);
         }
       }
     } catch (error: any) {
@@ -54,7 +60,7 @@ const page = () => {
   if (IsLoading) {
     return (
       <>
-        <LoadingScreen />
+        <CobraAILoading />
       </>
     );
   }

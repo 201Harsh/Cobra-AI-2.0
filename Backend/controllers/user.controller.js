@@ -437,6 +437,9 @@ module.exports.verifyOtp = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
     });
 
     res.status(200).json({
@@ -845,6 +848,9 @@ module.exports.loginUser = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
     });
 
     res.status(200).json({
@@ -881,10 +887,10 @@ module.exports.forgotPasswordSendOtp = async (req, res) => {
     const OtpExpiryTime = Date.now() + 5 * 60 * 1000;
 
     const info = await transporter.sendMail({
-  from: "Cobra AI 2.0 <endgamingai2@gmail.com>",
-  to: email,
-  subject: "🔐 Your Cobra AI 2.0 Verification Code",
-  html: `
+      from: "Cobra AI 2.0 <endgamingai2@gmail.com>",
+      to: email,
+      subject: "🔐 Your Cobra AI 2.0 Verification Code",
+      html: `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1206,7 +1212,7 @@ module.exports.forgotPasswordSendOtp = async (req, res) => {
 </body>
 </html>
 `,
-});
+    });
 
     const User = await UserService.ForgetPasswordSendOtp({
       user,

@@ -3,15 +3,15 @@ import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast, Bounce } from "react-toastify";
-import LoadingScreen from "../auto/LoadingScreen";
+import CobraAILoading from "../auto/CobraLoading";
 
 const ProtectedRoute = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const Router = useRouter();
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (!token) {
       Router.push("/");
       return;
@@ -49,12 +49,12 @@ const ProtectedRoute = ({ children }: any) => {
     };
 
     verifyUser();
-  }, [Router, token]);
+  }, [Router]);
 
   if (isLoading)
     return (
       <>
-        <LoadingScreen />
+        <CobraAILoading />
       </>
     );
 

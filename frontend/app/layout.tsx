@@ -70,11 +70,11 @@ export const metadata: Metadata = {
     title: "Cobra AI 2.0 – Intelligent Coding Platform",
     description:
       "Boost your coding productivity with Cobra AI's real-time collaborative coding, AI suggestions, and live previews.",
-    url: baseUrl, // replace with your actual URL
+    url: baseUrl, 
     siteName: "Cobra AI 2.0",
     images: [
       {
-        url: "/img/Seoimg.png", // your OG image
+        url: "/img/Seoimg.png",
         width: 1200,
         height: 630,
         alt: "Cobra AI 2.0 – Intelligent Coding Platform",

@@ -198,4 +198,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy...
 **Cobra AI 2.0 isn’t just a tool — it’s your intelligent coding companion.**  
 Empowering creators and developers to build the future of the web, one AI-assisted project at a time.
 
-### 🧠 Built with passion by [Harsh](https://github.com/201Harsh)
+### 🧠 Built with passion by [Harsh](https://www.instagram.com/201harshs/)

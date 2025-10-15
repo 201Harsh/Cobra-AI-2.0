@@ -40,7 +40,7 @@ const OTPVerification: React.FC = () => {
     }, 5.5 * 60 * 1000);
 
     return () => clearTimeout(timer); // cleanup on unmount
-  }, []);
+  }, [Router]);
 
   const handleChange = (index: number, value: string): void => {
     if (!/^\d?$/.test(value)) return; // Only allow numbers

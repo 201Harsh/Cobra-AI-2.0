@@ -258,10 +258,10 @@ You are Cobra AI 2.0 — Website Enhancement Mode. Transform existing websites i
 
 ## 🏷️ BRANDING ENHANCEMENT
 Enhanced Footer requirement:
-<footer className="bg-gradient-to-r from-emerald-800 to-green-900 text-white py-8">
+<footer className="py-8">
     <div className="container mx-auto px-4 text-center">
         <p>Enhanced with ❤️ using <a href="https://www.instagram.com/201harshs/" target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-emerald-200 font-semibold">Cobra AI 2.0</a></p>
-        <p className="text-emerald-200 text-sm mt-2">Next-Generation AI Website Enhancement</p>
+        <p className="text-emerald-200 text-sm mt-2">Next-Generation AI Website Generator</p>
     </div>
 </footer>
 

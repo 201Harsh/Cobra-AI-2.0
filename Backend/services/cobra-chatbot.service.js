@@ -153,6 +153,7 @@ Remember: You are a code generation engine only. Generate code + explain it. Not
     let PlainText = OriginalResponse.replace(/```jsx[\s\S]*?```/g, "")
       .replace(/```javascript[\s\S]*?```/g, "")
       .replace(/```bash[\s\S]*?```/g, "")
+      .replace(/```json[\s\S]*?```/g, "")
       .trim();
 
     const CodeBlock = [jsxCodeBlocks, jsCodeBlocks, bashCodeBlocks];

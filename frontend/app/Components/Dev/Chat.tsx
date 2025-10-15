@@ -74,6 +74,8 @@ const Chat = ({
               ? "JavaScript"
               : language === "bash"
               ? "Bash"
+              : language === "json"
+              ? "JSON"
               : language}
           </span>
           <div className="flex items-center gap-2">
@@ -275,6 +277,10 @@ const Chat = ({
 
                           {message.contentType === "code-bash" &&
                             renderCodeBlock(message.text, "bash", message.id)}
+
+                          {/* ADDED: JSON code block support */}
+                          {message.contentType === "code-json" &&
+                            renderCodeBlock(message.text, "json", message.id)}
                         </div>
                       )}
                     </div>

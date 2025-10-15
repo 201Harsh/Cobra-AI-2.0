@@ -1,4 +1,3 @@
-// app/creator/layout.tsx
 import "../globals.css";
 import Head from "next/head";
 import React from "react";
@@ -11,7 +10,7 @@ export const metadata = {
   description:
     "Cobra AI 2.0 Creator Dashboard — Build, manage, and deploy AI-powered websites effortlessly.",
   icons: {
-    icon: "/img/Seoimg.png",
+    icon: "/img/logo.png",
     shortcut: "/img/logo.png",
   },
 };

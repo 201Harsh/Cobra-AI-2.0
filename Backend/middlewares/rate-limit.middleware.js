@@ -35,7 +35,7 @@ module.exports.forgotPasswordLimit = rateLimit({
 
 // 💻 Website creation limit
 module.exports.createWebsiteLimit = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 5 * 60 * 1000, // 15 minutes
   max: 5,
   message:
     "Too many website creation requests, please try again after 15 minutes",

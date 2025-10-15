@@ -21,20 +21,19 @@ const page = () => {
         if (res.data.user.mode === "creator") {
           setTimeout(() => {
             Router.push("/creator");
-          }, 3000);
+          }, 2000);
         } else if (res.data.user.mode === "developer") {
           setTimeout(() => {
             Router.push("/dev");
-          }, 3500);
+          }, 2500);
         } else {
           setTimeout(() => {
             Router.push("/home");
-          }, 3000);
+          }, 1000);
         }
       }
     } catch (error: any) {
-      Router.push("/");
-      toast.error(error.response.data.message, {
+      toast.error(error.response.data.message || error.response.data.error, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

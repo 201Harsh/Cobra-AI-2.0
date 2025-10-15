@@ -4,6 +4,7 @@ import "./globals.css";
 import { Slide, ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cobra-ai.com"),
   title: "Cobra AI 2.0 – Intelligent Coding Platform for Developers",
   description:
     "Cobra AI 2.0 is a full-stack AI-powered coding platform that helps developers write, run, and debug code in real-time. Boost your productivity with intelligent code suggestions, live previews, and collaborative coding tools.",

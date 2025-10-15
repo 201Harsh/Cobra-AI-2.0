@@ -52,7 +52,6 @@ const MySitePage = ({
       });
 
       if (res.status === 200) {
-        console.log(res.data);
         toast.success(res.data.message, {
           position: "top-right",
           autoClose: 5000,
@@ -66,17 +65,22 @@ const MySitePage = ({
         });
       }
     } catch (error: any) {
-      toast.error(error.response.data.message || "Something went wrong", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
+      toast.error(
+        error.response.data.error ||
+          error.response.data.message ||
+          "Something went wrong",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        }
+      );
     } finally {
       setCustomizePopup(null);
       setNewPrompt("");

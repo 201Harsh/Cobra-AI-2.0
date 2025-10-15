@@ -126,9 +126,19 @@ module.exports.UpdateWebsite = async (req, res) => {
     if (NewResponse) {
       user.siteGenToken -= 1;
       user.sitegenerated += 1;
+      await user.save();
+
+      if (
+        typeof NewResponse === "string" &&
+        NewResponse.startsWith("// Error enhancing website:")
+      ) {
+        return res.status(400).json({
+          error: "AI did not return a valid enhancement response",
+        });
+      }
+
       Website.Code = NewResponse;
       Website.createdAt = Date.now();
-      await user.save();
       await Website.save();
     }
 
@@ -137,6 +147,7 @@ module.exports.UpdateWebsite = async (req, res) => {
       code: NewResponse,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       error: error.message,
     });

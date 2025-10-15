@@ -12,15 +12,15 @@ const WebsiteRouter = require("./routes/website.route");
 const LabRouter = require("./routes/venomlab.route");
 const ChatRouter = require("./routes/chat.route");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/users", USerRouter);
 app.use("/ai", AIRouter);

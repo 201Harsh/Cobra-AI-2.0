@@ -46,3 +46,11 @@ module.exports.devModeLimit = rateLimit({
   max: 5,
   message: "Too many AI/dev requests, please try again after 1 minute",
 });
+
+// 🧬 Venom Lab creation limit
+module.exports.venomLabLimit = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 3,
+  message:
+    "Too many Venom Lab creation requests, please try again after 10 minutes",
+});

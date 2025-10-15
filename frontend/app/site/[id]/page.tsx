@@ -56,6 +56,7 @@ export default page
     <>
       <Head>
         <title>{PageTitle}</title>
+        <link rel="icon" href="/img/Seoimg.png" />
       </Head>
 
       <div className="scrollbar-hide min-h-screen">

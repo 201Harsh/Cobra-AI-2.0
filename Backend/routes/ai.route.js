@@ -3,6 +3,7 @@ const AIController = require("../controllers/ai.controller");
 const AuthMiddleware = require("../middlewares/auth.middleware");
 const ValidateMiddleware = require("../middlewares/validate.middleware");
 const { body } = require("express-validator");
+const RateLimitMiddleware = require("../middlewares/rate-limit.middleware");
 
 router.post(
   "/site/gen",
@@ -15,7 +16,17 @@ router.post(
   ],
   AuthMiddleware.AuthUser,
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.createWebsiteLimit,
   AIController.GenerateWebsite
+);
+
+router.post(
+  "/recreate/:id",
+  [body("newPrompt").notEmpty().withMessage("Prompt is required")],
+  AuthMiddleware.AuthUser,
+  ValidateMiddleware.validateUser,
+  RateLimitMiddleware.createWebsiteLimit,
+  AIController.UpdateWebsite
 );
 
 router.post(
@@ -23,18 +34,8 @@ router.post(
   [body("prompt").notEmpty().withMessage("Prompt is required")],
   AuthMiddleware.AuthUser,
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.devModeLimit,
   AIController.GenerateChat
-);
-
-router.post(
-  "/recreate/:id",
-  [
-    body("newPrompt")
-      .notEmpty()
-      .withMessage("Prompt is required")
-  ],
-  AuthMiddleware.AuthUser,
-  AIController.UpdateWebsite
 );
 
 module.exports = router;

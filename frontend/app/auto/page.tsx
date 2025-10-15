@@ -3,13 +3,10 @@ import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Slide, toast } from "react-toastify";
-import CobraAILoading from "./CobraLoading";
 
 const page = () => {
-  const [IsLoading, setIsLoading] = useState<boolean>(true);
   const Router = useRouter();
   const getUser = async () => {
-    setIsLoading(true);
     try {
       const res = await AxiosInstance.get("/users/me");
 
@@ -19,21 +16,14 @@ const page = () => {
         localStorage.setItem("mode", res.data.user.mode);
 
         if (res.data.user.mode === "creator") {
-          setTimeout(() => {
-            Router.push("/creator");
-          }, 2000);
+          Router.push("/creator");
         } else if (res.data.user.mode === "developer") {
-          setTimeout(() => {
-            Router.push("/dev");
-          }, 2500);
+          Router.push("/dev");
         } else {
-          setTimeout(() => {
-            Router.push("/home");
-          }, 1000);
+          Router.push("/home");
         }
       }
     } catch (error: any) {
-      console.log(error)
       Router.push("/");
       toast.error(error.response.data.message || error.response.data.error, {
         position: "top-right",
@@ -47,24 +37,12 @@ const page = () => {
         transition: Slide,
       });
       localStorage.clear();
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3500);
     }
   };
 
   useEffect(() => {
     getUser();
   }, []);
-
-  if (IsLoading) {
-    return (
-      <>
-        <CobraAILoading />
-      </>
-    );
-  }
 };
 
 export default page;

@@ -12,7 +12,7 @@ export function middleware(req: NextRequest) {
   }
 
   // --- 2️⃣ Protect Private Routes ---
-  const protectedRoutes = ["/home", "/creator", "/dev"];
+  const protectedRoutes = ["/creator", "/dev"];
   const isProtected = protectedRoutes.some((route) => pathname.startsWith(route));
 
   if (isProtected && !token) {

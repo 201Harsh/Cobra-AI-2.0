@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-const AutoRedirect = () => {
+const AutoRedirect = ({ children }: any) => {
   const Router = useRouter();
 
   useEffect(() => {
@@ -10,12 +10,10 @@ const AutoRedirect = () => {
 
     if (token) {
       Router.push("/auto");
-    } else {
-      Router.push("/");
     }
   }, [Router]);
 
-  return null;
+  return <>{children}</>;
 };
 
 export default AutoRedirect;

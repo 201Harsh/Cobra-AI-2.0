@@ -848,13 +848,10 @@ module.exports.loginUser = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       sameSite: "lax",
       path: "/",
-      domain:
-        process.env.NODE_ENV === "production"
-          ? "https://cobra-aing.vercel.app/"
-          : undefined,
+      domain: ".cobraai.com",
     });
 
     res.status(200).json({

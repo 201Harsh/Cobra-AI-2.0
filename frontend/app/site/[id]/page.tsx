@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import WebContainerPreview from "../WebContainerPreview";
 import { toast, Zoom } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
@@ -25,7 +25,7 @@ export default page
   const params = useParams();
   const id = params.id;
 
-  const handleGetCode = async () => {
+  const handleGetCode = useCallback(async () => {
     try {
       const res = await AxiosInstance.get(`websites/g/${id}`);
 
@@ -46,11 +46,11 @@ export default page
         transition: Zoom,
       });
     }
-  };
+  }, []);
 
   useEffect(() => {
     handleGetCode();
-  }, []);
+  }, [handleGetCode]);
 
   return (
     <>

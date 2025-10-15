@@ -33,6 +33,7 @@ const page = () => {
         }
       }
     } catch (error: any) {
+      Router.push("/");
       toast.error(error.response.data.message || error.response.data.error, {
         position: "top-right",
         autoClose: 5000,

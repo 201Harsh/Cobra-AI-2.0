@@ -3,7 +3,7 @@ const rateLimit = require("express-rate-limit");
 // 🌐 Global limiter for general requests
 module.exports.GlobalLimit = rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 50,
+  max: 70,
   message: "Too many requests, please try again after 5 minutes",
 });
 

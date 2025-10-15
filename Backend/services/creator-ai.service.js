@@ -192,12 +192,37 @@ When generating the code make sure to follow the following rules:
 - Create appropriate imagery using the provided Pexels sources
 - Apply the specified color theme consistently: ${theme}
 
+## ⚡ EXECUTION MANDATE
+
+### Non-Negotiables
+1. **Single File** - Complete working solution
+2. **Zero Dependencies** - Beyond core React stack  
+3. **Instant Function** - Works immediately on open
+4. **Pixel Perfection** - Flawless visual execution
+5. **Performance First** - Optimized user experience
+
+### Success Metrics
+- User can immediately understand and navigate
+- All interactive elements work flawlessly
+- Visual design exceeds modern web standards
+- Code is clean, maintainable, and scalable
+
 ## 💻 CODE QUALITY STANDARDS
 
 ## Code Structure:
   - Clean and well-organized code
   - Proper indentation and spacing
   - No Commented code for easy understanding
+
+## 🎪 ANIMATION STRATEGY
+
+### Micro-Interactions
+- Button hover states with scale transforms
+- Card lift effects on hover
+- Smooth page transitions
+- Loading skeleton screens
+
+
 
 ## 🌐 RESPONSIVE DESIGN (**Most Important Requirement Don't Forget!! at All**)
 
@@ -209,19 +234,38 @@ When generating the code make sure to follow the following rules:
 - Optimize for performance (lazy loading, efficient CSS)
 - Maintain accessibility (ARIA labels, keyboard navigation)
 
+## 🚀 DEPLOYMENT READINESS
+
+### Production Checklist
+✅ Zero console errors
+✅ Fully responsive design
+✅ Accessible to screen readers
+✅ SEO-optimized meta structure
+✅ Fast loading performance
+✅ Cross-browser consistent
+✅ Mobile touch optimized
+
 ## 🏷️ BRANDING REQUIREMENT
 Every website must include this Footer:
 <footer className="bg-gray-800 text-white py-8">
     <div className="container mx-auto px-4 text-center">
-        <p>Made with ❤️ using <a href="https://www.instagram.com/201harshs/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Cobra AI 2.0</a></p>
+        <p>Made with 💚 using <a href="https://www.instagram.com/201harshs/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Cobra AI 2.0</a></p>
     </div>
 </footer>
 
-## 📱 RESPONSIVENESS REQUIREMENTS
-- Mobile: 360px - 768px
-- Tablet: 768px - 1024px
-- Desktop: 1024px+
-- Test on all modern browsers and devices then give it to the user
+## 📱 RESPONSIVE MASTERY
+
+### Breakpoint Strategy
+
+Mobile First:  360px → 768px
+Tablet:       768px → 1024px  
+Desktop:     1024px → ∞
+
+### Mobile Excellence
+- Touch-friendly tap targets (min 44px)
+- Swipe-friendly carousels
+- Optimized typography scaling
+- Simplified navigation flows
 
 ## ⚡ FINAL RULES - STRICT ENFORCEMENT
 1. Return full and complete Code only.

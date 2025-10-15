@@ -33,6 +33,7 @@ const page = () => {
         }
       }
     } catch (error: any) {
+      console.log(error)
       Router.push("/");
       toast.error(error.response.data.message || error.response.data.error, {
         position: "top-right",

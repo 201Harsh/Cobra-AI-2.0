@@ -71,6 +71,10 @@ const HeaderandNavigation = ({
   };
 
   const handlehome = () => {
+    router.push("/dev");
+    setIsDropdownOpen(false);
+  };
+  const handleVenomhome = () => {
     setActiveSection("chat");
     setIsDropdownOpen(false);
   };
@@ -148,6 +152,31 @@ const HeaderandNavigation = ({
                         <p className="text-xs text-gray-400">Free Plan</p>
                       </div>
 
+                      <button
+                        onMouseDown={handleVenomhome}
+                        className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors"
+                      >
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 19l-7 -7 7-7 7 7 7 7z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 12a9 9 0 0118 0 9 9 0 118 0z"
+                          />
+                        </svg>
+                        Home
+                      </button>
                       <button
                         onMouseDown={handleDashboard}
                         className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 transition-colors"

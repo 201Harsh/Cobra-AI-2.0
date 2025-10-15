@@ -24,6 +24,5 @@ export default function CreatorLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // ✅ Remove <html>, <body>, <Head>
   return <div className="font-inter">{children}</div>;
 }

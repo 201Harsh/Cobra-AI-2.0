@@ -3,6 +3,7 @@ const UserController = require("../controllers/user.controller");
 const ValidateMiddleware = require("../middlewares/validate.middleware");
 const AuthMiddleware = require("../middlewares/auth.middleware");
 const { body } = require("express-validator");
+const RateLimitMiddleware = require("../middlewares/rate-limit.middleware");
 
 router.post("/register", [
   body("name")
@@ -15,6 +16,7 @@ router.post("/register", [
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters"),
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.registerLimit,
   UserController.registerUser,
 ]);
 
@@ -25,6 +27,7 @@ router.post(
     body("otp").notEmpty().withMessage("OTP is required"),
   ],
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.verifyOtpLimit,
   UserController.verifyOtp
 );
 
@@ -32,6 +35,7 @@ router.post(
   "/resend",
   [body("email").isEmail().withMessage("Email is invalid")],
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.verifyOtpLimit,
   UserController.resendOtp
 );
 
@@ -46,6 +50,7 @@ router.post(
       .withMessage("Password must be at least 6 characters"),
   ],
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.loginLimit,
   UserController.loginUser
 );
 
@@ -53,6 +58,7 @@ router.post(
   "/forgot",
   [body("email").isEmail().withMessage("Email is invalid")],
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.forgotPasswordLimit,
   UserController.forgotPasswordSendOtp
 );
 
@@ -63,6 +69,7 @@ router.post(
     body("otp").notEmpty().withMessage("OTP is required"),
   ],
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.verifyOtpLimit,
   UserController.checkOtp
 );
 
@@ -75,12 +82,23 @@ router.post(
       .withMessage("Password must be at least 6 characters"),
   ],
   ValidateMiddleware.validateUser,
+  RateLimitMiddleware.GlobalLimit,
   UserController.UpdatePassword
 );
 
-router.post("/logout", AuthMiddleware.AuthUser, UserController.logoutUser);
+router.post(
+  "/logout",
+  AuthMiddleware.AuthUser,
+  RateLimitMiddleware.GlobalLimit,
+  UserController.logoutUser
+);
 
-router.get("/me", AuthMiddleware.AuthUser, UserController.getUser);
+router.get(
+  "/me",
+  AuthMiddleware.AuthUser,
+  RateLimitMiddleware.GlobalLimit,
+  UserController.getUser
+);
 
 router.get("/all", UserController.getAllUsers);
 
@@ -88,10 +106,16 @@ router.post(
   "/updateMode",
   [body("mode").notEmpty().withMessage("Mode is required")],
   AuthMiddleware.AuthUser,
-  UserController.updateMode,
-  ValidateMiddleware.validateUser
+  ValidateMiddleware.validateUser,
+  RateLimitMiddleware.GlobalLimit,
+  UserController.updateMode
 );
 
-router.post("/del", AuthMiddleware.AuthUser, UserController.deleteUser);
+router.post(
+  "/del",
+  AuthMiddleware.AuthUser,
+  RateLimitMiddleware.GlobalLimit,
+  UserController.deleteUser
+);
 
 module.exports = router;

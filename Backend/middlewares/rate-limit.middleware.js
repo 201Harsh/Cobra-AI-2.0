@@ -3,7 +3,7 @@ const rateLimit = require("express-rate-limit");
 // 🌐 Global limiter for general requests
 module.exports.GlobalLimit = rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 100,
+  max: 50,
   message: "Too many requests, please try again after 5 minutes",
 });
 
@@ -27,10 +27,9 @@ module.exports.loginLimit = rateLimit({
 });
 
 module.exports.forgotPasswordLimit = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
+  windowMs: 2 * 60 * 1000, // 10 minutes
   max: 3,
-  message:
-    "Too many password reset attempts, please try again after 10 minutes",
+  message: "Too many password reset attempts, please try again after 2 minutes",
 });
 
 // 💻 Website creation limit

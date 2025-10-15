@@ -1,10 +1,10 @@
 "use client";
 import AxiosInstance from "@/config/Axios";
-import { time } from "console";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
-import { FaCode, FaArrowLeft, FaRedo } from "react-icons/fa";
+import { FaArrowLeft, FaRedo } from "react-icons/fa";
 import { Slide, toast, Zoom } from "react-toastify";
 
 const OTPVerification: React.FC = () => {
@@ -237,10 +237,13 @@ const OTPVerification: React.FC = () => {
         <div className="text-center mb-8">
           <div className="flex justify-center items-center space-x-2 mb-4">
             <div className="w-20 h-20 rounded-xl flex items-center justify-center">
-              <img
+              <Image
                 src="/img/logo.png"
                 alt="logo"
                 className="w-full h-full object-cover"
+                width={100}
+                height={100}
+                priority
               />
             </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-green-500 bg-clip-text text-transparent">

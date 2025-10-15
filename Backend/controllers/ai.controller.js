@@ -147,7 +147,6 @@ module.exports.UpdateWebsite = async (req, res) => {
       code: NewResponse,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       error: error.message,
     });

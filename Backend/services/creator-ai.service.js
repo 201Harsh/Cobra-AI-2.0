@@ -313,7 +313,6 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
     cleanedCode = cleanedCode.trim();
     return cleanedCode;
   } catch (error) {
-    console.log("AI Generation Error:", error);
     return `// Error generating website: ${error.message}\n// Please try again with a different prompt.`;
   }
 }

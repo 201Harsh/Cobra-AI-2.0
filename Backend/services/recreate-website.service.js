@@ -329,7 +329,6 @@ Deliver perfectly enhanced, optimized websites that maintain all existing functi
   };
 
   const UpdatedPrompt = [newPrompt, existingCode];
-  console.log(UpdatedPrompt);
 
   try {
     const response = await ai.models.generateContent({
@@ -349,7 +348,6 @@ Deliver perfectly enhanced, optimized websites that maintain all existing functi
 
     return cleanedCode;
   } catch (error) {
-    console.log(error);
     return `// Error enhancing website: ${error.message}\n// Please try again with a different enhancement request.`;
   }
 }

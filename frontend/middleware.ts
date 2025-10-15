@@ -6,14 +6,19 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // --- 1️⃣ Auto Redirect Logged-In Users ---
-  if (token && ["/login", "/register" , "/forgot", "/verify"].includes(pathname)) {
+  if (
+    token &&
+    ["/login", "/register", "/forgot", "/verify"].includes(pathname)
+  ) {
     const dashboardUrl = new URL("/auto", req.url);
     return NextResponse.redirect(dashboardUrl);
   }
 
   // --- 2️⃣ Protect Private Routes ---
   const protectedRoutes = ["/home", "/creator", "/dev"];
-  const isProtected = protectedRoutes.some((route) => pathname.startsWith(route));
+  const isProtected = protectedRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
 
   if (isProtected && !token) {
     const loginUrl = new URL("/", req.url);
@@ -29,4 +34,5 @@ export const config = {
     // Match everything except static assets
     "/((?!_next/static|_next/image|favicon.ico|api).*)",
   ],
+  runtime: "experimental-edge",
 };

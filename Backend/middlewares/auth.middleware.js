@@ -15,6 +15,7 @@ module.exports.AuthUser = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
+    res.cookies.clear("token");
     res.status(401).json({
       message: "Unauthorized Access",
     });

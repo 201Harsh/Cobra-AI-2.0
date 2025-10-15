@@ -12,12 +12,6 @@ module.exports.GetAllWebsites = async (req, res) => {
       });
     }
 
-    if (Websites.length === 0) {
-      return res.status(400).json({
-        message: "No Websites Found",
-      });
-    }
-
     res.status(200).json({
       message: "Websites Found",
       Websites,

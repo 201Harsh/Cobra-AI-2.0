@@ -1,10 +1,11 @@
+// app/creator/layout.tsx
 import "../globals.css";
-import Head from "next/head";
 import React from "react";
+import type { Metadata } from "next";
 
-const BaseUrl: any = process.env.SEO_URL;
+const BaseUrl = process.env.SEO_URL || "http://localhost:3000";
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(BaseUrl),
   title: "Cobra AI - Creator Dashboard",
   description:
@@ -23,16 +24,6 @@ export default function CreatorLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <link rel="icon" href={metadata.icons.icon} />
-      </Head>
-      <body suppressHydrationWarning className=" font-inter">
-        {children}
-      </body>
-    </html>
-  );
+  // ✅ Remove <html>, <body>, <Head>
+  return <div className="font-inter">{children}</div>;
 }

@@ -2,6 +2,7 @@
 import "../globals.css";
 import React from "react";
 import type { Metadata } from "next";
+import ProtectedRoute from "../Custom/ProtectedRoute";
 
 const BaseUrl = process.env.SEO_URL || "http://localhost:3000";
 
@@ -24,5 +25,11 @@ export default function CreatorLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="font-inter">{children}</div>;
+  return (
+    <>
+      <ProtectedRoute>
+        <div className="font-inter">{children}</div>;
+      </ProtectedRoute>
+    </>
+  );
 }

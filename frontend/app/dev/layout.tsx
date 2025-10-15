@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     { name: "Harsh Pandey", url: "https://www.instagram.com/201harshs/" },
   ],
   icons: {
-    icon: "/img/logo.png",
-    shortcut: "/img/logo.png",
+    icon: "/img/Seoimg.png",
+    shortcut: "/img/Seoimg.png",
   },
 };
 

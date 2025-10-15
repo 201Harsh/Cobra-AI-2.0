@@ -16,7 +16,7 @@ module.exports.registerLimit = rateLimit({
 
 module.exports.verifyOtpLimit = rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 5,
+  max: 3,
   message: "Too many OTP verifications, please try again after 5 minutes",
 });
 

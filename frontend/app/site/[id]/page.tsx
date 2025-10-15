@@ -18,7 +18,7 @@ const page = () => {
 
 export default page
 `);
-  const [PageTitle, setPageTitle] = useState<string>(
+  const [PageTitle, setPageTitle] = useState<any>(
     "Cobra AI 2.0 - Web Site Preview"
   );
 
@@ -31,7 +31,7 @@ export default page
 
       if (res.status === 200) {
         setCode(res.data.Website.Code);
-        setPageTitle(res.data.Website.Name);
+        setPageTitle(`${res.data.Website.Name} | Cobra AI 2.0`);
       }
     } catch (error: any) {
       toast.error(error.response.data.message, {

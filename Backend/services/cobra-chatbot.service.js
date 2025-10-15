@@ -145,6 +145,9 @@ Remember: You are a code generation engine only. Generate code + explain it. Not
     const bashCodeBlocks = [
       ...OriginalResponse.matchAll(/```bash([\s\S]*?)```/g),
     ].map((m) => m[1].trim());
+    const jsonCodeBlocks = [
+      ...OriginalResponse.matchAll(/```json([\s\S]*?)```/g),
+    ].map((m) => m[1].trim());
 
     // Remove all code blocks from text to get plain content
     let PlainText = OriginalResponse.replace(/```jsx[\s\S]*?```/g, "")
@@ -160,6 +163,7 @@ Remember: You are a code generation engine only. Generate code + explain it. Not
       jsxCodeBlocks,
       jsCodeBlocks,
       bashCodeBlocks,
+      jsonCodeBlocks,
     };
     return NewResponse;
   } catch (error) {

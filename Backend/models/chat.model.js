@@ -29,6 +29,10 @@ const ChatSchema = new mongoose.Schema(
             type: Array,
             default: [],
           },
+          jsonCodeBlocks: {
+            type: Array,
+            default: [],
+          },
         },
         createdAt: {
           type: Date,

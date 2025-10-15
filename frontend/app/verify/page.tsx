@@ -311,7 +311,7 @@ const OTPVerification: React.FC = () => {
 
           {/* Resend OTP */}
           <div className="mt-6 pt-6 border-t border-gray-700 text-center">
-            <p className="text-gray-400 mb-4">Didn't receive the code?</p>
+            <p className="text-gray-400 mb-4">Didn&apos;t receive the code?</p>
             <button
               onClick={handleResendOTP}
               type="button"

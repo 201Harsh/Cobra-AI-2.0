@@ -368,7 +368,6 @@
 .scrollbar-small::-webkit-scrollbar {
   width: 5px;
   height: 4px; /* Very slim height */
-
 }
 
 .scrollbar-small::-webkit-scrollbar-track {
@@ -378,4 +377,41 @@
 .scrollbar-small::-webkit-scrollbar-thumb {
   background: #d1d1d1;
   border-radius: 40px;
+}
+
+/* styles/globals.css */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
+
+.neon-green {
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00,
+    0 0 20px #00ff00;
+}
+
+.neon-red {
+  text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000,
+    0 0 20px #ff0000;
+}
+
+.neon-green-glow {
+  box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00,
+    inset 0 0 5px #00ff00;
+}
+
+.neon-red-glow {
+  box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000,
+    inset 0 0 5px #ff0000;
+}
+
+.neon-green-pulse {
+  animation: greenPulse 2s infinite;
+}
+
+@keyframes greenPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 5px #00ff00;
+  }
+  50% {
+    box-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00;
+  }
 }

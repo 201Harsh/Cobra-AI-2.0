@@ -11,7 +11,7 @@
 
 ## 🚀 Live Demo
 
-🔗 [View Live App](#) | 💻 [GitHub Repository](https://github.com/201Harsh/Cobra-AI-2.0)
+🔗 [View Live App](https://cobra-aing.vercel.app/) | 💻 [GitHub Repository](https://github.com/201Harsh/Cobra-AI-2.0)
 
 ---
 

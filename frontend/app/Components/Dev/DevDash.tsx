@@ -93,7 +93,6 @@ const DevDash = ({ activeSection }: { activeSection: string }) => {
         });
       }
     } catch (error) {
-      console.error("Error fetching lab data:", error);
       // Set mock data for demonstration
       setLabData({
         _id: id as string,

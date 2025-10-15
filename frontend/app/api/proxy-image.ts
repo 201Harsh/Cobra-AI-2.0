@@ -26,7 +26,6 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    console.error("Image proxy error:", error);
     return new NextResponse("Error fetching image", { status: 500 });
   }
 }

@@ -186,7 +186,6 @@ const ForgotPassword: React.FC = () => {
         });
       }
     } catch (error: any) {
-      console.error(error);
 
       const errorMessage =
         error.response?.data?.message || "Invalid OTP. Please try again.";

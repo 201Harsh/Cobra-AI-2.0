@@ -326,7 +326,6 @@ console.log(greeting());`);
         transition: Flip,
       });
     } catch (error: any) {
-      console.log(error);
       setOutput(`❌ Error: ${error.message}`);
       setConsoleLogs([`❌ Error: ${error.message}`]);
     }

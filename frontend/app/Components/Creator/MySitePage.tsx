@@ -8,6 +8,8 @@ const MySitePage = ({
   generatedSites,
   handleDeleteSite,
   setIsGenerating,
+  getWebsites,
+  getUserData,
 }: any) => {
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
   const [customizePopup, setCustomizePopup] = useState<string | null>(null);
@@ -64,6 +66,8 @@ const MySitePage = ({
           transition: Zoom,
         });
       }
+      getWebsites();
+      getUserData();
     } catch (error: any) {
       toast.error(
         error.response.data.error ||

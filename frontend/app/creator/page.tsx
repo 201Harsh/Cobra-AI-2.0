@@ -89,6 +89,7 @@ const CreatorDashboard = () => {
           transition: Bounce,
         });
         GetWebsites();
+        getUserData();
         setWebsiteData({
           prompt: "",
           name: "",
@@ -322,6 +323,8 @@ const CreatorDashboard = () => {
               generatedSites={generatedSites}
               handleDeleteSite={handleDeleteSite}
               setIsGenerating={setIsGenerating}
+              getUserData={getUserData}
+              getWebsites={GetWebsites}
             />
 
             {/* Dashboard Page */}

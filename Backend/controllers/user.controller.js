@@ -435,13 +435,6 @@ module.exports.verifyOtp = async (req, res) => {
 
     const token = User.Jwt_token();
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-    });
-
     res.status(200).json({
       message: "Account created successfully",
       User,
@@ -845,13 +838,6 @@ module.exports.loginUser = async (req, res) => {
     }
 
     const token = user.Jwt_token();
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      path: "/",
-    });
 
     res.status(200).json({
       message: "Login successful",

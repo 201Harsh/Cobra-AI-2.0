@@ -21,9 +21,9 @@ module.exports.verifyOtpLimit = rateLimit({
 });
 
 module.exports.loginLimit = rateLimit({
-  windowMs: 2 * 60 * 1000, // 2 minutes
+  windowMs: 1 * 60 * 1000, // 2 minutes
   max: 5,
-  message: "Too many login attempts, please try again after 2 minutes",
+  message: "Too many login attempts, please try again after 1 minutes",
 });
 
 module.exports.forgotPasswordLimit = rateLimit({
@@ -35,10 +35,10 @@ module.exports.forgotPasswordLimit = rateLimit({
 
 // 💻 Website creation limit
 module.exports.createWebsiteLimit = rateLimit({
-  windowMs: 5 * 60 * 1000, // 15 minutes
+  windowMs: 5 * 60 * 1000, // 5 minutes
   max: 5,
   message:
-    "Too many website creation requests, please try again after 15 minutes",
+    "Too many website creation requests, please try again after 5 minutes",
 });
 
 // ⚙️ Developer Mode / AI usage limiter

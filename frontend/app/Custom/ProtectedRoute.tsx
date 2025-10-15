@@ -2,7 +2,7 @@
 import AxiosInstance from "@/config/Axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { toast, Bounce } from "react-toastify";
+import { toast, Bounce, Flip } from "react-toastify";
 import CobraAILoading from "../auto/CobraLoading";
 
 const ProtectedRoute = ({ children }: any) => {
@@ -14,6 +14,17 @@ const ProtectedRoute = ({ children }: any) => {
     const token = localStorage.getItem("token");
     if (!token) {
       Router.push("/");
+      toast.error("Authentication failed", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Flip,
+      });
       return;
     }
 

@@ -85,23 +85,23 @@ Create reusable SVG icon components within the same file
 **NAVBAR CLEAN PATTERN**:
 \`\`\`jsx
 const Navbar = () => (
-  <nav className="bg-white shadow-sm border-b">
+  <nav className="shadow-sm border-b">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center h-16">
         {/* Logo */}
         <div className="flex items-center">
-          <span className="text-xl font-bold text-gray-900">${name}</span>
+          <span className="text-xl font-bold">${name}</span>
         </div>
         
         {/* Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#home" className="text-gray-700 hover:text-blue-600">Home</a>
-          <a href="#about" className="text-gray-700 hover:text-blue-600">About</a>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
         </div>
         
         {/* Mobile menu button */}
         <div className="md:hidden">
-          <button className="p-2 rounded-md text-gray-700">
+          <button className="p-2 rounded-md">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -394,6 +394,9 @@ const Navbar = () => (
 - Card lift effects on hover
 - Smooth page transitions
 - Loading skeleton screens
+- Smooth scroll animations
+- Parallax effects
+- Content reveal animations
 
 ## 🌐 RESPONSIVE DESIGN (**Most Important Requirement Don't Forget!! at All**)
 
@@ -418,7 +421,7 @@ const Navbar = () => (
 
 ## 🏷️ BRANDING REQUIREMENT
 Every website must include this Footer:
-<footer className="bg-gray-800 text-white py-8">
+<footer className="py-8">
     <div className="container mx-auto px-4 text-center">
         <p>Made with 💚 using <a href="https://www.instagram.com/201harshs/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Cobra AI 2.0</a></p>
     </div>

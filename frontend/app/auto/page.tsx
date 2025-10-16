@@ -29,8 +29,8 @@ const page = () => {
     } catch (error: any) {
       Router.push("/");
       toast.error(
-        error.response.data?.message ||
-          error.response.data?.error ||
+        error.response?.data?.message ||
+          error.response?.data?.error ||
           "Something went wrong",
         {
           position: "top-right",

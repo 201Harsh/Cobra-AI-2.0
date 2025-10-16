@@ -23,6 +23,7 @@ const CreatorDashboard = () => {
     name: "",
     type: "custom",
     theme: "light",
+    aiModel: "cobra-rift-v2.7", // Added default AI model
   });
 
   const Router = useRouter();
@@ -37,6 +38,9 @@ const CreatorDashboard = () => {
     siteGen: 0,
     maxSitegeneration: 0,
   });
+
+  // Get user plan for AI model selection
+  const userPlan = UserData.plan;
 
   const getUserData = async () => {
     try {
@@ -95,6 +99,7 @@ const CreatorDashboard = () => {
           name: "",
           type: "custom",
           theme: "light",
+          aiModel: "cobra-rift-v2.7", // Reset to default AI model
         });
         setActiveTab("sites");
       }
@@ -314,6 +319,7 @@ const CreatorDashboard = () => {
               isGenerating={isGenerating}
               websiteTypes={websiteTypes}
               themes={themes}
+              userPlan={userPlan} // Pass userPlan to CreatorPage
             />
 
             {/* My Sites Page */}

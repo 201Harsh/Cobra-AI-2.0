@@ -9,7 +9,12 @@ const CreatorPage = ({
   themes,
   handleGenerate,
   isGenerating,
+  userPlan, // Add userPlan prop to check user's subscription
 }: any) => {
+  const isProUser =
+    userPlan === "pro" || userPlan === "elite" || userPlan === "creator-plus";
+  const isStarterUser = userPlan === "starter";
+
   return (
     <>
       {activeTab === "create" && (
@@ -82,6 +87,183 @@ const CreatorPage = ({
                   Be specific! The more details you provide, the better the
                   result.
                 </p>
+              </div>
+
+              {/* AI Model Selection Card - Below Input */}
+              <div className="mb-8">
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="relative bg-gray-800/80 backdrop-blur-lg rounded-xl p-6 border border-purple-500/30 group-hover:border-purple-400/50 transition-all duration-500">
+                    {/* Section Heading */}
+                    <div className="text-center mb-6">
+                      <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent mb-2">
+                        Choose Your AI Model
+                      </h2>
+                      <p className="text-sm text-gray-400 max-w-2xl mx-auto">
+                        Select the perfect AI engine for your project. Each
+                        model is optimized for different use cases and delivers
+                        production-ready code.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">
+                          <span className="text-purple-400 text-lg">🤖</span>
+                        </div>
+                        <div>
+                          <label className="block text-lg font-semibold text-gray-200">
+                            Cobra AI Engine
+                          </label>
+                          <p className="text-xs text-gray-400">
+                            Choose your AI engine for website generation
+                          </p>
+                        </div>
+                      </div>
+                      {isProUser && (
+                        <span className="text-xs text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-400/30">
+                          PRO ACCESS
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Cobra Rift v2.7 Card */}
+                      <div
+                        className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
+                          websiteData.aiModel === "cobra-rift-v2.7"
+                            ? "border-emerald-500 bg-emerald-500/10"
+                            : "border-gray-600/50 bg-gray-800/50 hover:border-gray-500"
+                        }`}
+                        onClick={() =>
+                          setWebsiteData({
+                            ...websiteData,
+                            aiModel: "cobra-rift-v2.7",
+                          })
+                        }
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center mb-2">
+                              <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center mr-2">
+                                <span className="text-emerald-400 text-sm">
+                                  ⚡
+                                </span>
+                              </div>
+                              <h3 className="font-semibold text-gray-200">
+                                Cobra Rift v2.7
+                              </h3>
+                            </div>
+                            <p className="text-xs text-gray-400 mb-3">
+                              Standard AI Model
+                            </p>
+                            <div className="space-y-1">
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span>
+                                React.js + Tailwind CSS
+                              </div>
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span>
+                                Best Performance and Speed
+                              </div>
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span>
+                                Framer Motion Animations
+                              </div>
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span>
+                                Production Ready Frontend
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-center w-6 h-6 rounded-full border-2 border-emerald-500">
+                            {websiteData.aiModel === "cobra-rift-v2.7" && (
+                              <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Venom Q12 Card */}
+                      <div
+                        className={`relative p-4 rounded-xl border-2 transition-all duration-300 ${
+                          websiteData.aiModel === "venom-q12"
+                            ? "border-purple-500 bg-purple-500/10"
+                            : isProUser
+                            ? "border-gray-600/50 bg-gray-800/50 hover:border-gray-500 cursor-pointer"
+                            : "border-gray-600/30 bg-gray-800/30 opacity-60 cursor-not-allowed"
+                        }`}
+                        onClick={() => {
+                          if (isProUser) {
+                            setWebsiteData({
+                              ...websiteData,
+                              aiModel: "venom-q12",
+                            });
+                          }
+                        }}
+                      >
+                        {!isProUser && (
+                          <div className="absolute inset-0 bg-gray-900/20 rounded-xl flex items-center justify-center z-10">
+                            <span className="text-xs text-red-400 bg-red-500/20 px-2 py-1 rounded-full border border-red-400/30">
+                              Coming Soon...
+                            </span>
+                          </div>
+                        )}
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center mb-2">
+                              <div className="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center mr-2">
+                                <span className="text-red-400 text-sm">🚀</span>
+                              </div>
+                              <h3 className="font-semibold text-gray-200">
+                                Venom Q12
+                              </h3>
+                            </div>
+                            <p className="text-xs text-gray-400 mb-3">
+                              Advanced AI Model
+                            </p>
+                            <div className="space-y-1">
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                                Full Stack Applications
+                              </div>
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                                Backend API + Database
+                              </div>
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                                Complete Web Solutions
+                              </div>
+                              <div className="flex items-center text-xs text-gray-400">
+                                <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                                Production Ready Deployment
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className={`flex items-center justify-center w-6 h-6 rounded-full border-2 ${
+                              isProUser ? "border-red-500" : "border-gray-500"
+                            }`}
+                          >
+                            {websiteData.aiModel === "venom-q12" && (
+                              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Model Description */}
+                    <div className="mt-4 p-3 bg-gray-900/50 rounded-lg border border-gray-600/30">
+                      <p className="text-sm text-gray-300">
+                        {websiteData.aiModel === "venom-q12"
+                          ? "🚀 Venom Q12: Advanced full-stack AI model that creates complete web applications with backend APIs, databases, and production-ready deployment setup."
+                          : "⚡ Cobra Rift v2.7: Powerful frontend-focused AI model that generates stunning, animated React.js websites with Tailwind CSS and Framer Motion."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Enhanced Optional Fields */}

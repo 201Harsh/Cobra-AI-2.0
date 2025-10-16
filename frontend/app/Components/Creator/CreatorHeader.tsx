@@ -56,7 +56,7 @@ const CreatorHeader = ({
             {/* Logo & Mobile Menu Button */}
             <div className="flex items-center space-x-3">
               <Link href="/" className="flex items-center space-x-2">
-                <div className="w-16 h-16 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center">
                   <Image
                     priority
                     src="/img/logo.png"

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import WebContainerPreview from "../WebContainerPreview";
 import { toast, Zoom } from "react-toastify";
 import AxiosInstance from "@/config/Axios";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Head from "next/head";
 
 export default function EditorPage() {
@@ -22,6 +22,8 @@ export default page
     "Cobra AI 2.0 - Web Site Preview"
   );
 
+  const Router = useRouter();
+
   const params = useParams();
   const id = params.id;
 
@@ -34,6 +36,7 @@ export default page
         setPageTitle(`${res.data.Website.Name} | Cobra AI 2.0`);
       }
     } catch (error: any) {
+      Router.push("/creator");
       toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: 5000,

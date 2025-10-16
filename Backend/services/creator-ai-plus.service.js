@@ -423,7 +423,7 @@ const Navbar = () => (
 Every website must include this Footer:
 <footer className="py-8">
     <div className="container mx-auto px-4 text-center">
-        <p>Made with 💚 using <a href="https://www.instagram.com/201harshs/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Cobra AI 2.0</a></p>
+        <p>Made with 💚 using <a href="https://www.instagram.com/201harshs/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">Cobra AI 2.0 Next-Gen</a></p>
     </div>
 </footer>
 
@@ -475,7 +475,7 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
   };
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-2.5-pro",
       contents: prompt,
       config: {
         systemInstruction: systemInstruction,

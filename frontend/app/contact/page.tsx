@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import AxiosInstance from "@/config/Axios";
-import { toast } from "react-toastify";
+import { Flip, toast, Zoom } from "react-toastify";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
@@ -36,7 +36,7 @@ const ContactSupport = () => {
       icon: <FaEnvelope className="text-2xl" />,
       title: "Email Support",
       description: "Get detailed assistance via email",
-      contact: "support@cobraai.com",
+      contact: "endgamingai2@gmail.com",
       responseTime: "Within 24 hours",
       color: "from-emerald-400 to-green-500",
     },
@@ -44,7 +44,7 @@ const ContactSupport = () => {
       icon: <FaWhatsapp className="text-2xl" />,
       title: "WhatsApp",
       description: "Quick chat support",
-      contact: "+1 (555) 123-4567",
+      contact: "+9411378054",
       responseTime: "Within 2 hours",
       color: "from-green-400 to-green-600",
     },
@@ -52,7 +52,7 @@ const ContactSupport = () => {
       icon: <FaDiscord className="text-2xl" />,
       title: "Discord Community",
       description: "Join our developer community",
-      contact: "discord.gg/cobraai",
+      contact: "not yet",
       responseTime: "Real-time",
       color: "from-purple-400 to-purple-600",
     },
@@ -60,7 +60,7 @@ const ContactSupport = () => {
       icon: <FaTwitter className="text-2xl" />,
       title: "Twitter",
       description: "Quick updates and support",
-      contact: "@CobraAI_Support",
+      contact: "no yet",
       responseTime: "Within 4 hours",
       color: "from-blue-400 to-blue-600",
     },
@@ -105,12 +105,16 @@ const ContactSupport = () => {
     setIsLoading(true);
 
     try {
-      const response = await AxiosInstance.post("/support/contact", formData);
+      const response = await AxiosInstance.post(
+        "/users/contact/admin",
+        formData
+      );
 
-      if (response.data.success) {
+      if (response.status === 200) {
         setIsSubmitted(true);
         toast.success(
-          "Message sent successfully! We'll get back to you soon.",
+          response.data?.message ||
+            "Message sent successfully! We'll get back to you soon.",
           {
             position: "top-right",
             autoClose: 5000,
@@ -120,10 +124,10 @@ const ContactSupport = () => {
             draggable: true,
             progress: undefined,
             theme: "dark",
+            transition: Flip,
           }
         );
 
-        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -146,6 +150,7 @@ const ContactSupport = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
+          transition: Zoom,
         }
       );
     } finally {
@@ -288,8 +293,10 @@ const ContactSupport = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-1">Email Us</h3>
-                      <p className="text-gray-400">support@cobraai.com</p>
-                      <p className="text-gray-400">contact@cobraai.com</p>
+                      <p className="text-gray-400">
+                        gamerpandeyharsh@gmail.com
+                      </p>
+                      <p className="text-gray-400">endgamingai2@gmail.com</p>
                     </div>
                   </div>
 
@@ -299,8 +306,8 @@ const ContactSupport = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-1">Call Us</h3>
-                      <p className="text-gray-400">+1 (555) 123-4567</p>
-                      <p className="text-gray-400">Mon - Fri, 9AM - 6PM EST</p>
+                      <p className="text-gray-400">+9411378054</p>
+                      <p className="text-gray-400">Mon - Fri, 9AM - 6PM</p>
                     </div>
                   </div>
 
@@ -310,8 +317,8 @@ const ContactSupport = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-1">Visit Us</h3>
-                      <p className="text-gray-400">123 Tech Park Drive</p>
-                      <p className="text-gray-400">San Francisco, CA 94107</p>
+                      <p className="text-gray-400">Tallital, Nainital</p>
+                      <p className="text-gray-400">Uttrakhand India</p>
                     </div>
                   </div>
                 </div>

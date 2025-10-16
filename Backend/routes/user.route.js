@@ -118,4 +118,18 @@ router.post(
   UserController.deleteUser
 );
 
+router.post(
+  "/contact/admin",
+  [
+    body("name").notEmpty().withMessage("Name is required"),
+    body("email").isEmail().withMessage("Email is invalid"),
+    body("subject").notEmpty().withMessage("Subject is required"),
+    body("category").notEmpty().withMessage("Category is required"),
+    body("priority").notEmpty().withMessage("Priority is required"),
+    body("message").notEmpty().withMessage("Message is required"),
+  ],
+  ValidateMiddleware.validateUser,
+  UserController.SendContactMessage
+);
+
 module.exports = router;

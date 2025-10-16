@@ -1412,3 +1412,126 @@ module.exports.deleteUser = async (req, res) => {
     });
   }
 };
+
+module.exports.SendContactMessage = async (req, res) => {
+  try {
+    const { name, email, category, priority, subject, message } = req.body;
+
+    // Validation
+    if (!name || !email || !category || !priority || !subject || !message) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide a valid email address",
+      });
+    }
+
+    // Create HTML email template
+    const htmlTemplate = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: #f8f9fa; padding: 20px; border-radius: 5px; }
+          .field { margin-bottom: 15px; }
+          .label { font-weight: bold; color: #555; }
+          .message-box { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-left: 4px solid #007bff;
+            margin: 20px 0;
+          }
+          .priority-high { color: #dc3545; font-weight: bold; }
+          .priority-medium { color: #ffc107; font-weight: bold; }
+          .priority-low { color: #28a745; font-weight: bold; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h2>New Contact Form Submission</h2>
+            <p>You have received a new message from your website contact form.</p>
+          </div>
+          
+          <div class="field">
+            <span class="label">From:</span> ${name} &lt;${email}&gt;
+          </div>
+          
+          <div class="field">
+            <span class="label">Subject:</span> ${subject}
+          </div>
+          
+          <div class="field">
+            <span class="label">Category:</span> ${category}
+          </div>
+          
+          <div class="field">
+            <span class="label">Priority:</span> 
+            <span class="priority-${priority.toLowerCase()}">${priority}</span>
+          </div>
+          
+          <div class="field">
+            <span class="label">Message:</span>
+            <div class="message-box">${message.replace(/\n/g, "<br>")}</div>
+          </div>
+          
+          <div class="field">
+            <span class="label">Received:</span> ${new Date().toLocaleString()}
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // Create plain text version for email clients that don't support HTML
+    const textTemplate = `
+New Contact Form Submission
+============================
+
+You have received a new message from your website contact form.
+
+From: ${name} <${email}>
+Subject: ${subject}
+Category: ${category}
+Priority: ${priority}
+
+Message:
+${message}
+
+Received: ${new Date().toLocaleString()}
+    `;
+
+    // Send email
+    const info = await transporter.sendMail({
+      from: `"${email}"<endgamingai2@gmail.com>`,
+      to: "gamerpandeyharsh@gmail.com",
+      subject: `Contact Form: ${subject}`,
+      text: textTemplate,
+      html: htmlTemplate,
+    });
+
+    // Success response
+    return res.status(200).json({
+      success: true,
+      message: "Your message has been sent successfully!",
+      messageId: info.messageId,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to send message. Please try again later.",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};

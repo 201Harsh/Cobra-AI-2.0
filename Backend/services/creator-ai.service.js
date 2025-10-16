@@ -476,7 +476,6 @@ Deliver perfect, single-file websites that work instantly. No excuses, just resu
       contents: prompt,
       config: {
         systemInstruction: systemInstruction,
-        tools: [groundingTool],
       },
     });
     const responseOriginal = response.text;

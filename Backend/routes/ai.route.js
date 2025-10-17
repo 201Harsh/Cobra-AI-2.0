@@ -6,6 +6,20 @@ const { body } = require("express-validator");
 const RateLimitMiddleware = require("../middlewares/rate-limit.middleware");
 
 router.post(
+  "/site/gen/pro",
+  [
+    body("prompt")
+      .notEmpty()
+      .withMessage("Prompt is required")
+      .isLength({ min: 10 })
+      .withMessage("Prompt must be at least 10 characters"),
+  ],
+  AuthMiddleware.AuthUser,
+  ValidateMiddleware.validateUser,
+  RateLimitMiddleware.createWebsiteLimit,
+  AIController.GenerateAdvancedWebsite
+);
+router.post(
   "/site/gen",
   [
     body("prompt")

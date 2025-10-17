@@ -9,11 +9,40 @@ const CreatorPage = ({
   themes,
   handleGenerate,
   isGenerating,
-  userPlan, // Add userPlan prop to check user's subscription
+  userPlan,
+  handleGeneratePro,
 }: any) => {
   const isProUser =
     userPlan === "pro" || userPlan === "elite" || userPlan === "creator-plus";
   const isStarterUser = userPlan === "starter";
+
+  // Function to handle the generate button click based on selected AI model
+  const handleGenerateClick = () => {
+    if (websiteData.aiModel === "venom-q12") {
+      handleGeneratePro();
+    } else {
+      handleGenerate();
+    }
+  };
+
+  // Determine button text based on selected model
+  const getButtonText = () => {
+    if (isGenerating) {
+      return "Generating Magic...";
+    }
+    if (websiteData.aiModel === "venom-q12") {
+      return "Generate Full Stack App";
+    }
+    return "Generate Website";
+  };
+
+  // Determine button icon based on selected model
+  const getButtonIcon = () => {
+    if (websiteData.aiModel === "venom-q12") {
+      return "🚀";
+    }
+    return "⚡";
+  };
 
   return (
     <>
@@ -203,8 +232,8 @@ const CreatorPage = ({
                         }}
                       >
                         {!isProUser && (
-                          <div className="absolute inset-0 bg-gray-900/20 rounded-xl flex items-center justify-center z-10">
-                            <span className="text-xs text-red-400 bg-red-500/20 px-2 py-1 rounded-full border border-red-400/30">
+                          <div className="absolute inset-0 bg-gray-900/50 rounded-xl flex items-center justify-center z-10">
+                            <span className="text-xs text-yellow-400 bg-red-500/70 px-2 py-1 rounded-full border border-red-400/30">
                               Coming Soon...
                             </span>
                           </div>
@@ -358,7 +387,7 @@ const CreatorPage = ({
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8 w-px h-8 bg-gradient-to-b from-emerald-400/50 to-transparent"></div>
 
                 <button
-                  onClick={handleGenerate}
+                  onClick={handleGenerateClick}
                   disabled={
                     !websiteData.prompt ||
                     !websiteData.name ||
@@ -366,23 +395,29 @@ const CreatorPage = ({
                     !websiteData.theme ||
                     isGenerating
                   }
-                  className="relative w-full max-w-md cursor-pointer px-8 sm:px-16 py-4 sm:py-6 bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 rounded-2xl font-black text-white text-lg sm:text-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/40 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 group overflow-hidden"
+                  className={`relative w-full max-w-md cursor-pointer px-8 sm:px-16 py-4 sm:py-6 rounded-2xl font-black text-white text-lg sm:text-xl transition-all duration-500 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 group overflow-hidden ${
+                    websiteData.aiModel === "venom-q12"
+                      ? "bg-gradient-to-r from-red-500 via-purple-500 to-red-600 hover:shadow-red-500/40"
+                      : "bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 hover:shadow-emerald-500/40"
+                  }`}
                 >
                   {/* Main Content */}
                   <span className="relative z-10 flex items-center justify-center space-x-3">
-                    <span className="text-xl">🚀</span>
-                    <span>
-                      {isGenerating
-                        ? "Generating Magic..."
-                        : "Generate Website"}
-                    </span>
+                    <span className="text-xl">{getButtonIcon()}</span>
+                    <span>{getButtonText()}</span>
                     {isGenerating && (
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                     )}
                   </span>
 
                   {/* Enhanced Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500 opacity-75"></div>
+                  <div
+                    className={`absolute inset-0 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500 opacity-75 ${
+                      websiteData.aiModel === "venom-q12"
+                        ? "bg-gradient-to-r from-red-500 via-purple-500 to-red-600"
+                        : "bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600"
+                    }`}
+                  ></div>
 
                   {/* Animated Light Rays */}
                   <div className="absolute inset-0 rounded-2xl overflow-hidden">
@@ -405,13 +440,21 @@ const CreatorPage = ({
                   </div>
 
                   {/* Border Animation */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-400 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm"></div>
+                  <div
+                    className={`absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm ${
+                      websiteData.aiModel === "venom-q12"
+                        ? "bg-gradient-to-r from-red-400 via-purple-400 to-red-400"
+                        : "bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-400"
+                    }`}
+                  ></div>
                 </button>
 
                 {/* Status Message */}
                 <p className="text-sm text-gray-400 mt-4">
                   {!websiteData.prompt
                     ? "✨ Describe your vision to begin magic..."
+                    : websiteData.aiModel === "venom-q12"
+                    ? "🚀 Ready to create a full-stack application!"
                     : "🎉 Ready to create something amazing!"}
                 </p>
               </div>

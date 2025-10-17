@@ -74,6 +74,68 @@ const CreatorDashboard = () => {
     }
   };
 
+  const handleGeneratePro = async () => {
+    setIsGenerating(true);
+
+    try {
+      const res = await AxiosInstance.post("/ai/site/gen/pro", websiteData);
+
+      if (res.status === 200) {
+        toast.success(res.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+        GetWebsites();
+        getUserData();
+        setWebsiteData({
+          prompt: "",
+          name: "",
+          type: "custom",
+          theme: "light",
+          aiModel: "cobra-rift-v2.7",
+        });
+        setActiveTab("sites");
+      }
+    } catch (error: any) {
+      const errors = error.response.data.errors;
+      toast.error(
+        error.response?.data?.error ||
+          errors.forEach((e: any) => {
+            toast.success(e.msg, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Bounce,
+            });
+          }),
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Flip,
+        }
+      );
+    } finally {
+      setIsGenerating(false);
+    }
+  };
   const handleGenerate = async () => {
     setIsGenerating(true);
 
@@ -99,22 +161,39 @@ const CreatorDashboard = () => {
           name: "",
           type: "custom",
           theme: "light",
-          aiModel: "cobra-rift-v2.7", // Reset to default AI model
+          aiModel: "cobra-rift-v2.7",
         });
         setActiveTab("sites");
       }
     } catch (error: any) {
-      toast.error(error.response.data.error, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Flip,
-      });
+      const errors = error.response.data.errors;
+      toast.error(
+        error.response?.data?.error ||
+          errors.forEach((e: any) => {
+            toast.success(e.msg, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              transition: Bounce,
+            });
+          }),
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Flip,
+        }
+      );
     } finally {
       setIsGenerating(false);
     }
@@ -319,7 +398,8 @@ const CreatorDashboard = () => {
               isGenerating={isGenerating}
               websiteTypes={websiteTypes}
               themes={themes}
-              userPlan={userPlan} // Pass userPlan to CreatorPage
+              userPlan={userPlan}
+              handleGeneratePro={handleGeneratePro}
             />
 
             {/* My Sites Page */}

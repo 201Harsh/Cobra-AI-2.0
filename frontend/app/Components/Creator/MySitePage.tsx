@@ -14,6 +14,7 @@ const MySitePage = ({
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
   const [customizePopup, setCustomizePopup] = useState<string | null>(null);
   const [newPrompt, setNewPrompt] = useState("");
+  const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -96,6 +97,46 @@ const MySitePage = ({
     return generatedSites.find((site: any) => site._id === customizePopup);
   };
 
+  const getSiteUrl = (siteId: string) => {
+    return `${window.location.origin}/site/${siteId}`;
+  };
+
+  const handleCopyUrl = async (siteId: string) => {
+    const url = getSiteUrl(siteId);
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedUrl(siteId);
+      toast.success("URL copied to clipboard!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Zoom,
+      });
+
+      // Reset copied state after 2 seconds
+      setTimeout(() => {
+        setCopiedUrl(null);
+      }, 2000);
+    } catch (err) {
+      toast.error("Failed to copy URL", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  };
+
   const currentSite = getCurrentSite();
 
   return (
@@ -162,6 +203,49 @@ const MySitePage = ({
                   <p className="text-white font-medium">
                     {new Date(currentSite.createdAt).toLocaleDateString()}
                   </p>
+                </div>
+                <div className="col-span-2">
+                  <p className="text-gray-400">Website URL</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <p className="text-white font-medium text-sm truncate flex-1">
+                      {getSiteUrl(currentSite._id)}
+                    </p>
+                    <button
+                      onClick={() => handleCopyUrl(currentSite._id)}
+                      className="p-2 bg-gray-600 hover:bg-gray-500 rounded-lg transition-colors cursor-pointer"
+                      title="Copy URL"
+                    >
+                      {copiedUrl === currentSite._id ? (
+                        <svg
+                          className="w-4 h-4 text-emerald-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="w-4 h-4 text-gray-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                          />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -324,6 +408,51 @@ const MySitePage = ({
                         {site.status}
                       </span>
                     </div>
+
+                    {/* Website URL with Copy Button */}
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 bg-gray-800/50 rounded-lg p-3">
+                        <p className="text-xs text-red-300 truncate flex-1">
+                          {getSiteUrl(site._id)}
+                        </p>
+                        <button
+                          onClick={() => handleCopyUrl(site._id)}
+                          className="p-1.5 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors cursor-pointer flex-shrink-0"
+                          title="Copy URL"
+                        >
+                          {copiedUrl === site._id ? (
+                            <svg
+                              className="w-3.5 h-3.5 text-emerald-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          ) : (
+                            <svg
+                              className="w-3.5 h-3.5 text-gray-300"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                              />
+                            </svg>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
                     <div className="space-y-2 text-sm text-gray-300">
                       <p>Type: {site.SiteType}</p>
                       <p>

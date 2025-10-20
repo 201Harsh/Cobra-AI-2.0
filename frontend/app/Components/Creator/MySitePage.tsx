@@ -15,13 +15,18 @@ const MySitePage = ({
   const [customizePopup, setCustomizePopup] = useState<string | null>(null);
   const [newPrompt, setNewPrompt] = useState("");
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRefs = useRef<{[key: string]: HTMLDivElement | null}>({});
   const popupRef = useRef<HTMLDivElement>(null);
 
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      // Check if click is outside any menu
+      const isOutsideAllMenus = Object.values(menuRefs.current).every(ref => 
+        !ref || !ref.contains(event.target as Node)
+      );
+      
+      if (isOutsideAllMenus) {
         setMenuOpen(null);
       }
       if (
@@ -36,6 +41,10 @@ const MySitePage = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const setMenuRef = (id: string, element: HTMLDivElement | null) => {
+    menuRefs.current[id] = element;
+  };
 
   const handleView = async ({ id }: any) => {
     window.open(`/site/${id}`, "_blank");
@@ -324,7 +333,10 @@ const MySitePage = ({
                     className="bg-gray-700/30 rounded-2xl p-6 border border-gray-600/50 hover:border-emerald-400/30 transition-all duration-300 hover:scale-105 relative"
                   >
                     {/* Menu Button */}
-                    <div className="absolute top-5 right-4" ref={menuRef}>
+                    <div 
+                      className="absolute top-5 right-4" 
+                      ref={(el) => setMenuRef(site._id, el)}
+                    >
                       <button
                         onClick={() =>
                           setMenuOpen(menuOpen === site._id ? null : site._id)
@@ -412,7 +424,7 @@ const MySitePage = ({
                     {/* Website URL with Copy Button */}
                     <div className="mb-4">
                       <div className="flex items-center gap-2 bg-gray-800/50 rounded-lg p-3">
-                        <p className="text-xs text-red-300 truncate flex-1">
+                        <p className="text-xs text-purple-300 truncate flex-1">
                           {getSiteUrl(site._id)}
                         </p>
                         <button

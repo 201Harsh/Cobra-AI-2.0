@@ -234,7 +234,7 @@ const CreatorPage = ({
                         {!isProUser && (
                           <div className="absolute inset-0 bg-gray-900/50 rounded-xl flex items-center justify-center z-10">
                             <span className="text-xs text-yellow-400 bg-red-500/70 px-2 py-1 rounded-full border border-red-400/30">
-                              Coming Soon...
+                              PRO ACCESS ONLY...
                             </span>
                           </div>
                         )}

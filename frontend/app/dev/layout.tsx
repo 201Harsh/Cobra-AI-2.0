@@ -28,7 +28,7 @@ export default function CreatorLayout({
   return (
     <>
       <ProtectedRoute>
-        <div className="font-inter">{children}</div>;
+        <div className="font-inter">{children}</div>
       </ProtectedRoute>
     </>
   );
